@@ -1,0 +1,333 @@
+﻿@model ToDo.Models.Event
+
+
+<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">
+
+    @*Check if current user is the owner of this event*@
+    @if (ViewBag.IsOwner == true)
+    {
+        <div style="padding-top: 25px;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.EventID }, new { @class = "btn btn-primary" })
+
+            @Html.ActionLink("Delete", "Delete", new { id = Model.EventID }, new { @class = "btn btn-danger" })
+        </div>
+    }
+
+    <div>
+
+        <h1>@Model.EventTitle</h1>
+        
+        <hr />
+
+        <div class="row">
+            @*Image*@
+            <div class="col-sm-3">
+                
+                @*Check if event has image*@
+                @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+                {
+                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 250px; height:250px;" />                    
+                }
+
+                @*No event image was uploaded, display default image*@
+                else
+                {
+                    <h4>No Image</h4>
+                }
+
+                <p style="padding-top:15px;">
+
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus pull-left"></span> Subscribe
+                    </button>
+                </p>
+
+            </div>
+
+            @*Description*@
+            <div class="col-sm-5">
+                <h2 style="padding-left: 25px; color: #70b2f9;">@Html.DisplayNameFor(model => model.EventDescription)</h2>
+
+                
+                <p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.EventDescription)</p>
+            </div>
+
+            @*Where*@
+            <div class="col-sm-2">
+                <h2 style="color: #70b2f9;">Where</h2>
+                <h3>@Model.EventVenue</h3>
+
+                <h3>@Model.EventAddress</h3>
+
+                <h3>@Model.EventTown</h3>
+
+                @*When*@
+                <h2 style="color: #70b2f9;">When</h2>
+                <h3>@Model.EventDate.ToShortDateString()</h3>
+
+                <h3>@Model.EventTime.ToShortTimeString()</h3>
+            </div>
+
+            @*More Info*@
+            <div class="col-sm-2">
+                <h2 style="color: #70b2f9;">More Info</h2>
+
+                @*Free Event*@
+                @if (ViewBag.FreeEvent == true)
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): Free Event</h3>
+                }
+                else
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): € @Html.DisplayFor(model => model.EventTicketPrice)</h3>
+                }
+
+                @*Check if ticket store information is not null*@
+                @if (Model.EventTicketStore != null)
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventTicketStore): @Html.DisplayFor(model => model.EventTicketStore)</h3>
+                }
+
+                @*Check if phone number is not null*@
+                @if (Model.EventPhoneNumber != null)
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventPhoneNumber): @Html.DisplayFor(model => model.EventPhoneNumber)</h3>
+                }
+
+                @*Check if email is not null*@
+                @if (Model.EventEmail != null)
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventEmail): @Html.DisplayFor(model => model.EventEmail)</h3>
+                }
+
+                @*Check if website is not null*@
+                @if (Model.EventWebsite != null)
+                {
+                    <h3>@Html.DisplayNameFor(model => model.EventWebsite): @Html.DisplayFor(model => model.EventWebsite)</h3>
+                }
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                @*Check if there is google map info for this event*@
+                @if (ViewBag.hasMap == true)
+                {
+                    <div id="googleMap" style="width:500px;height:500px; padding-top: 25px;">
+
+                    </div>
+
+                    <h3>Need Directions?</h3>
+
+                    <input type="text" class="form-control" placeholder="Travelling From..." id="txtFrom">
+
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <button onclick="PlanRoute()" class="btn btn-success">Plan Route</button>
+                    </p>
+
+                    <h1 style="text-align:center;" id="txtDirections"></h1>
+                    <div id="dir" style="width: 350px; float: right; margin-right:40px; margin-top: 20px; margin-bottom: 20px;"></div>
+                }
+
+                @*No Google map could be generated*@
+                @if (ViewBag.hasMap == false)
+                {
+                    <h2>There was a problem creating a map for this event</h2>
+                    <h2>Please check that the event location is a vlaid address</h2>
+                }
+
+            </div>
+
+            <div class="col-sm-6">
+
+                @*Check if there is a youtube link for this event*@
+                @if (ViewBag.hasYT == true)
+                {
+                    <div id="player">
+
+                    </div>
+                }
+
+                else
+                {
+                        <h4>No YouTube link</h4>
+                }
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
+
+<script>
+
+    //Directions
+    function PlanRoute() {
+
+        //Check if the user has entered a starting location
+        var startingLoc = document.getElementById('txtFrom').value;
+
+        if (startingLoc == null || startingLoc == "") {
+            alert("You must enter a starting location first");
+        }
+
+        else
+        { 
+            GetMap();
+        }
+
+    }
+
+    function GetMap() {
+
+        //Clear last directions
+        document.getElementById('dir').innerHTML = "";
+        txtDirections.innerHTML = "";
+
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+
+        //Get start and End locations that the user selected
+        var startLocation = document.getElementById('txtFrom').value;
+        var endLocation =  @Html.Raw(Json.Encode(@ViewBag.Address));
+
+        console.log(startLocation);
+        console.log(endLocation);
+
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+
+        });
+
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('dir'));
+
+        //Map options
+        var request = {
+            origin: startLocation,
+            destination: endLocation,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+
+            $('txtDirections').innerHTML = directions.getDuration().seconds + " seconds";
+
+        });
+    }
+
+    //Google Map
+    function myFunction(lat, lon) {
+
+        // Array of stylin for map
+        var styles = [
+          {
+              stylers: [
+                { hue: "#b3ccff" },
+                { saturation: -30 }
+              ]
+          },
+          //Road Labels
+          {
+              featureType: "road",
+              elementType: "labels",
+              stylers: [
+                { visibility: "on" }
+              ]
+          },
+          //Road Geometry
+          {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [
+                { lightness: 100 },
+                { visibility: "simplified" }
+              ]
+          }
+        ];
+
+        var styledMap = new google.maps.StyledMapType(styles,
+          { name: "Styled Map" });
+
+        //Get center using longitude and latitude passed back from controller
+        var center = new google.maps.LatLng(lat, lon);
+
+        //Specify Map Options
+        var mapOptions = {
+            zoom: 17, //Map Zoom Level
+            center: center, //Set Map center point
+            mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+            }
+        };
+
+        //Assign Map to div
+        var map = new google.maps.Map(document.getElementById('googleMap'),
+          mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: center,
+            map: map,
+            title: "@ViewBag.EventTitle"
+        })
+
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+
+        // google.maps.event.addDomListener(window, "load", initialize);
+    }
+
+    //YouTube iFrame API code
+    //This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    //This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+
+        //Video ID
+        var youTubeLink = @Html.Raw(Json.Encode(@ViewBag.youTubeID))
+
+        player = new YT.Player('player', {
+            height: '390',
+            width: '640',            
+            videoId: youTubeLink,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    //The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    //The API calls this function when the player's state changes.
+    //The function indicates that when playing a video (state=1),
+    //the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+
+</script>

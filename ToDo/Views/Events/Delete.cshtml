@@ -1,0 +1,168 @@
+﻿@model ToDo.Models.Event
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventYouTube)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventYouTube)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventSoundCloud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventSoundCloud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventFacebook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventFacebook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTwitter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTwitter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventInstagram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventInstagram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventWebsite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventWebsite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTicketPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTicketPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTicketStore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventTicketStore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventImage)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
