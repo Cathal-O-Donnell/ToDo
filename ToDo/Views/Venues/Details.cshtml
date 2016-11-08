@@ -1,0 +1,138 @@
+﻿@model ToDo.Models.Venue
+
+@*Check if current user is the owner of this event*@
+@if (ViewBag.IsOwner == true)
+{
+    <div style="padding-top: 25px;">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Delete", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })
+    </div>
+}
+
+<h2>@Model.VenueName</h2>
+<h3>@Model.VenueTown</h3>
+<div>
+    <hr />
+
+    @*Check if event has image*@
+    @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+    {
+        <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 250px; height:250px;" />
+    }
+
+    @*No event image was uploaded, display default image*@
+    else
+    {
+        <h4>No Image</h4>
+    }
+
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueTown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenueTown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenueAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenueDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenueEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenuePhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenuePhoneNumber)
+        </dd>
+
+    </dl>
+
+    @if (ViewBag.IsOwner == true)
+    {
+        @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-info btn-sm" })
+    }
+
+    @if (Model.VenueEvents == null)
+    {
+        <h2>No Events for this venue currently</h2>
+    }
+
+    else
+    {
+        <table id="eventsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Event Date</th>
+                    <th>Start Type</th>
+                    <th>@*Details Button*@</th>
+
+                </tr>
+            </thead>
+            
+            <tbody>
+
+                @foreach (var item in Model.VenueEvents)
+                {
+                    <tr>
+
+                        <td>@Html.DisplayFor(modelItem => item.EventTitle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EventCategory)</td>  
+                        <td>@Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-info btn-sm" })</td>                     
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VenueID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div class="row">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+</div>
+
+<script>
+
+    //Comments section
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//s00144297.disqus.com/embed.js';
+        //src="//s00144297.disqus.com/count.js
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

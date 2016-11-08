@@ -1,22 +1,59 @@
 ﻿@model ToDo.Models.Event
 
+@{
+    ViewBag.Title = "Edit";
+}
 
-@using (Html.BeginForm("Edit", "Events", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-
+        <h4>Event</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.EventID)
 
-        @*Basic Information*@
         <div class="form-group">
-            <h2 style="color: #70b2f9;">Edit @Model.EventTitle</h2>
+            @Html.LabelFor(model => model.OwnerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OwnerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OwnerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VenueID, "VenueID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventTitle, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -36,81 +73,23 @@
             </div>
         </div>
 
-        @*Location*@
         <div class="form-group">
-            <h2 style="color: #70b2f9;">Location</h2>
-            @Html.LabelFor(model => model.EventVenue, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventVenue, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventVenue, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EventYouTube, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventYouTube, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventAddress, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EventSoundCloud, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventTown, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.EventTown, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventTown, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Date and Time*@
-        <div class="form-group">
-            <h2 style="color: #70b2f9;">When</h2>
-            @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-       
-
-        @*Contact Information*@
-        <div class="form-group">
-            <h2 style="color: #70b2f9;">Contact Information</h2>
-            @Html.LabelFor(model => model.EventPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventPhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventWebsite, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventWebsite, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Social Media*@
-        <div class="form-group">
-            <h2 style="color: #70b2f9;">Social Media</h2>
             @Html.LabelFor(model => model.EventFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventFacebook, new { htmlAttributes = new { @class = "form-control" } })
@@ -134,9 +113,15 @@
             </div>
         </div>
 
-        @*Ticket Information*@
         <div class="form-group">
-            <h2 style="color: #70b2f9;">Ticket Information</h2>
+            @Html.LabelFor(model => model.EventWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventWebsite, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventWebsite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.EventTicketPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventTicketPrice, new { htmlAttributes = new { @class = "form-control" } })
@@ -152,55 +137,17 @@
             </div>
         </div>
 
-        @*Media*@
-        <div class="form-group">
-            <h2 style="color: #70b2f9;">Media</h2>
-            @Html.LabelFor(model => model.EventYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventYouTube, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventYouTube, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventSoundCloud, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })
-            </div>
-        </div>    
-
-        @*Image*@
-        @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
-        {
-            <div class="form-group">
-                <h2 style="color: #70b2f9;">Image</h2>
-                <span class="control-label col-md-2"><strong>Current Image</strong></span>
-                <div class="col-md-10">
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == ToDo.Models.FileType.EventImage).FileId" alt="avatar" style="width: 200px; height:200px;"/>
-                </div>
-            </div>
-        }
-
-        @*OwnerID*@
-        @Html.HiddenFor(m => m.OwnerID, new { @Value = @ViewBag.OID })
-
-        <div class="form-group">
-            @Html.Label("Image", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="imgEvent" name="imageUpload" />
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-
-                @Html.ActionLink("Cancel", null, null, null, new { href = Request.UrlReferrer, @class = "btn btn-danger" })
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

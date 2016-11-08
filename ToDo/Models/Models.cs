@@ -6,9 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 
-//File
-using System.Collections.Generic;   
-
 namespace ToDo.Models
 {
     //Enums
@@ -16,6 +13,7 @@ namespace ToDo.Models
     public enum Town { Cork, Dublin, Galway, Limerick, Sligo, Waterford }
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
+    public enum VenueType { Hall, Hotel, Nightclub, Pitch, Pub, Restraunt, Sports_Complex, Stadium, Theater }
 
     public class Event
     {
@@ -27,32 +25,21 @@ namespace ToDo.Models
         //User ID Foregin Key
         public string OwnerID { get; set; }
 
+        //Foreign Key for Club
+        public int VenueID { get; set; }
+        [ForeignKey("VenueID")]
+        public virtual Venue Venue { get; set; }
+
         //Title
         [Required(ErrorMessage = "You must enter a title")]
         [DataType(DataType.Text)]
         [Display(Name = "Title")]
         public string EventTitle { get; set; }
 
-        //Town
-        [Required(ErrorMessage = "You must select a town from the list provided")]
-        [Display(Name = "Town")]
-        public Town EventTown { get; set; }
-
-        //Venue
-        [Display(Name = "Venue")]
-        [DataType(DataType.Text)]
-        public string EventVenue { get; set; }
-
-        //Address
-        [Required(ErrorMessage = "You must enter a street")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Street")]
-        public string EventAddress { get; set; }
-
         //Date
         [Required(ErrorMessage = "You must enter a date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime EventDate { get; set; }
 
@@ -74,23 +61,19 @@ namespace ToDo.Models
         [Display(Name = "Category")]
         public Category EventCategory { get; set; }
 
-        //Youtube Link
-        //[RegularExpression("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?‌​[\\w\\?‌​=]*)?", ErrorMessage = "This is not a valid YouTube Link")]
+        //Youtube Link     
         [Display(Name = "YouTube")]
         public string EventYouTube { get; set; }
 
         //SoundCloud Link
-        //[RegularExpression("/^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/", ErrorMessage = "This is not a valid SoundCloud Link")]
         [Display(Name = "SoundCloud")]
         public string EventSoundCloud { get; set; }
 
         //Facebook Link
-        //Regular Expression
         [Display(Name = "Facebook")]
         public string EventFacebook { get; set; }
 
         //Twitter Link
-        //Regular expression
         [Display(Name = "Twitter")]
         public string EventTwitter { get; set; }
 
@@ -110,20 +93,6 @@ namespace ToDo.Models
         //Ticket Shop Link/ Location
         [Display(Name = "Ticket Vendor")]
         public string EventTicketStore { get; set; }
-
-        //Image
-        [Display(Name = "Image")]
-        public string EventImage { get; set; }
-
-        //Contact Email
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
-        public string EventEmail { get; set; }
-
-        //Contact Number
-        [Display(Name = "Telephone")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
-        public string EventPhoneNumber { get; set; }
 
         //Image File 
         public virtual ICollection<File> Files { get; set; }
@@ -174,11 +143,11 @@ namespace ToDo.Models
         //Price Information
         public double ActivityPrice { get; set; }
 
-        //Image
-        public string ActivityImage { get; set; }
-
         //Telephone Number
         public string ActivityTelephoneNumber { get; set; }
+
+        //Image File 
+        public virtual ICollection<File> Files { get; set; }
     }
 
     //Image File class
@@ -201,4 +170,107 @@ namespace ToDo.Models
 
         public virtual Event Event { get; set; }
     }
+
+    //Venue
+    public class Venue
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int VenueID { get; set; }
+
+        //Id for the owner of this venue
+        public string OwnerId { get; set; }
+
+        //List of events for this venue
+        public List<Event> VenueEvents { get; set; }
+
+        //Name
+        [Required(ErrorMessage = "You must enter a name")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
+        public string VenueName { get; set; }
+
+        //Type
+        [DataType(DataType.Text)]
+        [Display(Name = "Type")]
+        public VenueType VenueType { get; set; }
+
+        //Town
+        [Required(ErrorMessage = "You must select a town from the list provided")]
+        [Display(Name = "Town")]
+        public Town VenueTown { get; set; }
+
+        //Address
+        [Required(ErrorMessage = "You must enter a street")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Street")]
+        public string VenueAddress { get; set; }
+
+        //Description
+        [Required(ErrorMessage = "Give your venue a brief description")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Details")]
+        public string VenueDescription { get; set; }
+
+        //Contact Email
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
+        public string VenueEmail { get; set; }
+
+        //Contact Number
+        [Display(Name = "Telephone")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
+        public string VenuePhoneNumber { get; set; }
+
+        //Image File 
+        public virtual ICollection<File> Files { get; set; }
+    }
+
+    //Band Class
+    public class Band
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BandID { get; set; }
+
+        //Name
+        [Required(ErrorMessage = "You must enter a name")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Venue")]
+        public string BandName { get; set; }
+
+        //Description
+        [Required(ErrorMessage = "Give your venue a brief description")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Description")]
+        public string BandDescription { get; set; }
+
+        //Contact Number
+        [Display(Name = "Telephone")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
+        public int BandContactNumber { get; set; }
+
+        //Contact Email
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
+        public string BandEmail { get; set; }
+
+        //Facebook
+        [Display(Name = "Facebook")]
+        public string BandFacebook { get; set; }
+    }
 }
+
+//To Do
+//1. expanding text area from futa till project, use this for event description
+//2. Fix date not displaying in edit
+//3. set default image for event if none uploaded
+//4. Get the users current information
+//5. YouTube video disable autoplay
+//6. Impliment SoundClou API
+//7. Google Directions styling (pop up?, expand div?)
+//8. Facebook (sign in/ up, share events, like)
+//9. sendgrid
+//10. Styling (color wheel, human computer interaction)
+//11. YouTube/ SoundCloud icon on hover text
+//12. Add comments section to venue and event details page (get code from ultimate organiser)

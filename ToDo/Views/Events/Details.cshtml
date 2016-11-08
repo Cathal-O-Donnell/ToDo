@@ -1,4 +1,5 @@
-﻿@model ToDo.Models.Event
+﻿
+@model ToDo.Models.Event
 
 
 <body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">
@@ -16,17 +17,17 @@
     <div>
 
         <h1>@Model.EventTitle</h1>
-        
+
         <hr />
 
         <div class="row">
             @*Image*@
             <div class="col-sm-3">
-                
+
                 @*Check if event has image*@
                 @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
                 {
-                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 250px; height:250px;" />                    
+                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 250px; height:250px;" />
                 }
 
                 @*No event image was uploaded, display default image*@
@@ -35,6 +36,26 @@
                     <h4>No Image</h4>
                 }
 
+                @*Social Links*@
+                <p>
+                    @*Facebook*@
+                    @if (Model.EventFacebook != null || Model.EventFacebook != "")
+                    {
+                        <a href="@Model.EventFacebook" class="fa fa-facebook-official" style="font-size:30px;color:#3b5998"></a>
+                    }
+
+                    @*Twitter*@
+                    @if (Model.EventTwitter != null)
+                    {
+                        <a href="@Model.EventTwitter" class="fa fa-twitter" style="font-size:30px;color:#0084b4"></a>
+                    }
+
+                    @*Instagram*@
+                    @if (Model.EventInstagram != null)
+                    {
+                        <a href="@Model.EventInstagram" class="fa fa-instagram" style="font-size:30px;color:#fb3958"></a>
+                    }
+                </p>
                 <p style="padding-top:15px;">
 
                     <button class="btn btn-primary">
@@ -48,18 +69,18 @@
             <div class="col-sm-5">
                 <h2 style="padding-left: 25px; color: #70b2f9;">@Html.DisplayNameFor(model => model.EventDescription)</h2>
 
-                
+
                 <p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.EventDescription)</p>
             </div>
 
             @*Where*@
             <div class="col-sm-2">
                 <h2 style="color: #70b2f9;">Where</h2>
-                <h3>@Model.EventVenue</h3>
+                <h3>@ViewBag.EVenue</h3>
 
-                <h3>@Model.EventAddress</h3>
+                <h3>@ViewBag.EAddress</h3>
 
-                <h3>@Model.EventTown</h3>
+                <h3>@ViewBag.ETown</h3>
 
                 @*When*@
                 <h2 style="color: #70b2f9;">When</h2>
@@ -89,15 +110,15 @@
                 }
 
                 @*Check if phone number is not null*@
-                @if (Model.EventPhoneNumber != null)
+                @if (ViewBag.EPhone != null)
                 {
-                    <h3>@Html.DisplayNameFor(model => model.EventPhoneNumber): @Html.DisplayFor(model => model.EventPhoneNumber)</h3>
+                    <h3>Phone: @ViewBag.EPhone</h3>
                 }
 
                 @*Check if email is not null*@
-                @if (Model.EventEmail != null)
+                @if (ViewBag.EEmail != null)
                 {
-                    <h3>@Html.DisplayNameFor(model => model.EventEmail): @Html.DisplayFor(model => model.EventEmail)</h3>
+                    <h3>Email: @ViewBag.EEmail</h3>
                 }
 
                 @*Check if website is not null*@
@@ -153,14 +174,19 @@
 
                 else
                 {
-                        <h4>No YouTube link</h4>
+                    <h4>No YouTube link</h4>
                 }
 
             </div>
         </div>
+        <div class="row">
+            <h2>Comments</h2>
+            <div id="disqus_thread"></div>
+        </div>
     </div>
 </body>
 
+@*Google Maps and Directions*@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
 
 <script>
@@ -176,7 +202,7 @@
         }
 
         else
-        { 
+        {
             GetMap();
         }
 
@@ -301,7 +327,7 @@
 
         player = new YT.Player('player', {
             height: '390',
-            width: '640',            
+            width: '640',
             videoId: youTubeLink,
             events: {
                 'onReady': onPlayerReady,
@@ -329,5 +355,17 @@
         player.stopVideo();
     }
 
+    //Comments section
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
 
+        s.src = '//s00144297.disqus.com/embed.js';
+        //src="//s00144297.disqus.com/count.js
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+

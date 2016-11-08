@@ -22,11 +22,8 @@ namespace ToDo.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            //Count Events
-            int numberOfEvents = db.Events.Count();
-            ViewBag.numberOfEvents = numberOfEvents;
-
-            return View(db.Events.ToList());
+            var events = db.Events.Include(e => e.Venue);
+            return View(events.ToList());
         }
 
         // GET: Events/Details/5
@@ -36,11 +33,20 @@ namespace ToDo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //Get selected event from DB
             Event @event = db.Events.Find(id);
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
+
+            //Get Venue Id
+            int venueID = @event.VenueID;
+            //Find venue in db
+            Venue venue = db.Venues.Find(venueID);
+            //Pass venue info to view
+            ViewBag.EVenue = venue.VenueName;
+            ViewBag.EAddress = venue.VenueAddress;
+            ViewBag.ETown = venue.VenueTown;
+            ViewBag.EPhone = venue.VenuePhoneNumber;
+            ViewBag.EEmail = venue.VenueEmail;
 
             //Get currents users id
             string UserId = User.Identity.GetUserId();
@@ -68,7 +74,7 @@ namespace ToDo.Controllers
             geoCode = new GoogleGeocoder();
 
             //Combine location into one string
-            string address = string.Format("{0}, {1}, {2}", @event.EventVenue, @event.EventAddress, @event.EventTown);
+            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown);
 
             var coordinates = geoCode.Geocode(address).ToList();
 
@@ -100,25 +106,39 @@ namespace ToDo.Controllers
                 ViewBag.hasYT = false;
             }
 
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
             return View(@event);
         }
 
         // GET: Events/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            //Get UserID
-            string UserId = User.Identity.GetUserId();
 
-            //User not logged in, redirect to Login Page
-            if (UserId == null)
+            //Get the currentely logged in user
+            string currentUserId = User.Identity.GetUserId();
+
+            //If no user is logged in, redirect them to the login page
+            if (currentUserId == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            else
+            ViewBag.VID = id;
+
+            //Get the currentely selected club
+            var venue = db.Venues.Find(id);
+
+            if (venue == null)
             {
-                return View();
+                return HttpNotFound();
             }
+            
+            Event newEvent = new Event() { Venue = venue, VenueID = Convert.ToInt32(id) };
+
+            return View(newEvent);
         }
 
         // POST: Events/Create
@@ -126,20 +146,12 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,OwnerID,EventTitle,EventTown,EventVenue,EventAddress,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventImage,EventPhoneNumber,EventEmail")] Event @event, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
-                //Get UserID
+                //Get Owner Id
                 string UserId = User.Identity.GetUserId();
-
-                //User not logged in, redirect to Login Page
-                if (UserId == null)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-
-                //Set Event Owner ID equal to current user ID
                 @event.OwnerID = UserId;
 
                 //Image File Upload
@@ -164,6 +176,7 @@ namespace ToDo.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
         }
 
@@ -175,17 +188,11 @@ namespace ToDo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Event @event = db.Events.Find(id);
-
-            //Image
-            @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
-
-            ViewBag.OID = @event.OwnerID;
-
-
             if (@event == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
         }
 
@@ -194,37 +201,15 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,OwnerID,EventTitle,EventTown,EventVenue,EventAddress,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventImage,EventPhoneNumber,EventEmail")] Event @event, HttpPostedFileBase imageUpload)
+        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(@event).State = EntityState.Modified;
-
-                @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == @event.EventID);
-
-                //Image
-                if (imageUpload != null && imageUpload.ContentLength > 0)
-                {
-                    if (@event.Files.Any(f => f.FileType == FileType.EventImage))
-                    {
-                        db.Files.Remove(@event.Files.First(f => f.FileType == FileType.EventImage));
-                    }
-                    var avatar = new File
-                    {
-                        FileName = System.IO.Path.GetFileName(imageUpload.FileName),
-                        FileType = FileType.EventImage,
-                        ContentType = imageUpload.ContentType
-                    };
-                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
-                    {
-                        avatar.Content = reader.ReadBytes(imageUpload.ContentLength);
-                    }
-                    @event.Files = new List<File> { avatar };
-                }
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
         }
 

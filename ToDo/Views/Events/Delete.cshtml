@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Venue.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue.OwnerId)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.OwnerID)
         </dt>
 
@@ -25,30 +33,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.EventTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventTown)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventTown)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventVenue)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventVenue)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventAddress)
         </dd>
 
         <dt>
@@ -145,14 +129,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.EventTicketStore)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventImage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventImage)
         </dd>
 
     </dl>

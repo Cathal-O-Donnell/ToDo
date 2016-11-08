@@ -34,5 +34,7 @@ namespace ToDo.Models
         }
 
         public System.Data.Entity.DbSet<ToDo.Models.Event> Events { get; set; }
+
+        public System.Data.Entity.DbSet<ToDo.Models.Venue> Venues { get; set; }
     }
 }

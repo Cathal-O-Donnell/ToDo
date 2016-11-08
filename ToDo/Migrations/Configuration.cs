@@ -10,6 +10,7 @@ namespace ToDo.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "ToDo.Models.ApplicationDbContext";
         }
 
