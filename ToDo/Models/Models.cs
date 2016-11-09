@@ -154,6 +154,8 @@ namespace ToDo.Models
     //http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files
     public class File
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FileId { get; set; }
 
         [StringLength(255)]
@@ -169,6 +171,28 @@ namespace ToDo.Models
         public int EventID { get; set; }
 
         public virtual Event Event { get; set; }
+    }
+
+    //Venue Files
+    public class VenueFile
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int VenueFileId { get; set; }
+
+        [StringLength(255)]
+        public string VenueFileName { get; set; }
+
+        [StringLength(100)]
+        public string VenueContentType { get; set; }
+
+        public byte[] VenueContent { get; set; }
+
+        public FileType VenueFileType { get; set; }
+
+        public int VenueID { get; set; }
+
+        public virtual Venue Venue { get; set; }
     }
 
     //Venue
@@ -223,7 +247,7 @@ namespace ToDo.Models
         public string VenuePhoneNumber { get; set; }
 
         //Image File 
-        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<VenueFile> VenueFiles { get; set; }
     }
 
     //Band Class

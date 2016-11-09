@@ -22,6 +22,7 @@ namespace ToDo.Models
     {
 
         public DbSet<File> Files { get; set; }
+        public DbSet<VenueFile> VenueFiles { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -97,18 +97,18 @@ namespace ToDo.Controllers
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
                 {
-                    var imgEvent = new File
+                    var imgVenue = new VenueFile
                     {
-                        FileName = System.IO.Path.GetFileName(imageUpload.FileName),
-                        FileType = FileType.EventImage,
-                        ContentType = imageUpload.ContentType
+                        VenueFileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        VenueFileType = FileType.EventImage,
+                        VenueContentType = imageUpload.ContentType
                     };
                     using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
                     {
-                        imgEvent.Content = reader.ReadBytes(imageUpload.ContentLength);
+                        imgVenue.VenueContent = reader.ReadBytes(imageUpload.ContentLength);
                     }
 
-                    venue.Files = new List<File> { imgEvent };
+                    venue.VenueFiles = new List<VenueFile> { imgVenue };
                 }
 
                 db.Venues.Add(venue);
@@ -131,6 +131,13 @@ namespace ToDo.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Owner Id
+            ViewBag.OID = venue.OwnerId;
+
+            //Image
+            venue = db.Venues.Include(s => s.VenueFiles).SingleOrDefault(s => s.VenueID == id);
+
             return View(venue);
         }
 
@@ -139,10 +146,33 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VenueID,OwnerId,VenueName,VenueType,EventTown,EventAddress,EventDescription,EventEmail,EventPhoneNumber")] Venue venue)
+        public ActionResult Edit([Bind(Include = "VenueID,OwnerId,VenueName,VenueType,VenueTown,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber")] Venue venue, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
+
+                venue = db.Venues.Include(s => s.VenueFiles).SingleOrDefault(s => s.VenueID == venue.VenueID);
+
+                //Image
+                if (imageUpload != null && imageUpload.ContentLength > 0)
+                {
+                    if (venue.VenueFiles.Any(f => f.VenueFileType == FileType.EventImage))
+                    {
+                        db.VenueFiles.Remove(venue.VenueFiles.First(f => f.VenueFileType == FileType.EventImage));
+                    }
+                    var avatar = new VenueFile
+                    {
+                        VenueFileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        VenueFileType = FileType.EventImage,
+                        VenueContentType = imageUpload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
+                    {
+                        avatar.VenueContent = reader.ReadBytes(imageUpload.ContentLength);
+                    }
+                    venue.VenueFiles = new List<VenueFile> { avatar };
+                }
+
                 db.Entry(venue).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

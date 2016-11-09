@@ -16,9 +16,9 @@
     <hr />
 
     @*Check if event has image*@
-    @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+    @if (Model.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
     {
-        <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 250px; height:250px;" />
+        <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 250px; height:250px;" />
     }
 
     @*No event image was uploaded, display default image*@

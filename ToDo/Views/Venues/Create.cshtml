@@ -8,6 +8,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @*Name*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">New Venue</h2>
             @Html.LabelFor(model => model.VenueName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -17,6 +18,7 @@
             </div>
         </div>
 
+        @*Description*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,6 +27,7 @@
             </div>
         </div>
 
+        @*Venue Type*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,6 +36,7 @@
             </div>
         </div>
 
+        @*Venue Town*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueTown, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -41,6 +45,7 @@
             </div>
         </div>
 
+        @*Address*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,6 +54,7 @@
             </div>
         </div>        
 
+        @*Email*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Contact Details</h2>
             @Html.LabelFor(model => model.VenueEmail, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -58,6 +64,7 @@
             </div>
         </div>
 
+        @*Phone Number*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenuePhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -66,17 +73,19 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        @*Image*@
+        <div class="form-group">
             <h2 style="color: #70b2f9;">Image</h2>
             @Html.Label("Image", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="imgEvent" name="imageUpload" />
+                <input type="file" id="imgVenue" name="imageUpload" />
             </div>
-        </div>*@
+        </div>
 
+        @*Submit Button*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>

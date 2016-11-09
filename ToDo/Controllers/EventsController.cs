@@ -193,6 +193,12 @@ namespace ToDo.Controllers
                 return HttpNotFound();
             }
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
+
+            ViewBag.OID = @event.OwnerID;
+
+            //Image
+            @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
+
             return View(@event);
         }
 
@@ -201,10 +207,31 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
+
+                //Image
+                if (imageUpload != null && imageUpload.ContentLength > 0)
+                {
+                    if (@event.Files.Any(f => f.FileType == FileType.EventImage))
+                    {
+                        db.Files.Remove(@event.Files.First(f => f.FileType == FileType.EventImage));
+                    }
+                    var avatar = new File
+                    {
+                        FileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        FileType = FileType.EventImage,
+                        ContentType = imageUpload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(imageUpload.ContentLength);
+                    }
+                    @event.Files = new List<File> { avatar };
+                }
+
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

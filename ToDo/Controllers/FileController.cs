@@ -14,8 +14,21 @@ namespace ToDo.Controllers
         // GET: /File/
         public ActionResult Index(int id)
         {
+            //Event File
             var fileToRetrieve = db.Files.Find(id);
-            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+
+            //Venue File
+            var VfileToRetrieve = db.VenueFiles.Find(id);
+
+            if (fileToRetrieve != null)
+            {
+                return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+            }
+
+            else
+            {
+               return File(VfileToRetrieve.VenueContent, VfileToRetrieve.VenueContentType);
+            }            
         }
     }
 }
