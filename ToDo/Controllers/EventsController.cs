@@ -98,7 +98,7 @@ namespace ToDo.Controllers
             if (@event.EventYouTube != null)
             {
                 ViewBag.hasYT = true;
-                ViewBag.youTubeID  = @event.EventYouTube.Substring(@event.EventYouTube.LastIndexOf('=') + 1);
+                ViewBag.youTubeID = @event.EventYouTube.Substring(@event.EventYouTube.LastIndexOf('=') + 1);
             }
 
             else
@@ -135,7 +135,7 @@ namespace ToDo.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             Event newEvent = new Event() { Venue = venue, VenueID = Convert.ToInt32(id) };
 
             return View(newEvent);
@@ -187,17 +187,21 @@ namespace ToDo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Event @event = db.Events.Find(id);
+
+            //Image
+            @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
+
+            //Owner ID
+            ViewBag.OID = @event.OwnerID;
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
 
-            ViewBag.OID = @event.OwnerID;
-
-            //Image
-            @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
 
             return View(@event);
         }
@@ -207,32 +211,36 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase imageUpload)
+        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                Event oldEvent = db.Events.Find(@event.EventID);
+
+                @event.Venue = oldEvent.Venue;
+                @event.VenueID = oldEvent.VenueID;
+                @event.Files = oldEvent.Files;
 
                 //Image
-                if (imageUpload != null && imageUpload.ContentLength > 0)
+                if (upload != null && upload.ContentLength > 0)
                 {
                     if (@event.Files.Any(f => f.FileType == FileType.EventImage))
                     {
                         db.Files.Remove(@event.Files.First(f => f.FileType == FileType.EventImage));
                     }
-                    var avatar = new File
+                    var img = new File
                     {
-                        FileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
                         FileType = FileType.EventImage,
-                        ContentType = imageUpload.ContentType
+                        ContentType = upload.ContentType
                     };
-                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
                     {
-                        avatar.Content = reader.ReadBytes(imageUpload.ContentLength);
+                        img.Content = reader.ReadBytes(upload.ContentLength);
                     }
-                    @event.Files = new List<File> { avatar };
+                    @event.Files = new List<File> { img };
                 }
 
-                db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

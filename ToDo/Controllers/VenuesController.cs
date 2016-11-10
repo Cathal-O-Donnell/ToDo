@@ -146,15 +146,12 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VenueID,OwnerId,VenueName,VenueType,VenueTown,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber")] Venue venue, HttpPostedFileBase imageUpload)
+        public ActionResult Edit([Bind(Include = "VenueID,OwnerId,VenueName,VenueType,VenueTown,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber")] Venue venue, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
-
-                venue = db.Venues.Include(s => s.VenueFiles).SingleOrDefault(s => s.VenueID == venue.VenueID);
-
-                //Image
-                if (imageUpload != null && imageUpload.ContentLength > 0)
+                //New Image
+                if (upload != null && upload.ContentLength > 0)
                 {
                     if (venue.VenueFiles.Any(f => f.VenueFileType == FileType.EventImage))
                     {
@@ -162,13 +159,13 @@ namespace ToDo.Controllers
                     }
                     var avatar = new VenueFile
                     {
-                        VenueFileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        VenueFileName = System.IO.Path.GetFileName(upload.FileName),
                         VenueFileType = FileType.EventImage,
-                        VenueContentType = imageUpload.ContentType
+                        VenueContentType = upload.ContentType
                     };
-                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
                     {
-                        avatar.VenueContent = reader.ReadBytes(imageUpload.ContentLength);
+                        avatar.VenueContent = reader.ReadBytes(upload.ContentLength);
                     }
                     venue.VenueFiles = new List<VenueFile> { avatar };
                 }
