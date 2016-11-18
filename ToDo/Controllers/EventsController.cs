@@ -154,6 +154,11 @@ namespace ToDo.Controllers
                 string UserId = User.Identity.GetUserId();
                 @event.OwnerID = UserId;
 
+                //Get the new id for this event
+                var NextId = this.db.Events.Max(t => t.EventID);
+                var newId = NextId + 1;
+                @event.EventID = newId;
+
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
                 {
@@ -173,8 +178,13 @@ namespace ToDo.Controllers
 
                 db.Events.Add(@event);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                
+                //Redirect to details view for the new event
+                return RedirectToAction("Details", new
+                {
+                    id = @event.EventID
+                });
+        }
 
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
@@ -239,10 +249,18 @@ namespace ToDo.Controllers
                         img.Content = reader.ReadBytes(upload.ContentLength);
                     }
                     @event.Files = new List<File> { img };
+
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Events", @event.EventID);
                 }
 
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                else
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Events", @event.EventID);
+                }
+
+                
             }
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
@@ -269,18 +287,24 @@ namespace ToDo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
+            int venueID = @event.VenueID;
             db.Events.Remove(@event);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            //Redirect to details view for the current venue
+            return RedirectToAction("Details", "Venues", new
+            {
+                id = venueID
+            });
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

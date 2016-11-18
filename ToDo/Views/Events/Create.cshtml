@@ -9,6 +9,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @*Title*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">New Event</h2>
             @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -18,14 +19,16 @@
             </div>
         </div>               
 
+        @*Description*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10}, style = "height: 500px;" })
                 @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*Category*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,6 +37,7 @@
             </div>
         </div>
 
+        @*Date*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">When</h2>
             @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,6 +47,7 @@
             </div>
         </div>
 
+        @*Time*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -51,6 +56,7 @@
             </div>
         </div>
 
+        @*YouTube*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Multimedia Links</h2>
             @Html.LabelFor(model => model.EventYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,6 +66,7 @@
             </div>
         </div>
 
+        @*SoundCloud*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -68,6 +75,7 @@
             </div>
         </div>
 
+        @*Facebook*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Social Links</h2>
             @Html.LabelFor(model => model.EventFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -77,6 +85,7 @@
             </div>
         </div>
 
+        @*Twitter*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventTwitter, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -85,6 +94,7 @@
             </div>
         </div>
 
+        @*Instagram*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventInstagram, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -93,6 +103,7 @@
             </div>
         </div>
 
+        @*Website*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -101,6 +112,7 @@
             </div>
         </div>
 
+        @*Ticket Price*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Ticket Information</h2>
             @Html.LabelFor(model => model.EventTicketPrice, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -110,6 +122,7 @@
             </div>
         </div>
 
+        @*Ticket Vendor*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventTicketStore, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -118,6 +131,7 @@
             </div>
         </div>
 
+        @*Image*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Image</h2>
             @Html.Label("Image", new { @class = "control-label col-md-2" })
@@ -143,3 +157,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
