@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2>Venues</h2>
 
-<h2>Index</h2>
+<hr />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create",null , new { @class = "btn btn-primary"})
 </p>
 <table class="table">
     <tr>

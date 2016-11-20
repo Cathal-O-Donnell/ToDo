@@ -216,7 +216,7 @@ namespace ToDo.Models
 
         //Type
         [DataType(DataType.Text)]
-        [Display(Name = "Type")]
+        [Display(Name = "Venue")]
         public VenueType VenueType { get; set; }
 
         //Town

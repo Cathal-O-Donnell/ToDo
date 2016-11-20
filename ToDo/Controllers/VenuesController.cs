@@ -52,6 +52,12 @@ namespace ToDo.Controllers
 
             venue.VenueEvents = events;
 
+            //Check if there is any events for this Venue
+            if (events.Count() < 1)
+            {
+                ViewBag.noEvents = true;
+            }
+
             return View(venue);
         }
 
@@ -113,7 +119,12 @@ namespace ToDo.Controllers
 
                 db.Venues.Add(venue);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                //Redirect to details view for the new event
+                return RedirectToAction("Details", new
+                {
+                    id = venue.VenueID
+                });
             }
 
             return View(venue);
