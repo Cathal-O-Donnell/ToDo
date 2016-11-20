@@ -5,8 +5,18 @@
 <hr />
 
 <p>
-    @Html.ActionLink("Create New", "Create",null , new { @class = "btn btn-primary"})
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
+
+@*Search Box*@
+@using (Html.BeginForm())
+{
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" class="btn btn-info btn-sm" />
+        </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -23,22 +33,22 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VenueName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VenueType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VenueTown)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.VenueID }, new { @class = "btn btn-primary" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueTown)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
 
 </table>
-

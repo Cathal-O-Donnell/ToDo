@@ -11,6 +11,8 @@
         @Html.HiddenFor(model => model.EventID)
 
         @*Basic Information*@
+
+        @*Title*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Edit @Model.EventTitle</h2>
             @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -20,14 +22,24 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*Description*@
+        @*<div class="form-group">
             @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
             </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
+                @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
+            </div>
         </div>
 
+        @*Category*@
         <div class="form-group">
             @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -37,6 +49,7 @@
         </div>
 
         @*When*@
+        @*Date*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">When</h2>
             @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -46,6 +59,7 @@
             </div>
         </div>
 
+        Time
         <div class="form-group">
             @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

@@ -39,7 +39,7 @@ namespace ToDo.Models
         //Date
         [Required(ErrorMessage = "You must enter a date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime EventDate { get; set; }
 

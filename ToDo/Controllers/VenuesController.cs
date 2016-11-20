@@ -16,9 +16,37 @@ namespace ToDo.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Venues
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Venues.ToList());
+            //Filter 
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            var venues = from v in db.Venues
+                           select v;
+
+            //Search Bar
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                venues = venues.Where(v => v.VenueName.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            //Sort Order
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    venues = venues.OrderByDescending(v => v.VenueName);
+                    break;
+
+                case "Name_assc":
+                    venues = venues.OrderBy(v => v.VenueName);
+                    break;
+
+                default:
+                    venues = venues.OrderBy(v => v.VenueName);
+                    break;
+            }
+
+            return View(venues.ToList());
         }
 
         // GET: Venues/Details/5
