@@ -9,6 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using ToDo.Models;
 
+//Google Maps API
+using Geocoding;
+using Geocoding.Google;
+
 namespace ToDo.Controllers
 {
     public class VenuesController : Controller
@@ -57,6 +61,29 @@ namespace ToDo.Controllers
             if (events.Count() < 1)
             {
                 ViewBag.noEvents = true;
+            }
+
+            //GeoCodder: Long and Lat values
+            IGeocoder geoCode;
+
+            geoCode = new GoogleGeocoder();
+
+            //Combine location into one string
+            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown);
+
+            var coordinates = geoCode.Geocode(address).ToList();
+
+            //Check if coordinates are valid
+            if (coordinates.Count > 0)
+            {
+                var longlat = coordinates.First();
+
+                //Pass variables to View
+                ViewBag.Long = Convert.ToDouble(longlat.Coordinates.Longitude);
+                ViewBag.Lat = Convert.ToDouble(longlat.Coordinates.Latitude);
+                ViewBag.Address = address;
+
+                ViewBag.hasMap = true;
             }
 
             return View(venue);

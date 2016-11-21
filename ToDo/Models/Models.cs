@@ -286,8 +286,6 @@ namespace ToDo.Models
 }
 
 //To Do
-//1. expanding text area from futa till project, use this for event description
-
 //3. set default image for event if none uploaded
 
 //6. Impliment SoundClou API
