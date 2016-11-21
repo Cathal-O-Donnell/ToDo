@@ -5,11 +5,22 @@
 @*Search Box*@
 @using (Html.BeginForm())
 {
-    <p>
-        @*Find by name: @Html.TextBox("SearchString")*@
-        <input type="text" class="form-control" id="txtSearch">
-        <span class="btn btn-sm btn-warning" id="btnCustomerInc" onclick="VenueSearch();">Search</span>
-    </p>
+    
+
+    <div class="container" style="padding-bottom: 10px;">
+        <div class="row">
+            <div id="custom-search-input">
+                <div class="input-group col-md-2">
+                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search" />
+                    <span class="input-group-btn">
+                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-danger" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <table class="table">
@@ -66,4 +77,5 @@
             }
         });
     }
+
 </script>

@@ -13,6 +13,8 @@ namespace ToDo.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -72,6 +74,17 @@ namespace ToDo.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Get Venues that the user created
+            var venues = (from v in db.Venues
+                          where v.OwnerId == UserId
+                          select v).ToList();
+
+            model.UserVenues = venues;
+
             return View(model);
         }
 
