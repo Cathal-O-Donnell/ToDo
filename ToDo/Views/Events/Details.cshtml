@@ -330,13 +330,13 @@
             width: '640',
             videoId: youTubeLink,
             events: {
-                'onReady': onPlayerReady,
+                //'onReady': onPlayerReady, - AUTOPLAY
                 'onStateChange': onPlayerStateChange
             }
         });
     }
 
-    //The API will call this function when the video player is ready.
+    //This  function causes the video the play automatically, NOT CURRENTLY USED
     function onPlayerReady(event) {
         event.target.playVideo();
     }

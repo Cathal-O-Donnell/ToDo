@@ -225,13 +225,9 @@ namespace ToDo.Controllers
         }
 
         //Venue Index Partial View
-        //[ChildActionOnly]
         public ActionResult VenuesTablePartialView(string id)
         {
-            //string sortOrder,
-            //Filter 
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-
+            
             var venues = from v in db.Venues
                          select v;
 
@@ -240,6 +236,10 @@ namespace ToDo.Controllers
             {
                 venues = venues.Where(v => v.VenueName.ToUpper().Contains(id.ToUpper()));
             }
+
+            //string sortOrder,
+            //Filter 
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
 
             //Sort Order
             //switch (sortOrder)
@@ -257,8 +257,7 @@ namespace ToDo.Controllers
             //        break;
             //}
 
-            // return View(venues.ToList());
-            return PartialView("_VenuesTable", venues.ToList());
+            return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
         }
     }
 }
