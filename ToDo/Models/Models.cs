@@ -287,9 +287,9 @@ namespace ToDo.Models
 
 //To Do
 //1. expanding text area from futa till project, use this for event description
-//2. Fix date not displaying in edit
+//2. Fix date not displaying in edit - done
 //3. set default image for event if none uploaded
-//4. Get the users current information
+//4. Get the users current information - done
 //5. YouTube video disable autoplay
 //6. Impliment SoundClou API
 //7. Google Directions styling (pop up?, expand div?)
@@ -297,4 +297,4 @@ namespace ToDo.Models
 //9. sendgrid
 //10. Styling (color wheel, human computer interaction)
 //11. YouTube/ SoundCloud icon on hover text
-//12. Add comments section to venue and event details page (get code from ultimate organiser)
+//12. Add comments section to venue and event details page (get code from ultimate organiser) - done

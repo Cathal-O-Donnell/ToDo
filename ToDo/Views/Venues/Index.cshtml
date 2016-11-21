@@ -8,47 +8,7 @@
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-@*Search Box*@
-@using (Html.BeginForm())
-{
-        <p>
-            Find by name: @Html.TextBox("SearchString")
-            <input type="submit" value="Search" class="btn btn-info btn-sm" />
-        </p>
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueTown)
-        </th>
-        <th>
-            @*blank*@
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueTown)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
-    }
-
-</table>
+<div id="VenueTable">
+    @*Partial View*@
+    @Html.Action("VenuesTablePartialView")
+</div>

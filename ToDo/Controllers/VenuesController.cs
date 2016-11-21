@@ -16,37 +16,10 @@ namespace ToDo.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Venues
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index()
         {
-            //Filter 
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-
-            var venues = from v in db.Venues
-                           select v;
-
-            //Search Bar
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                venues = venues.Where(v => v.VenueName.ToUpper().Contains(searchString.ToUpper()));
-            }
-
-            //Sort Order
-            switch (sortOrder)
-            {
-                case "Name_desc":
-                    venues = venues.OrderByDescending(v => v.VenueName);
-                    break;
-
-                case "Name_assc":
-                    venues = venues.OrderBy(v => v.VenueName);
-                    break;
-
-                default:
-                    venues = venues.OrderBy(v => v.VenueName);
-                    break;
-            }
-
-            return View(venues.ToList());
+            //See VenuesTablePartialView
+            return View();
         }
 
         // GET: Venues/Details/5
@@ -249,6 +222,43 @@ namespace ToDo.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Venue Index Partial View
+        //[ChildActionOnly]
+        public ActionResult VenuesTablePartialView(string id)
+        {
+            //string sortOrder,
+            //Filter 
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            var venues = from v in db.Venues
+                         select v;
+
+            //Search Bar
+            if (!String.IsNullOrEmpty(id))
+            {
+                venues = venues.Where(v => v.VenueName.ToUpper().Contains(id.ToUpper()));
+            }
+
+            //Sort Order
+            //switch (sortOrder)
+            //{
+            //    case "Name_desc":
+            //        venues = venues.OrderByDescending(v => v.VenueName);
+            //        break;
+
+            //    case "Name_assc":
+            //        venues = venues.OrderBy(v => v.VenueName);
+            //        break;
+
+            //    default:
+            //        venues = venues.OrderBy(v => v.VenueName);
+            //        break;
+            //}
+
+            // return View(venues.ToList());
+            return PartialView("_VenuesTable", venues.ToList());
         }
     }
 }
