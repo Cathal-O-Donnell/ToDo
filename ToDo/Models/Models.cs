@@ -290,7 +290,7 @@ namespace ToDo.Models
 
 //6. Impliment SoundClou API
 //7. Google Directions styling (pop up?, expand div?)
-//8. Facebook (sign in/ up, share events, like)
+//8. Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
 //9. sendgrid
 //10. Styling (color wheel, human computer interaction)
 //11. YouTube/ SoundCloud icon on hover text

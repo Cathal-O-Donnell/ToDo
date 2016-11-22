@@ -54,9 +54,9 @@ namespace ToDo
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "742745362548531",
+               appSecret: "2a474959aaae40f1a2b6688d273e0ffc");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

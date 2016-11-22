@@ -15,6 +15,7 @@ using Geocoding.Google;
 
 namespace ToDo.Controllers
 {
+    [RequireHttps]
     public class VenuesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -252,16 +253,16 @@ namespace ToDo.Controllers
         }
 
         //Venue Index Partial View
-        public ActionResult VenuesTablePartialView(string id)
+        public ActionResult VenuesTablePartialView(string search)
         {
             
             var venues = from v in db.Venues
                          select v;
 
             //Search Bar
-            if (!String.IsNullOrEmpty(id))
+            if (!String.IsNullOrEmpty(search))
             {
-                venues = venues.Where(v => v.VenueName.ToUpper().Contains(id.ToUpper()));
+                venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
             }
 
             //string sortOrder,

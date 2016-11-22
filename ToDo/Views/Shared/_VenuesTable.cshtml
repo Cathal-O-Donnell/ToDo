@@ -7,9 +7,9 @@
         <div class="row">
             <div id="custom-search-input">
                 <div class="input-group col-md-2">
-                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search Venues..." />
+                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
                     <span class="input-group-btn">
-                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-danger" type="button">
+                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -17,6 +17,7 @@
             </div>
         </div>
     </div>
+
 }
 
 <table class="table">
@@ -64,7 +65,7 @@
         $.ajax({
             type: "GET",
             url: '@Url.Action("VenuesTablePartialView", "Venues")',
-            data: { id: search },
+            data: { search: search },
             success: function (data) {
 
                 $('#VenueTable').html(data);

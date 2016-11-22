@@ -15,6 +15,7 @@ using Geocoding.Google;
 
 namespace ToDo.Controllers
 {
+    [RequireHttps]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -309,16 +310,16 @@ namespace ToDo.Controllers
 
 
         //Venue Index Partial View
-        public ActionResult EventsTablePartialView(string id)
+        public ActionResult EventsTablePartialView(string search)
         {
 
             var events = from e in db.Events
                          select e;
 
             //Search Bar
-            if (!String.IsNullOrEmpty(id))
+            if (!String.IsNullOrEmpty(search))
             {
-                events = events.Where(e => e.EventTitle.ToUpper().Contains(id.ToUpper()));
+                events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
             }
 
             return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
