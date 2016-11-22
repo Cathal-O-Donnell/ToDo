@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ToDo.Models.Venue>
+﻿@model IEnumerable<ToDo.Models.Event>
 
 @*Search Box*@
 @using (Html.BeginForm())
-{   
+{
     <div class="container" style="padding-bottom: 10px;">
         <div class="row">
             <div id="custom-search-input">
                 <div class="input-group col-md-2">
-                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search Venues..." />
+                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search Events..." />
                     <span class="input-group-btn">
                         <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-danger" type="button">
                             <span class="glyphicon glyphicon-search"></span>
@@ -22,13 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.VenueName)
+            @Html.DisplayNameFor(model => model.EventTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VenueType)
+            @Html.DisplayNameFor(model => model.Venue.VenueName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VenueTown)
+            @Html.DisplayNameFor(model => model.EventDate)
         </th>
         <th>
             @*blank*@
@@ -39,16 +39,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueName)
+                @Html.DisplayFor(modelItem => item.EventTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueType)
+                @Html.DisplayFor(modelItem => item.Venue.VenueName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueTown)
+                @Html.DisplayFor(modelItem => item.EventDate)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.EventID }, new { @class = "btn btn-primary" })
             </td>
         </tr>
     }
@@ -63,7 +63,7 @@
         //Ajax code
         $.ajax({
             type: "GET",
-            url: '@Url.Action("VenuesTablePartialView", "Venues")',
+            url: '@Url.Action("EventsTablePartialView", "Events")',
             data: { id: search },
             success: function (data) {
 

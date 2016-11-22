@@ -22,8 +22,8 @@ namespace ToDo.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            var events = db.Events.Include(e => e.Venue);
-            return View(events.ToList());
+            //See EventsTablePartialView
+            return View();
         }
 
         // GET: Events/Details/5
@@ -306,5 +306,22 @@ namespace ToDo.Controllers
         //    }
         //    base.Dispose(disposing);
         //}
+
+
+        //Venue Index Partial View
+        public ActionResult EventsTablePartialView(string id)
+        {
+
+            var events = from e in db.Events
+                         select e;
+
+            //Search Bar
+            if (!String.IsNullOrEmpty(id))
+            {
+                events = events.Where(e => e.EventTitle.ToUpper().Contains(id.ToUpper()));
+            }
+
+            return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
+        }
     }
 }

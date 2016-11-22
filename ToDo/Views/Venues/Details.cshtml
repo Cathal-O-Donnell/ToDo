@@ -47,17 +47,21 @@
 
                     @*Details*@
                     <div id="home" class="tab-pane fade in active">
-                        <h3>@Html.DisplayNameFor(model => model.VenueDescription)</h3>
-                        <p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.VenueDescription)</p>
+                        <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.VenueDescription)</p>
                     </div>
 
                     @*Map*@
                     <div id="menu1" class="tab-pane fade">
                         @if (ViewBag.hasMap == true)
                         {
-                            <div id="googleMap" style="width:500px;height:500px; padding-top: 25px;">
+                            <div id="googleMap" style="width:400px;height:400px; padding: 25px;">
 
                             </div>
+                        }
+
+                        else
+                        {
+                                <h3>No map available</h3>
                         }
                     </div>
 
@@ -66,11 +70,13 @@
 
                         @if (Model.VenuePhoneNumber != null)
                         {
+                            <h3>@Html.DisplayNameFor(model => model.VenuePhoneNumber)</h3>
                             <h4>@Model.VenuePhoneNumber</h4>
                         }
 
                         @if (Model.VenueEmail != null)
                         {
+                            <h3>@Html.DisplayNameFor(model => model.VenueEmail)</h3>
                             <h4>@Model.VenueEmail</h4>
                         }
 
@@ -120,12 +126,6 @@
             }
         </div>
     </div>
-
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.VenueID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-
 
     <div class="row">
         <h2>Comments</h2>

@@ -6,10 +6,12 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@*Partial View*@
+<div id="VenueTable">
+    @Html.Action("EventsTablePartialView")
+</div>
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Venue.OwnerId)
@@ -114,4 +116,4 @@
     </tr>
 }
 
-</table>
+</table>*@
