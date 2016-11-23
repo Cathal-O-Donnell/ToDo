@@ -288,7 +288,7 @@ namespace ToDo.Models
 //To Do
 //3. set default image for event if none uploaded
 
-//6. Impliment SoundClou API
+//6. SoundCloud API
 //7. Google Directions styling (pop up?, expand div?)
 //8. Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
 //9. sendgrid
