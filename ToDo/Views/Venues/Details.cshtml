@@ -1,6 +1,7 @@
 ﻿@model ToDo.Models.Venue
 
-<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">
+@*<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">*@
+<body>
 
     @*Check if current user is the owner of this event*@
     @if (ViewBag.IsOwner == true)
@@ -39,7 +40,7 @@
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.VenueDescription)</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Map</a></li>
+                    <li><a data-toggle="tab" href="#menu1" onclick="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">Map</a></li>
                     <li><a data-toggle="tab" href="#menu2">Contact Us</a></li>
                 </ul>
 
@@ -54,7 +55,7 @@
                     <div id="menu1" class="tab-pane fade">
                         @if (ViewBag.hasMap == true)
                         {
-                            <div id="googleMap" style="width:400px;height:400px; padding: 25px;">
+                            <div id="googleMap" style="width:600px; height:600px; padding: 25px;">
 
                             </div>
                         }
@@ -138,9 +139,10 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
 
 <script>
-    //Google Map
-    function myFunction(lat, lon) {
 
+    //Google Map
+    function GoogleMap(lat, lon) {
+        console.log("Google Mao function hit");
         // Array of stylin for map
         var styles = [
           {
@@ -200,7 +202,7 @@
     }
 
     //Comments section
-    (function () { // DON'T EDIT BELOW THIS LINE
+    (function() { // DON'T EDIT BELOW THIS LINE
         var d = document, s = d.createElement('script');
 
         s.src = '//s00144297.disqus.com/embed.js';

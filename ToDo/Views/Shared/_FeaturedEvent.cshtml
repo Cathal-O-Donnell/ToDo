@@ -1,0 +1,8 @@
+﻿@model ToDo.Models.Event
+
+<div class="jumbotron">
+    <h1>Featured Event</h1>
+    <h2>@Model.EventTitle</h2>
+
+    @Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-primary" })
+</div>

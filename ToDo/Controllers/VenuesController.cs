@@ -182,77 +182,6 @@ namespace ToDo.Controllers
             return View(venue);
         }
 
-        // POST: Venues/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "VenueID,OwnerId,VenueName,VenueType,VenueTown,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber")] Venue venue, HttpPostedFileBase upload)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ////New Image
-        //        //if (upload != null && upload.ContentLength > 0)
-        //        //{
-        //        //    //Get Old Image
-        //        //    var oldImage = (from e in db.VenueFiles
-        //        //                  where e.VenueID == venue.VenueID
-        //        //                  select e).ToList();
-
-        //        //    venue.VenueFiles = oldImage;
-
-        //        //    if (venue.VenueFiles != null)
-        //        //    {
-        //        //        if (venue.VenueFiles.Any(f => f.VenueFileType == FileType.EventImage))
-        //        //        {
-        //        //            db.VenueFiles.Remove(venue.VenueFiles.First(f => f.VenueFileType == FileType.EventImage));
-        //        //        }
-        //        //    }
-
-        //        //    var newImg = new VenueFile
-        //        //    {
-        //        //        VenueFileName = System.IO.Path.GetFileName(upload.FileName),
-        //        //        VenueFileType = FileType.EventImage,
-        //        //        VenueContentType = upload.ContentType
-        //        //    };
-        //        //    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-        //        //    {
-        //        //        newImg.VenueContent = reader.ReadBytes(upload.ContentLength);
-        //        //    }
-
-        //        //    venue.VenueFiles = new List<VenueFile> { newImg };
-
-        //        //    /*venue.VenueFiles.Add(newImg);*/
-        //        //}
-
-        //        if (upload != null && upload.ContentLength > 0)
-        //        {
-        //            if (venue.VenueFiles.Any(f => f.VenueFileType == FileType.EventImage))
-        //            {
-        //                db.VenueFiles.Remove(venue.VenueFiles.First(f => f.VenueFileType == FileType.EventImage));
-        //            }
-        //            var avatar = new VenueFile
-        //            {
-        //                VenueFileName = System.IO.Path.GetFileName(upload.FileName),
-        //                VenueFileType = FileType.EventImage,
-        //                VenueContentType = upload.ContentType
-        //            };
-        //            using (var reader = new System.IO.BinaryReader(upload.InputStream))
-        //            {
-        //                avatar.VenueContent = reader.ReadBytes(upload.ContentLength);
-        //            }
-        //            venue.VenueFiles = new List<VenueFile> { avatar };
-        //        }
-        //        db.Entry(venue).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-        //        db.Entry(venue).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(venue);
-        //}
-
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id, HttpPostedFileBase upload)
@@ -290,9 +219,8 @@ namespace ToDo.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch (RetryLimitExceededException /* dex */)
+                catch (RetryLimitExceededException)
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }

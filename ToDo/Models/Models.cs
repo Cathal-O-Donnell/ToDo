@@ -233,7 +233,7 @@ namespace ToDo.Models
         //Description
         [Required(ErrorMessage = "Give your venue a brief description")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Details")]
+        [Display(Name = "About Us")]
         public string VenueDescription { get; set; }
 
         //Contact Email
@@ -286,11 +286,20 @@ namespace ToDo.Models
 }
 
 //To Do
-//3. set default image for event if none uploaded
+//set default image for event if none uploaded
+//SoundCloud API
+//Google Directions styling (pop up?, expand div?)
+//Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
+//sendgrid
+//YouTube/ SoundCloud icon on hover text
+//Venue Model - add social links and website link
+//Remove map from event details page and move this all to the venue details page
+//Add link to the event details page linking the user to the venue for this event
+//add enums to database (model classes)
+//Get users current location - apply this location to the filters by default
+//Add more filters to the index pages (Town, Date, Venue)
 
-//6. SoundCloud API
-//7. Google Directions styling (pop up?, expand div?)
-//8. Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
-//9. sendgrid
-//10. Styling (color wheel, human computer interaction)
-//11. YouTube/ SoundCloud icon on hover text
+//Style
+//Image thumbnails - http://bootsnipp.com/snippets/featured/thumbnails-like-bootsnipp
+//Styling (color wheel, human computer interaction)
+//Themeforest

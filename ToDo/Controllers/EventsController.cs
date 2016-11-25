@@ -12,6 +12,7 @@ using ToDo.Models;
 //Google Maps API
 using Geocoding;
 using Geocoding.Google;
+using System.Data.Entity.Infrastructure;
 
 namespace ToDo.Controllers
 {
@@ -217,54 +218,56 @@ namespace ToDo.Controllers
             return View(@event);
         }
 
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,OwnerID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase upload)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                Event oldEvent = db.Events.Find(@event.EventID);
-
-                @event.Venue = oldEvent.Venue;
-                @event.VenueID = oldEvent.VenueID;
-                @event.Files = oldEvent.Files;
-
-                //Image
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    if (@event.Files.Any(f => f.FileType == FileType.EventImage))
-                    {
-                        db.Files.Remove(@event.Files.First(f => f.FileType == FileType.EventImage));
-                    }
-                    var img = new File
-                    {
-                        FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.EventImage,
-                        ContentType = upload.ContentType
-                    };
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                    {
-                        img.Content = reader.ReadBytes(upload.ContentLength);
-                    }
-                    @event.Files = new List<File> { img };
-
-                    db.SaveChanges();
-                    return RedirectToAction("Details", "Events", @event.EventID);
-                }
-
-                else
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Details", "Events", @event.EventID);
-                }
-
-                
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
-            return View(@event);
+            var EventToUpdate = db.Events.Find(id);
+            if (TryUpdateModel(EventToUpdate, "",
+                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime","EventDescription","EventCategory","EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
+            {
+                try
+                {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        if (EventToUpdate.Files.Any(f => f.FileType == FileType.EventImage))
+                        {
+                            db.Files.Remove(EventToUpdate.Files.First(f => f.FileType == FileType.EventImage));
+                        }
+                        var img = new File
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.EventImage,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            img.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        EventToUpdate.Files = new List<File> { img };
+                    }
+
+                    Event oldEvent = db.Events.Find(EventToUpdate.EventID);
+
+                    EventToUpdate.Venue = oldEvent.Venue;
+                    EventToUpdate.VenueID = oldEvent.VenueID;
+                    EventToUpdate.Files = oldEvent.Files;
+
+                    db.Entry(EventToUpdate).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(EventToUpdate);
         }
 
         // GET: Events/Delete/5
@@ -299,26 +302,27 @@ namespace ToDo.Controllers
             });
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
 
         //Venue Index Partial View
         public ActionResult EventsTablePartialView(string search)
         {
-
+            //Get all events from the database
             var events = from e in db.Events
                          select e;
 
             //Search Bar
             if (!String.IsNullOrEmpty(search))
             {
+                //Get all the events where the name contains the users search term
                 events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
             }
 

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ToDo.Models.Venue>
+
+    <div class="row">
+        @foreach (var venue in Model)
+        {
+            <div class="col-md-4">
+                <h2>@venue.VenueName</h2>
+                <h3>@venue.VenueTown</h3>
+                @Html.ActionLink("Details", "Details", "Venues", new { id = venue.VenueID }, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
