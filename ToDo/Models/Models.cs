@@ -283,6 +283,40 @@ namespace ToDo.Models
         [Display(Name = "Facebook")]
         public string BandFacebook { get; set; }
     }
+
+    //Admin settings class
+    public class AdminSettings
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int AdminSettingsID { get; set; }
+
+        //Events
+        [Display(Name = "Top Event")]
+        public int TopFeaturedEvent { get; set; }
+
+        [Display(Name = "Featured Event 1")]
+        public int FeaturedEvent1 { get; set; }
+
+        [Display(Name = "Featured Event 2")]
+        public int FeaturedEvent2 { get; set; }
+
+        [Display(Name = "Featured Event 3")]
+        public int FeaturedEvent3 { get; set; }
+
+        //Venues
+        [Display(Name = "Top Venue")]
+        public int TopFeaturedVenue { get; set; }
+
+        [Display(Name = "Featured Venue 1")]
+        public int FeaturedVenue1 { get; set; }
+
+        [Display(Name = "Featured Venue 2")]
+        public int FeaturedVenue2 { get; set; }
+
+        [Display(Name = "Featured Venue 3")]
+        public int FeaturedVenue3 { get; set; }
+    }
 }
 
 //To Do

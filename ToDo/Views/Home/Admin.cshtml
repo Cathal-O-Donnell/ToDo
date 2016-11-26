@@ -1,0 +1,45 @@
+﻿@model ToDo.Models.AdminSettings
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+
+<p>
+    @Html.ActionLink("Edit Settings", "EditAdminSettings", null, new { @class = "btn btn-primary" })
+</p>
+
+@*Top Featured Event*@
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedEvent)</h3>
+<h3>@ViewBag.TopEvent</h3>
+
+
+@*Featured Events*@
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent1)</h3>
+<h3>@ViewBag.Event1</h3>
+
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent2)</h3>
+<h3>@ViewBag.Event2</h3>
+
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent3)</h3>
+<h3>@ViewBag.Event3</h3>
+
+
+@*Top Featured Venue*@
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedVenue)</h3>
+<h3>@ViewBag.TopVenue</h3>
+
+
+@*Featured Venues*@
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue1)</h3>
+<h3>@ViewBag.Venue1</h3>
+
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue2)</h3>
+<h3>@ViewBag.Venue2</h3>
+
+<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue3)</h3>
+<h3>@ViewBag.Venue3</h3>
+
+
+

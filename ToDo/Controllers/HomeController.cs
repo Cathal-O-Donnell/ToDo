@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ToDo.Models;
@@ -65,6 +69,102 @@ namespace ToDo.Controllers
             featuredVenues.Add(featuredVenue3);
 
             return PartialView("_FeaturedVenue", featuredVenues.ToList());
+        }
+
+        //Admin
+        public ActionResult Admin()
+        {
+            var admin = db.AdminSettings.Find(1);
+
+            //Top Event
+            Event TopFeaturedEvent = db.Events.Find(admin.TopFeaturedEvent);
+            ViewBag.TopEvent = TopFeaturedEvent.EventTitle;
+
+            //Featured Events
+            Event FeaturedEvent1 = db.Events.Find(admin.FeaturedEvent1);
+            ViewBag.Event1 = FeaturedEvent1.EventTitle;
+
+            Event FeaturedEvent2 = db.Events.Find(admin.FeaturedEvent2);
+            ViewBag.Event2 = FeaturedEvent2.EventTitle;
+
+            Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
+            ViewBag.Event3 = FeaturedEvent3.EventTitle;
+            //Top Venue
+            Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);            
+            ViewBag.TopVenue = TopFeaturedVenue.VenueName;
+
+            //Featured Venues
+            Venue Venue1 = db.Venues.Find(admin.FeaturedVenue1);
+            ViewBag.Venue1 = Venue1.VenueName;
+
+            Venue Venue2 = db.Venues.Find(admin.FeaturedVenue2);
+            ViewBag.Venue2 = Venue2.VenueName;
+
+            Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
+            ViewBag.Venue3 = Venue3.VenueName;
+
+
+            return View(admin);
+        }
+
+        [HttpGet]
+        public ActionResult EditAdminSettings()
+        {
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //User not logged in, redirect to Login Page
+            if (UserId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            //List of Events
+            var events = db.Events.Select(e => new
+            {
+                id = e.EventID,
+                Name = e.EventTitle
+
+            }).OrderBy(e => e.Name).ToList();
+            ViewBag.EventsList = new MultiSelectList(events, "id", "Name");
+
+          
+
+            //List of Venuess
+            var venues = db.Venues.Select(v => new
+            {
+                id = v.VenueID,
+                Name = v.VenueName
+
+            }).OrderBy(v => v.Name).ToList();
+            ViewBag.VenuesList = new SelectList(venues, "id", "Name");
+
+            AdminSettings admin = db.AdminSettings.Find(1);
+
+            return View(admin);            
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult EditAdminSettingsPost(int TopFeaturedEvent, int FeaturedEvent1, int FeaturedEvent2, int FeaturedEvent3, int TopFeaturedVenue, int FeaturedVenue1, int FeaturedVenue2, int FeaturedVenue3)
+        {
+            var admin = db.AdminSettings.Find(1);
+
+            admin.TopFeaturedEvent = TopFeaturedEvent;
+            admin.FeaturedEvent1 = FeaturedEvent1;
+            admin.FeaturedEvent2 = FeaturedEvent2;
+            admin.FeaturedEvent3 = FeaturedEvent3;
+
+            admin.TopFeaturedVenue = TopFeaturedVenue;
+            admin.FeaturedVenue1 = FeaturedVenue1;
+            admin.FeaturedVenue2 = FeaturedVenue2;
+            admin.FeaturedVenue3 = FeaturedVenue3;
+
+            db.Entry(admin).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return View("Admin");
         }
     }
 }

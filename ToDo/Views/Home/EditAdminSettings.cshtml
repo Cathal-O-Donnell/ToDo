@@ -1,0 +1,126 @@
+﻿@model ToDo.Models.AdminSettings
+
+@{
+    ViewBag.Title = "EditAdminSettings";
+}
+
+<h2>EditAdminSettings</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AdminSettings</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AdminSettingsID)
+
+        
+        
+        @*Events*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.TopFeaturedEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstTopFeaturedEvent" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedEvent1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent1" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedEvent2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent2" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedEvent3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent3" })
+            </div>
+        </div>
+
+        @*Venues*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.TopFeaturedVenue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstTopFeaturedVenue" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedVenue1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue1" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedVenue2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue2" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedVenue3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>*@
+            <div class="col-md-offset-2 col-md-10">
+                <span class="btn btn-success" onclick="Submit();" id="btnIncidents">Save</span>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    function Submit()
+    {
+        var TopFeaturedEvent = document.getElementById('lstTopFeaturedEvent').value;
+        var FeaturedEvent1 = document.getElementById('lstFeaturedEvent1').value;
+        var FeaturedEvent2 = document.getElementById('lstFeaturedEvent2').value;
+        var FeaturedEvent3 = document.getElementById('lstFeaturedEvent3').value;
+
+        var TopFeaturedVenue = document.getElementById('lstTopFeaturedVenue').value;
+        var FeaturedVenue1 = document.getElementById('lstFeaturedVenue1').value;
+        var FeaturedVenue2 = document.getElementById('lstFeaturedVenue2').value;
+        var FeaturedVenue3 = document.getElementById('lstFeaturedVenue3').value;
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("EditAdminSettingsPost", "Home")',
+            data: {
+                TopFeaturedEvent: TopFeaturedEvent, FeaturedEvent1: FeaturedEvent1, FeaturedEvent2: FeaturedEvent2, FeaturedEvent3: FeaturedEvent3,
+                TopFeaturedVenue: TopFeaturedVenue, FeaturedVenue1: FeaturedVenue1, FeaturedVenue2: FeaturedVenue2, FeaturedVenue3: FeaturedVenue3
+            },
+            success: function (data) {
+
+                console.log("success");
+
+            },
+            error: function (data) {
+
+                console.log("failure");
+
+            }
+        });
+    }
+</script>

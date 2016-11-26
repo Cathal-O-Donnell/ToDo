@@ -22,12 +22,23 @@
                 </button>
                 @Html.ActionLink("ToDo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">                              
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
 
-                    <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+                        <li>@Html.ActionLink("Events", "Index", "Events")</li>
 
-                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                        <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
+                    }
+
+                    else
+                    {
+                        <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+
+                        <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
