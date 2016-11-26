@@ -10,36 +10,39 @@
     @Html.ActionLink("Edit Settings", "EditAdminSettings", null, new { @class = "btn btn-primary" })
 </p>
 
+<h3>Total Venues: @ViewBag.VenueCount</h3>
+<h3>Total Events: @ViewBag.EventCount</h3>
+
 @*Top Featured Event*@
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedEvent)</h3>
-<h3>@ViewBag.TopEvent</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedEvent)</h4>
+<h5>@ViewBag.TopEvent</h5>
 
 
 @*Featured Events*@
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent1)</h3>
-<h3>@ViewBag.Event1</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent1)</h4>
+<h5>@ViewBag.Event1</h5>
 
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent2)</h3>
-<h3>@ViewBag.Event2</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent2)</h4>
+<h5>@ViewBag.Event2</h5>
 
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent3)</h3>
-<h3>@ViewBag.Event3</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent3)</h4>
+<h5>@ViewBag.Event3</h5>
 
 
 @*Top Featured Venue*@
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedVenue)</h3>
-<h3>@ViewBag.TopVenue</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedVenue)</h4>
+<h5>@ViewBag.TopVenue</h5>
 
 
 @*Featured Venues*@
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue1)</h3>
-<h3>@ViewBag.Venue1</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue1)</h4>
+<h5>@ViewBag.Venue1</h5>
 
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue2)</h3>
-<h3>@ViewBag.Venue2</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue2)</h4>
+<h5>@ViewBag.Venue2</h5>
 
-<h3 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue3)</h3>
-<h3>@ViewBag.Venue3</h3>
+<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue3)</h4>
+<h5>@ViewBag.Venue3</h5>
 
 
 

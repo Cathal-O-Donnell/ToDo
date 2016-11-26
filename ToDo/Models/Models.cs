@@ -333,6 +333,11 @@ namespace ToDo.Models
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
 //Kick User of Admin page if they are not an Admin
+//Admin should be able to remove venues and events via the admin section
+//Add some sort of graphing to the admin section
+//Admin should be able to add and remove admins
+//Same Admin controls as FutaTill
+
 
 //Style
 //Image thumbnails - http://bootsnipp.com/snippets/featured/thumbnails-like-bootsnipp

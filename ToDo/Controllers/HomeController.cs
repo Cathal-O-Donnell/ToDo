@@ -90,6 +90,7 @@ namespace ToDo.Controllers
 
                 Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
                 ViewBag.Event3 = FeaturedEvent3.EventTitle;
+
                 //Top Venue
                 Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);
                 ViewBag.TopVenue = TopFeaturedVenue.VenueName;
@@ -104,6 +105,11 @@ namespace ToDo.Controllers
                 Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
                 ViewBag.Venue3 = Venue3.VenueName;
 
+                int EventCount = db.Events.Distinct().Count();
+                ViewBag.EventCount = EventCount;
+
+                int VenueCount = db.Venues.Distinct().Count();
+                ViewBag.VenueCount = VenueCount;
 
                 return View(admin);
             }
@@ -177,8 +183,8 @@ namespace ToDo.Controllers
             db.Entry(admin).State = EntityState.Modified;
             db.SaveChanges();
 
-
-            return View("Admin");
+            return RedirectToAction("Index", "Home");
+            //return View("Admin");
         }
     }
 }
