@@ -332,6 +332,7 @@ namespace ToDo.Models
 //add enums to database (model classes)
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
+//Kick User of Admin page if they are not an Admin
 
 //Style
 //Image thumbnails - http://bootsnipp.com/snippets/featured/thumbnails-like-bootsnipp

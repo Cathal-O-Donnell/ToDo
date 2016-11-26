@@ -42,9 +42,9 @@ namespace ToDo.Controllers
         public ActionResult FeaturedEventPartialView()
         {
             //Hardcoded until Admin section is done where the event can be selected
-            int id = 42;
+            AdminSettings admin = db.AdminSettings.Find(1);
 
-            Event featuredEvent = db.Events.Find(id);
+            Event featuredEvent = db.Events.Find(admin.TopFeaturedEvent);
 
             return PartialView("_FeaturedEvent", featuredEvent);
         }
@@ -52,15 +52,12 @@ namespace ToDo.Controllers
         //Featured Venues Partial View
         public ActionResult FeaturedVenuesPartialView()
         {
-            //Hardcoded until Admin section is done where the event can be selected
-            int Venue1 = 15;
-            int Venue2 = 16;
-            int Venue3 = 17;
+            AdminSettings admin = db.AdminSettings.Find(1);
 
             //Get Venues from database
-            Venue featuredVenue1 = db.Venues.Find(Venue1);
-            Venue featuredVenue2 = db.Venues.Find(Venue2);
-            Venue featuredVenue3 = db.Venues.Find(Venue3);
+            Venue featuredVenue1 = db.Venues.Find(admin.FeaturedVenue1);
+            Venue featuredVenue2 = db.Venues.Find(admin.FeaturedVenue2);
+            Venue featuredVenue3 = db.Venues.Find(admin.FeaturedVenue3);
 
             List<Venue> featuredVenues = new List<Venue>();
 
@@ -74,44 +71,57 @@ namespace ToDo.Controllers
         //Admin
         public ActionResult Admin()
         {
-            var admin = db.AdminSettings.Find(1);
+            bool UserRole = User.IsInRole("Admin");
 
-            //Top Event
-            Event TopFeaturedEvent = db.Events.Find(admin.TopFeaturedEvent);
-            ViewBag.TopEvent = TopFeaturedEvent.EventTitle;
+            if (UserRole == true)
+            {
+                var admin = db.AdminSettings.Find(1);
 
-            //Featured Events
-            Event FeaturedEvent1 = db.Events.Find(admin.FeaturedEvent1);
-            ViewBag.Event1 = FeaturedEvent1.EventTitle;
+                //Top Event
+                Event TopFeaturedEvent = db.Events.Find(admin.TopFeaturedEvent);
+                ViewBag.TopEvent = TopFeaturedEvent.EventTitle;
 
-            Event FeaturedEvent2 = db.Events.Find(admin.FeaturedEvent2);
-            ViewBag.Event2 = FeaturedEvent2.EventTitle;
+                //Featured Events
+                Event FeaturedEvent1 = db.Events.Find(admin.FeaturedEvent1);
+                ViewBag.Event1 = FeaturedEvent1.EventTitle;
 
-            Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
-            ViewBag.Event3 = FeaturedEvent3.EventTitle;
-            //Top Venue
-            Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);            
-            ViewBag.TopVenue = TopFeaturedVenue.VenueName;
+                Event FeaturedEvent2 = db.Events.Find(admin.FeaturedEvent2);
+                ViewBag.Event2 = FeaturedEvent2.EventTitle;
 
-            //Featured Venues
-            Venue Venue1 = db.Venues.Find(admin.FeaturedVenue1);
-            ViewBag.Venue1 = Venue1.VenueName;
+                Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
+                ViewBag.Event3 = FeaturedEvent3.EventTitle;
+                //Top Venue
+                Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);
+                ViewBag.TopVenue = TopFeaturedVenue.VenueName;
 
-            Venue Venue2 = db.Venues.Find(admin.FeaturedVenue2);
-            ViewBag.Venue2 = Venue2.VenueName;
+                //Featured Venues
+                Venue Venue1 = db.Venues.Find(admin.FeaturedVenue1);
+                ViewBag.Venue1 = Venue1.VenueName;
 
-            Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
-            ViewBag.Venue3 = Venue3.VenueName;
+                Venue Venue2 = db.Venues.Find(admin.FeaturedVenue2);
+                ViewBag.Venue2 = Venue2.VenueName;
+
+                Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
+                ViewBag.Venue3 = Venue3.VenueName;
 
 
-            return View(admin);
+                return View(admin);
+            }
+
+            else
+                return RedirectToAction("Index", "Home");
+
         }
 
         [HttpGet]
         public ActionResult EditAdminSettings()
         {
-            //Get UserID
-            string UserId = User.Identity.GetUserId();
+            bool UserRole = User.IsInRole("Admin");
+
+            if (UserRole == true)
+            {
+                //Get UserID
+                string UserId = User.Identity.GetUserId();
 
             //User not logged in, redirect to Login Page
             if (UserId == null)
@@ -141,7 +151,11 @@ namespace ToDo.Controllers
 
             AdminSettings admin = db.AdminSettings.Find(1);
 
-            return View(admin);            
+            return View(admin);
+            }
+
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         //[HttpPost]
