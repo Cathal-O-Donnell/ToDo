@@ -10,39 +10,91 @@
     @Html.ActionLink("Edit Settings", "EditAdminSettings", null, new { @class = "btn btn-primary" })
 </p>
 
-<h3>Total Venues: @ViewBag.VenueCount</h3>
-<h3>Total Events: @ViewBag.EventCount</h3>
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Total Venues: @ViewBag.VenueCount</h3>
+        <h3>Total Events: @ViewBag.EventCount</h3>
+    </div>
 
-@*Top Featured Event*@
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedEvent)</h4>
-<h5>@ViewBag.TopEvent</h5>
+    @*Featured Events and Venues*@
+    <div class="col-sm-4">
+        <h4 style="color: blue">Featured Events</h4>
+        <dl class="dl-horizontal">
+            @*Events*@
+            <dt>
+                @Html.DisplayNameFor(model => model.TopFeaturedEvent)
+            </dt>
 
+            <dd>
+                @ViewBag.TopEvent
+            </dd>
 
-@*Featured Events*@
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent1)</h4>
-<h5>@ViewBag.Event1</h5>
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedEvent1)
+            </dt>
 
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent2)</h4>
-<h5>@ViewBag.Event2</h5>
+            <dd>
+                @ViewBag.Event1
+            </dd>
 
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedEvent3)</h4>
-<h5>@ViewBag.Event3</h5>
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedEvent2)
+            </dt>
 
+            <dd>
+                @ViewBag.Event2
+            </dd>
 
-@*Top Featured Venue*@
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.TopFeaturedVenue)</h4>
-<h5>@ViewBag.TopVenue</h5>
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedEvent3)
+            </dt>
 
+            <dd>
+                @ViewBag.Event3
+            </dd>
 
-@*Featured Venues*@
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue1)</h4>
-<h5>@ViewBag.Venue1</h5>
+        </dl>
 
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue2)</h4>
-<h5>@ViewBag.Venue2</h5>
+        <hr />
 
-<h4 style="font-weight: bold;">@Html.DisplayNameFor(model => model.FeaturedVenue3)</h4>
-<h5>@ViewBag.Venue3</h5>
+        <h4 style="color: blue">Featured Venues</h4>
+        <dl class="dl-horizontal">
+            @*Venues*@
+            <dt>
+                @Html.DisplayNameFor(model => model.TopFeaturedVenue)
+            </dt>
 
+            <dd>
+                @ViewBag.TopVenue
+            </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedVenue1)
+            </dt>
 
+            <dd>
+                @ViewBag.Venue1
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedVenue2)
+            </dt>
+
+            <dd>
+                @ViewBag.Venue2
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FeaturedVenue3)
+            </dt>
+
+            <dd>
+                @ViewBag.Venue3
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-sm-4">
+
+    </div>
+</div>

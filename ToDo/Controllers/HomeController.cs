@@ -129,35 +129,78 @@ namespace ToDo.Controllers
                 //Get UserID
                 string UserId = User.Identity.GetUserId();
 
-            //User not logged in, redirect to Login Page
-            if (UserId == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+                //User not logged in, redirect to Login Page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
 
-            //List of Events
-            var events = db.Events.Select(e => new
-            {
-                id = e.EventID,
-                Name = e.EventTitle
+                AdminSettings admin = db.AdminSettings.Find(1);
+                SelectListModel slm = new SelectListModel();
 
-            }).OrderBy(e => e.Name).ToList();
-            ViewBag.EventsList = new MultiSelectList(events, "id", "Name");
+                slm.AdminSettingsID = admin.AdminSettingsID;
 
-          
+                var model = new SelectListModel
+                {
+                    //Top Event
+                    TopEventId = admin.TopFeaturedEvent,
+                    TopEventOption = db.Events.Select(x => new SelectListItem
+                    {
+                        Value = x.EventID.ToString(),
+                        Text = x.EventTitle
+                    }),
+                    //Featured Event 1
+                    Event1Id = admin.FeaturedEvent1,
+                    Event1_Option = db.Events.Select(x => new SelectListItem
+                    {
+                        Value = x.EventID.ToString(),
+                        Text = x.EventTitle
+                    }),
+                    //Featured Event 2
+                    Event2Id = admin.FeaturedEvent2,
+                    Event2_Option = db.Events.Select(x => new SelectListItem
+                    {
+                        Value = x.EventID.ToString(),
+                        Text = x.EventTitle
+                    }),
+                    //Featured Event 3
+                    Event3Id = admin.FeaturedEvent3,
+                    Event3_Option = db.Events.Select(x => new SelectListItem
+                    {
+                        Value = x.EventID.ToString(),
+                        Text = x.EventTitle
+                    }),
+                    //Top Venue
+                    TopVenueId = admin.TopFeaturedVenue,
+                    TopVenueOption = db.Venues.Select(x => new SelectListItem
+                    {
+                        Value = x.VenueID.ToString(),
+                        Text = x.VenueName
+                    }),
+                    //Featured Venue 1
+                    Venue1Id = admin.FeaturedVenue1,
+                    Venue1_Option = db.Venues.Select(x => new SelectListItem
+                    {
+                        Value = x.VenueID.ToString(),
+                        Text = x.VenueName
+                    }),
+                    //Featured Venue 2
+                    Venue2Id = admin.FeaturedVenue2,
+                    Venue2_Option = db.Venues.Select(x => new SelectListItem
+                    {
+                        Value = x.VenueID.ToString(),
+                        Text = x.VenueName
+                    }),
+                    //Featured Venue 3
+                    Venue3Id = admin.FeaturedVenue3,
+                    Venue3_Option = db.Venues.Select(x => new SelectListItem
+                    {
+                        Value = x.VenueID.ToString(),
+                        Text = x.VenueName
+                    }),
+                };
 
-            //List of Venuess
-            var venues = db.Venues.Select(v => new
-            {
-                id = v.VenueID,
-                Name = v.VenueName
-
-            }).OrderBy(v => v.Name).ToList();
-            ViewBag.VenuesList = new SelectList(venues, "id", "Name");
-
-            AdminSettings admin = db.AdminSettings.Find(1);
-
-            return View(admin);
+                return View(model);
             }
 
             else

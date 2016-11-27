@@ -1,4 +1,4 @@
-﻿@model ToDo.Models.AdminSettings
+﻿@model ToDo.Models.SelectListModel
 
 @{
     ViewBag.Title = "EditAdminSettings";
@@ -7,77 +7,75 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>AdminSettings</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.AdminSettingsID)
 
-        
-        
+
+
         @*Events*@
         <div class="form-group">
-            @Html.LabelFor(model => model.TopFeaturedEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TopEventOption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstTopFeaturedEvent" })
+                @Html.DropDownListFor(x => x.TopEventId, Model.TopEventOption, new { @class = "form-control", id = "lstTopFeaturedEvent" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedEvent1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event1_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent1" })
+                @Html.DropDownListFor(x => x.Event1Id, Model.Event1_Option, new { @class = "form-control", id = "lstFeaturedEvent1" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedEvent2, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event2_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent2" })
+                @Html.DropDownListFor(x => x.Event2Id, Model.Event2_Option, new { @class = "form-control", id = "lstFeaturedEvent2" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedEvent3, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event3_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.EventsList, new { @class = "form-control", id = "lstFeaturedEvent3" })
+                @Html.DropDownListFor(x => x.Event3Id, Model.Event3_Option, new { @class = "form-control", id = "lstFeaturedEvent3" })
             </div>
         </div>
 
         @*Venues*@
         <div class="form-group">
-            @Html.LabelFor(model => model.TopFeaturedVenue, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TopVenueOption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstTopFeaturedVenue" })
+                @Html.DropDownListFor(x => x.TopVenueId, Model.TopVenueOption, new { @class = "form-control", id = "lstTopFeaturedVenue" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedVenue1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Venue1_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue1" })
+                @Html.DropDownListFor(x => x.Venue1Id, Model.Venue1_Option, new { @class = "form-control", id = "lstFeaturedVenue1" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedVenue2, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Venue2_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue2" })
+                @Html.DropDownListFor(x => x.Venue2Id, Model.Venue2_Option, new { @class = "form-control", id = "lstFeaturedVenue2" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FeaturedVenue3, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Venue3_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id", (MultiSelectList)ViewBag.VenuesList, new { @class = "form-control", id = "lstFeaturedVenue3" })
+                @Html.DropDownListFor(x => x.Venue3Id, Model.Venue3_Option, new { @class = "form-control", id = "lstFeaturedVenue3" })
             </div>
         </div>
+       
 
         <div class="form-group">
-            @*<div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
-            </div>*@
             <div class="col-md-offset-2 col-md-10">
                 <span class="btn btn-success" onclick="Submit();" id="btnIncidents">Save</span>
             </div>
@@ -90,8 +88,7 @@
 </div>
 
 <script>
-    function Submit()
-    {
+    function Submit() {
         var TopFeaturedEvent = document.getElementById('lstTopFeaturedEvent').value;
         var FeaturedEvent1 = document.getElementById('lstFeaturedEvent1').value;
         var FeaturedEvent2 = document.getElementById('lstFeaturedEvent2').value;
@@ -110,7 +107,7 @@
                 TopFeaturedVenue: TopFeaturedVenue, FeaturedVenue1: FeaturedVenue1, FeaturedVenue2: FeaturedVenue2, FeaturedVenue3: FeaturedVenue3
             },
             success: function (data) {
-
+                
                 console.log("success");
 
             },
