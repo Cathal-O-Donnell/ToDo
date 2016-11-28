@@ -14,15 +14,14 @@
     <div class="col-sm-4">
         <h3>Total Venues: @ViewBag.VenueCount</h3>
         <h3>Total Events: @ViewBag.EventCount</h3>
-    </div>
 
-    @*Featured Events and Venues*@
-    <div class="col-sm-4">
+        <hr />
+        
         <h4 style="color: blue">Featured Events</h4>
         <dl class="dl-horizontal">
             @*Events*@
             <dt>
-                @Html.DisplayNameFor(model => model.TopFeaturedEvent)
+                @Html.DisplayNameFor(model => model.TopFeaturedEvent):
             </dt>
 
             <dd>
@@ -30,7 +29,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedEvent1)
+                @Html.DisplayNameFor(model => model.FeaturedEvent1):
             </dt>
 
             <dd>
@@ -38,7 +37,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedEvent2)
+                @Html.DisplayNameFor(model => model.FeaturedEvent2):
             </dt>
 
             <dd>
@@ -46,7 +45,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedEvent3)
+                @Html.DisplayNameFor(model => model.FeaturedEvent3):
             </dt>
 
             <dd>
@@ -61,7 +60,7 @@
         <dl class="dl-horizontal">
             @*Venues*@
             <dt>
-                @Html.DisplayNameFor(model => model.TopFeaturedVenue)
+                @Html.DisplayNameFor(model => model.TopFeaturedVenue):
             </dt>
 
             <dd>
@@ -69,7 +68,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedVenue1)
+                @Html.DisplayNameFor(model => model.FeaturedVenue1):
             </dt>
 
             <dd>
@@ -77,7 +76,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedVenue2)
+                @Html.DisplayNameFor(model => model.FeaturedVenue2):
             </dt>
 
             <dd>
@@ -85,13 +84,18 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FeaturedVenue3)
+                @Html.DisplayNameFor(model => model.FeaturedVenue3):
             </dt>
 
             <dd>
                 @ViewBag.Venue3
             </dd>
         </dl>
+    </div>
+
+    @*Featured Events and Venues*@
+    <div class="col-sm-4">
+
     </div>
 
     <div class="col-sm-4">

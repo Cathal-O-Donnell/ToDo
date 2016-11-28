@@ -80,12 +80,12 @@
                 <span class="btn btn-success" onclick="Submit();" id="btnIncidents">Save</span>
             </div>
         </div>
+
+        <div>
+            <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+        </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script>
     function Submit() {
@@ -108,11 +108,14 @@
             },
             success: function (data) {
                 
+                txtSuccess.innerText = "Changes have been saved";
                 console.log("success");
 
             },
             error: function (data) {
 
+                txtSuccess.innerText = "An error has occurred";
+                txtSuccess.style = "color: red;"
                 console.log("failure");
 
             }
