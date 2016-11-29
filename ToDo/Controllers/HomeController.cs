@@ -19,7 +19,7 @@ namespace ToDo.Controllers
 
         public ActionResult Index()
         {
-            //See FeaturedEventPartialView
+            //See FeaturedEventPartialView/ FeaturedVenuesPartialView
 
             return View();
         }
@@ -44,9 +44,18 @@ namespace ToDo.Controllers
             //Hardcoded until Admin section is done where the event can be selected
             AdminSettings admin = db.AdminSettings.Find(1);
 
-            Event featuredEvent = db.Events.Find(admin.TopFeaturedEvent);
+            List<Event> featuredEvents = new List<Event>();
 
-            return PartialView("_FeaturedEvent", featuredEvent);
+           // Event featuredEvent1 = db.Events.Find(admin.FeaturedEvent1);
+            Event featuredEvent1 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent1);
+            Event featuredEvent2 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent2);
+            Event featuredEvent3 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent3);
+
+            featuredEvents.Add(featuredEvent1);
+            featuredEvents.Add(featuredEvent2);
+            featuredEvents.Add(featuredEvent3);
+
+            return PartialView("_FeaturedEvent", featuredEvents);
         }
 
         //Featured Venues Partial View
