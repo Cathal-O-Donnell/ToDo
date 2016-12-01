@@ -96,6 +96,10 @@ namespace ToDo.Models
 
         //Image File 
         public virtual ICollection<File> Files { get; set; }
+
+        //Event Active
+        [Display(Name = "Event Active")]
+        public bool EventActive { get; set; }
     }
 
     public class Activities
@@ -248,6 +252,10 @@ namespace ToDo.Models
 
         //Image File 
         public virtual ICollection<VenueFile> VenueFiles { get; set; }
+
+        //Venue Active
+        [Display(Name = "Venue Active")]
+        public bool VenueActive { get; set; }
     }
 
     //Band Class
@@ -282,6 +290,10 @@ namespace ToDo.Models
         //Facebook
         [Display(Name = "Facebook")]
         public string BandFacebook { get; set; }
+        
+        //Band Active
+        [Display(Name = "Band Active")]
+        public bool BandActive { get; set; }
     }
 
     //Admin settings class
@@ -337,6 +349,14 @@ namespace ToDo.Models
 //Add some sort of graphing to the admin section
 //Admin should be able to add and remove admins
 //Same Admin controls as FutaTill
+//Delete confirmation popup in stead of view - add this to admin page aswell
+//some way to contact venue owners through the website
+//Don't delete items just remove them, add bool to model (ActiveStatus)
+//Fourm section for user discussion
+//Admin activity log
+//Venues activity log - who create the venues, who created/ edited/ removed events
+//Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
+//Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue
 
 
 //Style

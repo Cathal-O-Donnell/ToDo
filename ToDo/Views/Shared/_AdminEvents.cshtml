@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ToDo.Models.Event>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue.VenueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventActive)
+        </th>
+        <th>
+            @*blank*@
+        </th>
+        <th>
+            @*blank*@
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.VenueName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.EventActive)*@
+                @(item.EventActive? "Yes" : "No")
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "RemoveEvent", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+            <td>
+                @Html.ActionLink("Change Status", "EventChangeStatus", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-warning" })
+            </td>
+        </tr>
+    }
+
+</table>

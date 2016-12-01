@@ -54,7 +54,7 @@ namespace ToDo.Controllers
 
             //Get Events
             var events = (from e in db.Events
-                      where e.VenueID == id
+                      where e.VenueID == id && e.EventActive == true
                       select e).ToList();
 
             venue.VenueEvents = events;
@@ -129,6 +129,9 @@ namespace ToDo.Controllers
                 }
 
                 venue.OwnerId = UserId;
+
+                //Set the venue status as active
+                venue.VenueActive = true;
 
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
@@ -250,7 +253,11 @@ namespace ToDo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Venue venue = db.Venues.Find(id);
-            db.Venues.Remove(venue);
+            //db.Venues.Remove(venue);
+
+            //Set this Venue as inactive
+            venue.VenueActive = false;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -269,6 +276,7 @@ namespace ToDo.Controllers
         {
             
             var venues = from v in db.Venues
+                         where v.VenueActive == true
                          select v;
 
             //Search Bar

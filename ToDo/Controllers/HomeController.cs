@@ -46,7 +46,7 @@ namespace ToDo.Controllers
 
             List<Event> featuredEvents = new List<Event>();
 
-           // Event featuredEvent1 = db.Events.Find(admin.FeaturedEvent1);
+            // Event featuredEvent1 = db.Events.Find(admin.FeaturedEvent1);
             Event featuredEvent1 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent1);
             Event featuredEvent2 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent2);
             Event featuredEvent3 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent3);
@@ -237,6 +237,82 @@ namespace ToDo.Controllers
 
             return RedirectToAction("Index", "Home");
             //return View("Admin");
+        }
+
+        //Admin Venue Partial View
+        public ActionResult AdminVenuesTablePartialView()
+        {
+
+            var venues = from v in db.Venues
+                         select v;
+
+            return PartialView("_AdminVenues", venues.OrderBy(v => v.VenueName).ToList());
+        }
+
+        //Admin EVent Partial View
+        public ActionResult AdminEventsTablePartialView()
+        {
+
+            var events = from e in db.Events
+                         select e;
+
+            return PartialView("_AdminEvents", events.OrderBy(e => e.EventTitle).ToList());
+        }
+
+        // Remove Venue 
+        public ActionResult RemoveVenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Venue venue = db.Venues.Find(id);
+
+            if (venue == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Venues.Remove(venue);
+            db.SaveChanges();
+            return RedirectToAction("Admin");
+            //return View(venue);
+        }
+
+        // POST: Venues/Delete/5
+        [HttpPost, ActionName("RemoveVenue")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+            db.Venues.Remove(venue);
+            db.SaveChanges();
+            return RedirectToAction("Admin");
+        }
+
+        //Change Status
+        public ActionResult EventChangeStatus(int id)
+        {
+            Event @event = db.Events.Find(id);
+
+            //Change from active to inactive
+            if (@event.EventActive == true)
+            {
+                @event.EventActive = false;
+            }
+
+            //Change from actice to inactive
+            else
+            {
+                @event.EventActive = true;
+            }
+
+            db.Entry(@event).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Admin");
         }
     }
 }

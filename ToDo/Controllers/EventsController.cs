@@ -161,6 +161,9 @@ namespace ToDo.Controllers
                 var newId = NextId + 1;
                 @event.EventID = newId;
 
+                //Set this Events status as active
+                @event.EventActive = true;
+
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
                 {
@@ -292,7 +295,11 @@ namespace ToDo.Controllers
         {
             Event @event = db.Events.Find(id);
             int venueID = @event.VenueID;
-            db.Events.Remove(@event);
+            //db.Events.Remove(@event);
+
+            //Set this event as inactive
+            @event.EventActive = false;
+
             db.SaveChanges();
 
             //Redirect to details view for the current venue
@@ -317,6 +324,7 @@ namespace ToDo.Controllers
         {
             //Get all events from the database
             var events = from e in db.Events
+                         where e.EventActive == true
                          select e;
 
             //Search Bar

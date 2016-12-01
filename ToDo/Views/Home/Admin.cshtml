@@ -14,9 +14,10 @@
     <div class="col-sm-4">
         <h3>Total Venues: @ViewBag.VenueCount</h3>
         <h3>Total Events: @ViewBag.EventCount</h3>
+    </div>
 
-        <hr />
-        
+
+    <div class="col-sm-4">
         <h4 style="color: blue">Featured Events</h4>
         <dl class="dl-horizontal">
             @*Events*@
@@ -54,8 +55,9 @@
 
         </dl>
 
-        <hr />
+    </div>
 
+    <div class="col-sm-4">
         <h4 style="color: blue">Featured Venues</h4>
         <dl class="dl-horizontal">
             @*Venues*@
@@ -93,12 +95,17 @@
         </dl>
     </div>
 
-    @*Featured Events and Venues*@
-    <div class="col-sm-4">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1 style="text-align: center; color: blue">Venues</h1>
+            <hr />
+            @Html.Action("AdminVenuesTablePartialView")
+        </div>
 
-    </div>
-
-    <div class="col-sm-4">
-
+        <div class="col-sm-6">
+            <h1 style="text-align: center; color: blue">Events</h1>
+            <hr />
+            @Html.Action("AdminEventsTablePartialView")
+        </div>
     </div>
 </div>

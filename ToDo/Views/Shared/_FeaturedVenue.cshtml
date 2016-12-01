@@ -1,6 +1,28 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
-    <div class="row">
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-4 col-sm-4 col-xs-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">@Html.DisplayFor(modelItem => item.VenueName)</h1>
+                </div>
+                <div class="panel-body" style="height: 3x50px;">
+                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive">
+                </div>
+                <div class="panel-footer">
+                    <center>@Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })</center>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+    @*<div class="row">
         @foreach (var venue in Model)
         {
             <div class="col-md-4">
@@ -9,4 +31,4 @@
                 @Html.ActionLink("Details", "Details", "Venues", new { id = venue.VenueID }, new { @class = "btn btn-primary" })
             </div>
         }
-    </div>
+    </div>*@

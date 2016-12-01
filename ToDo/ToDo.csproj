@@ -269,6 +269,8 @@
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\CreateAdminSettings.cshtml" />
     <Content Include="Views\Home\EditAdminSettings.cshtml" />
+    <Content Include="Views\Shared\_AdminVenues.cshtml" />
+    <Content Include="Views\Shared\_AdminEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
