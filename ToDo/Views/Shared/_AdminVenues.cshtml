@@ -14,6 +14,9 @@
         <th>
             @*blank*@
         </th>
+        <th>
+            @*blank*@
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -29,7 +32,10 @@
                 @Html.DisplayFor(modelItem => item.VenueTown)
             </td>
             <td>
-                @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+            <td>
+                @Html.ActionLink("Change Status", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })
             </td>
         </tr>
     }

@@ -291,7 +291,7 @@ namespace ToDo.Controllers
             return RedirectToAction("Admin");
         }
 
-        //Change Status
+        //Event Change Status
         public ActionResult EventChangeStatus(int id)
         {
             Event @event = db.Events.Find(id);
@@ -309,6 +309,31 @@ namespace ToDo.Controllers
             }
 
             db.Entry(@event).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Admin");
+        }
+
+        //Venue Change Status
+
+        public ActionResult VenueChangeStatus(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            //Change from active to inactive
+            if (venue.VenueActive == true)
+            {
+                venue.VenueActive = false;
+            }
+
+            //Change from actice to inactive
+            else
+            {
+                venue.VenueActive = true;
+            }
+
+            db.Entry(venue).State = EntityState.Modified;
             db.SaveChanges();
 
 

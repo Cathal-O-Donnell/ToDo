@@ -356,7 +356,9 @@ namespace ToDo.Models
 //Admin activity log
 //Venues activity log - who create the venues, who created/ edited/ removed events
 //Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
-//Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue
+//Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue**
+
+//**If a venue is inactive all of its events should be unlisted**
 
 
 //Style
