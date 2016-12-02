@@ -19,13 +19,26 @@ namespace ToDo
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            //DataTables Bundles
+            bundles.Add(new ScriptBundle("~/bundles/table").Include(
+               "~/Scripts/DataTables/jquery.dataTables.js",
+               "~/Scripts/DataTables/dataTables.buttons.min.js",
+               "~/Scripts/DataTables/buttons.flash.min.js",
+               "~/Scripts/DataTables/dataTables.fixedColumns.min.js",
+               "~/Scripts/DataTables/dataTables.fixedHeader.min.js"
+               ));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                       "~/Content/DataTables/css/jquery.dataTables.css",
+                        "~/Content/DataTables/images",
+                        "~/Content/DataTables/css/buttons.dataTables.min.css",
+                        "~/Content/DataTables/css/fixedColumns.dataTables.min.css"));
         }
     }
 }

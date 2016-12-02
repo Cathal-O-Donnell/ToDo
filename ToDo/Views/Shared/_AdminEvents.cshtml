@@ -1,46 +1,56 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EventTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Venue.VenueName)
-        </th>
-        <th>
-            @*blank*@
-        </th>
-        <th>
-            @*blank*@
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="dataTableEvents" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue.VenueName)
-            </td>
-            <td>
-                @Html.ActionLink("Remove", "RemoveEvent", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-danger" })
-            </td>
-            <td>
-                @if (item.EventActive == true)
-                {
-                    @Html.ActionLink("Make Inactive", "EventChangeStatus", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-warning" })
-                }
-
-                else if (item.EventActive == false)
-                {
-                    @Html.ActionLink("Make Active", "EventChangeStatus", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-success" })
-                }
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.EventTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue.VenueName)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+            <th>
+                @*blank*@
+            </th>
         </tr>
-    }
+    </thead>
 
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue.VenueName)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+                <td>
+                    @if (item.EventActive == true)
+                {
+                        @Html.ActionLink("Make Inactive", "EventChangeStatus", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-warning" })
+                    }
+
+                    else if (item.EventActive == false)
+                    {
+                        @Html.ActionLink("Make Active", "EventChangeStatus", "Home", new { id = item.EventID }, new { @class = "btn btn-sm btn-success" })
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+<script>
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableEvents').DataTable();
+    });
+</script>

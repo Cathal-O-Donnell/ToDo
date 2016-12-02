@@ -7,6 +7,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @Scripts.Render("~/bundles/jquery")
+
     @*font awesome - http://www.w3schools.com/icons/fontawesome_icons_brand.asp*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -52,7 +54,8 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    
+    @Scripts.Render("~/bundles/table")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
