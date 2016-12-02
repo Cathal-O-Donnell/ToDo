@@ -324,7 +324,7 @@ namespace ToDo.Controllers
         {
             //Get all events from the database
             var events = from e in db.Events
-                         where e.EventActive == true
+                         where e.EventActive == true && e.Venue.VenueActive == true
                          select e;
 
             //Search Bar

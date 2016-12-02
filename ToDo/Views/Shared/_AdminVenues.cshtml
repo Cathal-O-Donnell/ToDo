@@ -6,9 +6,6 @@
             @Html.DisplayNameFor(model => model.VenueName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VenueType)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.VenueTown)
         </th>
         <th>
@@ -26,16 +23,22 @@
                 @Html.DisplayFor(modelItem => item.VenueName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueType)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.VenueTown)
             </td>
             <td>
                 @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })
             </td>
             <td>
-                @Html.ActionLink("Change Status", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })
+                @if (item.VenueActive == true)
+                {
+                    @Html.ActionLink("Make Inactive", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })
+                }
+
+                else if (item.VenueActive == false)
+                {
+                    @Html.ActionLink("Make Active", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-success" })
+                }
+
             </td>
         </tr>
     }
