@@ -348,17 +348,12 @@ namespace ToDo.Models
 //Admin should be able to remove venues and events via the admin section
 //Add some sort of graphing to the admin section
 //Admin should be able to add and remove admins
-//Same Admin controls as FutaTill
 //Delete confirmation popup in stead of view - add this to admin page aswell
-//some way to contact venue owners through the website
-//Don't delete items just remove them, add bool to model (ActiveStatus)
 //Fourm section for user discussion
 //Admin activity log
 //Venues activity log - who create the venues, who created/ edited/ removed events
 //Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
 //Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue**
-
-//**If a venue is inactive all of its events should be unlisted**
 
 
 //Style

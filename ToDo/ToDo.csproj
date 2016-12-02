@@ -194,6 +194,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\RolesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -493,6 +494,7 @@
     <Content Include="Views\Home\EditAdminSettings.cshtml" />
     <Content Include="Views\Shared\_AdminVenues.cshtml" />
     <Content Include="Views\Shared\_AdminEvents.cshtml" />
+    <Content Include="Views\Shared\_AdminUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -98,7 +98,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h1 style="text-align: center; color: blue">Venues</h1>
-            <hr />
+            <hr style="color: red;"/>
             @Html.Action("AdminVenuesTablePartialView")
         </div>
 
@@ -107,5 +107,10 @@
             <hr />
             @Html.Action("AdminEventsTablePartialView")
         </div>
+    </div>
+
+    <div class="row">
+        <h1 style="color: blue; text-align: center;">Users</h1>
+        @Html.Action("AdminUsersTablePartialView")
     </div>
 </div>

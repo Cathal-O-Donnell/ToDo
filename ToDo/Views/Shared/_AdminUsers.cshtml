@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ToDo.Models.RolesViewModel>
+
+<table id="dataTableUsers" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+               @Html.DisplayNameFor(model => model.RoleNames)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleNames)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableUsers').DataTable();
+    });
+</script>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -339,5 +340,47 @@ namespace ToDo.Controllers
 
             return RedirectToAction("Admin");
         }
+
+        //Admin Venue Partial View
+        public PartialViewResult AdminUsersTablePartialView()
+        {
+            //Get the current user
+            if (User.Identity.IsAuthenticated)
+            {
+                string name = User.Identity.Name;
+            }
+
+            try
+            {
+                var userRoles = new List<RolesViewModel>();
+                var context = new ApplicationDbContext();
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                //Get all the usernames
+                foreach (var user in userStore.Users)
+                {
+                    var r = new RolesViewModel
+                    {
+                        UserName = user.UserName,
+                        Id = user.Id
+                    };
+                    userRoles.Add(r);
+                }
+                //Get all the Roles for our users
+                foreach (var user in userRoles)
+                {
+                    user.RoleNames = userManager.GetRoles(userStore.Users.First(s => s.UserName == user.UserName).Id);
+                }
+
+                return PartialView("_AdminUsers", userRoles);
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
