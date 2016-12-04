@@ -317,7 +317,6 @@ namespace ToDo.Controllers
         }
 
         //Venue Change Status
-
         public ActionResult VenueChangeStatus(int id)
         {
             Venue venue = db.Venues.Find(id);
@@ -382,5 +381,53 @@ namespace ToDo.Controllers
             }
         }
 
+        public PartialViewResult AdminTownsTablePartialView()
+        {
+            var towns = from t in db.Towns
+                        select t;
+
+            return PartialView("_AdminTowns", towns.OrderBy(v => v.Town).ToList());
+        }
+
+        [HttpGet]
+        public ActionResult AddTown(string twn, string cty)
+        {
+            bool UserRole = User.IsInRole("Admin");
+
+            if (UserRole == true)
+            {
+                //Get UserID
+                string UserId = User.Identity.GetUserId();
+
+                //User not logged in, redirect to Login Page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                Towns t = new Towns();
+
+                t.Town = twn;
+                t.County = cty;
+
+                db.Towns.Add(t);
+                db.SaveChanges();
+
+                return RedirectToAction("Admin", "Home");
+            }
+
+            else
+                return RedirectToAction("Index", "Home");
+        }
+
+        //Remove town 
+        public ActionResult RemoveTown(int id)
+        {
+            Towns t = db.Towns.Find(id);
+            db.Towns.Remove(t);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin", "Home");
+        }
     }
 }

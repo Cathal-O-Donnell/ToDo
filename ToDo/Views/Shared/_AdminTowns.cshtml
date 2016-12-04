@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ToDo.Models.Towns>
+
+<table id="dataTableTowns" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TownId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Town)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TownId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.County)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownId }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <label for="txtTown">Town:</label>
+    <input id="txtTown" />
+
+    <label for="txtCounty">County:</label>
+    <input id="txtCounty" />
+
+    <span class="btn btn-sm btn-success" onclick="AddTown();">Add Town</span>
+
+    <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+</div>
+
+<script>
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableTowns').DataTable();
+    });
+
+    function AddTown()
+    {
+        console.log("AddTown Function hit");
+        var town = document.getElementById('txtTown').value
+        console.log(town);
+        var county = document.getElementById('txtCounty').value
+        console.log(county);
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AddTown", "Home")',
+            data: { twn: town, cty: county },
+            success: function (data) {
+
+                txtSuccess.innerText = "Changes have been saved";
+                console.log("success");
+
+            },
+            error: function (data) {
+
+                txtSuccess.innerText = "An error has occurred";
+                txtSuccess.style = "color: red;"
+                console.log("failure");
+            }
+        });
+    }
+</script>
+

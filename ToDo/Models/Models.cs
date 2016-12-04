@@ -15,6 +15,24 @@ namespace ToDo.Models
     public enum FileType { EventImage = 1, Photo }
     public enum VenueType { Hall, Hotel, Nightclub, Pitch, Pub, Restraunt, Sports_Complex, Stadium, Theater }
 
+    public class Towns
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ID")]
+        public int TownId { get; set; }
+
+        [Required(ErrorMessage = "You must town name")]
+        [DataType(DataType.Text)]
+        [Display(Name = "City/ Town")]
+        public string Town { get; set; }
+
+        [Required(ErrorMessage = "You must county")]
+        [DataType(DataType.Text)]
+        [Display(Name = "County")]
+        public string County { get; set; }
+    }
+
     public class Event
     {
         //ID
