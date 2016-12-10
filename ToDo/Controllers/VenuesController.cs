@@ -70,8 +70,10 @@ namespace ToDo.Controllers
 
             geoCode = new GoogleGeocoder();
 
+            //string twn = db.Towns.Find(venue.VenueTownID).Town;
+
             //Combine location into one string
-            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown);
+            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown.TownName);
 
             var coordinates = geoCode.Geocode(address).ToList();
 
@@ -103,8 +105,12 @@ namespace ToDo.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+
             else
             {
+
+                ViewBag.TownId = new SelectList(db.Towns, "TownId", "TownName");
+
                 return View();
             }
 
@@ -115,7 +121,7 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VenueID,VenueName,VenueType,VenueTown,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber")] Venue venue, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "VenueID,VenueName,VenueType,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber,VenueTownID")] Venue venue, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -128,10 +134,16 @@ namespace ToDo.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
+                venue.VenueTown = db.Towns.Find(venue.VenueTownID);
+
                 venue.OwnerId = UserId;
 
                 //Set the venue status as active
                 venue.VenueActive = true;
+
+                Town twn = db.Towns.Find(venue.VenueID);
+
+                //venue.VenueTown = db.Towns.Find(venue.VenueID);
 
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
@@ -179,6 +191,11 @@ namespace ToDo.Controllers
             //Owner Id
             ViewBag.OID = venue.OwnerId;
 
+            //Towns
+            ViewBag.TownId = new SelectList(db.Towns, "TownId", "Town");
+
+            int twnID = venue.VenueTownID;
+
             //Image
             venue = db.Venues.Include(s => s.VenueFiles).SingleOrDefault(s => s.VenueID == id);
 
@@ -195,7 +212,7 @@ namespace ToDo.Controllers
             }
             var venueToUpdate = db.Venues.Find(id);
             if (TryUpdateModel(venueToUpdate, "",
-                new string[] { "VenueID","OwnerId","VenueName","VenueType","VenueTown","VenueAddress","VenueDescription","VenueEmail","VenuePhoneNumber" }))
+                new string[] { "VenueID","OwnerId","VenueName","VenueType","VenueAddress","VenueDescription","VenueEmail", "VenuePhoneNumber, VenueTownID" }))
             {
                 try
                 {
@@ -217,6 +234,10 @@ namespace ToDo.Controllers
                         }
                         venueToUpdate.VenueFiles = new List<VenueFile> { img };
                     }
+
+                    int twnID = venueToUpdate.VenueTownID;
+                    venueToUpdate.VenueTown = db.Towns.Find(venueToUpdate.VenueTownID);
+
                     db.Entry(venueToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
 

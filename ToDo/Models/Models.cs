@@ -10,27 +10,28 @@ namespace ToDo.Models
 {
     //Enums
     public enum Category { Charity, Community, Entertainment, Family, Music, Outdoor, Sporting, Theatre, Other }
-    public enum Town { Cork, Dublin, Galway, Limerick, Sligo, Waterford }
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
     public enum VenueType { Hall, Hotel, Nightclub, Pitch, Pub, Restraunt, Sports_Complex, Stadium, Theater }
 
-    public class Towns
+    public class Town
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "ID")]
-        public int TownId { get; set; }
+        public int TownID { get; set; }
 
         [Required(ErrorMessage = "You must town name")]
         [DataType(DataType.Text)]
         [Display(Name = "City/ Town")]
-        public string Town { get; set; }
+        public string TownName { get; set; }
 
         [Required(ErrorMessage = "You must county")]
         [DataType(DataType.Text)]
         [Display(Name = "County")]
         public string County { get; set; }
+
+        public virtual ICollection<Venue> Venues { get; set; }
     }
 
     public class Event
@@ -242,9 +243,9 @@ namespace ToDo.Models
         public VenueType VenueType { get; set; }
 
         //Town
-        [Required(ErrorMessage = "You must select a town from the list provided")]
-        [Display(Name = "Town")]
-        public Town VenueTown { get; set; }
+        //[Required(ErrorMessage = "You must select a town from the list provided")]
+        //[Display(Name = "Town")]
+        //public Town VenueTown { get; set; }
 
         //Address
         [Required(ErrorMessage = "You must enter a street")]
@@ -274,6 +275,13 @@ namespace ToDo.Models
         //Venue Active
         [Display(Name = "Venue Active")]
         public bool VenueActive { get; set; }
+
+        //Venue Town Foreign
+        [Display(Name = "Venue Town")]
+        public int VenueTownID { get; set; }
+
+        //venue Town
+        public virtual Town VenueTown { get; set; }
     }
 
     //Band Class
@@ -359,7 +367,7 @@ namespace ToDo.Models
 //Venue Model - add social links and website link
 //Remove map from event details page and move this all to the venue details page
 //Add link to the event details page linking the user to the venue for this event
-//add enums to database (model classes)
+//add enums to database (model classes) - Towns Done
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
 //Kick User of Admin page if they are not an Admin

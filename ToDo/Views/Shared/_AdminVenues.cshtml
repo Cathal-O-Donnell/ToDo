@@ -8,7 +8,7 @@
                 @Html.DisplayNameFor(model => model.VenueName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VenueTown)
+                @Html.DisplayNameFor(model => model.VenueTown.TownName)
             </th>
             <th>
                 @*blank*@
@@ -27,7 +27,7 @@
                     @Html.DisplayFor(modelItem => item.VenueName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VenueTown)
+                    @Html.DisplayFor(modelItem => item.VenueTown.TownName)
                 </td>
                 <td>
                     @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })

@@ -243,7 +243,6 @@ namespace ToDo.Controllers
         //Admin Venue Partial View
         public ActionResult AdminVenuesTablePartialView()
         {
-
             var venues = from v in db.Venues
                          select v;
 
@@ -386,7 +385,7 @@ namespace ToDo.Controllers
             var towns = from t in db.Towns
                         select t;
 
-            return PartialView("_AdminTowns", towns.OrderBy(v => v.Town).ToList());
+            return PartialView("_AdminTowns", towns.OrderBy(v => v.TownName).ToList());
         }
 
         [HttpGet]
@@ -405,9 +404,9 @@ namespace ToDo.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
-                Towns t = new Towns();
+                Town t = new Town();
 
-                t.Town = twn;
+                t.TownName = twn;
                 t.County = cty;
 
                 db.Towns.Add(t);
@@ -420,14 +419,33 @@ namespace ToDo.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        //Remove town 
+        ////Remove town 
         public ActionResult RemoveTown(int id)
         {
-            Towns t = db.Towns.Find(id);
+            Town t = db.Towns.Find(id);
             db.Towns.Remove(t);
             db.SaveChanges();
 
             return RedirectToAction("Admin", "Home");
         }
+        //public PartialViewResult RemoveTown(int id)
+        //{
+        //    try
+        //    {
+        //        Towns t = db.Towns.Find(id);
+        //        db.Towns.Remove(t);
+        //        db.SaveChanges();
+
+        //        var towns = from twns in db.Towns
+        //                    select twns;
+
+        //        return PartialView("_AdminTowns", towns.OrderBy(v => v.Town).ToList());
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+
+        //}
     }
 }

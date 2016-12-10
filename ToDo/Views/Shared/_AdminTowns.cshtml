@@ -1,13 +1,14 @@
-﻿@model IEnumerable<ToDo.Models.Towns>
+﻿@model IEnumerable<ToDo.Models.Town>
+
 
 <table id="dataTableTowns" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TownId)
+                @Html.DisplayNameFor(model => model.TownID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Town)
+                @Html.DisplayNameFor(model => model.TownName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.County)
@@ -23,16 +24,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TownId)
+                    @Html.DisplayFor(modelItem => item.TownID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Town)
+                    @Html.DisplayFor(modelItem => item.TownName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.County)
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownId }, new { @class = "btn btn-sm btn-danger" })
+                    @Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownID }, new { @class = "btn btn-sm btn-danger" })
                 </td>
             </tr>
         }
@@ -59,7 +60,6 @@
 
     function AddTown()
     {
-        console.log("AddTown Function hit");
         var town = document.getElementById('txtTown').value
         console.log(town);
         var county = document.getElementById('txtCounty').value
@@ -70,7 +70,10 @@
             url: '@Url.Action("AddTown", "Home")',
             data: { twn: town, cty: county },
             success: function (data) {
-
+                
+                
+                $("#towns").html("");
+                $("#towns").html(data);
                 txtSuccess.innerText = "Changes have been saved";
                 console.log("success");
 

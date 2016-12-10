@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.VenueType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VenueTown)
+            @Html.DisplayNameFor(model => model.VenueTown.TownName)
         </th>
         <th>
             @*blank*@
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.VenueType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueTown)
+                @Html.DisplayFor(modelItem => item.VenueTown.TownName)
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })

@@ -36,6 +36,8 @@ namespace ToDo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+
+
             //Get selected event from DB
             Event @event = db.Events.Find(id);
 
@@ -46,7 +48,8 @@ namespace ToDo.Controllers
             //Pass venue info to view
             ViewBag.EVenue = venue.VenueName;
             ViewBag.EAddress = venue.VenueAddress;
-            ViewBag.ETown = venue.VenueTown;
+            ViewBag.ETown = db.Towns.Find(venue.VenueTownID).TownName;
+            //ViewBag.ETown = venue.VenueTown;
             ViewBag.EPhone = venue.VenuePhoneNumber;
             ViewBag.EEmail = venue.VenueEmail;
 
@@ -75,8 +78,10 @@ namespace ToDo.Controllers
 
             geoCode = new GoogleGeocoder();
 
+            string twn = db.Towns.Find(venue.VenueTownID).TownName;
+
             //Combine location into one string
-            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown);
+            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, twn);
 
             var coordinates = geoCode.Geocode(address).ToList();
 
