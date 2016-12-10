@@ -14,6 +14,20 @@ namespace ToDo.Models
     public enum FileType { EventImage = 1, Photo }
     public enum VenueType { Hall, Hotel, Nightclub, Pitch, Pub, Restraunt, Sports_Complex, Stadium, Theater }
 
+    public class Venue_Type
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ID")]
+        public int Venue_TypeID { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Type")]
+        public string VenueTypeName { get; set; }
+
+        public virtual ICollection<Venue> Venues { get; set; }
+    }
+
     public class Town
     {
         [Key]
@@ -282,6 +296,13 @@ namespace ToDo.Models
 
         //venue Town
         public virtual Town VenueTown { get; set; }
+
+        //Venue Catergory Foreign
+        [Display(Name = "Venue Town")]
+        public int VenueTypeID { get; set; }
+
+        //venue Category
+        public virtual Venue_Type VenueTypeName { get; set; }
     }
 
     //Band Class
