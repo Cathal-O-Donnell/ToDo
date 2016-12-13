@@ -428,6 +428,55 @@ namespace ToDo.Controllers
 
             return RedirectToAction("Admin", "Home");
         }
+
+        public PartialViewResult AdminVenueTypesTablePartialView()
+        {
+            var venueTypes = from vt in db.VenueCategories
+                        select vt;
+
+            return PartialView("_AdminVenueType", venueTypes.OrderBy(vt => vt.VenueTypeName).ToList());
+        }
+
+        [HttpGet]
+        public ActionResult AddVenueType(string venueType)
+        {
+            bool UserRole = User.IsInRole("Admin");
+
+            if (UserRole == true)
+            {
+                //Get UserID
+                string UserId = User.Identity.GetUserId();
+
+                //User not logged in, redirect to Login Page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                Venue_Type vt = new Venue_Type();
+
+                vt.VenueTypeName = venueType;
+
+                db.VenueCategories.Add(vt);
+                db.SaveChanges();
+
+                return RedirectToAction("Admin", "Home");
+            }
+
+            else
+                return RedirectToAction("Index", "Home");
+        }
+
+        ////Remove town 
+        public ActionResult RemoveVenueType(int id)
+        {
+            Venue_Type vt = db.VenueCategories.Find(id);
+            db.VenueCategories.Remove(vt);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin", "Home");
+        }
+
         //public PartialViewResult RemoveTown(int id)
         //{
         //    try

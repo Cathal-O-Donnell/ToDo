@@ -496,6 +496,7 @@
     <Content Include="Views\Shared\_AdminEvents.cshtml" />
     <Content Include="Views\Shared\_AdminUsers.cshtml" />
     <Content Include="Views\Shared\_AdminTowns.cshtml" />
+    <Content Include="Views\Shared\_AdminVenueType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
