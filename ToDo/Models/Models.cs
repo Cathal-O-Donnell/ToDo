@@ -16,6 +16,7 @@ namespace ToDo.Models
 
     public class Venue_Type
     {
+        //Note: if I change the name of the properties in this class, make the changes in the VenuesTablePartialView mehtod and the _VenuesTable view
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "ID")]
@@ -401,6 +402,8 @@ namespace ToDo.Models
 //Venues activity log - who create the venues, who created/ edited/ removed events
 //Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
 //Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue**
+
+//Fix Venue Edit Town
 
 
 //Style

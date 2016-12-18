@@ -38,19 +38,10 @@
             </div>
         </div>
 
-        @*Town*@
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.VenueTown, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.VenueTown, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VenueTown, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
         @*Towns*@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueTownID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("TownId", String.Empty)*@
                 @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "--Select One--")
                 @Html.ValidationMessageFor(model => model.VenueTownID, "", new { @class = "text-danger" })
             </div>

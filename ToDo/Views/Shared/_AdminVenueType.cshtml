@@ -41,7 +41,7 @@
 
     <span class="btn btn-sm btn-success" onclick="AddVenueType();">Add Venue Type</span>
 
-    <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+    <h2 id="txtVTSuccess" style="color: green; text-align: center;"></h2>
 </div>
 
 <script>
@@ -61,18 +61,18 @@
             data: { venueType: venueType },
             success: function (data) {
 
-
+                console.log("success");
                 $("#towns").html("");
                 $("#towns").html(data);
-                txtSuccess.innerText = "Changes have been saved";
-                console.log("success");
+                txtVTSuccess.innerText = "Changes have been saved";
 
             },
             error: function (data) {
 
-                txtSuccess.innerText = "An error has occurred";
-                txtSuccess.style = "color: red;"
                 console.log("failure");
+                txtSuccess.innerText = "An error has occurred";
+                txtVTSuccess.style = "color: red;"
+                
             }
         });
     }

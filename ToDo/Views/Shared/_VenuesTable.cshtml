@@ -4,7 +4,9 @@
 @using (Html.BeginForm())
 {   
     <div class="container" style="padding-bottom: 10px;">
-        <div class="row">
+        <div class="row"style="border: solid; border-width: 2px;">
+
+            @*Search*@
             <div id="custom-search-input">
                 <div class="input-group col-md-2">
                     <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
@@ -15,6 +17,19 @@
                     </span>
                 </div>
             </div>
+
+            @*<div id="advanceSearch">*@
+                @*Towns*@
+                <div class="input-group" col-md-2>
+                    @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+                </div>
+                @*Venue Type*@
+                <div class="input-group" col-md-2>
+                    @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
+                </div>
+
+            <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+            @*</div>*@
         </div>
     </div>
 
@@ -72,5 +87,15 @@
                 $('#VenueTable').fadeIn("fast")
             }
         });
+    }
+
+    function AdvanceSearch()
+    {
+        console.log("AdvancedSearch function hit");
+
+        var town = document.getElementById("lstTowns").value;
+        console.log(town);
+        var venueType = document.getElementById("lstVenueTypes").value;
+        console.log(venueType);
     }
 </script>

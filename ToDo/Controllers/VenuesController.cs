@@ -192,7 +192,7 @@ namespace ToDo.Controllers
             ViewBag.OID = venue.OwnerId;
 
             //Towns
-            ViewBag.TownId = new SelectList(db.Towns, "TownId", "Town");
+            ViewBag.TownId = new SelectList(db.Towns, "TownID", "TownName");
 
             int twnID = venue.VenueTownID;
 
@@ -235,8 +235,9 @@ namespace ToDo.Controllers
                         venueToUpdate.VenueFiles = new List<VenueFile> { img };
                     }
 
+                    //Venue Town                    
                     int twnID = venueToUpdate.VenueTownID;
-                    venueToUpdate.VenueTown = db.Towns.Find(venueToUpdate.VenueTownID);
+                    venueToUpdate.VenueTown = db.Towns.Find(twnID);
 
                     db.Entry(venueToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
@@ -325,6 +326,9 @@ namespace ToDo.Controllers
             //        venues = venues.OrderBy(v => v.VenueName);
             //        break;
             //}
+
+            ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
+            ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
 
             return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
         }
