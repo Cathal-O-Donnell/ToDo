@@ -294,18 +294,49 @@ namespace ToDo.Controllers
         }
 
         //Venue Index Partial View
-        public ActionResult VenuesTablePartialView(string search)
+        public ActionResult VenuesTablePartialView(string search, string Town, string VenueType, string AdvancedSearch)
         {
-            
+
+            ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
+            ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
+
             var venues = from v in db.Venues
                          where v.VenueActive == true
                          select v;
 
-            //Search Bar
-            if (!String.IsNullOrEmpty(search))
-            {
-                venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
+            if (AdvancedSearch == "true")
+            {               
+
+                venues = from v in db.Venues
+                             where v.VenueActive == true
+                             select v;
+
+                if (Town != "")
+                {
+                    int townID = Convert.ToInt32(Town);
+                    venues = venues.Where(v => v.VenueTown.TownID == townID);
+                }
+
+                if (VenueType != "")
+                {
+                    int venueTypeID = Convert.ToInt32(VenueType);
+                    venues = venues.Where(v => v.VenueTypeName.Venue_TypeID == venueTypeID);
+                }
+
+                return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }
+
+            else
+            {
+                //Search Bar
+                if (!String.IsNullOrEmpty(search))
+                {
+                    venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
+                }
+
+                return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
+            }
+            
 
             //string sortOrder,
             //Filter 
@@ -325,12 +356,7 @@ namespace ToDo.Controllers
             //    default:
             //        venues = venues.OrderBy(v => v.VenueName);
             //        break;
-            //}
-
-            ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
-            ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
-
-            return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
+            //}                     
         }
     }
 }

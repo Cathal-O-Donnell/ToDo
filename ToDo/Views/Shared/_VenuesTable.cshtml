@@ -29,6 +29,8 @@
                 </div>
 
             <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+
+            <span class="btn btn-sm btn-primary" onclick="Reset();">Reset</span>
             @*</div>*@
         </div>
     </div>
@@ -75,12 +77,13 @@
     function VenueSearch() {
         //Get the search term the user entered
         var search = document.getElementById("txtSearch").value;
+        var advancedSearch = "false";
 
         //Ajax code
         $.ajax({
             type: "GET",
             url: '@Url.Action("VenuesTablePartialView", "Venues")',
-            data: { search: search },
+            data: { search: search, AdvancedSearch: advancedSearch },
             success: function (data) {
 
                 $('#VenueTable').html(data);
@@ -91,11 +94,35 @@
 
     function AdvanceSearch()
     {
-        console.log("AdvancedSearch function hit");
-
-        var town = document.getElementById("lstTowns").value;
-        console.log(town);
+        var town = document.getElementById("lstTowns").value;        
         var venueType = document.getElementById("lstVenueTypes").value;
-        console.log(venueType);
+        var advancedSearch = "true";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenuesTablePartialView", "Venues")',
+            data: { Town: town, VenueType: venueType, AdvancedSearch: advancedSearch },
+            success: function (data) {
+
+                $('#VenueTable').html(data);
+                $('#VenueTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function Reset()
+    {
+        var advancedSearch = "false";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenuesTablePartialView", "Venues")',
+            data: { AdvancedSearch: advancedSearch },
+            success: function (data) {
+
+                $('#VenueTable').html(data);
+                $('#VenueTable').fadeIn("fast")
+            }
+        });
     }
 </script>
