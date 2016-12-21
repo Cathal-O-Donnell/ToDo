@@ -12,7 +12,7 @@ namespace ToDo.Models
     public enum Category { Charity, Community, Entertainment, Family, Music, Outdoor, Sporting, Theatre, Other }
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
-    public enum VenueType { Hall, Hotel, Nightclub, Pitch, Pub, Restraunt, Sports_Complex, Stadium, Theater }
+
 
     public class Venue_Type
     {
@@ -23,7 +23,7 @@ namespace ToDo.Models
         public int Venue_TypeID { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Type")]
+        [Display(Name = "Venue Type")]
         public string VenueTypeName { get; set; }
 
         public virtual ICollection<Venue> Venues { get; set; }
@@ -252,16 +252,6 @@ namespace ToDo.Models
         [Display(Name = "Name")]
         public string VenueName { get; set; }
 
-        //Type
-        [DataType(DataType.Text)]
-        [Display(Name = "Venue")]
-        public VenueType VenueType { get; set; }
-
-        //Town
-        //[Required(ErrorMessage = "You must select a town from the list provided")]
-        //[Display(Name = "Town")]
-        //public Town VenueTown { get; set; }
-
         //Address
         [Required(ErrorMessage = "You must enter a street")]
         [DataType(DataType.Text)]
@@ -303,7 +293,7 @@ namespace ToDo.Models
         public int VenueTypeID { get; set; }
 
         //venue Category
-        public virtual Venue_Type VenueTypeName { get; set; }
+        public virtual Venue_Type VenueType { get; set; }
     }
 
     //Band Class

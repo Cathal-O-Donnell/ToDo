@@ -33,6 +33,11 @@ main,
 nav,
 section,
 
+/*FilterInputs*/
+.filterInputs input{
+  float:left;
+}
+
 /*Image Size*/
 #imageDiv{
   width: 400px;

@@ -320,7 +320,7 @@ namespace ToDo.Controllers
                 if (VenueType != "")
                 {
                     int venueTypeID = Convert.ToInt32(VenueType);
-                    venues = venues.Where(v => v.VenueTypeName.Venue_TypeID == venueTypeID);
+                    venues = venues.Where(v => v.VenueType.Venue_TypeID == venueTypeID);
                 }
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());

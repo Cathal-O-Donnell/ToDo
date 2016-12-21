@@ -2,38 +2,69 @@
 
 @*Search Box*@
 @using (Html.BeginForm())
-{   
-    <div class="container" style="padding-bottom: 10px;">
-        <div class="row"style="border: solid; border-width: 2px;">
+{
 
-            @*Search*@
-            <div id="custom-search-input">
-                <div class="input-group col-md-2">
-                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                    <span class="input-group-btn">
-                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group" style="padding-bottom: 10px;">
+
+            <div class="input-group col-md-2">
+                <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                <span class="input-group-btn">
+                    <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
 
-            @*<div id="advanceSearch">*@
-                @*Towns*@
-                <div class="input-group" col-md-2>
-                    @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
-                </div>
-                @*Venue Type*@
-                <div class="input-group" col-md-2>
-                    @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
-                </div>
+            <div class="col-md-2">
+                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+            </div>
 
-            <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+            <div class="col-md-2">
+                @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
+            </div>
 
-            <span class="btn btn-sm btn-primary" onclick="Reset();">Reset</span>
-            @*</div>*@
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+            </div>
+
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+            </div>
         </div>
-    </div>
+    </form>
+
+        @*<div class="container" style="padding-bottom: 10px;">
+            <div class="row" style="border: solid; border-width: 2px;">*@
+
+                @*Search*@
+                @*<div id="custom-search-input">
+                    <div class="input-group col-md-2">
+                        <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                        <span class="input-group-btn">
+                            <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="advanceSearch">*@
+                    @*Towns*@
+                    @*<div class="input-group" col-md-2>
+                        @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+                    </div>*@
+                    @*Venue Type*@
+                    @*<div class="input-group" col-md-2>
+                        @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
+                    </div>
+
+                    <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+
+                    <span class="btn btn-sm btn-primary" onclick="Reset();">Reset</span>
+                </div>
+            </div>
+        </div>*@
 
 }
 
@@ -43,7 +74,7 @@
             @Html.DisplayNameFor(model => model.VenueName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VenueType)
+            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.VenueTown.TownName)
@@ -60,7 +91,7 @@
                 @Html.DisplayFor(modelItem => item.VenueName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VenueType)
+                @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VenueTown.TownName)
@@ -92,9 +123,8 @@
         });
     }
 
-    function AdvanceSearch()
-    {
-        var town = document.getElementById("lstTowns").value;        
+    function AdvanceSearch() {
+        var town = document.getElementById("lstTowns").value;
         var venueType = document.getElementById("lstVenueTypes").value;
         var advancedSearch = "true";
         //Ajax code
@@ -110,8 +140,7 @@
         });
     }
 
-    function Reset()
-    {
+    function Reset() {
         var advancedSearch = "false";
         //Ajax code
         $.ajax({
