@@ -108,8 +108,11 @@ namespace ToDo.Controllers
 
             else
             {
+                //Towns
+                ViewBag.TownId = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
 
-                ViewBag.TownId = new SelectList(db.Towns, "TownId", "TownName");
+                //Venue Types
+                ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
 
                 return View();
             }
@@ -121,7 +124,7 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VenueID,VenueName,VenueType,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber,VenueTownID")] Venue venue, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "VenueID,VenueName,VenueType,VenueAddress,VenueDescription,VenueEmail,VenuePhoneNumber,VenueTownID,VenueTypeID")] Venue venue, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -134,6 +137,7 @@ namespace ToDo.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
+                venue.VenueType = db.VenueCategories.Find(venue.VenueTypeID);
                 venue.VenueTown = db.Towns.Find(venue.VenueTownID);
 
                 venue.OwnerId = UserId;
@@ -143,7 +147,6 @@ namespace ToDo.Controllers
 
                 Town twn = db.Towns.Find(venue.VenueID);
 
-                //venue.VenueTown = db.Towns.Find(venue.VenueID);
 
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
@@ -194,6 +197,9 @@ namespace ToDo.Controllers
             //Towns
             ViewBag.TownId = new SelectList(db.Towns, "TownID", "TownName");
 
+            //Venue Types
+            ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
+
             int twnID = venue.VenueTownID;
 
             //Image
@@ -211,8 +217,9 @@ namespace ToDo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var venueToUpdate = db.Venues.Find(id);
+
             if (TryUpdateModel(venueToUpdate, "",
-                new string[] { "VenueID","OwnerId","VenueName","VenueType","VenueAddress","VenueDescription","VenueEmail", "VenuePhoneNumber, VenueTownID" }))
+                new string[] { "VenueID","OwnerId","VenueName", "VenueTypeID", "VenueTownID", "VenueAddress","VenueDescription","VenueEmail", "VenuePhoneNumber" }))
             {
                 try
                 {
@@ -233,13 +240,15 @@ namespace ToDo.Controllers
                             img.VenueContent = reader.ReadBytes(upload.ContentLength);
                         }
                         venueToUpdate.VenueFiles = new List<VenueFile> { img };
-                    }
-
-                    //Venue Town                    
-                    int twnID = venueToUpdate.VenueTownID;
-                    venueToUpdate.VenueTown = db.Towns.Find(twnID);
+                    }                  
 
                     db.Entry(venueToUpdate).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    //Town and Venue Type 
+                    Venue v = db.Venues.Find(venueToUpdate.VenueID);
+                    v.VenueTown = db.Towns.Find(venueToUpdate.VenueTownID);
+                    v.VenueType = db.VenueCategories.Find(venueToUpdate.VenueTypeID);
                     db.SaveChanges();
 
                     return RedirectToAction("Index");

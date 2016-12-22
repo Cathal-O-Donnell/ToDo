@@ -379,10 +379,8 @@ namespace ToDo.Models
 //Venue Model - add social links and website link
 //Remove map from event details page and move this all to the venue details page
 //Add link to the event details page linking the user to the venue for this event
-//add enums to database (model classes) - Towns Done
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
-//Kick User of Admin page if they are not an Admin
 //Admin should be able to remove venues and events via the admin section
 //Add some sort of graphing to the admin section
 //Admin should be able to add and remove admins
@@ -393,7 +391,6 @@ namespace ToDo.Models
 //Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
 //Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue**
 
-//Fix Venue Edit Town
 
 
 //Style
