@@ -477,24 +477,52 @@ namespace ToDo.Controllers
             return RedirectToAction("Admin", "Home");
         }
 
-        //public PartialViewResult RemoveTown(int id)
-        //{
-        //    try
-        //    {
-        //        Towns t = db.Towns.Find(id);
-        //        db.Towns.Remove(t);
-        //        db.SaveChanges();
+        public PartialViewResult AdminEventCategoriesTablePartialView()
+        {
+            var eventCategories = from ec in db.EventCategories
+                             select ec;
 
-        //        var towns = from twns in db.Towns
-        //                    select twns;
+            return PartialView("_AdminEventCategories", eventCategories.OrderBy(ec => ec.EventCategoryName).ToList());
+        }
 
-        //        return PartialView("_AdminTowns", towns.OrderBy(v => v.Town).ToList());
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        [HttpGet]
+        public ActionResult AddVEventCategory(string Category)
+        {
+            bool UserRole = User.IsInRole("Admin");
 
-        //}
+            if (UserRole == true)
+            {
+                //Get UserID
+                string UserId = User.Identity.GetUserId();
+
+                //User not logged in, redirect to Login Page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                EventCategory ec = new EventCategory();
+
+                ec.EventCategoryName = Category;
+
+                db.EventCategories.Add(ec);
+                db.SaveChanges();
+
+                return RedirectToAction("Admin", "Home");
+            }
+
+            else
+                return RedirectToAction("Index", "Home");
+        }
+
+        //Remove town 
+        public ActionResult RemoveEventCategory(int id)
+        {
+            EventCategory ec = db.EventCategories.Find(id);
+            db.EventCategories.Remove(ec);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin", "Home");
+        }
     }
 }

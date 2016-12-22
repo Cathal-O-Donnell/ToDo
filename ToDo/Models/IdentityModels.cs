@@ -26,6 +26,7 @@ namespace ToDo.Models
         public DbSet<AdminSettings> AdminSettings { get; set; }
         public DbSet<Town> Towns { get; set; }
         public DbSet<Venue_Type> VenueCategories { get; set; }
+        public DbSet<EventCategory> EventCategories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

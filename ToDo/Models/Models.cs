@@ -13,6 +13,20 @@ namespace ToDo.Models
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
 
+    public class EventCategory
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ID")]
+        public int EventCategoryID { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Event Type")]
+        public string EventCategoryName { get; set; }
+
+        public virtual ICollection<Event> Events { get; set; }
+    }
+
 
     public class Venue_Type
     {
@@ -134,6 +148,12 @@ namespace ToDo.Models
         //Event Active
         [Display(Name = "Event Active")]
         public bool EventActive { get; set; }
+
+        //Event Category Foreign ID
+        public int EventCatID { get; set; }
+
+        //Event Category
+        public virtual EventCategory EventCat { get; set; }
     }
 
     public class Activities

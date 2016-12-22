@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ToDo.Models.EventCategory>
+
+
+<table id="dataTableEventCategories" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCategoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCategoryName)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventCategoryID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventCategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveEventCategory", "Home", new { id = item.EventCategoryID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <label for="txtCategory">Category:</label>
+    <input id="txtCategory" />
+
+    <span class="btn btn-sm btn-success" onclick="AddCategory();">Add Category</span>
+
+    <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+</div>
+
+<script>
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableEventCategories').DataTable();
+    });
+
+    function AddCategory()
+    {
+        var cat = document.getElementById('txtCategory').value
+        console.log(cat);
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AddVEventCategory", "Home")',
+            data: { Category: cat },
+            success: function (data) {
+
+
+                $("#towns").html("");
+                $("#towns").html(data);
+                txtSuccess.innerText = "Changes have been saved";
+                console.log("success");
+
+            },
+            error: function (data) {
+
+                txtSuccess.innerText = "An error has occurred";
+                txtSuccess.style = "color: red;"
+                console.log("failure");
+            }
+        });
+    }
+</script>
+
+
