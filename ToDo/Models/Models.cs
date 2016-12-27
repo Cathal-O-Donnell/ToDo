@@ -401,8 +401,6 @@ namespace ToDo.Models
 //Add link to the event details page linking the user to the venue for this event
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
-//Admin should be able to remove venues and events via the admin section
-//Add some sort of graphing to the admin section
 //Admin should be able to add and remove admins
 //Delete confirmation popup in stead of view - add this to admin page aswell
 //Fourm section for user discussion

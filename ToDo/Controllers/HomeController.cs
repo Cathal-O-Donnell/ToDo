@@ -485,6 +485,7 @@ namespace ToDo.Controllers
             return PartialView("_AdminEventCategories", eventCategories.OrderBy(ec => ec.EventCategoryName).ToList());
         }
 
+
         [HttpGet]
         public ActionResult AddVEventCategory(string Category)
         {
@@ -515,7 +516,7 @@ namespace ToDo.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        //Remove town 
+        //Remove Event Category 
         public ActionResult RemoveEventCategory(int id)
         {
             EventCategory ec = db.EventCategories.Find(id);

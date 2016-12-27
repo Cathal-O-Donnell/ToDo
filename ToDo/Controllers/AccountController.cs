@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ToDo.Models;
+using System.Web.Security;
 
 namespace ToDo.Controllers
 {
@@ -155,6 +156,8 @@ namespace ToDo.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    UserManager.AddToRole(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -170,6 +173,15 @@ namespace ToDo.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //Assign Role
+        [Authorize]
+        public ActionResult AssignRole()
+        {
+            string usrName = User.Identity.GetUserName();
+            Roles.AddUserToRole(usrName, "User");
+            return RedirectToAction("Login", "Account");
         }
 
         //
