@@ -59,6 +59,40 @@ namespace ToDo.Controllers
 
             venue.VenueEvents = events;
 
+            //Sort Events
+            foreach (var Event in venue.VenueEvents.ToList())
+            {
+                var EventDate = Event.EventDate;
+
+                TimeSpan ts = DateTime.Now - EventDate;
+
+                //Remove event if it is old
+                if (ts.TotalDays > 1)
+                {
+                    db.Events.Remove(Event);
+                    db.SaveChanges();
+                }
+
+                //Check if this event is schedluded for today
+                if (EventDate == DateTime.Today)
+                {
+                    ViewBag.EventToday = 1;
+                    ViewBag.TodaysEventTitle = Event.EventTitle;
+                    ViewBag.EventStart = Event.EventTime.ToString("hh:mm tt");
+
+                    //Check if Event has not started
+                    if (DateTime.Now.TimeOfDay < Event.EventTime.TimeOfDay)
+                    {
+                        ViewBag.HasEventStarted = false;
+                    }
+                    //Check if Event has started
+                    if (DateTime.Now.TimeOfDay > Event.EventTime.TimeOfDay)
+                    {
+                        ViewBag.HasEventStarted = true;
+                    }
+                }
+            }
+
             //Check if there is any events for this Venue
             if (events.Count() < 1)
             {
@@ -73,7 +107,7 @@ namespace ToDo.Controllers
             //string twn = db.Towns.Find(venue.VenueTownID).Town;
 
             //Combine location into one string
-            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, venue.VenueTown.TownName);
+            string address = string.Format("{0}, {1}, {2}, Ireland", venue.VenueAddress, venue.VenueTown.TownName, venue.VenueTown.County);
 
             var coordinates = geoCode.Geocode(address).ToList();
 

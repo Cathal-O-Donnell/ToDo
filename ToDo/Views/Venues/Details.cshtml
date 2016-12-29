@@ -1,7 +1,7 @@
 ﻿@model ToDo.Models.Venue
 
-@*<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">*@
-<body>
+<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">
+@*<body>*@
 
     @*Check if current user is the owner of this event*@
     @if (ViewBag.IsOwner == true)
@@ -40,7 +40,7 @@
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.VenueDescription)</a></li>
-                    <li><a data-toggle="tab" href="#menu1" onclick="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">Map</a></li>
+                    <li><a data-toggle="tab" href="#menu1" @*onclick="GoogleMap(@ViewBag.Lat, @ViewBag.Long)"*@>Map</a></li>
                     <li><a data-toggle="tab" href="#menu2">Contact Us</a></li>
                 </ul>
 
@@ -142,7 +142,7 @@
 
     //Google Map
     function GoogleMap(lat, lon) {
-        console.log("Google Mao function hit");
+        console.log("Google Map function hit");
         // Array of stylin for map
         var styles = [
           {
@@ -198,6 +198,8 @@
         map.mapTypes.set('map_style', styledMap);
         map.setMapTypeId('map_style');
 
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
         // google.maps.event.addDomListener(window, "load", initialize);
     }
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ToDo.Models;
 
 namespace ToDo.Controllers
@@ -115,11 +116,17 @@ namespace ToDo.Controllers
                 Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
                 ViewBag.Venue3 = Venue3.VenueName;
 
+                //Event Count
                 int EventCount = db.Events.Distinct().Count();
                 ViewBag.EventCount = EventCount;
 
+                //Venue Count
                 int VenueCount = db.Venues.Distinct().Count();
                 ViewBag.VenueCount = VenueCount;
+
+                //Registerd User Count
+                var userCount = db.Users.Count();
+                ViewBag.UserCount = userCount;
 
                 return View(admin);
             }
