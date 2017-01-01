@@ -21,7 +21,7 @@ namespace ToDo.Controllers
 
         public ActionResult Index()
         {
-            //See FeaturedEventPartialView/ FeaturedVenuesPartialView
+            //See FeaturedEventPartialView/ FeaturedVenuesPartialView/ TopEvent
 
             return View();
         }
@@ -58,6 +58,28 @@ namespace ToDo.Controllers
             featuredEvents.Add(featuredEvent3);
 
             return PartialView("_FeaturedEvent", featuredEvents);
+        }
+
+        //Top Event Partial View
+        public ActionResult TopEventPartialView()
+        {
+            AdminSettings admin = db.AdminSettings.Find(1);
+
+            //Get Top Event from database
+            Event topEvent = db.Events.Find(admin.TopFeaturedEvent);
+
+            return PartialView("_TopEvent", topEvent);
+        }
+
+        //Top Venue Partial View
+        public ActionResult TopVenuePartialView()
+        {
+            AdminSettings admin = db.AdminSettings.Find(1);
+
+            //Get Top Event from database
+            Venue topVenue = db.Venues.Find(admin.TopFeaturedVenue);
+
+            return PartialView("_TopVenue", topVenue);
         }
 
         //Featured Venues Partial View

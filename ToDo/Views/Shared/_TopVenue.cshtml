@@ -1,0 +1,18 @@
+﻿@model ToDo.Models.Venue
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Top Venue: @Html.DisplayFor(modelItem => Model.VenueName)</h1>
+            </div>
+            <div class="panel-body" style="height: 350px;">
+                <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive">
+            </div>
+            <div class="panel-footer">
+                <center>@Html.ActionLink("Details", "Details", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-primary" })</center>
+            </div>
+        </div>
+    </div>
+
+</div>

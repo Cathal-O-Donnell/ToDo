@@ -498,6 +498,8 @@
     <Content Include="Views\Shared\_AdminTowns.cshtml" />
     <Content Include="Views\Shared\_AdminVenueType.cshtml" />
     <Content Include="Views\Shared\_AdminEventCategories.cshtml" />
+    <Content Include="Views\Shared\_TopEvent.cshtml" />
+    <Content Include="Views\Shared\_TopVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

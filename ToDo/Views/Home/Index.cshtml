@@ -2,10 +2,19 @@
     ViewBag.Title = "Home Page";
 }
 
+@*Top Featured Event*@
+<div style="padding-top: 10px;">
+    @Html.Action("TopEventPartialView")
+</div>
 
 @*Featured Event Partial View*@
 <div style="padding-top: 10px;">
     @Html.Action("FeaturedEventPartialView")
+</div>
+
+@*Top Featured Venue*@
+<div style="padding-top: 10px;">
+    @Html.Action("TopVenuePartialView")
 </div>
 
 @*Featured Venues Partial View*@

@@ -55,7 +55,7 @@ namespace ToDo.Controllers
             //Get Events
             var events = (from e in db.Events
                       where e.VenueID == id && e.EventActive == true
-                      select e).ToList();
+                      select e).OrderBy(x => x.EventDate).ToList();
 
             venue.VenueEvents = events;
 
