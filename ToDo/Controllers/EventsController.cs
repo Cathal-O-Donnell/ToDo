@@ -325,21 +325,51 @@ namespace ToDo.Controllers
 
 
         //Venue Index Partial View
-        public ActionResult EventsTablePartialView(string search)
+        public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch)
         {
+
+            ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
+            ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
             //Get all events from the database
             var events = from e in db.Events
                          where e.EventActive == true && e.Venue.VenueActive == true
                          select e;
 
-            //Search Bar
-            if (!String.IsNullOrEmpty(search))
+            if (AdvancedSearch == "true")
             {
-                //Get all the events where the name contains the users search term
-                events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
+
+                events = from v in db.Events
+                         where v.EventActive == true
+                         select v;
+
+                if (Town != "")
+                {
+                    int townID = Convert.ToInt32(Town);
+                    events = events.Where(e => e.Venue.VenueTown.TownID == townID);
+                }
+
+                if (EventCategory != "")
+                {
+                    int EventCategoryID = Convert.ToInt32(EventCategory);
+                    events = events.Where(e => e.EventCat.EventCategoryID == EventCategoryID);
+                }
+
+                return PartialView("_EventsTable", events.OrderBy(e => e.EventTitle).ToList());
             }
 
-            return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
+
+            else
+            {
+                //Search Bar
+                if (!String.IsNullOrEmpty(search))
+                {
+                    //Get all the events where the name contains the users search term
+                    events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
+                }
+
+                return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
+            }
         }
     }
 }

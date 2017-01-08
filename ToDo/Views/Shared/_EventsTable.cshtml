@@ -3,7 +3,7 @@
 @*Search Box*@
 @using (Html.BeginForm())
 {
-    <div class="container" style="padding-bottom: 10px;">
+    @*<div class="container" style="padding-bottom: 10px;">
         <div class="row">
             <div id="custom-search-input">
                 <div class="input-group col-md-2">
@@ -16,7 +16,37 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
+
+    <form class="form-horizontal" role="form">
+        <div class="form-group" style="padding-bottom: 10px;">
+
+            <div class="input-group col-md-2">
+                <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                <span class="input-group-btn">
+                    <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+
+            <div class="col-md-2">
+                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+            </div>
+
+            <div class="col-md-2">
+                @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "form-control", id = "lstEventCat" })
+            </div>
+
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+            </div>
+
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+            </div>
+        </div>
+    </form>
 }
 
 <table class="table">
@@ -29,6 +59,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EventDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue.VenueTown.TownName)
         </th>
         <th>
             @*blank*@
@@ -46,6 +79,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EventDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.EventID }, new { @class = "btn btn-primary" })
@@ -67,8 +103,40 @@
             data: { search: search },
             success: function (data) {
 
-                $('#VenueTable').html(data);
-                $('#VenueTable').fadeIn("fast")
+                $('#EventTable').html(data);
+                $('#EventTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function AdvanceSearch() {
+        var town = document.getElementById("lstTowns").value;
+        var eventCat = document.getElementById("lstEventCat").value;
+        var advancedSearch = "true";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("EventsTablePartialView", "Events")',
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch },
+            success: function (data) {
+
+                $('#EventTable').html(data);
+                $('#EventTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function Reset() {
+        var advancedSearch = "false";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("EventsTablePartialView", "Events")',
+            data: { AdvancedSearch: advancedSearch },
+            success: function (data) {
+
+                $('#EventTable').html(data);
+                $('#EventTable').fadeIn("fast")
             }
         });
     }
