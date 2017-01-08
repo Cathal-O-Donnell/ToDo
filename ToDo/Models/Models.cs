@@ -87,7 +87,7 @@ namespace ToDo.Models
         //Date
         [Required(ErrorMessage = "You must enter a date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime EventDate { get; set; }
 
@@ -269,7 +269,7 @@ namespace ToDo.Models
         //Name
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
-        [Display(Name = "Name")]
+        [Display(Name = "Venue")]
         public string VenueName { get; set; }
 
         //Address

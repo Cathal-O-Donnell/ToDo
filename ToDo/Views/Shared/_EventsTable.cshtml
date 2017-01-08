@@ -58,6 +58,9 @@
             @Html.DisplayNameFor(model => model.Venue.VenueName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.EventCat.EventCategoryName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.EventDate)
         </th>
         <th>
@@ -76,6 +79,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Venue.VenueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventCat.EventCategoryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EventDate)
