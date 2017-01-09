@@ -145,6 +145,9 @@ namespace ToDo.Controllers
 
             Event newEvent = new Event() { Venue = venue, VenueID = Convert.ToInt32(id) };
 
+            //Venue Types
+            ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
             return View(newEvent);
         }
 
@@ -153,7 +156,7 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventCategory,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore")] Event @event, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventCatID")] Event @event, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -168,6 +171,9 @@ namespace ToDo.Controllers
 
                 //Set this Events status as active
                 @event.EventActive = true;
+
+                //Event Category
+                @event.EventCat = db.EventCategories.Find(@event.EventCatID);
 
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
