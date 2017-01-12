@@ -31,11 +31,20 @@
         </div>
 
         @*Category*@
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.EventCategory, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EventCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*Category*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventCatID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCatagories, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EventCatID, "", new { @class = "text-danger" })
             </div>
         </div>
 

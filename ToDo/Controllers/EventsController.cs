@@ -222,6 +222,11 @@ namespace ToDo.Controllers
             //Owner ID
             ViewBag.OID = @event.OwnerID;
 
+            //Event Catagories
+            ViewBag.EventCatagories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
+            int eventCatID = @event.EventCatID;
+
             if (@event == null)
             {
                 return HttpNotFound();
@@ -242,7 +247,7 @@ namespace ToDo.Controllers
             }
             var EventToUpdate = db.Events.Find(id);
             if (TryUpdateModel(EventToUpdate, "",
-                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime","EventDescription","EventCategory","EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
+                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime","EventDescription", "EventCatID", "EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
             {
                 try
                 {
@@ -273,6 +278,14 @@ namespace ToDo.Controllers
 
                     db.Entry(EventToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    //Event Category
+                    Event eventA = db.Events.Find(EventToUpdate.EventID);
+                    eventA.EventCat = db.EventCategories.Find(EventToUpdate.EventCatID);
+
+                    db.SaveChanges();
+
+                    
 
                     return RedirectToAction("Index");
                 }

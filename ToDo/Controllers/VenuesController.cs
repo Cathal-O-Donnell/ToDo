@@ -283,6 +283,7 @@ namespace ToDo.Controllers
                     Venue v = db.Venues.Find(venueToUpdate.VenueID);
                     v.VenueTown = db.Towns.Find(venueToUpdate.VenueTownID);
                     v.VenueType = db.VenueCategories.Find(venueToUpdate.VenueTypeID);
+
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
