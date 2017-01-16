@@ -365,7 +365,7 @@ namespace ToDo.Controllers
                 {
                     int venueTypeID = Convert.ToInt32(VenueType);
                     venues = venues.Where(v => v.VenueType.Venue_TypeID == venueTypeID);
-                }
+                }               
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }
@@ -377,6 +377,11 @@ namespace ToDo.Controllers
                 {
                     venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
                 }
+
+                if (search != "")
+                {
+                    ViewBag.SearchTerm = search;
+                }                
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }

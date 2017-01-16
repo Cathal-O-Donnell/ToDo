@@ -387,6 +387,11 @@ namespace ToDo.Controllers
                     events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
                 }
 
+                if (search != "")
+                {
+                    ViewBag.SearchTerm = search;
+                }
+
                 return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
             }
         }

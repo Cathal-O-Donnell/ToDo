@@ -22,7 +22,15 @@
         <div class="form-group" style="padding-bottom: 10px;">
 
             <div class="input-group col-md-2">
-                <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                @if (ViewBag.SearchTerm != null)
+                {
+                    <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
+                }
+                else
+                {
+                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                }
+                
                 <span class="input-group-btn">
                     <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
                         <span class="glyphicon glyphicon-search"></span>

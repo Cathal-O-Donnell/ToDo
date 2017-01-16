@@ -1,77 +1,85 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
-@*Search Box*@
-@using (Html.BeginForm())
-{
-
-    <form class="form-horizontal" role="form">
-        <div class="form-group" style="padding-bottom: 10px;">
-
-            <div class="input-group col-md-2">
-                <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                <span class="input-group-btn">
-                    <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-
-            <div class="col-md-2">
-                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
-            </div>
-
-            <div class="col-md-2">
-                @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
-            </div>
-
-            <div class="col-md-1">
-                <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
-            </div>
-
-            <div class="col-md-1">
-                <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
-            </div>
-        </div>
-    </form>
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueTown.TownName)
-        </th>
-        <th>
-            @*blank*@
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
+    @*Search Box*@
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueTown.TownName)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group" style="padding-bottom: 10px;">
+
+                <div class="input-group col-md-2">
+                    @if (ViewBag.SearchTerm != null)
+                    {
+                        <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
+                    }
+                    else
+                    {
+                        <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                    }                    
+                    <span class="input-group-btn">
+                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
+                </div>
+
+                <div class="col-md-1">
+                    <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+                </div>
+
+                <div class="col-md-1">
+                    <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+                </div>
+            </div>
+        </form>
     }
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueTown.TownName)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueTown.TownName)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </table>
 
 <script>
+
     function VenueSearch() {
         //Get the search term the user entered
         var search = document.getElementById("txtSearch").value;
