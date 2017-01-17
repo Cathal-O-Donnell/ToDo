@@ -374,6 +374,13 @@ namespace ToDo.Controllers
                     events = events.Where(e => e.EventCat.EventCategoryID == EventCategoryID);
                 }
 
+                if (!String.IsNullOrEmpty(search))
+                {
+                    //Get all the events where the name contains the users search term
+                    events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
+                    ViewBag.SearchTerm = search;
+                }
+
                 return PartialView("_EventsTable", events.OrderBy(e => e.EventTitle).ToList());
             }
 
@@ -385,10 +392,6 @@ namespace ToDo.Controllers
                 {
                     //Get all the events where the name contains the users search term
                     events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
-                }
-
-                if (search != "")
-                {
                     ViewBag.SearchTerm = search;
                 }
 

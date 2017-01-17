@@ -3,20 +3,6 @@
 @*Search Box*@
 @using (Html.BeginForm())
 {
-    @*<div class="container" style="padding-bottom: 10px;">
-        <div class="row">
-            <div id="custom-search-input">
-                <div class="input-group col-md-2">
-                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                    <span class="input-group-btn">
-                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
     <form class="form-horizontal" role="form">
         <div class="form-group" style="padding-bottom: 10px;">
@@ -126,12 +112,14 @@
     function AdvanceSearch() {
         var town = document.getElementById("lstTowns").value;
         var eventCat = document.getElementById("lstEventCat").value;
+        var search = document.getElementById("txtSearch").value;
+
         var advancedSearch = "true";
         //Ajax code
         $.ajax({
             type: "GET",
             url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch },
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search },
             success: function (data) {
 
                 $('#EventTable').html(data);

@@ -101,12 +101,14 @@
     function AdvanceSearch() {
         var town = document.getElementById("lstTowns").value;
         var venueType = document.getElementById("lstVenueTypes").value;
+        var search = document.getElementById("txtSearch").value;
+
         var advancedSearch = "true";
         //Ajax code
         $.ajax({
             type: "GET",
             url: '@Url.Action("VenuesTablePartialView", "Venues")',
-            data: { Town: town, VenueType: venueType, AdvancedSearch: advancedSearch },
+            data: { Town: town, VenueType: venueType, search: search, AdvancedSearch: advancedSearch },
             success: function (data) {
 
                 $('#VenueTable').html(data);
