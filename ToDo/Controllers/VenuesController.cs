@@ -22,9 +22,20 @@ namespace ToDo.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Venues
-        public ActionResult Index()
+        public ActionResult Index(string AdvancedSearch, string Town)
         {
             //See VenuesTablePartialView
+
+            if (AdvancedSearch != null)
+            {
+                TempData["AdvancedSearch"] = AdvancedSearch;
+            }
+
+            if (Town != null)
+            {
+                TempData["Town"] = Town;
+            }
+
             return View();
         }
 
@@ -340,6 +351,18 @@ namespace ToDo.Controllers
         //Venue Index Partial View
         public ActionResult VenuesTablePartialView(string search, string Town, string VenueType, string AdvancedSearch)
         {
+            if (TempData["Town"] != null)
+            {
+                Town = Convert.ToString(TempData["Town"]);
+                VenueType = "";
+            }
+
+            if (TempData["AdvancedSearch"] != null)
+            {
+                AdvancedSearch = Convert.ToString(TempData["AdvancedSearch"]);
+                VenueType = "";
+            }
+
 
             ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
             ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
@@ -372,6 +395,10 @@ namespace ToDo.Controllers
                     venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
                     ViewBag.SearchTerm = search;
                 }
+
+                //Clear the TempData
+                TempData["AdvancedSearch"] = null;
+                TempData["Town"] = null;
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }

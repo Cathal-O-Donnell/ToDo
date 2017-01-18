@@ -1,18 +1,29 @@
 ﻿@model ToDo.Models.Event
 
 <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1 class="panel-title">Top Event: @Html.DisplayFor(modelItem => Model.EventTitle)</h1>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Top Event: @Html.DisplayFor(modelItem => Model.EventTitle)</h1>
+            </div>
+            <div class="panel-body" style="height: 350px;">
+
+                @*Image*@
+                <div class="col-sm-4">
+                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
                 </div>
-                <div class="panel-body" style="height: 350px;">
-                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" class="img-responsive">
-                </div>
-                <div class="panel-footer">
-                    <center>@Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-primary" })</center>
+
+                @*Event Info*@
+                <div class="col-sm-6">
+                    <h3>@Model.EventTitle</h3>
+                    <h3>@Model.Venue.VenueName - @Model.Venue.VenueTown.TownName</h3>
+                    <h3>@Model.EventDate.ToShortDateString()</h3>
                 </div>
             </div>
+            <div class="panel-footer">
+                <center>@Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-primary" })</center>
+            </div>
         </div>
-    
+    </div>
+
 </div>

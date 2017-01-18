@@ -10,7 +10,7 @@
                     <h1 class="panel-title">@Html.DisplayFor(modelItem => item.VenueName)</h1>
                 </div>
                 <div class="panel-body" style="height: 350px;">
-                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive">
+                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
                 </div>
                 <div class="panel-footer">
                     <center>@Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })</center>
