@@ -1,7 +1,7 @@
 ﻿@model ToDo.Models.Venue
 
-<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">
-@*<body>*@
+@*<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">*@
+    @*<body>*@
 
     @*Check if current user is the owner of this event*@
     @if (ViewBag.IsOwner == true)
@@ -62,7 +62,7 @@
 
                         else
                         {
-                                <h3>No map available</h3>
+                            <h3>No map available</h3>
                         }
                     </div>
 
@@ -95,7 +95,7 @@
 
             @if (ViewBag.noEvents == true)
             {
-                <h2>No Events for this venue currently</h2>
+                <h2>There is no events for this venue, please check back later</h2>
             }
 
             else
@@ -133,7 +133,7 @@
         <div id="disqus_thread"></div>
     </div>
 
-</body>
+@*</body>*@
 
 @*Google Maps and Directions*@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
@@ -204,7 +204,7 @@
     }
 
     //Comments section
-    (function() { // DON'T EDIT BELOW THIS LINE
+    (function () { // DON'T EDIT BELOW THIS LINE
         var d = document, s = d.createElement('script');
 
         s.src = '//s00144297.disqus.com/embed.js';
@@ -213,5 +213,10 @@
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        GoogleMap(@ViewBag.Lat, @ViewBag.Long);
+    });
+
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
