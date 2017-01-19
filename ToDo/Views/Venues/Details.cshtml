@@ -13,7 +13,10 @@
         </div>
     }
 
+<div style="display: inline; vertical-align: top;">
     <h1>@Model.VenueName</h1>
+    @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)
+</div>
 
     <div>
         <hr />
@@ -40,7 +43,7 @@
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.VenueDescription)</a></li>
-                    <li><a data-toggle="tab" href="#menu1" @*onclick="GoogleMap(@ViewBag.Lat, @ViewBag.Long)"*@>Map</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Map</a></li>
                     <li><a data-toggle="tab" href="#menu2">Contact Us</a></li>
                 </ul>
 
