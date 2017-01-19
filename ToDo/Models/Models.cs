@@ -98,6 +98,12 @@ namespace ToDo.Models
         [Display(Name = "Time")]
         public DateTime EventTime { get; set; }
 
+        //End Time
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
+        [Display(Name = "End Time")]
+        public DateTime EventEndTime { get; set; }
+
         //Description
         [Required(ErrorMessage = "Give your event a brief description")]
         [DataType(DataType.MultilineText)]

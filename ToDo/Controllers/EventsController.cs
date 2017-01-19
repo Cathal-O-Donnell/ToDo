@@ -156,7 +156,7 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventDescription,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventCatID")] Event @event, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventEndTime,EventDescription,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventCatID")] Event @event, HttpPostedFileBase imageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -247,7 +247,7 @@ namespace ToDo.Controllers
             }
             var EventToUpdate = db.Events.Find(id);
             if (TryUpdateModel(EventToUpdate, "",
-                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime","EventDescription", "EventCatID", "EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
+                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime", "EventEndTime", "EventDescription", "EventCatID", "EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
             {
                 try
                 {
