@@ -65,8 +65,8 @@ namespace ToDo.Controllers
 
             //Get Events
             var events = (from e in db.Events
-                      where e.VenueID == id && e.EventActive == true
-                      select e).OrderBy(x => x.EventDate).ToList();
+                          where e.VenueID == id && e.EventActive == true
+                          select e).OrderBy(x => x.EventDate).ToList();
 
             venue.VenueEvents = events;
 
@@ -264,7 +264,7 @@ namespace ToDo.Controllers
             var venueToUpdate = db.Venues.Find(id);
 
             if (TryUpdateModel(venueToUpdate, "",
-                new string[] { "VenueID","OwnerId","VenueName", "VenueTypeID", "VenueTownID", "VenueAddress","VenueDescription","VenueEmail", "VenuePhoneNumber" }))
+                new string[] { "VenueID", "OwnerId", "VenueName", "VenueTypeID", "VenueTownID", "VenueAddress", "VenueDescription", "VenueEmail", "VenuePhoneNumber" }))
             {
                 try
                 {
@@ -285,7 +285,7 @@ namespace ToDo.Controllers
                             img.VenueContent = reader.ReadBytes(upload.ContentLength);
                         }
                         venueToUpdate.VenueFiles = new List<VenueFile> { img };
-                    }                  
+                    }
 
                     db.Entry(venueToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
@@ -372,11 +372,11 @@ namespace ToDo.Controllers
                          select v;
 
             if (AdvancedSearch == "true")
-            {               
+            {
 
                 venues = from v in db.Venues
-                             where v.VenueActive == true
-                             select v;
+                         where v.VenueActive == true
+                         select v;
 
                 if (Town != "")
                 {
@@ -410,31 +410,10 @@ namespace ToDo.Controllers
                 {
                     venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
                     ViewBag.SearchTerm = search;
-                }              
+                }
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }
-            
-
-            //string sortOrder,
-            //Filter 
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-
-            //Sort Order
-            //switch (sortOrder)
-            //{
-            //    case "Name_desc":
-            //        venues = venues.OrderByDescending(v => v.VenueName);
-            //        break;
-
-            //    case "Name_assc":
-            //        venues = venues.OrderBy(v => v.VenueName);
-            //        break;
-
-            //    default:
-            //        venues = venues.OrderBy(v => v.VenueName);
-            //        break;
-            //}                     
         }
     }
 }

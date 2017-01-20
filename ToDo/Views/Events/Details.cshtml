@@ -67,67 +67,151 @@
 
             </div>
 
+            @*Tabs*@
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.EventDescription)</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Time and Date</a></li>
+                    <li><a data-toggle="tab" href="#menu2">More Info</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    @*Description*@
+                    <div id="home" class="tab-pane fade in active">
+                        <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.EventDescription)</p>
+                    </div>
+
+                    @*Time and Date*@
+                    <div id="menu1" class="tab-pane fade">
+                        <h2 style="color: #70b2f9;">Where</h2>
+                        <h3>@ViewBag.EVenue</h3>
+
+                        <h3>@ViewBag.EAddress</h3>
+
+                        <h3>@ViewBag.ETown</h3>
+
+                        @*When*@
+                        <h2 style="color: #70b2f9;">When</h2>
+                        <h3>@Model.EventDate.ToShortDateString()</h3>
+
+                        <h3>@Model.EventTime.ToShortTimeString()</h3>
+
+                        @if (Model.EventEndTime != null)
+                        {
+                            <h3>@Model.EventEndTime.ToShortTimeString()</h3>
+                        }
+                    </div>
+
+                    @*More Info*@
+                    <div id="menu2" class="tab-pane fade">
+
+                        <h2 style="color: #70b2f9;">More Info</h2>
+
+                        @*Free Event*@
+                        @if (ViewBag.FreeEvent == true)
+                        {
+                            <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): Free Event</h3>
+                        }
+                        else
+                        {
+                            <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): € @Html.DisplayFor(model => model.EventTicketPrice)</h3>
+                        }
+
+                        @*Check if ticket store information is not null*@
+                        @if (Model.EventTicketStore != null)
+                        {
+                            <h3>@Html.DisplayNameFor(model => model.EventTicketStore): @Html.DisplayFor(model => model.EventTicketStore)</h3>
+                        }
+
+                        @*Check if phone number is not null*@
+                        @if (ViewBag.EPhone != null)
+                        {
+                            <h3>Phone: @ViewBag.EPhone</h3>
+                        }
+
+                        @*Check if email is not null*@
+                        @if (ViewBag.EEmail != null)
+                        {
+                            <h3>Email: @ViewBag.EEmail</h3>
+                        }
+
+                        @*Check if website is not null*@
+                        @if (Model.EventWebsite != null)
+                        {
+                            <h3>@Html.DisplayNameFor(model => model.EventWebsite): @Html.DisplayFor(model => model.EventWebsite)</h3>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
             @*Description*@
-            <div class="col-sm-5">
+            @*<div class="col-sm-5">
                 <h2 style="padding-left: 25px; color: #70b2f9;">@Html.DisplayNameFor(model => model.EventDescription)</h2>
 
 
                 <p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.EventDescription)</p>
-            </div>
+            </div>*@
 
             @*Where*@
-            <div class="col-sm-2">
+            @*<div class="col-sm-2">
                 <h2 style="color: #70b2f9;">Where</h2>
                 <h3>@ViewBag.EVenue</h3>
 
                 <h3>@ViewBag.EAddress</h3>
 
-                <h3>@ViewBag.ETown</h3>
+                <h3>@ViewBag.ETown</h3>*@
 
                 @*When*@
-                <h2 style="color: #70b2f9;">When</h2>
+                @*<h2 style="color: #70b2f9;">When</h2>
                 <h3>@Model.EventDate.ToShortDateString()</h3>
 
                 <h3>@Model.EventTime.ToShortTimeString()</h3>
-            </div>
+
+                @if (Model.EventEndTime != null)
+                {
+                    <h3>@Model.EventEndTime.ToShortTimeString()</h3>
+                }
+            </div>*@
 
             @*More Info*@
-            <div class="col-sm-2">
-                <h2 style="color: #70b2f9;">More Info</h2>
+            @*<div class="col-sm-2">
+                <h2 style="color: #70b2f9;">More Info</h2>*@
 
                 @*Free Event*@
-                @if (ViewBag.FreeEvent == true)
+                @*@if (ViewBag.FreeEvent == true)
                 {
                     <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): Free Event</h3>
                 }
                 else
                 {
                     <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): € @Html.DisplayFor(model => model.EventTicketPrice)</h3>
-                }
+                }*@
 
                 @*Check if ticket store information is not null*@
-                @if (Model.EventTicketStore != null)
+                @*@if (Model.EventTicketStore != null)
                 {
                     <h3>@Html.DisplayNameFor(model => model.EventTicketStore): @Html.DisplayFor(model => model.EventTicketStore)</h3>
-                }
+                }*@
 
                 @*Check if phone number is not null*@
-                @if (ViewBag.EPhone != null)
+                @*@if (ViewBag.EPhone != null)
                 {
                     <h3>Phone: @ViewBag.EPhone</h3>
-                }
+                }*@
 
                 @*Check if email is not null*@
-                @if (ViewBag.EEmail != null)
+                @*@if (ViewBag.EEmail != null)
                 {
                     <h3>Email: @ViewBag.EEmail</h3>
-                }
+                }*@
 
                 @*Check if website is not null*@
-                @if (Model.EventWebsite != null)
+                @*@if (Model.EventWebsite != null)
                 {
                     <h3>@Html.DisplayNameFor(model => model.EventWebsite): @Html.DisplayFor(model => model.EventWebsite)</h3>
-                }
+                }*@
             </div>
         </div>
 
