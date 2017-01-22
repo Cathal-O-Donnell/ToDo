@@ -107,7 +107,7 @@ namespace ToDo.Models
         //Description
         [Required(ErrorMessage = "Give your event a brief description")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Details")]
+        [Display(Name = "Description")]
         public string EventDescription { get; set; }
 
         //Event Category

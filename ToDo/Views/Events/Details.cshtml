@@ -1,8 +1,8 @@
-﻿
-@model ToDo.Models.Event
+﻿@model ToDo.Models.Event
 
 
-<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">
+@*<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">*@
+<body>
 
     @*Check if current user is the owner of this event*@
     @if (ViewBag.IsOwner == true)
@@ -18,7 +18,7 @@
 
         <div style="display: inline; vertical-align: top;">
             <h1>@Model.EventTitle</h1>
-            @Html.ActionLink( Model.Venue.VenueTown.TownName,"Index","Venues", new { AdvancedSearch = "true",Town = Model.Venue.VenueTown.TownID}, null)
+            @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
         </div>
         <hr />
 
@@ -71,7 +71,7 @@
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.EventDescription)</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Time and Date</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Where and When</a></li>
                     <li><a data-toggle="tab" href="#menu2">More Info</a></li>
                 </ul>
 
@@ -82,25 +82,30 @@
                         <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.EventDescription)</p>
                     </div>
 
-                    @*Time and Date*@
+                    @*Where and When*@
                     <div id="menu1" class="tab-pane fade">
-                        <h2 style="color: #70b2f9;">Where</h2>
-                        <h3>@ViewBag.EVenue</h3>
+                        <div class="col-sm-4">
+                            <h2 style="color: #70b2f9;">Where</h2>
 
-                        <h3>@ViewBag.EAddress</h3>
+                            <h3>@ViewBag.EVenue</h3>
 
-                        <h3>@ViewBag.ETown</h3>
+                            <h3>@ViewBag.EAddress</h3>
 
-                        @*When*@
-                        <h2 style="color: #70b2f9;">When</h2>
-                        <h3>@Model.EventDate.ToShortDateString()</h3>
+                            <h3>@ViewBag.ETown</h3>
+                        </div>
 
-                        <h3>@Model.EventTime.ToShortTimeString()</h3>
+                        <div class="col-sm-4">
+                            @*When*@
+                            <h2 style="color: #70b2f9;">When</h2>
+                            <h3>Date: @Model.EventDate.ToShortDateString()</h3>
 
-                        @if (Model.EventEndTime != null)
-                        {
-                            <h3>@Model.EventEndTime.ToShortTimeString()</h3>
-                        }
+                            <h3>Start Time: @Model.EventTime.ToShortTimeString()</h3>
+
+                            @if (Model.EventEndTime != null)
+                            {
+                                <h3>End Time: @Model.EventEndTime.ToShortTimeString()</h3>
+                            }
+                        </div>
                     </div>
 
                     @*More Info*@
@@ -118,25 +123,25 @@
                             <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): € @Html.DisplayFor(model => model.EventTicketPrice)</h3>
                         }
 
-                        @*Check if ticket store information is not null*@
+                        @*Ticket Store Information*@
                         @if (Model.EventTicketStore != null)
                         {
                             <h3>@Html.DisplayNameFor(model => model.EventTicketStore): @Html.DisplayFor(model => model.EventTicketStore)</h3>
                         }
 
-                        @*Check if phone number is not null*@
+                        @*Phone Number*@
                         @if (ViewBag.EPhone != null)
                         {
                             <h3>Phone: @ViewBag.EPhone</h3>
                         }
 
-                        @*Check if email is not null*@
+                        @*Email*@
                         @if (ViewBag.EEmail != null)
                         {
                             <h3>Email: @ViewBag.EEmail</h3>
                         }
 
-                        @*Check if website is not null*@
+                        @*Website*@
                         @if (Model.EventWebsite != null)
                         {
                             <h3>@Html.DisplayNameFor(model => model.EventWebsite): @Html.DisplayFor(model => model.EventWebsite)</h3>
@@ -145,131 +150,35 @@
                     </div>
                 </div>
             </div>
-
-            @*Description*@
-            @*<div class="col-sm-5">
-                <h2 style="padding-left: 25px; color: #70b2f9;">@Html.DisplayNameFor(model => model.EventDescription)</h2>
-
-
-                <p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.EventDescription)</p>
-            </div>*@
-
-            @*Where*@
-            @*<div class="col-sm-2">
-                <h2 style="color: #70b2f9;">Where</h2>
-                <h3>@ViewBag.EVenue</h3>
-
-                <h3>@ViewBag.EAddress</h3>
-
-                <h3>@ViewBag.ETown</h3>*@
-
-                @*When*@
-                @*<h2 style="color: #70b2f9;">When</h2>
-                <h3>@Model.EventDate.ToShortDateString()</h3>
-
-                <h3>@Model.EventTime.ToShortTimeString()</h3>
-
-                @if (Model.EventEndTime != null)
-                {
-                    <h3>@Model.EventEndTime.ToShortTimeString()</h3>
-                }
-            </div>*@
-
-            @*More Info*@
-            @*<div class="col-sm-2">
-                <h2 style="color: #70b2f9;">More Info</h2>*@
-
-                @*Free Event*@
-                @*@if (ViewBag.FreeEvent == true)
-                {
-                    <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): Free Event</h3>
-                }
-                else
-                {
-                    <h3>@Html.DisplayNameFor(model => model.EventTicketPrice): € @Html.DisplayFor(model => model.EventTicketPrice)</h3>
-                }*@
-
-                @*Check if ticket store information is not null*@
-                @*@if (Model.EventTicketStore != null)
-                {
-                    <h3>@Html.DisplayNameFor(model => model.EventTicketStore): @Html.DisplayFor(model => model.EventTicketStore)</h3>
-                }*@
-
-                @*Check if phone number is not null*@
-                @*@if (ViewBag.EPhone != null)
-                {
-                    <h3>Phone: @ViewBag.EPhone</h3>
-                }*@
-
-                @*Check if email is not null*@
-                @*@if (ViewBag.EEmail != null)
-                {
-                    <h3>Email: @ViewBag.EEmail</h3>
-                }*@
-
-                @*Check if website is not null*@
-                @*@if (Model.EventWebsite != null)
-                {
-                    <h3>@Html.DisplayNameFor(model => model.EventWebsite): @Html.DisplayFor(model => model.EventWebsite)</h3>
-                }*@
-            </div>
-        </div>
-
-        <hr />
-
-        <div class="row">
-            <div class="col-sm-6">
-
-                @*Check if there is google map info for this event*@
-                @if (ViewBag.hasMap == true)
-                {
-                    <div id="googleMap" style="width:500px;height:500px; padding-top: 25px;">
-
-                    </div>
-
-                    <h3>Need Directions?</h3>
-
-                    <input type="text" class="form-control" placeholder="Travelling From..." id="txtFrom">
-
-                    <p style="padding-top: 10px; padding-bottom: 10px;">
-                        <button onclick="PlanRoute()" class="btn btn-success">Plan Route</button>
-                    </p>
-
-                    <h1 style="text-align:center;" id="txtDirections"></h1>
-                    <div id="dir" style="width: 350px; float: right; margin-right:40px; margin-top: 20px; margin-bottom: 20px;"></div>
-                }
-
-                @*No Google map could be generated*@
-                @if (ViewBag.hasMap == false)
-                {
-                    <h2>There was a problem creating a map for this event</h2>
-                    <h2>Please check that the event location is a vlaid address</h2>
-                }
-
-            </div>
-
-            <div class="col-sm-6">
-
-                @*Check if there is a youtube link for this event*@
-                @if (ViewBag.hasYT == true)
-                {
-                    <div id="player">
-
-                    </div>
-                }
-
-                else
-                {
-                    <h4>No YouTube link</h4>
-                }
-
-            </div>
-        </div>
-        <div class="row">
-            <h2>Comments</h2>
-            <div id="disqus_thread"></div>
         </div>
     </div>
+
+    <hr />
+
+    <div class="row">
+
+        <div class="col-sm-6" style="margin: auto;">
+
+            @*Check if there is a youtube link for this event*@
+            @if (ViewBag.hasYT == true)
+            {
+                <div id="player">
+
+                </div>
+            }
+
+            else
+            {
+                <h4>No YouTube link</h4>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+    </div>
+  
 </body>
 
 @*Google Maps and Directions*@
@@ -277,7 +186,7 @@
 
 <script>
 
-    //Directions
+    @*//Directions
     function PlanRoute() {
 
         //Check if the user has entered a starting location
@@ -393,7 +302,7 @@
         map.setMapTypeId('map_style');
 
         // google.maps.event.addDomListener(window, "load", initialize);
-    }
+    }*@
 
     //YouTube iFrame API code
     //This code loads the IFrame Player API code asynchronously.
