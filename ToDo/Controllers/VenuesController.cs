@@ -22,7 +22,7 @@ namespace ToDo.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Venues
-        public ActionResult Index(string AdvancedSearch, string Town)
+        public ActionResult Index(string AdvancedSearch, string Town, string VenueType)
         {
             //See VenuesTablePartialView
 
@@ -34,6 +34,11 @@ namespace ToDo.Controllers
             if (Town != null)
             {
                 TempData["Town"] = Town;
+            }
+
+            if (VenueType != null)
+            {
+                TempData["VenueType"] = VenueType;
             }
 
             return View();
@@ -351,16 +356,24 @@ namespace ToDo.Controllers
         //Venue Index Partial View
         public ActionResult VenuesTablePartialView(string search, string Town, string VenueType, string AdvancedSearch)
         {
+            if (VenueType == null)
+            {
+                VenueType = "";
+            }
+
             if (TempData["Town"] != null)
             {
                 Town = Convert.ToString(TempData["Town"]);
-                VenueType = "";
+            }
+
+            if (TempData["VenueType"] != null)
+            {
+                VenueType = Convert.ToString(TempData["VenueType"]);
             }
 
             if (TempData["AdvancedSearch"] != null)
             {
                 AdvancedSearch = Convert.ToString(TempData["AdvancedSearch"]);
-                VenueType = "";
             }
 
 

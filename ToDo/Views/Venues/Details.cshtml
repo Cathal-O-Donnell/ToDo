@@ -15,6 +15,7 @@
 
 <div style="display: inline; vertical-align: top;">
     <h1>@Model.VenueName</h1>
+
     @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)
 </div>
 
@@ -31,11 +32,17 @@
                 <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 250px; height:250px;" />
             }
 
-            @*No event image was uploaded, display default image*@
+            @*Display defualt image*@
             else
             {
-                <h4>No Image</h4>
+                <img src="~/default.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
+
+            @*No event image was uploaded, display default image*@
+            @*else
+            {
+                <h4>No Image</h4>
+            }*@
 
         </div>
 
@@ -61,22 +68,23 @@
 
                         <div class="row">
 
-                            <div id="googleMap" style="width:500px;height:500px; padding-top: 25px;" class="col-sm-4">
+                            <div id="googleMap" style="width:500px;height:500px; padding-top: 50px; padding-right: 25px;" class="col-sm-4">
 
                             </div>
 
-                            <h3>Need Directions?</h3>
+                            <div style="padding-left: 20px; padding-top: 20px;">
+                                <h3>Need Directions?</h3>
 
-                            <input type="text" class="form-control" placeholder="Travelling From..." id="txtFrom">
+                                <input type="text" class="form-control" placeholder="Travelling From..." id="txtFrom">
 
-                            <p style="padding-top: 10px; padding-bottom: 10px;">
-                                <button onclick="PlanRoute()" class="btn btn-success">Plan Route</button>
-                            </p>
+                                <p style="padding-top: 10px; padding-bottom: 10px;">
+                                    <button onclick="PlanRoute()" class="btn btn-success">Get Directions</button>
+                                </p>
 
-                            <h1 style="text-align:center;" id="txtDirections"></h1>
+                                <h1 style="text-align:center;" id="txtDirections"></h1>
 
-                            <div id="dir"  class="col-sm-5"></div>
-
+                                <div id="dir" class="col-sm-5"></div>
+                            </div>
                         </div>
                     }
 
@@ -120,7 +128,7 @@
 
         else
         {
-            <table id="eventsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="eventsTable" class="table table-striped table-bordered" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Title</th>
