@@ -32,18 +32,11 @@
                 <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 250px; height:250px;" />
             }
 
-            @*Display defualt image*@
+            @*No event image was uploaded, display default image*@
             else
             {
                 <img src="~/default.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
-
-            @*No event image was uploaded, display default image*@
-            @*else
-            {
-                <h4>No Image</h4>
-            }*@
-
         </div>
 
         @*Tabs*@
