@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<ToDo.Models.EventCategory>
 
+<h1 style="color: blue; text-align: center;">Event Categories</h1>
+<hr />
 
 <table id="dataTableEventCategories" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
     <thead>
@@ -27,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.EventCategoryName)
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "RemoveEventCategory", "Home", new { id = item.EventCategoryID }, new { @class = "btn btn-sm btn-danger" })
+                    <button type="button" onclick="RemoveEventCategory(@item.EventCategoryID);" class="btn btn-sm btn-danger">Delete</button>
                 </td>
             </tr>
         }
@@ -40,7 +42,7 @@
 
     <span class="btn btn-sm btn-success" onclick="AddCategory();">Add Category</span>
 
-    <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+    <h2 id="txtEC" style="color: green; text-align: center;"></h2>
 </div>
 
 <script>
@@ -48,6 +50,22 @@
     $(document).ready(function () {
         $('#dataTableEventCategories').DataTable();
     });
+
+    function RemoveEventCategory(ECID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveEventCategory", "Home")',
+            data: { id: ECID },
+            success: function (data) {
+
+                $('#AdminEventCategories').html(data);
+                $('#AdminEventCategories').fadeIn("fast")
+                document.getElementById("txtEC").style.color = "#ff0000";
+                txtEC.innerText = "Event Category has been deleted";
+            }
+        });
+    }
 
     function AddCategory()
     {
@@ -61,17 +79,16 @@
             success: function (data) {
 
 
-                $("#towns").html("");
-                $("#towns").html(data);
-                txtSuccess.innerText = "Changes have been saved";
-                console.log("success");
+                $("#AdminEventCategories").html("");
+                $("#AdminEventCategories").html(data);
+                document.getElementById("txtEC").style.color = "green";
+                txtEC.innerText = cat + " has been added";
 
             },
             error: function (data) {
 
-                txtSuccess.innerText = "An error has occurred";
-                txtSuccess.style = "color: red;"
-                console.log("failure");
+                txtEC.innerText = "An error has occurred";
+                txtEC.style = "color: red;"
             }
         });
     }

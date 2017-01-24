@@ -32,7 +32,8 @@
                     @Html.DisplayFor(modelItem => item.Venue.VenueName)
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })
+                    @*@Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })*@
+                    <button type="button" onclick="RemoveEvent(@item.EventID);" class="btn btn-sm btn-danger">Delete</button>
                 </td>
                 <td>
                     @if (item.EventActive == true)
@@ -51,11 +52,29 @@
     </tbody>
 </table>
 
+<h2 id="txtSuccessEvent" style="color: green; text-align: center;"></h2>
+
 <script>
      //DataTable
     $(document).ready(function () {
         $('#dataTableEvents').DataTable();
     });
+
+    //Remove Venue Ajax Function
+    function RemoveEvent(EID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveEvent", "Home")',
+            data: { id: EID },
+            success: function (data) {
+
+                $('#AdminEvents').html(data);
+                $('#AdminEvents').fadeIn("fast");
+                txtSuccessEvent.innerText = "Event has been deleted";
+            }
+        });
+    }
 
     //Change Event Status Ajax
     function EventChangeStatus(EID) {

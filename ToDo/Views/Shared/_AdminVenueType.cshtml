@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<ToDo.Models.Venue_Type>
 
+<h1 style="color: blue; text-align: center;">Venue Types</h1>
+<hr />
 
 <table id="dataTableVenueTypes" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
     <thead>
@@ -28,7 +30,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Remove", "RemoveVenueType", "Home", new { id = item.Venue_TypeID }, new { @class = "btn btn-sm btn-danger" })
+                    <button type="button" onclick="RemoveVenueType(@item.Venue_TypeID);" class="btn btn-sm btn-danger">Delete</button>
                 </td>
             </tr>
         }
@@ -50,6 +52,23 @@
         $('#dataTableVenueTypes').DataTable();
     });
 
+    //Remove Venue Type Ajax Function
+    function RemoveVenueType(VTID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveVenueType", "Home")',
+            data: { id: VTID },
+            success: function (data) {
+
+                $('#AdminVenueType').html(data);
+                $('#AdminVenueType').fadeIn("fast");
+                document.getElementById("txtVTSuccess").style.color = "#ff0000";
+                txtVTSuccess.innerText = "Venue Type has been deleted";
+            }
+        });
+    }
+
     function AddVenueType()
     {
         var venueType = document.getElementById('txtVenueType').value
@@ -61,10 +80,10 @@
             data: { venueType: venueType },
             success: function (data) {
 
-                console.log("success");
-                $("#towns").html("");
-                $("#towns").html(data);
-                txtVTSuccess.innerText = "Changes have been saved";
+                $("#AdminVenueType").html("");
+                $("#AdminVenueType").html(data);
+                document.getElementById("txtVTSuccess").style.color = "green";
+                txtVTSuccess.innerText = venueType + " has been added";
 
             },
             error: function (data) {

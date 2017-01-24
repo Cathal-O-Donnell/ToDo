@@ -17,7 +17,6 @@
         <h4>Registered Users: @ViewBag.UserCount</h4>
     </div>
 
-
     <div class="col-sm-4">
         <h4 style="color: blue">Featured Events</h4>
         <dl class="dl-horizontal">
@@ -95,40 +94,40 @@
             </dd>
         </dl>
     </div>
+</div>
 
-    <div class="row">
-        @*Venues*@
-        <div id="AdminVenues" class="col-sm-6">
-            @Html.Action("AdminVenuesTablePartialView")
-        </div>
-
-        @*Events*@
-        <div id="AdminEvents" class="col-sm-6">
-            @Html.Action("AdminEventsTablePartialView")
-        </div>
+<div class="row" style="height: 750px;">
+    @*Venues*@
+    <div id="AdminVenues" class="col-sm-6">
+        @Html.Action("AdminVenuesTablePartialView")
     </div>
 
-    <div class="row">
-        @*Users*@
-        <div class="col-sm-6">            
-            @Html.Action("AdminUsersTablePartialView")
-        </div>
-        @*Towns*@
-        <div class="col-sm-6">
-            <div id="AdminTowns">
-                @Html.Action("AdminTownsTablePartialView")
-            </div>
-        </div>
+    @*Events*@
+    <div id="AdminEvents" class="col-sm-6">
+        @Html.Action("AdminEventsTablePartialView")
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h1 style="color: blue; text-align: center;">Venue Types</h1>
-            @Html.Action("AdminVenueTypesTablePartialView")
-        </div>
-        <div class="col-sm-6">
-            <h1 style="color: blue; text-align: center;">Event Categories</h1>
-            @Html.Action("AdminEventCategoriesTablePartialView")
+<div class="row" style="height: 750px;">
+    @*Users*@
+    <div class="col-sm-6">
+        @Html.Action("AdminUsersTablePartialView")
+    </div>
+    @*Towns*@
+    <div class="col-sm-6">
+        <div id="AdminTowns">
+            @Html.Action("AdminTownsTablePartialView")
         </div>
     </div>
+</div>
+
+<div class="row" style="height: 750px;">
+    @*Venue Types*@
+    <div id="AdminVenueType" class="col-sm-6">
+        @Html.Action("AdminVenueTypesTablePartialView")
     </div>
+    @*Event Categories*@
+    <div id="AdminEventCategories" class="col-sm-6">
+        @Html.Action("AdminEventCategoriesTablePartialView")
+    </div>
+</div>

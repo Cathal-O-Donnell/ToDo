@@ -36,7 +36,6 @@
                     @Html.DisplayFor(modelItem => item.County)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownID }, new { @class = "btn btn-sm btn-danger" })*@
                     <button type="button" onclick="RemoveTown(@item.TownID);" class="btn btn-sm btn-danger">Delete</button>
                 </td>
             </tr>
@@ -53,7 +52,7 @@
 
     <span class="btn btn-sm btn-success" onclick="AddTown();">Add Town</span>
 
-    <h2 id="txtSuccess" style="color: green; text-align: center;"></h2>
+    <h2 id="txtSuccessTown" style="color: green; text-align: center;"></h2>
 </div>
 
 <script>
@@ -72,7 +71,9 @@
             success: function (data) {
 
                 $('#AdminTowns').html(data);
-                $('#AdminTowns').fadeIn("fast")
+                $('#AdminTowns').fadeIn("fast");
+                document.getElementById("txtSuccessTown").style.color = "#ff0000";
+                txtSuccessTown.innerText = "Town has been deleted";
             }
         });
     }
@@ -92,10 +93,13 @@
 
                 $('#AdminTowns').html(data);
                 $('#AdminTowns').fadeIn("fast")
+                document.getElementById("txtSuccessTown").style.color = "green";
+                txtSuccessTown.innerText = town + " has been added";
             },
             error: function (data) {
 
-                console.log("failure");
+                txtSuccessTown.innerText = "An error has occurred";
+                txtSuccessTown.style = "color: red;"
             }
         });
     }

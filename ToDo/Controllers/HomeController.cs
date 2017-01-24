@@ -287,6 +287,32 @@ namespace ToDo.Controllers
             return PartialView("_AdminEvents", events.OrderBy(e => e.EventTitle).ToList());
         }
 
+        // Remove Event 
+        public ActionResult RemoveEvent(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Event e = db.Events.Find(id);
+
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Events.Remove(e);
+            db.SaveChanges();
+
+            var ev = from events in db.Events
+                         select events;
+
+            return PartialView("_AdminEvents", ev.OrderBy(x => x.EventTitle).ToList());
+            //return RedirectToAction("Admin");
+            //return View(venue)
+        }
+
         // Remove Venue 
         public ActionResult RemoveVenue(int? id)
         {
@@ -305,7 +331,11 @@ namespace ToDo.Controllers
             db.Venues.Remove(venue);
             db.SaveChanges();
 
-            return RedirectToAction("Admin");
+            var venues = from v in db.Venues
+                         select v;
+
+            return PartialView("_AdminVenues", venues.OrderBy(v => v.VenueName).ToList());
+            //return RedirectToAction("Admin");
             //return View(venue)
         }
 
@@ -458,7 +488,7 @@ namespace ToDo.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        ////Remove town 
+        //Remove town 
         public ActionResult RemoveTown(int id)
         {
             Town t = db.Towns.Find(id);
@@ -504,29 +534,41 @@ namespace ToDo.Controllers
                 db.VenueCategories.Add(vt);
                 db.SaveChanges();
 
-                return RedirectToAction("Admin", "Home");
+                var venueTypes = from vtype in db.VenueCategories
+                                 select vtype;
+
+                return PartialView("_AdminVenueType", venueTypes.OrderBy(vtype => vtype.VenueTypeName).ToList());
+                //return RedirectToAction("Admin", "Home");
             }
 
             else
-                return RedirectToAction("Index", "Home");
+            {
+                var venueTypes = from vtype in db.VenueCategories
+                                 select vtype;
+
+                return PartialView("_AdminVenueType", venueTypes.OrderBy(vtype => vtype.VenueTypeName).ToList());
+            }
         }
 
-        ////Remove town 
+        //Remove Venue Type 
         public ActionResult RemoveVenueType(int id)
         {
             Venue_Type vt = db.VenueCategories.Find(id);
             db.VenueCategories.Remove(vt);
             db.SaveChanges();
 
-            return RedirectToAction("Admin", "Home");
+            var venueTypes = from vtype in db.VenueCategories
+                             select vtype;
+
+            return PartialView("_AdminVenueType", venueTypes.OrderBy(vtype => vtype.VenueTypeName).ToList());
         }
 
         public PartialViewResult AdminEventCategoriesTablePartialView()
         {
-            var eventCategories = from ec in db.EventCategories
-                             select ec;
+            var eventCategories = from ecat in db.EventCategories
+                             select ecat;
 
-            return PartialView("_AdminEventCategories", eventCategories.OrderBy(ec => ec.EventCategoryName).ToList());
+            return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
         }
 
 
@@ -553,11 +595,20 @@ namespace ToDo.Controllers
                 db.EventCategories.Add(ec);
                 db.SaveChanges();
 
-                return RedirectToAction("Admin", "Home");
+                var eventCategories = from ecat in db.EventCategories
+                                      select ecat;
+
+                return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
+                //return RedirectToAction("Admin", "Home");
             }
 
             else
-                return RedirectToAction("Index", "Home");
+            {
+                var eventCategories = from ecat in db.EventCategories
+                                      select ecat;
+
+                return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
+            }
         }
 
         //Remove Event Category 
@@ -567,7 +618,11 @@ namespace ToDo.Controllers
             db.EventCategories.Remove(ec);
             db.SaveChanges();
 
-            return RedirectToAction("Admin", "Home");
+            var eventCategories = from ecat in db.EventCategories
+                                  select ecat;
+
+            return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
+            //return RedirectToAction("Admin", "Home");
         }
     }
 }
