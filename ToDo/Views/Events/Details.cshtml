@@ -157,22 +157,28 @@
 
     <div class="row">
 
-        <div class="col-sm-6" style="margin: auto; text-align: center;">
+        @*YouTube*@
+        <div class="col-sm-6" style="padding-right: 25px;">
 
-            @*Check if there is a youtube link for this event*@
             @if (ViewBag.hasYT == true)
             {
                 <div id="player">
 
                 </div>
             }
-
-            else
-            {
-
-            }
-
         </div>
+
+        @*Soundcloud*@
+        <div class="col-sm-6" style="padding-left: 25px;">
+
+            @if (ViewBag.hasSC == true)
+            {
+                <div id="scEmbed">
+
+                </div>
+            }
+        </div>
+
     </div>
     <div class="row">
         <h2>Comments</h2>
@@ -184,125 +190,25 @@
 @*Google Maps and Directions*@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
 
+@*Soundcloud*@
+<script src="https://connect.soundcloud.com/sdk.js"></script>
+
 <script>
 
-    @*//Directions
-    function PlanRoute() {
+    $( document ).ready(function() {
+        console.log('sc function hit');
+        var hasSC =  @Html.Raw(Json.Encode(@ViewBag.hasSC));
+        console.log(hasSC);
+        if (hasSC == true) {
+            var sc =  @Html.Raw(Json.Encode(@ViewBag.SoundCloud));
 
-        //Check if the user has entered a starting location
-        var startingLoc = document.getElementById('txtFrom').value;
-
-        if (startingLoc == null || startingLoc == "") {
-            alert("You must enter a starting location first");
+            console.log(sc);
+            var container = document.getElementById('scEmbed');
+            SC.oEmbed(sc, container);
         }
+        
+    });
 
-        else
-        {
-            GetMap();
-        }
-
-    }
-
-    function GetMap() {
-
-        //Clear last directions
-        document.getElementById('dir').innerHTML = "";
-        txtDirections.innerHTML = "";
-
-        var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-
-        //Get start and End locations that the user selected
-        var startLocation = document.getElementById('txtFrom').value;
-        var endLocation =  @Html.Raw(Json.Encode(@ViewBag.Address));
-
-        console.log(startLocation);
-        console.log(endLocation);
-
-        var map = new google.maps.Map(document.getElementById('googleMap'), {
-
-        });
-
-        directionsDisplay.setMap(map);
-        directionsDisplay.setPanel(document.getElementById('dir'));
-
-        //Map options
-        var request = {
-            origin: startLocation,
-            destination: endLocation,
-            travelMode: google.maps.DirectionsTravelMode.DRIVING
-        };
-
-        directionsService.route(request, function (response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-            }
-
-            $('txtDirections').innerHTML = directions.getDuration().seconds + " seconds";
-
-        });
-    }
-
-    //Google Map
-    function myFunction(lat, lon) {
-
-        // Array of stylin for map
-        var styles = [
-          {
-              stylers: [
-                { hue: "#b3ccff" },
-                { saturation: -30 }
-              ]
-          },
-          //Road Labels
-          {
-              featureType: "road",
-              elementType: "labels",
-              stylers: [
-                { visibility: "on" }
-              ]
-          },
-          //Road Geometry
-          {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [
-                { lightness: 100 },
-                { visibility: "simplified" }
-              ]
-          }
-        ];
-
-        var styledMap = new google.maps.StyledMapType(styles,
-          { name: "Styled Map" });
-
-        //Get center using longitude and latitude passed back from controller
-        var center = new google.maps.LatLng(lat, lon);
-
-        //Specify Map Options
-        var mapOptions = {
-            zoom: 17, //Map Zoom Level
-            center: center, //Set Map center point
-            mapTypeControlOptions: {
-                mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-            }
-        };
-
-        //Assign Map to div
-        var map = new google.maps.Map(document.getElementById('googleMap'),
-          mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: center,
-            map: map,
-            title: "@ViewBag.EventTitle"
-        })
-
-        map.mapTypes.set('map_style', styledMap);
-        map.setMapTypeId('map_style');
-
-        // google.maps.event.addDomListener(window, "load", initialize);
-    }*@
 
     //YouTube iFrame API code
     //This code loads the IFrame Player API code asynchronously.

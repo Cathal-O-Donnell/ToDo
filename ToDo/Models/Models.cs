@@ -320,6 +320,10 @@ namespace ToDo.Models
 
         //venue Category
         public virtual Venue_Type VenueType { get; set; }
+
+        //Venue Facebook
+        [Display(Name = "Facebook")]
+        public string VenueFacebook { get; set; }
     }
 
     //Band Class

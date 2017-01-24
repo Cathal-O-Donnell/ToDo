@@ -113,6 +113,18 @@ namespace ToDo.Controllers
                 ViewBag.hasYT = false;
             }
 
+            //Soundcloud
+            if (@event.EventSoundCloud != null)
+            {
+                ViewBag.hasSC = true;
+                ViewBag.SoundCloud = @event.EventSoundCloud;
+            }
+
+            else
+            {
+                ViewBag.hasSC = false;
+            }
+
             if (@event == null)
             {
                 return HttpNotFound();
