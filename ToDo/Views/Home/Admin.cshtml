@@ -99,27 +99,22 @@
     <div class="row">
         @*Venues*@
         <div id="AdminVenues" class="col-sm-6">
-            <h1 style="text-align: center; color: blue">Venues</h1>
-            <hr/>
             @Html.Action("AdminVenuesTablePartialView")
         </div>
 
         @*Events*@
-        <div class="col-sm-6">
-            <h1 style="text-align: center; color: blue">Events</h1>
-            <hr />
+        <div id="AdminEvents" class="col-sm-6">
             @Html.Action("AdminEventsTablePartialView")
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
-            <h1 style="color: blue; text-align: center;">Users</h1>
+        @*Users*@
+        <div class="col-sm-6">            
             @Html.Action("AdminUsersTablePartialView")
         </div>
         @*Towns*@
         <div class="col-sm-6">
-            <h1 style="color: blue; text-align: center;">Towns</h1>
             <div id="AdminTowns">
                 @Html.Action("AdminTownsTablePartialView")
             </div>

@@ -341,7 +341,10 @@ namespace ToDo.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("Admin");
+            var events = from e in db.Events
+                         select e;
+
+            return PartialView("_AdminEvents", events.OrderBy(e => e.EventTitle).ToList());
         }
 
         //Venue Change Status
@@ -462,7 +465,12 @@ namespace ToDo.Controllers
             db.Towns.Remove(t);
             db.SaveChanges();
 
-            return RedirectToAction("Admin", "Home");
+            var towns = from twns in db.Towns
+                        select twns;
+
+            return PartialView("_AdminTowns", towns.OrderBy(v => v.TownName).ToList());
+
+            //return RedirectToAction("Admin", "Home");
         }
 
         public PartialViewResult AdminVenueTypesTablePartialView()

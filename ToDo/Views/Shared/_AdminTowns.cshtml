@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<ToDo.Models.Town>
 
 
+<h1 style="color: blue; text-align: center;">Towns</h1>
+<hr />
+
 <table id="dataTableTowns" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
     <thead>
         <tr>
@@ -33,7 +36,8 @@
                     @Html.DisplayFor(modelItem => item.County)
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownID }, new { @class = "btn btn-sm btn-danger" })
+                    @*@Html.ActionLink("Remove", "RemoveTown", "Home", new { id = item.TownID }, new { @class = "btn btn-sm btn-danger" })*@
+                    <button type="button" onclick="RemoveTown(@item.TownID);" class="btn btn-sm btn-danger">Delete</button>
                 </td>
             </tr>
         }
@@ -58,10 +62,26 @@
         $('#dataTableTowns').DataTable();
     });
 
+    //Remove Town Ajax Function
+    function RemoveTown(TID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveTown", "Home")',
+            data: { id: TID },
+            success: function (data) {
+
+                $('#AdminTowns').html(data);
+                $('#AdminTowns').fadeIn("fast")
+            }
+        });
+    }
+
+    //Add Town Ajax Function
     function AddTown()
     {
         var town = document.getElementById('txtTown').value
-       
+
         var county = document.getElementById('txtCounty').value
 
         $.ajax({

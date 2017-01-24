@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
-@*<table class="table">*@
+<h1 style="text-align: center; color: blue">Venues</h1>
+<hr />
+
 <table id="dataTable" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
     <thead>
         <tr>
@@ -35,14 +37,12 @@
                 <td>
                     @if (item.VenueActive == true)
                     {
-                        @*@Html.ActionLink("Make Inactive", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })*@
-                        <button type="button" onclick="ChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class = "btn btn-sm btn-warning">Make Inactive</button>
+                        <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class = "btn btn-sm btn-warning">Make Inactive</button>
                     }
 
                     else if (item.VenueActive == false)
                     {
-                        @*@Html.ActionLink("Make Active", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-success" })*@
-                        <button type="button" onclick="ChangeStatus(@item.VenueID);"  data-VenueID="@item.VenueID" class="btn btn-sm btn-success">Make Active</button>
+                        <button type="button" onclick="VenueChangeStatus(@item.VenueID);"  data-VenueID="@item.VenueID" class="btn btn-sm btn-success">Make Active</button>
                     }
 
                 </td>
@@ -57,9 +57,8 @@
         $('#dataTable').DataTable();
     });
 
-    //$("#btnChangeStatus").click(function () {
-    function ChangeStatus(VeID) {
-        console.log(VeID);
+    //Change Venue Status Ajax
+    function VenueChangeStatus(VeID) {
 
         $.ajax({
             type: "GET",
