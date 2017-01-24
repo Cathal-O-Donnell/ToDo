@@ -34,13 +34,15 @@
                 </td>
                 <td>
                     @if (item.VenueActive == true)
-                {
-                        @Html.ActionLink("Make Inactive", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })
+                    {
+                        @*@Html.ActionLink("Make Inactive", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-warning" })*@
+                        <button type="button" onclick="ChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class = "btn btn-sm btn-warning">Make Inactive</button>
                     }
 
                     else if (item.VenueActive == false)
                     {
-                        @Html.ActionLink("Make Active", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-success" })
+                        @*@Html.ActionLink("Make Active", "VenueChangeStatus", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-success" })*@
+                        <button type="button" onclick="ChangeStatus(@item.VenueID);"  data-VenueID="@item.VenueID" class="btn btn-sm btn-success">Make Active</button>
                     }
 
                 </td>
@@ -50,8 +52,24 @@
 </table>
 
 <script>
-     //DataTable
+    //DataTable
     $(document).ready(function () {
         $('#dataTable').DataTable();
     });
+
+    //$("#btnChangeStatus").click(function () {
+    function ChangeStatus(VeID) {
+        console.log(VeID);
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenueChangeStatus", "Home")',
+            data: { id: VeID },
+            success: function (data) {
+
+                $('#AdminVenues').html(data);
+                $('#AdminVenues').fadeIn("fast")
+            }
+        });
+    }
 </script>

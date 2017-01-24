@@ -304,8 +304,9 @@ namespace ToDo.Controllers
 
             db.Venues.Remove(venue);
             db.SaveChanges();
+
             return RedirectToAction("Admin");
-            //return View(venue);
+            //return View(venue)
         }
 
         // POST: Venues/Delete/5
@@ -363,8 +364,11 @@ namespace ToDo.Controllers
             db.Entry(venue).State = EntityState.Modified;
             db.SaveChanges();
 
+            var venues = from v in db.Venues
+                         select v;
 
-            return RedirectToAction("Admin");
+            return PartialView("_AdminVenues", venues.OrderBy(v => v.VenueName).ToList());
+            //return RedirectToAction("Admin");
         }
 
         //Admin Venue Partial View
