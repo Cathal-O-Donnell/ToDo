@@ -18,7 +18,9 @@
 
         <div style="display: inline; vertical-align: top;">
             <h1>@Model.EventTitle</h1>
+            @Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) - 
             @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
+            
         </div>
         <hr />
 

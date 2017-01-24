@@ -156,6 +156,7 @@ namespace ToDo.Models
         public bool EventActive { get; set; }
 
         //Event Category Foreign ID
+        [Display(Name = "Category")]
         public int EventCatID { get; set; }
 
         //Event Category
