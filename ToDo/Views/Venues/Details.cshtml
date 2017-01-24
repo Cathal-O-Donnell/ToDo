@@ -7,9 +7,11 @@
 @if (ViewBag.IsOwner == true)
 {
     <div style="padding-top: 25px;">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit Venue", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Remove", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Remove Venue", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })
+
+        @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
     </div>
 }
 
@@ -35,7 +37,7 @@
             @*No event image was uploaded, display default image*@
             else
             {
-                <img src="~/default.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
+                <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
         </div>
 
@@ -109,14 +111,10 @@
 
 
     <div style="padding-top: 25px;">
-        @if (ViewBag.IsOwner == true)
-            {
-            @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-info btn-sm" })
-        }
 
         @if (ViewBag.noEvents == true)
             {
-            <h2>There is no events for this venue, please check back later</h2>
+            <h2 style="text-align:center;">There is no events for this venue, please check back later</h2>
         }
 
         else

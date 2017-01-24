@@ -61,27 +61,20 @@
     function AddTown()
     {
         var town = document.getElementById('txtTown').value
-        console.log(town);
+       
         var county = document.getElementById('txtCounty').value
-        console.log(county);
 
         $.ajax({
             type: "GET",
             url: '@Url.Action("AddTown", "Home")',
             data: { twn: town, cty: county },
             success: function (data) {
-                
-                
-                $("#towns").html("");
-                $("#towns").html(data);
-                txtSuccess.innerText = "Changes have been saved";
-                console.log("success");
 
+                $('#AdminTowns').html(data);
+                $('#AdminTowns').fadeIn("fast")
             },
             error: function (data) {
 
-                txtSuccess.innerText = "An error has occurred";
-                txtSuccess.style = "color: red;"
                 console.log("failure");
             }
         });

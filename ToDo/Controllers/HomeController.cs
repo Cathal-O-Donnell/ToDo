@@ -266,7 +266,6 @@ namespace ToDo.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
-            //return View("Admin");
         }
 
         //Admin Venue Partial View
@@ -441,7 +440,11 @@ namespace ToDo.Controllers
                 db.Towns.Add(t);
                 db.SaveChanges();
 
-                return RedirectToAction("Admin", "Home");
+                var towns = from twns in db.Towns
+                            select twns;
+
+                return PartialView("_AdminTowns", towns.OrderBy(v => v.TownName).ToList());
+                //return RedirectToAction("Admin", "Home");
             }
 
             else
