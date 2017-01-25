@@ -80,6 +80,14 @@
 
 <script>
 
+    $(document).ready(function () {
+        var TownIndex =  @Html.Raw(Json.Encode(@ViewBag.TownIndex));
+        var TypeIndex =  @Html.Raw(Json.Encode(@ViewBag.TypeIndex));
+
+        document.getElementById("lstTowns").selectedIndex = TownIndex;
+        document.getElementById("lstVenueTypes").selectedIndex = TypeIndex;
+    });
+
     function VenueSearch() {
         //Get the search term the user entered
         var search = document.getElementById("txtSearch").value;
@@ -99,6 +107,9 @@
     }
 
     function AdvanceSearch() {
+        var TownSelectedIndex = document.getElementById("lstTowns").selectedIndex;
+        var VTypeSelectedIndex = document.getElementById("lstVenueTypes").selectedIndex;
+
         var town = document.getElementById("lstTowns").value;
         var venueType = document.getElementById("lstVenueTypes").value;
         var search = document.getElementById("txtSearch").value;
@@ -108,7 +119,7 @@
         $.ajax({
             type: "GET",
             url: '@Url.Action("VenuesTablePartialView", "Venues")',
-            data: { Town: town, VenueType: venueType, search: search, AdvancedSearch: advancedSearch },
+            data: { Town: town, VenueType: venueType, search: search, AdvancedSearch: advancedSearch, TownIndex: TownSelectedIndex, TypeIndex: VTypeSelectedIndex },
             success: function (data) {
 
                 $('#VenueTable').html(data);

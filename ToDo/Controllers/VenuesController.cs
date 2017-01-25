@@ -354,8 +354,12 @@ namespace ToDo.Controllers
         }
 
         //Venue Index Partial View
-        public ActionResult VenuesTablePartialView(string search, string Town, string VenueType, string AdvancedSearch)
+        public ActionResult VenuesTablePartialView(string search, string Town, string VenueType, string AdvancedSearch, string TownIndex, string TypeIndex)
         {
+
+            ViewBag.TownIndex = TownIndex;
+            ViewBag.TypeIndex = TypeIndex;
+
             if (VenueType == null)
             {
                 VenueType = "";

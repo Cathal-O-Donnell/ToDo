@@ -356,8 +356,10 @@ namespace ToDo.Controllers
 
 
         //Venue Index Partial View
-        public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch)
+        public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch, string TownIndex, string CategoryIndex)
         {
+            ViewBag.TownIndex = TownIndex;
+            ViewBag.CategoryIndex = CategoryIndex;
 
             ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
             ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");

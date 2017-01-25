@@ -92,6 +92,15 @@
 </table>
 
 <script>
+
+    $(document).ready(function () {
+        var TownIndex =  @Html.Raw(Json.Encode(@ViewBag.TownIndex));
+        var CategoryIndex =  @Html.Raw(Json.Encode(@ViewBag.CategoryIndex));
+
+        document.getElementById("lstTowns").selectedIndex = TownIndex;
+        document.getElementById("lstEventCat").selectedIndex = CategoryIndex;
+    });
+
     function VenueSearch() {
         //Get the search term the user entered
         var search = document.getElementById("txtSearch").value;
@@ -110,6 +119,9 @@
     }
 
     function AdvanceSearch() {
+        var TownSelectedIndex = document.getElementById("lstTowns").selectedIndex;
+        var ECypeSelectedIndex = document.getElementById("lstEventCat").selectedIndex;
+
         var town = document.getElementById("lstTowns").value;
         var eventCat = document.getElementById("lstEventCat").value;
         var search = document.getElementById("txtSearch").value;
@@ -119,7 +131,7 @@
         $.ajax({
             type: "GET",
             url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search },
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, CategoryIndex: ECypeSelectedIndex },
             success: function (data) {
 
                 $('#EventTable').html(data);
