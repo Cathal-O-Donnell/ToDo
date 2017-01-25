@@ -43,9 +43,9 @@
                 @*Social Links*@
                 <p>
                     @*Facebook*@
-                    @if (Model.EventFacebook != null || Model.EventFacebook != "")
+                    @if (ViewBag.hasFB == true)
                     {
-                        <a href="@Model.EventFacebook" class="fa fa-facebook-official" style="font-size:30px;color:#3b5998"></a>
+                        <a href="@ViewBag.FaceBook" class="fa fa-facebook-official" style="font-size:30px;color:#3b5998"></a>
                     }
 
                     @*Twitter*@
@@ -60,12 +60,12 @@
                         <a href="@Model.EventInstagram" class="fa fa-instagram" style="font-size:30px;color:#fb3958"></a>
                     }
                 </p>
-                <p style="padding-top:15px;">
 
+                @*<p style="padding-top:15px;">
                     <button class="btn btn-primary">
                         <span class="glyphicon glyphicon-plus pull-left"></span> Subscribe
                     </button>
-                </p>
+                </p>*@
 
             </div>
 

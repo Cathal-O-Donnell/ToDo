@@ -101,6 +101,19 @@ namespace ToDo.Controllers
             //Get Event Image
             @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
 
+            //FaceBook
+            if (@event.EventFacebook != null)
+            {
+                ViewBag.hasFB = true;
+                ViewBag.FaceBook = @event.EventFacebook;
+            }
+
+            else
+            {
+                ViewBag.hasFB = false;
+            }
+            
+
             //YouTube
             if (@event.EventYouTube != null)
             {
