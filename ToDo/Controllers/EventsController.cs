@@ -36,8 +36,6 @@ namespace ToDo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
-
             //Get selected event from DB
             Event @event = db.Events.Find(id);
 

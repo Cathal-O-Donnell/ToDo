@@ -401,19 +401,14 @@ namespace ToDo.Models
 }
 
 //To Do
-//set default image for event if none uploaded
-//SoundCloud API
-//Google Directions styling (pop up?, expand div?)
+
 //Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
 //sendgrid
-//YouTube/ SoundCloud icon on hover text
-//Venue Model - add social links and website link
-//Remove map from event details page and move this all to the venue details page
-//Add link to the event details page linking the user to the venue for this event
+
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)
 //Admin should be able to add and remove admins
-//Delete confirmation popup in stead of view - add this to admin page aswell
+//Delete confirmation popup in stead of view - add this to admin page aswell - https://jsfiddle.net/gitaek/2d4Mv/ - http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_modal_sm&stacked=h
 //Fourm section for user discussion
 //Admin activity log
 //Venues activity log - who create the venues, who created/ edited/ removed events

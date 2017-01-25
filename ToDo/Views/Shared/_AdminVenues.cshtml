@@ -31,9 +31,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.VenueTown.TownName)
                 </td>
-                <td>
-                    @*@Html.ActionLink("Remove", "RemoveVenue", "Home", new { id = item.VenueID }, new { @class = "btn btn-sm btn-danger" })*@
-                    <button type="button" onclick="RemoveVenue(@item.VenueID);" class="btn btn-sm btn-danger">Delete</button>
+                <td>                    
+                    @*<button type="button" onclick="RemoveVenue(@item.VenueID);" class="btn btn-sm btn-danger">Delete</button>*@
+                    @*<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#VenueModal">Delete</button>*@
+                    <button id="btnVenueDelete" onclick="DeleteModal('@item.VenueName', '@item.VenueID');" class="btn btn-sm btn-danger">Delete</button>
                 </td>
                 <td>
                     @if (item.VenueActive == true)
@@ -52,16 +53,50 @@
     </tbody>
 </table>
 
+@*Bootstap Modal Window*@
+<div class="modal fade" id="VenueModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtVenueModal" class="modal-title">Delete </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this venue?</p>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="RemoveVenue();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h2 id="txtSuccessVenue" style="color: green; text-align: center;"></h2>
 
 <script>
+
+    var VenueModalID = null;
+
     //DataTable
     $(document).ready(function () {
         $('#dataTable').DataTable();
     });
 
+    function DeleteModal(Name, ID) {
+
+        VenueModalID = ID;
+
+        txtVenueModal.innerText = "Delete " + Name;
+        $("#VenueModal").modal();
+    }
+
     //Remove Venue Ajax Function
-    function RemoveVenue(VID) {
+    function RemoveVenue() {
+
+        VID = VenueModalID;
+        console.log("remove");
 
         $.ajax({
             type: "GET",
@@ -71,6 +106,11 @@
 
                 $('#AdminVenues').html(data);
                 $('#AdminVenues').fadeIn("fast");
+
+                $('#VenueModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
                 txtSuccessVenue.innerText = "Venue has been deleted";
             }
         });
