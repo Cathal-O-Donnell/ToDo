@@ -32,8 +32,6 @@
                     @Html.DisplayFor(modelItem => item.VenueTown.TownName)
                 </td>
                 <td>                    
-                    @*<button type="button" onclick="RemoveVenue(@item.VenueID);" class="btn btn-sm btn-danger">Delete</button>*@
-                    @*<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#VenueModal">Delete</button>*@
                     <button id="btnVenueDelete" onclick="DeleteModal('@item.VenueName', '@item.VenueID');" class="btn btn-sm btn-danger">Delete</button>
                 </td>
                 <td>
@@ -96,7 +94,6 @@
     function RemoveVenue() {
 
         VID = VenueModalID;
-        console.log("remove");
 
         $.ajax({
             type: "GET",

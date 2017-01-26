@@ -312,7 +312,26 @@ namespace ToDo.Controllers
             return View(venueToUpdate);
         }
 
+        // Remove Venue 
+        public ActionResult RemoveVenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            Venue venue = db.Venues.Find(id);
+
+            if (venue == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Venues.Remove(venue);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
         // GET: Venues/Delete/5
         public ActionResult Delete(int? id)

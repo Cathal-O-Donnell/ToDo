@@ -30,7 +30,8 @@
                 </td>
 
                 <td>
-                    <button type="button" onclick="RemoveVenueType(@item.Venue_TypeID);" class="btn btn-sm btn-danger">Delete</button>
+                    @*<button type="button" onclick="RemoveVenueType(@item.Venue_TypeID);" class="btn btn-sm btn-danger">Delete</button>*@
+                    <button id="btnVenueDelete" onclick="DeleteVenueTypeModal('@item.VenueTypeName', '@item.Venue_TypeID');" class="btn btn-sm btn-danger">Delete</button>
                 </td>
             </tr>
         }
@@ -46,23 +47,62 @@
     <h2 id="txtVTSuccess" style="color: green; text-align: center;"></h2>
 </div>
 
+@*Bootstap Modal Window*@
+<div class="modal fade" id="VenueTypeModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtVenueModal" class="modal-title">Delete </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this Venue Type?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="RemoveVenueType();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+
+    var VenueTypeModalID = null;
+
      //DataTable
     $(document).ready(function () {
         $('#dataTableVenueTypes').DataTable();
     });
 
+
+    function DeleteVenueTypeModal(Name, ID) {
+
+        VenueTypeModalID = ID;
+
+        txtVenueModal.innerText = "Delete " + Name;
+        $("#VenueTypeModal").modal();
+    }
+
     //Remove Venue Type Ajax Function
-    function RemoveVenueType(VTID) {
+    function RemoveVenueType() {
+
+        VtID = VenueTypeModalID;
 
         $.ajax({
             type: "GET",
             url: '@Url.Action("RemoveVenueType", "Home")',
-            data: { id: VTID },
+            data: { id: VtID },
             success: function (data) {
 
                 $('#AdminVenueType').html(data);
                 $('#AdminVenueType').fadeIn("fast");
+
+                $('#VenueTypeModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
                 document.getElementById("txtVTSuccess").style.color = "#ff0000";
                 txtVTSuccess.innerText = "Venue Type has been deleted";
             }

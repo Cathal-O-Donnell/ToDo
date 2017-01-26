@@ -320,6 +320,33 @@ namespace ToDo.Controllers
             return View(EventToUpdate);
         }
 
+        // Remove Venue 
+        public ActionResult DeleteEvent(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Event @event = db.Events.Find(id);
+
+            int venueID = @event.VenueID;
+
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Events.Remove(@event);
+            db.SaveChanges();
+
+            //Redirect to details view for the current venue
+            return RedirectToAction("Details", "Venues", new
+            {
+                id = venueID
+            });
+        }
+
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {

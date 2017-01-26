@@ -9,7 +9,8 @@
     <div style="padding-top: 25px;">
         @Html.ActionLink("Edit Venue", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Remove Venue", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })
+        @*@Html.ActionLink("Remove Venue", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })*@
+        <button id="btnRemoveVenue" class="btn btn-danger">Remove</button>
 
         @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
     </div>
@@ -152,6 +153,27 @@
     <div id="disqus_thread"></div>
 </div>
 
+@*Bootstap Modal Window*@
+<div class="modal fade" id="VenueRemoveModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtVenueRemoveModal" class="modal-title">Delete @Model.VenueName</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this venue?</p>
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" onclick="RemoveVenue();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>*@
+                @Html.ActionLink("Remove", "RemoveVenue", new { id = Model.VenueID }, new { @class = "btn btn-success", @style = "float: left" })
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @*</body>*@
 
 @*Google Maps and Directions*@
@@ -159,7 +181,17 @@
 
 <script>
 
-    //start
+    $(document).ready(function(){
+        $("#btnRemoveVenue").click(function(){
+            console.log('RemoveVenueModal function hit');
+            $("#VenueRemoveModal").modal();
+        });
+    });
+
+    function RemoveVenue() {
+        console.log('RemoveVenueModal function hit');
+        $("#VenueRemoveModal").modal();
+    }
 
     //Directions
     function PlanRoute() {
@@ -217,7 +249,6 @@
 
         });
     }
-    //end
 
     //Google Map
     function GoogleMap(lat, lon) {
@@ -294,7 +325,16 @@
     })();
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        GoogleMap(@ViewBag.Lat, @ViewBag.Long);
+
+        var hasMap =  @Html.Raw(Json.Encode(@ViewBag.hasMap));
+        var lat =  @Html.Raw(Json.Encode(@ViewBag.Lat));
+        var long =  @Html.Raw(Json.Encode(@ViewBag.Long));
+
+        if (long != null && lat != null) {
+            console.log("not null");
+            GoogleMap(lat, long);
+        }
+
     });
 
 </script>
