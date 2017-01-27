@@ -338,13 +338,19 @@ namespace ToDo.Models
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
         [Display(Name = "Venue")]
-        public string BandName { get; set; }
+        public string BandName { get; set; }        
 
         //Description
         [Required(ErrorMessage = "Give your venue a brief description")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Description")]
         public string BandDescription { get; set; }
+
+        //Genre
+        [Required(ErrorMessage = "You must enter a genre")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Genre")]
+        public string BandGenre { get; set; }
 
         //Contact Number
         [Display(Name = "Telephone")]

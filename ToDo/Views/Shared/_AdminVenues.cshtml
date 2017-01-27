@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.VenueTown.TownName)
                 </td>
                 <td>                    
-                    <button id="btnVenueDelete" onclick="DeleteModal('@item.VenueName', '@item.VenueID');" class="btn btn-sm btn-danger">Delete</button>
+                    <button id="btnVenueDelete" onclick="DeleteVenueModal('@item.VenueName', '@item.VenueID');" class="btn btn-sm btn-danger">Delete</button>
                 </td>
                 <td>
                     @if (item.VenueActive == true)
@@ -82,7 +82,7 @@
         $('#dataTable').DataTable();
     });
 
-    function DeleteModal(Name, ID) {
+    function DeleteVenueModal(Name, ID) {
 
         VenueModalID = ID;
 

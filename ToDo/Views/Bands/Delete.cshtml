@@ -1,0 +1,80 @@
+﻿@model ToDo.Models.Band
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Band</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandGenre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandFacebook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandFacebook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandActive)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

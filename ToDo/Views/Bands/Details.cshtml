@@ -1,0 +1,74 @@
+﻿@model ToDo.Models.Band
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Band</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandGenre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandFacebook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandFacebook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BandID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
