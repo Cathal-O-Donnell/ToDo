@@ -1,74 +1,166 @@
 ﻿@model ToDo.Models.Band
 
-@{
-    ViewBag.Title = "Details";
+@if (ViewBag.IsOwner == true)
+{
+    <div style="padding-top: 25px;">
+        @Html.ActionLink("Edit Venue", "Edit", new { id = Model.BandID }, new { @class = "btn btn-primary" })
+
+        <button id="btnRemoveVenue" class="btn btn-danger">Remove</button>
+    </div>
 }
 
-<h2>Details</h2>
+<h1>@Model.BandName</h1>
+
 
 <div>
-    <h4>Band</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BandName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandName)
-        </dd>
+    <div class="row">
+        @*Image*@
+        <div class="col-sm-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandDescription)
-        </dt>
+            @*Check if event has image*@
+            @if (Model.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
+            {
+                <img src="~/File?id=@Model.BandFiles.First().BandFileId" alt="imgEvent" style="width: 250px; height:250px;" />
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.BandDescription)
-        </dd>
+            @*No event image was uploaded, display default image*@
+            else
+            {
+                <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandContactNumber)
-        </dt>
+            <div style="padding-top: 100px;">
+                <h3>@Model.BandGenre.MusicGenreName</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandContactNumber)
-        </dd>
+                @if (Model.BandContactNumber != null)
+                {
+                    <h3>@Model.BandContactNumber</h3>
+                }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandEmail)
-        </dt>
+                @if (Model.BandEmail != null)
+                {
+                    <h3>@Model.BandEmail</h3>
+                }
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandEmail)
-        </dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandFacebook)
-        </dt>
+        <div class="col-sm-9">
+            <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.BandDescription)</p>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandFacebook)
-        </dd>
+    <div class="row">
+        @*YouTube*@
+        <div class="col-sm-6" style="padding-right: 25px;">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandActive)
-        </dt>
+            @if (ViewBag.hasYT == true)
+            {
+                <div id="player">
 
-        <dd>
-            @Html.DisplayFor(model => model.BandActive)
-        </dd>
+                </div>
+            }
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandGenreID)
-        </dt>
+        @*Soundcloud*@
+        <div class="col-sm-6" style="padding-left: 25px;">
 
-        <dd>
-            @Html.DisplayFor(model => model.BandGenreID)
-        </dd>
+            @if (ViewBag.hasSC == true)
+            {
+                <div id="scEmbed">
 
-    </dl>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.BandID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@*Soundcloud*@
+<script src="https://connect.soundcloud.com/sdk.js"></script>
+
+<script>
+
+    $( document ).ready(function() {
+
+        var hasSC =  @Html.Raw(Json.Encode(@ViewBag.hasSC));
+        console.log(hasSC);
+        if (hasSC == true) {
+            var sc =  @Html.Raw(Json.Encode(@ViewBag.SoundCloud));
+
+            console.log(sc);
+            var container = document.getElementById('scEmbed');
+            SC.oEmbed(sc, container);
+        }
+
+    });
+
+    //YouTube iFrame API code
+    //This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    //This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+
+        //Video ID
+        var youTubeLink = @Html.Raw(Json.Encode(@ViewBag.youTubeID))
+
+        player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            videoId: youTubeLink,
+            events: {
+                //'onReady': onPlayerReady, - AUTOPLAY
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    //This  function causes the video the play automatically, NOT CURRENTLY USED
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    //The API calls this function when the player's state changes.
+    //The function indicates that when playing a video (state=1),
+    //the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+    //Comments section
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//s00144297.disqus.com/embed.js';
+        //src="//s00144297.disqus.com/count.js
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

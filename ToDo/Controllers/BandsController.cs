@@ -78,11 +78,47 @@ namespace ToDo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Band band = db.Bands.Find(id);
+
             if (band == null)
             {
                 return HttpNotFound();
             }
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Check if current user is the owner of this event
+            if (band.OwnerId == UserId)
+            {
+                ViewBag.IsOwner = true;
+            }
+
+            //YouTube
+            if (band.BandYouTube != null)
+            {
+                ViewBag.hasYT = true;
+                ViewBag.youTubeID = band.BandYouTube.Substring(band.BandYouTube.LastIndexOf('=') + 1);
+            }
+
+            else
+            {
+                ViewBag.hasYT = false;
+            }
+
+            //Soundcloud
+            if (band.BandSoundCloud != null)
+            {
+                ViewBag.hasSC = true;
+                ViewBag.SoundCloud = band.BandSoundCloud;
+            }
+
+            else
+            {
+                ViewBag.hasSC = false;
+            }
+
             return View(band);
         }
 

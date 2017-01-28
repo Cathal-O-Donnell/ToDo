@@ -392,7 +392,7 @@ namespace ToDo.Models
         //Contact Number
         [Display(Name = "Telephone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
-        public int BandContactNumber { get; set; }
+        public int? BandContactNumber { get; set; }
 
         //Contact Email
         [Display(Name = "Email")]
