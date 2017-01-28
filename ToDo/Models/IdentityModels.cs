@@ -23,11 +23,13 @@ namespace ToDo.Models
 
         public DbSet<File> Files { get; set; }
         public DbSet<VenueFile> VenueFiles { get; set; }
+        public DbSet<BandFile> BandFiles { get; set; }
         public DbSet<AdminSettings> AdminSettings { get; set; }
         public DbSet<Town> Towns { get; set; }
         public DbSet<Venue_Type> VenueCategories { get; set; }
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<Band> Bands { get; set; }
+        public DbSet<MusicGenre> MusicGenres { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

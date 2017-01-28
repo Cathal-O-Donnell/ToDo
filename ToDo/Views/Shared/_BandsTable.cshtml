@@ -1,0 +1,132 @@
+﻿@model IEnumerable<ToDo.Models.Band>
+
+@*Search Box*@
+@using (Html.BeginForm())
+{
+
+    <form class="form-horizontal" role="form">
+        <div class="form-group" style="padding-bottom: 10px;">
+
+            <div class="input-group col-md-2">
+                @if (ViewBag.SearchTerm != null)
+                {
+                    <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
+                }
+                else
+                {
+                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                }
+
+                <span class="input-group-btn">
+                    <button onclick="BandSearch();" class="btn btn-info" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+
+            <div class="col-md-2">
+                @Html.DropDownList("GenreId", (SelectList)ViewBag.Genres, "Please select", new { @class = "form-control", id = "lstGenres" })
+            </div>
+
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+            </div>
+
+            <div class="col-md-1">
+                <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+            </div>
+        </div>
+    </form>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BandGenre.MusicGenreName)
+        </th>
+        <th>
+            @*blank*@
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BandGenre.MusicGenreName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.BandID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+
+    $(document).ready(function () {
+        var GenreIndex =  @Html.Raw(Json.Encode(@ViewBag.GenreIndex));
+
+        document.getElementById("lstGenres").selectedIndex = GenreIndex;
+    });
+
+    function BandSearch() {
+        //Get the search term the user entered
+        var search = document.getElementById("txtSearch").value;
+
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandsTablePartialView", "Bands")',
+            data: { search: search },
+            success: function (data) {
+
+                $('#BandTable').html(data);
+                $('#BandTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function AdvanceSearch() {
+
+        var GenreIndex = document.getElementById("lstGenres").selectedIndex;
+        var BandGenre = document.getElementById("lstGenres").value;
+        var search = document.getElementById("txtSearch").value;
+        var advancedSearch = "true";
+
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandsTablePartialView", "Bands")',
+            data: { BandGenre: BandGenre, AdvancedSearch: advancedSearch, search: search, GenreIndex: GenreIndex },
+            success: function (data) {
+
+                $('#BandTable').html(data);
+                $('#BandTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function Reset() {
+        var advancedSearch = "false";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandsTablePartialView", "Bands")',
+            data: { AdvancedSearch: advancedSearch },
+            success: function (data) {
+
+                $('#BandTable').html(data);
+                $('#BandTable').fadeIn("fast")
+            }
+        });
+    }
+
+</script>

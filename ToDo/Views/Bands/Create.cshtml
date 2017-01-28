@@ -1,20 +1,17 @@
 ﻿@model ToDo.Models.Band
 
-@{
-    ViewBag.Title = "Create";
-}
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Bands", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Band</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*Name*@
         <div class="form-group">
+            <h2 style="color: #70b2f9;">Bands Registration</h2>
             @Html.LabelFor(model => model.BandName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BandName, new { htmlAttributes = new { @class = "form-control" } })
@@ -22,23 +19,27 @@
             </div>
         </div>
 
+        @*Description*@
         <div class="form-group">
             @Html.LabelFor(model => model.BandDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BandDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.BandDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
                 @Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*Genre*@
         <div class="form-group">
-            @Html.LabelFor(model => model.BandGenre, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BandGenreID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BandGenre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandGenre, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.Genres, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*Contact Number*@
         <div class="form-group">
+            <h2 style="color: #70b2f9;">Contact Information</h2>
             @Html.LabelFor(model => model.BandContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BandContactNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -46,6 +47,7 @@
             </div>
         </div>
 
+        @*Contact Email*@
         <div class="form-group">
             @Html.LabelFor(model => model.BandEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -54,6 +56,7 @@
             </div>
         </div>
 
+        @*Facebook*@
         <div class="form-group">
             @Html.LabelFor(model => model.BandFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -62,24 +65,38 @@
             </div>
         </div>
 
+        @*YouTube*@
         <div class="form-group">
-            @Html.LabelFor(model => model.BandActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <h2 style="color: #70b2f9;">Content Links</h2>
+            @Html.LabelFor(model => model.BandYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.BandActive)
-                    @Html.ValidationMessageFor(model => model.BandActive, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.BandYouTube, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*SoundCloud*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandSoundCloud, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })
+            </div>
+        </div>       
+
+        @*Image*@
+        <div class="form-group">
+            <h2 style="color: #70b2f9;">Image</h2>
+            @Html.Label("Image", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="imgBand" name="imageUpload" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

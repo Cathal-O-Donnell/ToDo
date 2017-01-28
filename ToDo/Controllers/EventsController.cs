@@ -393,7 +393,7 @@ namespace ToDo.Controllers
         }
 
 
-        //Venue Index Partial View
+        //Event Index Partial View
         public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch, string TownIndex, string CategoryIndex)
         {
             ViewBag.TownIndex = TownIndex;
@@ -435,7 +435,6 @@ namespace ToDo.Controllers
 
                 return PartialView("_EventsTable", events.OrderBy(e => e.EventTitle).ToList());
             }
-
 
             else
             {

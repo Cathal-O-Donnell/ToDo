@@ -1,69 +1,14 @@
 ﻿@model IEnumerable<ToDo.Models.Band>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2>Bands</h2>
 
-<h2>Index</h2>
+<hr />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Register Band", "Create", null, new { @class = "btn btn-primary"})
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BandName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandGenre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandContactNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandFacebook)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandActive)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandGenre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandContactNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandFacebook)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BandID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BandID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BandID })
-        </td>
-    </tr>
-}
-
-</table>
+@*Partial View*@
+<div id="BandTable">
+    @Html.Action("BandsTablePartialView")
+</div>

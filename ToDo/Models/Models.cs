@@ -13,6 +13,20 @@ namespace ToDo.Models
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
 
+    public class MusicGenre
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ID")]
+        public int MusicGenreID { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Genre")]
+        public string MusicGenreName { get; set; }
+
+        public virtual ICollection<Band> GenreBands { get; set; }
+    }
+
     public class EventCategory
     {
         [Key]
@@ -163,6 +177,7 @@ namespace ToDo.Models
         public virtual EventCategory EventCat { get; set; }
     }
 
+    #region Activities
     public class Activities
     {
         //ID
@@ -214,6 +229,8 @@ namespace ToDo.Models
         //Image File 
         public virtual ICollection<File> Files { get; set; }
     }
+    #endregion
+
 
     //Image File class
     //http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files
@@ -260,6 +277,29 @@ namespace ToDo.Models
         public virtual Venue Venue { get; set; }
     }
 
+    //Band Files
+    public class BandFile
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BandFileId { get; set; }
+
+        [StringLength(255)]
+        public string BandFileName { get; set; }
+
+        [StringLength(100)]
+        public string BandContentType { get; set; }
+
+        public byte[] BandContent { get; set; }
+
+        public FileType BandFileType { get; set; }
+
+        public int BandID { get; set; }
+
+        public virtual Band Band { get; set; }
+    }
+
+
     //Venue
     public class Venue
     {
@@ -267,7 +307,7 @@ namespace ToDo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VenueID { get; set; }
 
-        //Id for the owner of this venue
+        //Id for the user that created this venue
         public string OwnerId { get; set; }
 
         //List of events for this venue
@@ -324,7 +364,7 @@ namespace ToDo.Models
 
         //Venue Facebook
         [Display(Name = "Facebook")]
-        public string VenueFacebook { get; set; }
+        public string VenueFacebook { get; set; }        
     }
 
     //Band Class
@@ -334,10 +374,13 @@ namespace ToDo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BandID { get; set; }
 
+        //Id for the owner of this band
+        public string OwnerId { get; set; }
+
         //Name
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
-        [Display(Name = "Venue")]
+        [Display(Name = "Name")]
         public string BandName { get; set; }        
 
         //Description
@@ -345,12 +388,6 @@ namespace ToDo.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "Description")]
         public string BandDescription { get; set; }
-
-        //Genre
-        [Required(ErrorMessage = "You must enter a genre")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Genre")]
-        public string BandGenre { get; set; }
 
         //Contact Number
         [Display(Name = "Telephone")]
@@ -369,6 +406,26 @@ namespace ToDo.Models
         //Band Active
         [Display(Name = "Band Active")]
         public bool BandActive { get; set; }
+
+        //Music Genre Foreign ID
+        [Required(ErrorMessage = "You must select a genre for your band")]
+        [Display(Name = "Genre")]
+        public int BandGenreID { get; set; }
+
+        //Band Genre
+        [Display(Name = "Genre")]
+        public virtual MusicGenre BandGenre { get; set; }
+
+        //Image File 
+       public virtual ICollection<BandFile> BandFiles { get; set; }
+
+        //Youtube Link     
+        [Display(Name = "YouTube")]
+        public string BandYouTube { get; set; }
+
+        //SoundCloud Link
+        [Display(Name = "SoundCloud")]
+        public string BandSoundCloud { get; set; }
     }
 
     //Admin settings class
