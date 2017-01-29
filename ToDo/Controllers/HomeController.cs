@@ -624,5 +624,56 @@ namespace ToDo.Controllers
             return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
             //return RedirectToAction("Admin", "Home");
         }
+
+
+        //Band
+        public PartialViewResult AdminBandsPartialView()
+        {
+            var bands = from b in db.Bands
+                                  select b;
+
+            return PartialView("_AdminBands", bands.OrderBy(b => b.BandName).ToList());
+        }
+
+        //Remove Band
+        public ActionResult RemoveBand(int id)
+        {
+            Band band = db.Bands.Find(id);
+
+            db.Bands.Remove(band);
+            db.SaveChanges();
+
+            var bands = from b in db.Bands
+                        select b;
+
+            return PartialView("_AdminBands", bands.OrderBy(b => b.BandName).ToList());
+        }
+
+        //Band Change Status
+        public ActionResult BandChangeStatus(int id)
+        {
+            Band band = db.Bands.Find(id);
+
+            //Change from active to inactive
+            if (band.BandActive == true)
+            {
+                band.BandActive = false;
+            }
+
+            //Change from actice to inactive
+            else
+            {
+                band.BandActive = true;
+            }
+
+            db.Entry(band).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            var bands = from b in db.Bands
+                        select b;
+
+            return PartialView("_AdminBands", bands.OrderBy(b => b.BandName).ToList());
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace ToDo.Models
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
 
+    //Music Genre Class
     public class MusicGenre
     {
         [Key]
@@ -27,6 +28,7 @@ namespace ToDo.Models
         public virtual ICollection<Band> GenreBands { get; set; }
     }
 
+    //Event Category Class
     public class EventCategory
     {
         [Key]
@@ -41,7 +43,7 @@ namespace ToDo.Models
         public virtual ICollection<Event> Events { get; set; }
     }
 
-
+    //Venue Type Class
     public class Venue_Type
     {
         //Note: if I change the name of the properties in this class, make the changes in the VenuesTablePartialView mehtod and the _VenuesTable view
@@ -57,6 +59,7 @@ namespace ToDo.Models
         public virtual ICollection<Venue> Venues { get; set; }
     }
 
+    //Town Class
     public class Town
     {
         [Key]
@@ -77,6 +80,7 @@ namespace ToDo.Models
         public virtual ICollection<Venue> Venues { get; set; }
     }
 
+    //Event Class
     public class Event
     {
         //ID
@@ -177,61 +181,6 @@ namespace ToDo.Models
         public virtual EventCategory EventCat { get; set; }
     }
 
-    #region Activities
-    public class Activities
-    {
-        //ID
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ActivityID { get; set; }
-
-        //Name
-        [Required(ErrorMessage = "You must enter a name")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Name")]
-        public string ActivityName { get; set; }
-
-        //Category
-        [Required(ErrorMessage = "You must select a category")]
-        public ActivityCategory ActivityCategory { get; set; }
-
-        //Description
-        [Required(ErrorMessage = "You must enter a description")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Descrition")]
-        public string ActivityDescription { get; set; }
-
-        //Town
-        [Required(ErrorMessage = "You must select a town from the list provided")]
-        [Display(Name = "Town")]
-        public Town ActivityTown { get; set; }
-
-        //Address
-        [Required(ErrorMessage = "You must enter an address")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Address")]
-        public string ActivityAddress { get; set; }
-
-        //Website Link
-        //regular expression
-        public string ActivityWebsite { get; set; }
-
-        //Facebook Link
-        //regular expression
-        public string ActivityFacebook { get; set; }
-
-        //Price Information
-        public double ActivityPrice { get; set; }
-
-        //Telephone Number
-        public string ActivityTelephoneNumber { get; set; }
-
-        //Image File 
-        public virtual ICollection<File> Files { get; set; }
-    }
-    #endregion
-
-
     //Image File class
     //http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files
     public class File
@@ -298,7 +247,6 @@ namespace ToDo.Models
 
         public virtual Band Band { get; set; }
     }
-
 
     //Venue
     public class Venue
@@ -417,7 +365,7 @@ namespace ToDo.Models
         public virtual MusicGenre BandGenre { get; set; }
 
         //Image File 
-       public virtual ICollection<BandFile> BandFiles { get; set; }
+        public virtual ICollection<BandFile> BandFiles { get; set; }
 
         //Youtube Link     
         [Display(Name = "YouTube")]

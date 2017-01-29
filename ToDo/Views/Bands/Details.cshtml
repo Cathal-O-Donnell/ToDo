@@ -31,6 +31,10 @@
                 <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
 
+            <p style="padding-top: 25px;">
+                <button onclick="BookBand(@Model.BandID)"; class="btn btn-info">Book @Model.BandName</button>
+            </p>
+
         </div>
 
         <div class="col-sm-9">
@@ -54,48 +58,48 @@
                             <dl>
                                 @if (Model.BandContactNumber != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandContactNumber)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandContactNumber)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandContactNumber):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandContactNumber)</dd>
                                 }
 
                                 @if (Model.BandEmail != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandEmail)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandEmail)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandEmail):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandEmail)</dd>
                                 }
 
                                 @if (Model.BandManagerName != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandManagerName)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandManagerName)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandManagerName):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandManagerName)</dd>
                                 }
 
                                 @if (Model.BandManagerEmail != null)
                                 {
-                                    <dd>@Html.DisplayFor(model => model.BandManagerEmail)</dd>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandManagerEmail)</dd>
                                 }
 
                                 @if (Model.BandPressContact != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandPressContact)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandPressContact)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandPressContact):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandPressContact)</dd>
                                 }
 
                                 @if (Model.BandRecordLabel != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandRecordLabel)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandRecordLabel)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandRecordLabel):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandRecordLabel)</dd>
                                 }
 
                                 @if (Model.BandBookingAgentName != null)
                                 {
-                                    <dt>@Html.DisplayNameFor(model => model.BandBookingAgentName)</dt>
-                                    <dd>@Html.DisplayFor(model => model.BandBookingAgentName)</dd>
+                                    <dt>@Html.DisplayNameFor(model => model.BandBookingAgentName):</dt>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandBookingAgentName)</dd>
                                 }
 
                                 @if (Model.BandBookingAgentEmail != null)
                                 {
-                                    <dd>@Html.DisplayFor(model => model.BandBookingAgentEmail)</dd>
+                                    <dd style="padding-left:25px;">@Html.DisplayFor(model => model.BandBookingAgentEmail)</dd>
                                 }
                                 
                             </dl>
@@ -161,6 +165,10 @@
 <script src="https://connect.soundcloud.com/sdk.js"></script>
 
 <script>
+
+    function BookBand(bandID) {
+        console.log("Book band function hit ID: " + bandID);
+    }
 
     $( document ).ready(function() {
 

@@ -1,0 +1,125 @@
+﻿@model IEnumerable<ToDo.Models.Band>
+
+<h1 style="text-align: center; color: blue">Bands</h1>
+<hr />
+
+<table id="dataTableBands" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BandName)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+            <th>
+                @*blank*@
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BandName)
+                </td>
+                <td>
+                    <button id="btnBandDelete" onclick="DeleteBandModal('@item.BandName', '@item.BandID');" class="btn btn-sm btn-danger">Delete</button>
+                </td>
+                <td>
+                    @if (item.BandActive == true)
+                    {
+                        <button type="button" onclick="BandChangeStatus(@item.BandID);" class="btn btn-sm btn-warning">Make Inactive</button>
+                    }
+
+                    else if (item.BandActive == false)
+                    {
+                        <button type="button" onclick="BandChangeStatus(@item.BandID);" class="btn btn-sm btn-success">Make Active</button>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*Bootstap Modal Window*@
+<div class="modal fade" id="BandModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtBandModal" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this band?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="RemoveBand();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 id="txtSuccessBand" style="color: green; text-align: center;"></h2>
+
+<script>
+
+    var BandModalID = null;
+
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableBands').DataTable();
+    });
+
+    function DeleteBandModal(Name, ID) {
+
+        BandModalID = ID;
+
+        txtBandModal.innerText = "Delete " + Name;
+        $("#BandModal").modal();
+    }
+
+    //Remove Band Ajax Function
+    function RemoveBand() {
+
+        bID = BandModalID;
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveBand", "Home")',
+            data: { id: bID },
+            success: function (data) {
+
+                $('#AdminBands').html(data);
+                $('#AdminBands').fadeIn("fast");
+
+                $('#BandModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+                txtSuccessBand.innerText = "Band has been deleted";
+            }
+        });
+    }
+
+    //Change Band Status Ajax
+    function BandChangeStatus(BID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandChangeStatus", "Home")',
+            data: { id: BID },
+            success: function (data) {
+
+                $('#AdminBands').html(data);
+                $('#AdminBands').fadeIn("fast")
+            }
+        });
+    }
+</script>
+

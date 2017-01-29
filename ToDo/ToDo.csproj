@@ -509,6 +509,7 @@
     <Content Include="Views\Bands\Edit.cshtml" />
     <Content Include="Views\Bands\Index.cshtml" />
     <Content Include="Views\Shared\_BandsTable.cshtml" />
+    <Content Include="Views\Shared\_AdminBands.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
