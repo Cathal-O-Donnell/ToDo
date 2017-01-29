@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -189,29 +190,102 @@ namespace ToDo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Band band = db.Bands.Find(id);
+
             if (band == null)
             {
                 return HttpNotFound();
             }
+
+
+            //Image
+            band = db.Bands.Include(s => s.BandFiles).SingleOrDefault(s => s.BandID == id);
+
+            //Owner ID
+            ViewBag.OID = band.BandID;
+
+            //Event Catagories
+            ViewBag.MusicGenres = new SelectList(db.MusicGenres.OrderBy(x => x.MusicGenreName), "MusicGenreID", "MusicGenreName");
+            int musicGenreID = band.BandGenreID;
+
             return View(band);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var BandToUpdate = db.Bands.Find(id);
+            if (TryUpdateModel(BandToUpdate, "",
+
+                new string[] { "BandID", "BandName", "BandDescription", "BandContactNumber", "BandEmail", "BandFacebook", "BandGenreID", "BandYouTube", "BandSoundCloud", "BandManagerName", "BandManagerEmail", "BandPressContact", "BandRecordLabel", "BandBookingAgentName", "BandBookingAgentEmail" }))
+            {
+                try
+                {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        if (BandToUpdate.BandFiles.Any(f => f.BandFileType == FileType.EventImage))
+                        {
+                            db.BandFiles.Remove(BandToUpdate.BandFiles.First(f => f.BandFileType == FileType.EventImage));
+                        }
+                        var img = new BandFile
+                        {
+                            BandFileName = System.IO.Path.GetFileName(upload.FileName),
+                            BandFileType = FileType.EventImage,
+                            BandContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            img.BandContent = reader.ReadBytes(upload.ContentLength);
+                        }
+                        BandToUpdate.BandFiles = new List<BandFile> { img };
+                    }
+
+                    Band oldBand = db.Bands.Find(BandToUpdate.BandID);
+
+                    BandToUpdate.BandFiles = oldBand.BandFiles;
+
+                    db.Entry(BandToUpdate).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    //Event Category
+                    Band bandA = db.Bands.Find(BandToUpdate.BandID);
+                    bandA.BandGenre = db.MusicGenres.Find(BandToUpdate.BandGenreID);
+
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(BandToUpdate);
         }
 
         // POST: Bands/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandActive,BandGenreID")] Band band)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(band).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(band);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud,BandManagerName,BandManagerEmail,BandPressContact,BandRecordLabel,BandBookingAgentName,BandBookingAgentEmail")] Band band)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(band).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(band);
+        //}
 
         // GET: Bands/Delete/5
         public ActionResult Delete(int? id)
