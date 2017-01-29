@@ -390,7 +390,7 @@ namespace ToDo.Models
         public string BandDescription { get; set; }
 
         //Contact Number
-        [Display(Name = "Telephone")]
+        [Display(Name = "Contact Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
         public int? BandContactNumber { get; set; }
 
@@ -426,6 +426,38 @@ namespace ToDo.Models
         //SoundCloud Link
         [Display(Name = "SoundCloud")]
         public string BandSoundCloud { get; set; }
+
+        //Manager Name
+        [Display(Name = "Manager")]
+        [DataType(DataType.Text)]
+        public string BandManagerName { get; set; }
+
+        //Manager Email
+        [Display(Name = "Manager Email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
+        public string BandManagerEmail { get; set; }
+
+        //Press Contact
+        [Display(Name = "Press Contact Email")]
+        [DataType(DataType.Text)]
+        public string BandPressContact { get; set; }
+
+        //Record Label
+        [Display(Name = "Record Label")]
+        [DataType(DataType.Text)]
+        public string BandRecordLabel { get; set; }
+
+        //Booking Agent
+        [Display(Name = "Booking Agent")]
+        [DataType(DataType.Text)]
+        public string BandBookingAgentName { get; set; }
+
+        //Manager Email
+        [Display(Name = "Booking Agent Email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
+        public string BandBookingAgentEmail { get; set; }
+
+
     }
 
     //Admin settings class

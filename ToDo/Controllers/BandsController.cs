@@ -137,7 +137,7 @@ namespace ToDo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud")] Band band, HttpPostedFileBase imageUpload)
+        public ActionResult Create([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud,BandManagerName,BandManagerEmail,BandPressContact,BandRecordLabel,BandBookingAgentName,BandBookingAgentEmail")] Band band, HttpPostedFileBase imageUpload)
         {
             //Band Genre
             band.BandGenre = db.MusicGenres.Find(band.BandGenreID);
@@ -246,6 +246,27 @@ namespace ToDo.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Remove Venue 
+        public ActionResult RemoveBand(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Band band = db.Bands.Find(id);
+
+            if (band == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Bands.Remove(band);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

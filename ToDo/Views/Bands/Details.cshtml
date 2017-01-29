@@ -3,13 +3,13 @@
 @if (ViewBag.IsOwner == true)
 {
     <div style="padding-top: 25px;">
-        @Html.ActionLink("Edit Venue", "Edit", new { id = Model.BandID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit Band", "Edit", new { id = Model.BandID }, new { @class = "btn btn-primary" })
 
-        <button id="btnRemoveVenue" class="btn btn-danger">Remove</button>
+        <button id="btnRemoveBand" class="btn btn-danger">Remove</button>
     </div>
 }
 
-<h1>@Model.BandName</h1>
+<h1>@Model.BandName - @Model.BandGenre.MusicGenreName</h1>
 
 
 <div>
@@ -31,28 +31,82 @@
                 <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
 
-            <div style="padding-top: 100px;">
-                <h3>@Model.BandGenre.MusicGenreName</h3>
-
-                @if (Model.BandContactNumber != null)
-                {
-                    <h3>@Model.BandContactNumber</h3>
-                }
-
-                @if (Model.BandEmail != null)
-                {
-                    <h3>@Model.BandEmail</h3>
-                }
-            </div>
-
         </div>
 
         <div class="col-sm-9">
-            <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.BandDescription)</p>
+            @*Tabs*@
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.BandDescription)</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Contact Details</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    @*Description*@
+                    <div id="home" class="tab-pane fade in active">
+                        <p style="white-space: pre-wrap; padding-top:10px;">@Html.DisplayFor(model => model.BandDescription)</p>
+                    </div>
+
+                    @*Conatct Details*@
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="col-sm-4">
+                            <dl>
+                                @if (Model.BandContactNumber != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandContactNumber)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandContactNumber)</dd>
+                                }
+
+                                @if (Model.BandEmail != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandEmail)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandEmail)</dd>
+                                }
+
+                                @if (Model.BandManagerName != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandManagerName)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandManagerName)</dd>
+                                }
+
+                                @if (Model.BandManagerEmail != null)
+                                {
+                                    <dd>@Html.DisplayFor(model => model.BandManagerEmail)</dd>
+                                }
+
+                                @if (Model.BandPressContact != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandPressContact)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandPressContact)</dd>
+                                }
+
+                                @if (Model.BandRecordLabel != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandRecordLabel)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandRecordLabel)</dd>
+                                }
+
+                                @if (Model.BandBookingAgentName != null)
+                                {
+                                    <dt>@Html.DisplayNameFor(model => model.BandBookingAgentName)</dt>
+                                    <dd>@Html.DisplayFor(model => model.BandBookingAgentName)</dd>
+                                }
+
+                                @if (Model.BandBookingAgentEmail != null)
+                                {
+                                    <dd>@Html.DisplayFor(model => model.BandBookingAgentEmail)</dd>
+                                }
+                                
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="padding-top: 50px;">
         @*YouTube*@
         <div class="col-sm-6" style="padding-right: 25px;">
 
@@ -82,10 +136,26 @@
         <div id="disqus_thread"></div>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BandID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@*Bootstap Modal Window*@
+<div class="modal fade" id="BandRemoveModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtVenueRemoveModal" class="modal-title">Delete @Model.BandName</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this band?</p>
+
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Remove", "RemoveBand", new { id = Model.BandID }, new { @class = "btn btn-success", @style = "float: left" })
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*Soundcloud*@
 <script src="https://connect.soundcloud.com/sdk.js"></script>
@@ -93,6 +163,10 @@
 <script>
 
     $( document ).ready(function() {
+
+        $("#btnRemoveBand").click(function(){
+            $("#BandRemoveModal").modal();
+        });
 
         var hasSC =  @Html.Raw(Json.Encode(@ViewBag.hasSC));
         console.log(hasSC);

@@ -65,6 +65,60 @@
             </div>
         </div>
 
+        @*Manager Name*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandManagerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandManagerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Manager Email*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandManagerEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandManagerEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Press Contact*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandPressContact, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandPressContact, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Record Label*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandRecordLabel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandRecordLabel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Booking Agent Name*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandBookingAgentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandBookingAgentName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Booking Agent Email*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandBookingAgentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandBookingAgentEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         @*YouTube*@
         <div class="form-group">
             <h2 style="color: #70b2f9;">Content Links</h2>
