@@ -337,7 +337,9 @@ namespace ToDo.Controllers
                 return HttpNotFound();
             }
 
-            db.Bands.Remove(band);
+            //Set this event as inactive
+            band.BandActive = false;
+
             db.SaveChanges();
 
             return RedirectToAction("Index");
