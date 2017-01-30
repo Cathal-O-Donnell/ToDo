@@ -127,6 +127,15 @@ namespace ToDo.Controllers
         public ActionResult Create()
         {
 
+            //Get the currentely logged in user
+            string currentUserId = User.Identity.GetUserId();
+
+            //If no user is logged in, redirect them to the login page
+            if (currentUserId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             //Genre
             ViewBag.Genres = new SelectList(db.MusicGenres.OrderBy(x => x.MusicGenreName), "MusicGenreID", "MusicGenreName");
 
@@ -140,12 +149,19 @@ namespace ToDo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud,BandManagerName,BandManagerEmail,BandPressContact,BandRecordLabel,BandBookingAgentName,BandBookingAgentEmail")] Band band, HttpPostedFileBase imageUpload)
         {
-            //Band Genre
-            band.BandGenre = db.MusicGenres.Find(band.BandGenreID);
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
             //Get the currentely logged in user
             string UserId = User.Identity.GetUserId();
+
+            //If no user is logged in, redirect them to the login page
+            if (UserId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            //Band Genre
+            band.BandGenre = db.MusicGenres.Find(band.BandGenreID);
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
             //Set the band OwnerID equal to the current user ID
             band.OwnerId = UserId;
