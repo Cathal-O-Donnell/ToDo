@@ -1,29 +1,26 @@
 ﻿@model ToDo.Models.Event
 
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h1 class="panel-title">Top Event: @Html.DisplayFor(modelItem => Model.EventTitle)</h1>
-            </div>
-            <div class="panel-body" style="height: 350px;">
-
-                @*Image*@
-                <div class="col-sm-4">
-                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
+<div class="event-slider">
+    <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+        <div class="row">
+            <div class="eventschedule-post clearfix">
+                <div class="event-img">
+                    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
                 </div>
-
-                @*Event Info*@
-                <div class="col-sm-6">
-                    <h3>@Model.EventTitle</h3>
-                    <h3>@Model.Venue.VenueName - @Model.Venue.VenueTown.TownName</h3>
-                    <h3>@Model.EventDate.ToShortDateString()</h3>
+                <div class="content">
+                    <h3>@Model.EventTitle<span class="job">@Model.EventCat.EventCategoryName    </span></h3>
+                    <h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>
+                    <p>
+                        Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                    </p>
+                    <ul class="gray-bg">
+                        <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
+                        <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
+                    </ul>
+                    <div class="clearboth"></div>
+                    @Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-pri" })
                 </div>
-            </div>
-            <div class="panel-footer">
-                <center>@Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-primary" })</center>
             </div>
         </div>
     </div>
-
 </div>

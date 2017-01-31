@@ -1,22 +1,39 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
+
+<h2>Featured Events</h2>
+
 <div class="row">
     @foreach (var item in Model)
     {
-
-        <div class="col-md-4 col-sm-4 col-xs-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1 class="panel-title">@Html.DisplayFor(modelItem => item.EventTitle) - @Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</h1>
+        <div class="col-md-4 col-sm-4">
+            <div class="L_blog_post">
+                <div class="post-img">
+                    <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
                 </div>
-                <div class="panel-body"  style="height: 350px;">
-                        <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
-                    </div>
-                <div class="panel-footer">
-                    <center>@Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-primary" })</center>
+                <div class="content">
+                    <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
+                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-comments"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                    @Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
         </div>
     }
 </div>
+
+
+@*<div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">@Html.DisplayFor(modelItem => item.EventTitle) - @Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</h1>
+            </div>
+            <div class="panel-body" style="height: 350px;">
+                <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
+            </div>
+            <div class="panel-footer">
+                <center>@Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-primary" })</center>
+            </div>
+        </div>
+    </div>*@
 

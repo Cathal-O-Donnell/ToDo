@@ -33,12 +33,17 @@ namespace ToDo
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                       "~/Content/DataTables/css/jquery.dataTables.css",
-                        "~/Content/DataTables/images",
-                        "~/Content/DataTables/css/buttons.dataTables.min.css",
-                        "~/Content/DataTables/css/fixedColumns.dataTables.min.css"));
+                       "~/Content/main.css",
+                       "~/Content/plugins.css",
+                       "~/Content/site.css",
+                        "~/Content/DataTables/css/jquery.dataTables.css",
+                         "~/Content/DataTables/images",
+                         "~/Content/DataTables/css/buttons.dataTables.min.css",
+                         "~/Content/DataTables/css/fixedColumns.dataTables.min.css"
+                         ));
+
+            //"~/Content/main.css",
+            //           "~/Content/plugins.css",
         }
     }
 }

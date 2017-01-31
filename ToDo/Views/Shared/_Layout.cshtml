@@ -14,7 +14,42 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div style="padding-bottom: 75px;">
+        <header id="main-header">
+            <div class="container">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/logo.png" id="logo" alt="logo" />
+                </a>
+                <nav class="main-nav">
+                    <ul>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+                            <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                            <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
+                            <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
+
+                            <li>@Html.Partial("_LoginPartial")</li>
+                        }
+
+                        else
+                        {
+                            <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+                            <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                            <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
+
+                            <li>@Html.Partial("_LoginPartial")</li>
+                        }
+                    </ul>
+
+                </nav>
+            </div>
+        </header>
+
+    </div>
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,7 +84,7 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />

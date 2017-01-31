@@ -1,17 +1,931 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Events Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <!-- Place favicon.png and apple-touch-icon.png in the root directory -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- This is the traditional favicon.
+    - size: 16x16 or 32x32
+    - transparency is OK
+    - see wikipedia for info on browser support: http://mky.be/favicon/-->
+    <link rel="apple-touch-icon" href="apple-touch-icon-precomposed.png">
+    <!-- The is the icon for iOS's Web Clip.
+    - size: 57x57 for older iPhones, 72x72 for iPads, 114x114 for iPhone4's retina display (IMHO, just go ahead and use the biggest one)
+    - To prevent iOS from applying its styles to the icon name it thusly: apple-touch-icon-precomposed.png
+    - Transparency is not recommended (iOS will put a black BG behind the icon) -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="css/colors-css/default.css" rel="stylesheet" type="text/css" class="colorCssStyles">
+    <script src="js/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <!--Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container">
+            <a href="index.html" id="logo"><img src="img/logo.png" alt="logo"></a>
+            <span class="main-open fa fa-bars"> </span>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#speakers">speakers</a></li>
+                    <li><a href="#schedule">SChedule</a></li>
+                    <li><a href="#price_table">prices</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#faq">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Header -->
+    <div id="home" class="banner-owlCarousel">
+        <div class="banner">
+            <img src="img/placehold/banner.png" alt="banner01">
+            <div class="banner-content">
+                <div class="center-element">
+                    <div class="center-vertcal">
+                        <h2>WelCome To Business Event</h2>
+                        <p>Business is a popular style or practice, especially in clothing, footwear, accessories, makeup, body or furniture. Business is a distinctive and often habitual trend in The web component of Canada's general fashion title, with fashion, beauty, gift ideas and online competitions.</p>
+
+                        <div class="btn-cover">
+                            <a href="#" class="btn btn-pri">Buy NOW</a>
+                            <a href="#" class="btn btn-black">Read More</a>
+                        </div>
+                        <div id="countdown" class="countdown "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="img/placehold/banner.png" alt="banner02">
+            <div class="banner-content" style="left: 0px">
+                <div class="center-element">
+                    <div class="center-vertcal">
+                        <h2>  Trading Bussiness  </h2>
+                        <p>Business is a popular style or practice, especially in clothing, footwear, accessories, makeup, body or furniture. Business is a distinctive and often habitual trend in The web component of Canada's general fashion title, with fashion, beauty, gift ideas and online competitions.</p>
+                        <div class="btn-cover">
+                            <a href="#" class="btn btn-pri">Buy NOW</a>
+                            <a href="#" class="btn btn-black">Read More</a>
+                        </div>
+                        <div id="countdown2" class="countdown "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner">
+
+
+            <img src="img/placehold/banner.png" alt="banner03">
+            <div class="banner-content">
+                <div class="center-element">
+                    <div class="center-vertcal">
+                        <h2>NEW Business Event</h2>
+                        <p>Business is a popular style or practice, especially in clothing, footwear, accessories, makeup, body or furniture. Business is a distinctive and often habitual trend in The web component of Canada's general fashion title, with fashion, beauty, gift ideas and online competitions.</p>
+
+                        <div class="btn-cover">
+                            <a href="#" class="btn btn-pri">Buy NOW</a>
+                            <a href="#" class="btn btn-black">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="header-con">
+                        <h2 class="title">ABOUT EVENTS</h2>
+                        <span>it,s an amazine confernce for all over the word Business community</span>
+                    </div>
+                    <p>
+                        Business is a popular style or practice, especially in clothing, footwear, accessories, makeup, body or furniture. Business is a distinctive and often habitual trend in The web component of Canada's general fashion title, with fashion, beauty, gift ideas and online competitions.
+                    </p>
+                    <p>Looking for womens fashion magazine which features all the latest women's fashion news, clothing, accessories and top fashion trends on wedding, jewellery Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+                    <div class="btn-cover">
+                        <a href="index.html" class="btn btn-pri">Read More</a>
+                        <a href="index.html" class="btn btn-like btn-sm">BUY TRICKET</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="speakers">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">EVENT SPEAKER</h2>
+                <span>This event will continues as time to time schedule speaker</span>
+            </div>
+            <div class="owlCarousel">
+                <div class="">
+                    <div class="eventbox">
+                        <div class="event-icon-box">
+                            <div class="event-img">
+                                <img src="img/placehold/80x80.png" alt="01">
+                            </div>
+                            <div class="event-content">
+                                <h2 class="title">Giovanni Kinney</h2>
+                                <p>consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                <a href="#" class="btn btn-pri btn-md">Read More</a>
+                            </div>
+                        </div>
+                        <div class="box-bottom">
+                            <span class="job"> <i class="fa  fa-microphone"></i> New Bussiness </span>
+                            <div class="social-icon">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-pinterest-p"></a>
+                                <a href="#" class="fa fa-stack-overflow "></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="eventbox">
+                        <div class="event-icon-box">
+                            <div class="event-img">
+                                <img src="img/placehold/80x80.png" alt="02">
+                            </div>
+                            <div class="event-content">
+                                <h2 class="title"> Lane Benjamin </h2>
+                                <p>consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                <a href="#" class="btn btn-pri btn-md">Read More</a>
+                            </div>
+                        </div>
+                        <div class="box-bottom">
+                            <span class="job"> <i class="fa  fa-microphone"></i> Goble BUSSINESS </span>
+                            <div class="social-icon">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-pinterest-p"></a>
+                                <a href="#" class="fa fa-stack-overflow "></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="eventbox">
+                        <div class="event-icon-box">
+                            <div class="event-img">
+                                <img src="img/placehold/80x80.png" alt="03">
+                            </div>
+                            <div class="event-content">
+                                <h2 class="title"> Brett Sawyer </h2>
+                                <p>consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                <a href="#" class="btn btn-pri btn-md">Read More</a>
+                            </div>
+                        </div>
+                        <div class="box-bottom">
+                            <span class="job"> <i class="fa  fa-microphone"></i> trading Bussiness </span>
+                            <div class="social-icon">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-pinterest-p"></a>
+                                <a href="#" class="fa fa-stack-overflow "></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="eventbox">
+                        <div class="event-icon-box">
+                            <div class="event-img">
+                                <img src="img/placehold/80x80.png" alt="04">
+                            </div>
+                            <div class="event-content">
+                                <h2 class="title"> Mark Gordon </h2>
+                                <p>consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                <a href="#" class="btn btn-pri btn-md">Read More</a>
+                            </div>
+                        </div>
+                        <div class="box-bottom">
+                            <span class="job"> <i class="fa  fa-microphone"></i> sumal bussiness </span>
+                            <div class="social-icon">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-pinterest-p"></a>
+                                <a href="#" class="fa fa-stack-overflow "></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="eventbox">
+                        <div class="event-icon-box">
+                            <div class="event-img">
+                                <img src="img/placehold/80x80.png" alt="05">
+                            </div>
+                            <div class="event-content">
+                                <h2 class="title"> Curtis Fletcher </h2>
+                                <p>consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                <a href="#" class="btn btn-pri btn-md">Read More</a>
+                            </div>
+                        </div>
+                        <div class="box-bottom">
+                            <span class="job"> <i class="fa  fa-microphone"></i> Bussines developer </span>
+                            <div class="social-icon">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-pinterest-p"></a>
+                                <a href="#" class="fa fa-stack-overflow "></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="schedule">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">EVENT SCHEDULE</h2>
+                <span> schedule event time table</span>
+            </div>
+            <div class="event-slider">
+                <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="01">
+                        </div>
+                        <div class="content">
+                            <h3>Mark Gordon <span class="job">  BUSSINESS </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="02">
+                        </div>
+                        <div class="content">
+                            <h3>Brett Sawyer  <span class="job"> trading </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="eventschedule" data-dot="2<span class='date'>06/2016</span>">
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="03">
+                        </div>
+                        <div class="content">
+                            <h3>Norun Shoal <span class="job"> ceo</span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="04">
+                        </div>
+                        <div class="content">
+                            <h3>Brett Sawyer  <span class="job"> sumal bussiness </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eventschedule" data-dot="3<span class='date'>06/2016</span>">
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="05">
+                        </div>
+                        <div class="content">
+                            <h3> Shoal <span class="job"> developer  </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="06">
+                        </div>
+                        <div class="content">
+                            <h3>Norun Shoal <span class="job">  New Bussiness </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eventschedule" data-dot="4<span class='date'>06/2016</span>">
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="07">
+                        </div>
+                        <div class="content">
+                            <h3> Lane Benjamin <span class="job"> Event</span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            <img src="img/placehold/360x240.png" alt="08">
+                        </div>
+                        <div class="content">
+                            <h3> Mark Gordon  <span class="job"> Bussines developer </span></h3>
+                            <h4 class="primery-color"><a href="#">  Competently customize adaptive mindshare </a> </h4>
+                            <p>
+                                Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
+                            </p>
+                            <ul class="gray-bg">
+                                <li class="fa fa-clock-o ">9:00 AM TO 10:00 AM</li>
+                                <li class="fa fa-map-signs">Riot Hall A</li>
+                            </ul>
+                            <div class="clearboth"></div>
+                            <a href="#" class="btn btn-pri">BUY TRICKET</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="background-img" style="background:url(img/placehold/1360x700.png) left top fixed">
+
+        <div class="content">
+            <div class="center-element">
+                <div class="center-vertcal">
+                    <div class="single_slider">
+                        <div class="testmonail container">
+                            <img src="img/placehold/80x80.png" alt="01" class="author-img">
+                            <p>"Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets."</p>
+                            <div class="">
+                                <span class="author_name">Jasmine Benjamin</span>
+                                <span class="job">- CEO -</span>
+                            </div>
+                        </div>
+                        <div class="testmonail container">
+                            <img src="img/placehold/80x80.png" alt="02" class="author-img">
+                            <p>"Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets."</p>
+                            <div class="">
+                                <span class="author_name">Randy White</span>
+                                <span class="job">- DEVPOVER -</span>
+                            </div>
+                        </div>
+
+                        <div class="testmonail container">
+                            <p>"Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets."</p>
+                            <div class="">
+                                <span class="author_name">Randy White</span>
+                                <span class="job">- FASHIO -</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overla-bg" style="opacity: 0.9 "></div>
+    </section>
+
+
+    <section id="price_table">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">PRICE TABLES </h2>
+                <span> PRICE TRICKET</span>
+            </div>
+            <div class="price-table">
+                <div id="tab" class="resp-vtabs clearfix">
+                    <!-- tab styles ( default, resp-vtabs ) -->
+                    <ul class="resp-tabs-list clearfix">
+                        <li>TRICKET ONLY</li>
+                        <li> ONE DAY TRICKET</li>
+                        <li> TWO DAY TRICKET</li>
+                        <li> THREE DAY TRICKET</li>
+                    </ul>
+                    <div class="resp-tabs-container">
+                        <!-- tab1 -->
+                        <div>
+                            <div class="content clearfix">
+                                <div class="body_content">
+                                    <h3>FREE TRICKET</h3>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                                    <h4>TRICKET INFORMATION</h4>
+                                    <ul>
+                                        <li>FREE TRICKET</li>
+                                        <li>ONE PERSON ONLY</li>
+                                        <li class="no_offer">FREE EVENT COPUNES</li>
+                                        <li class="no_offer">FREE LUNCH AND FOOD</li>
+                                        <li class="no_offer">HOTEL ROOM FREE</li>
+                                        <li class="no_offer">MORE THAN OFFER</li>
+                                    </ul>
+                                </div>
+                                <div class="price_Amount">
+                                    <span class="price">$ 000</span>
+                                    <span class="dec">ONE PER DAY</span>
+                                    <a href="#" class="btn btn-pri btn-sm">Buy Tricket</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab2 -->
+                        <div>
+                            <div class="content clearfix">
+                                <div class="body_content">
+                                    <h3>ONE DAY TRICKET</h3>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                                    <h4>TRICKET INFORMATION</h4>
+                                    <ul>
+                                        <li>ONE DAY FREE TRICKET</li>
+                                        <li>ONE PERSON ONLY</li>
+                                        <li>FREE EVENT COPUNES</li>
+                                        <li>FREE LUNCH AND FOOD</li>
+                                        <li class="no_offer">HOTEL ROOM FREE</li>
+                                        <li class="no_offer">MORE THAN OFFER</li>
+                                    </ul>
+                                </div>
+                                <div class="price_Amount">
+                                    <span class="price">$ 200</span>
+                                    <span class="dec">ONE  DAY</span>
+                                    <a href="#" class="btn btn-pri btn-sm">Buy Tricket</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab3 -->
+                        <div>
+                            <div class="content clearfix">
+                                <div class="body_content">
+                                    <h3>TWO DAY TRICKET</h3>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                                    <h4>TRICKET INFORMATION</h4>
+                                    <ul>
+                                        <li>TWO DAY FREE TRICKET</li>
+                                        <li>TWO PERSON ONLY</li>
+                                        <li>FREE EVENT COPUNES</li>
+                                        <li>FREE LUNCH AND FOOD</li>
+                                        <li class="no_offer">HOTEL ROOM FREE</li>
+                                        <li class="no_offer">MORE THAN OFFER</li>
+                                    </ul>
+                                </div>
+                                <div class="price_Amount">
+                                    <span class="price">$ 300</span>
+                                    <span class="dec">TWO  DAY</span>
+                                    <a href="#" class="btn btn-pri btn-sm">Buy Tricket</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab4 -->
+                        <div>
+                            <div class="content clearfix">
+                                <div class="body_content">
+                                    <h3>THREE DAY TRICKET</h3>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                                    <h4>TRICKET INFORMATION</h4>
+                                    <ul>
+                                        <li>THREE DAY FREE TRICKET</li>
+                                        <li>THREE PERSON ONLY</li>
+                                        <li>FREE EVENT COPUNES</li>
+                                        <li>FREE LUNCH AND FOOD</li>
+                                        <li>HOTEL ROOM FREE</li>
+                                        <li>MORE THAN OFFER</li>
+                                    </ul>
+                                </div>
+                                <div class="price_Amount">
+                                    <span class="price">$ 500</span>
+                                    <span class="dec">THREE  DAY</span>
+                                    <a href="#" class="btn btn-pri btn-sm">Buy Tricket</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="background-img">
+        <img src="img/placehold/1360x700.png" alt="01">
+        <div class="content">
+            <div class="center-element">
+                <div class="center-vertcal">
+                    <div class="container">
+                        <h2>NEWSLETTER</h2>
+                        <p>
+                            Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum.
+                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                        </p>
+                        <form>
+                            <input type="text" value="" placeholder="Newsletter"/>
+                            <a href="#" class="btn btn-pri btn-md">SUBSCRIBE</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overla-bg" style="opacity: 0.9 "></div>
+    </section>
+    <section id="blog">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">EVENT BLOGS </h2>
+                <span>YOUR EVENT POST.</span>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="L_blog_post">
+                        <div class="post-img">
+                            <img src="img/placehold/360x240.png" alt="01">
+                        </div>
+                        <div class="content">
+                            <h3><a href="#"> Fusce dapibus, tellus ac cursus commodo</a></h3>
+                            <div class=catgrory> <span> <i class="icon fa fa-calendar"></i> 10/4/16 </span>  <span><i class="icon fa fa-comments"></i> COMMENTS 08</span></div>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                            <a href="single-blog.html" class="btn btn-pri">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="L_blog_post">
+                        <div class="post-img">
+                            <img src="img/placehold/360x240.png" alt="02">
+                        </div>
+                        <div class="content">
+                            <h3><a href="#">Fusce dapibus, tellus ac cursus commodo</a></h3>
+                            <div class=catgrory> <span> <i class="fa fa-calendar"></i> 10/4/16 </span>  <span><i class="fa fa-comments"></i> COMMENTS 08</span></div>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                            <a href="single-blog.html" class="btn btn-pri">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4">
+                    <div class="L_blog_post">
+                        <div class="post-img">
+                            <img src="img/placehold/360x240.png" alt="03">
+                        </div>
+                        <div class="content">
+                            <h3><a href="#">Fusce dapibus, tellus ac cursus commodo</a></h3>
+                            <div class=catgrory> <span> <i class="fa fa-calendar"></i> 10/4/16 </span>  <span><i class="fa fa-comments"></i> COMMENTS 08</span></div>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                            <a href="single-blog.html" class="btn btn-pri">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 35px;">
+                <a href="blog.html" class="btn btn-like btn-sm">All POST</a>
+            </div>
+        </div>
+    </section>
+    <section class="gallery">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">EVENTS gallery </h2>
+                <span>YOU EVENT GALLEYS AND VIDEOS PHOTOS</span>
+            </div>
+            <div class="gallery popup-img">
+                <div class="gallery-img">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+                <div class="gallery-img ">
+                    <img src="img/placehold/260x180.png" alt="">
+                    <a href="img/placehold/840x400.png" class="lightbox"><i class="icons fa fa-camera "></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="client">
+        <div class="container">
+            <div class="header-con">
+                <h2 class="title">EVENTS SPONSORE </h2>
+                <span>YOU EVENT SPONSORE LOGOS</span>
+            </div>
+            <div class="client-slider">
+                <div class="">
+                    <a href="#"> <img src="img/placehold/220x100.png" alt="01"> </a>
+                </div>
+                <div class="">
+                    <a href="#"> <img src="img/placehold/220x100.png" alt="02"> </a>
+                </div>
+                <div class="">
+                    <a href="#"> <img src="img/placehold/220x100.png" alt="03"> </a>
+                </div>
+                <div class="">
+                    <a href="#"> <img src="img/placehold/220x100.png" alt="04"> </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="header-con">
+                        <h2 class="title">EVENT FAQ</h2>
+                        <span> EVENT FAQ</span>
+                    </div>
+
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                        EVENT  TEAM SUPPORT..?
+                                        <span class="icon fa fa-angle-double-down "></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        EVENT TRICKET HELP ?
+                                        <span class="icon fa fa-angle-double-down"></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="clearboth"></div>
+                                    <br>
+                                    <a href="#" class="btn btn-pri">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsethree" aria-expanded="false" aria-controls="collapsethree" class="collapsed">
+                                        HOW TO PURCHAGLE EVENT TRICKET HELP ?
+                                        <span class="icon fa fa-angle-double-down "></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapsethree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefoure" aria-expanded="false" aria-controls="collapsefoure" class="collapsed">
+                                        HOW to change event date?
+                                        <span class="icon fa fa-angle-double-down "></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapsefoure" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapsefive" class="collapsed">
+                                        HOW TO RESITER EVENT FORM ?
+                                        <span class="icon fa fa-angle-double-down "></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsesix" aria-expanded="false" aria-controls="collapsesix" class="collapsed">
+                                        NEW EVENT TRICKT BOOKING?
+                                        <span class="icon fa fa-angle-double-down "></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapsesix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="header-con">
+                        <h2 class="title">EVENT CONTACT FORM</h2>
+                        <span> CONTACT FORM</span>
+                    </div>
+                    <form method="post" action="sendMail.php" id="contactform">
+                        <!--  <div class="response">&nbsp; </div> -->
+                        <p>
+
+                            <input name="contactname" id="contactname" type="text" value="" placeholder="Name:">
+                        </p>
+                        <p>
+
+                            <input name="subject" id="subject" type="text" value="" placeholder="Subject:">
+                        </p>
+                        <p>
+
+                            <input name="email" id="email" type="email" value="" placeholder="Email:">
+                        </p>
+                        <p>
+
+                            <textarea name="message" id="message" rows="6" placeholder="message"></textarea>
+                        </p>
+
+                        <button name="submit" type="submit" id="submitButton" title="Click here to submit your message!" class="btn btn-pri">SEND</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="map">
+        <div class="map-overlaly"></div>
+        <div id="googleMap"> </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="container">
+            <p class="copyright pull-left">EVENTs  2016.All right received</p>
+            <div class="social-icon pull-right">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-pinterest "></a>
+                <a href="#" class="fa fa-linkedin"></a>
+                <a href="#" class="fa fa-skype"></a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="js/jquery-2.2.2.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/jquery.nav.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqf-F2lTx_i1ryCS9De2h2_sNMxDj8pA&v=3"></script>
+    <script type="text/javascript">
+   var locations = [
+      ['USA', 39.60568818, -104.87548828],
+      ['USA', 38.92522905, -94.50439453],
+      ['USA', 38.54816542, -105.35888672],
+    ];
+
+    var map = new google.maps.Map(document.getElementById('googleMap'), {
+      zoom: 5,
+
+      center: new google.maps.LatLng(39.60568818, -104.87548828),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+    </script>
+</body>
+</html>
+
+
+
