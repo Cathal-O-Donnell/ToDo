@@ -36,14 +36,12 @@ namespace ToDo
                        "~/Content/main.css",
                        "~/Content/plugins.css",
                        "~/Content/site.css",
+                       "~/Content/font-awesome.min.css",
                         "~/Content/DataTables/css/jquery.dataTables.css",
                          "~/Content/DataTables/images",
                          "~/Content/DataTables/css/buttons.dataTables.min.css",
-                         "~/Content/DataTables/css/fixedColumns.dataTables.min.css"
+                         "~/Content/DataTables/css/fixedColumns.dataTables.min.css"                           
                          ));
-
-            //"~/Content/main.css",
-            //           "~/Content/plugins.css",
         }
     }
 }

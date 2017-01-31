@@ -347,6 +347,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="fonts\font-awesome.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\plugins.css" />
     <Content Include="default-image.jpg" />

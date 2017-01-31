@@ -12,6 +12,7 @@
     @*font awesome - http://www.w3schools.com/icons/fontawesome_icons_brand.asp*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+
 </head>
 <body>
     <div style="padding-bottom: 75px;">
@@ -29,7 +30,9 @@
                             <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
                             <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
 
-                            <li>@Html.Partial("_LoginPartial")</li>
+
+                            @Html.Partial("_LoginPartial")
+                            @*<li>@Html.Partial("_LoginPartial")</li>*@
                         }
 
                         else
@@ -48,52 +51,29 @@
 
     </div>
 
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("ToDo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">                              
-                <ul class="nav navbar-nav">
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
-
-                        <li>@Html.ActionLink("Events", "Index", "Events")</li>                        
-
-                        <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
-
-                        <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
-                    }
-
-                    else
-                    {
-                        <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
-
-                        <li>@Html.ActionLink("Events", "Index", "Events")</li>
-
-                        <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
     <div class="container body-content">
+        @*@RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+
     </div>
 
-    
+    <footer class="main-footer">
+        <div class="container">
+            <p class="copyright pull-left">ToDo 2016. Cathal O'Donnell</p>
+            <div class="social-icon pull-right">
+                <a href="www.facebook.com" class="fa fa-facebook"></a>
+                <a href="www.twitter.com" class="fa fa-twitter"></a>
+                <a href="www.pintresr.com" class="fa fa-pinterest "></a>
+                <a href="www.linkedin.com" class="fa fa-linkedin"></a>
+            </div>
+        </div>
+    </footer>
+
     @Scripts.Render("~/bundles/table")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
