@@ -358,6 +358,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="logo.png" />
     <Content Include="logo2.png" />
+    <Content Include="MUSIC-EDU-bass.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />

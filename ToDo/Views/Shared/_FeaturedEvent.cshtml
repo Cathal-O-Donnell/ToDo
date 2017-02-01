@@ -13,7 +13,7 @@
                 </div>
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
-                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-comments"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
+                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-map-signs"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
                     @Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
                 </div>

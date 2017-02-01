@@ -2,22 +2,113 @@
     ViewBag.Title = "Home Page";
 }
 
-@*Top Featured Event*@
-<div style="padding-top: 10px;">
-    @Html.Action("TopEventPartialView")
-</div>
+<style>
+    body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
 
-@*Featured Event Partial View*@
-<div style="padding-top: 10px;">
-    @Html.Action("FeaturedEventPartialView")
-</div>
+.bgimg-1 {
+  position: relative;
+  opacity: 0.6;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-@*Top Featured Venue*@
-<div style="padding-top: 10px;">
-    @Html.Action("TopVenuePartialView")
-</div>
+}
+.bgimg-1 {
+    background-image: url('../MUSIC-EDU-bass.jpg');    
+    min-height: 100%;
+}
 
-@*Featured Venues Partial View*@
-<div style="padding-top: 10px;">
-    @Html.Action("FeaturedVenuesPartialView")
-</div>
+
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  /*color: #ddd;*/
+}
+
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+</style>
+
+@*<div class="container-full">*@
+ <section class="background-img" style="background:url('../MUSIC-EDU-bass.jpg') left top fixed">
+        <div class="content">
+            <div class="center-element">
+                <div class="center-vertcal">
+                    <div class="single_slider">
+                        <div class="testmonail container">
+                            <img src="~/logo.png" alt="01" class="author-img">
+                            <p>"Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets."</p>
+                            <div class="">
+                                <span class="author_name">Jasmine Benjamin</span>
+                                <span class="job">- CEO -</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overla-bg" style="opacity: 0.9 "></div>
+    </section>
+@*</div>*@
+
+    @*Top Featured Event*@
+    <div style="padding-top: 10px;">
+        @Html.Action("TopEventPartialView")
+    </div>
+
+    @*Featured Event Partial View*@
+    <div style="padding-top: 10px;">
+        @Html.Action("FeaturedEventPartialView")
+    </div>
+
+    @*Top Featured Venue*@
+    <div style="padding-top: 10px;">
+        @Html.Action("TopVenuePartialView")
+    </div>
+
+    @*Featured Venues Partial View*@
+    <div style="padding-top: 10px;">
+        @Html.Action("FeaturedVenuesPartialView")
+    </div>
+
+    @*<script>
+
+            var jumboHeight = $('.jumbotron').outerHeight();
+            function parallax() {
+                var scrolled = $(window).scrollTop();
+                $('.bg').css('height', (jumboHeight - scrolled) + 'px');
+            }
+
+            $(window).scroll(function (e) {
+                parallax();
+            });
+
+        </script>*@

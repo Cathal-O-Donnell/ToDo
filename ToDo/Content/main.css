@@ -713,6 +713,9 @@ video {
     text-align: center;
     font-size: 18px;
     max-width: 800px;
+    /*width: 100%;
+    margin: 0 auto;*/
+
     color: #fff;
     position: relative;
     z-index: 22;
@@ -2584,8 +2587,11 @@ aside .widget-twitter li {
 {
     margin-top: 10px;
 }
-.new-account
-{
+.new-account {
     display: block;
     margin-top: 10px;
 }
+
+/*Image Parallax - http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax_percent*/
+
+
