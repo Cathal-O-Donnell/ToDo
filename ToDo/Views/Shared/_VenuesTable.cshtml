@@ -43,50 +43,28 @@
         </form>
     }
 </div>
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueTown.TownName)
-        </th>
-        <th>*@
-@*blank*@
-@*</th>
-    </tr>*@
 
-@*@foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueTown.TownName)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-
-    </table>*@
 
 <div class="row">
     @foreach (var item in Model)
     {
-
         <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
             <div class="L_blog_post">
                 <div class="post-img">
-                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+
+                    @*Check if event has image*@
+                    @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
+                    {
+                        <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                    }
+
+                    @*No event image was uploaded, display default image*@
+                    else
+                    {
+                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                    }
+
+                    @*<img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
                 </div>
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
@@ -97,7 +75,6 @@
             </div>
         </div>
     }
-
 </div>
 
 <script>
@@ -165,3 +142,40 @@
         });
     }
 </script>
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueTown.TownName)
+        </th>
+        <th>*@
+@*blank*@
+@*</th>
+    </tr>*@
+
+@*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueTown.TownName)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </table>*@
