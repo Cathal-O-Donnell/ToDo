@@ -52,13 +52,13 @@
             <div class="L_blog_post">
                 <div class="post-img">
 
-                    @*Check if event has image*@
+                    @*Check if venue has image*@
                     @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
                     {
                         <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
                     }
 
-                    @*No event image was uploaded, display default image*@
+                    @*No venue image was uploaded, display default image*@
                     else
                     {
                         <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />

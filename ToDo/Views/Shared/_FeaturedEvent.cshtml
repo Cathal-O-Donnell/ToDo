@@ -7,7 +7,18 @@
         <div class="col-md-4 col-sm-4">
             <div class="L_blog_post">
                 <div class="post-img">
-                    <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+                    @*Check if event has image*@
+                    @if (item.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+                    {
+                        <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                    }
+
+                    @*No event image was uploaded, display default image*@
+                    else
+                    {
+                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                    }
+                    @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
                 </div>
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>

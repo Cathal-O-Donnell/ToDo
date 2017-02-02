@@ -7,7 +7,17 @@
         <div class="col-md-4 col-sm-4">
             <div class="L_blog_post">
                 <div class="post-img">
-                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+                    @*Check if venue has image*@
+                    @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
+                    {
+                        <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                    }
+
+                    @*No venue image was uploaded, display default image*@
+                    else
+                    {
+                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                    }
                 </div>
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
