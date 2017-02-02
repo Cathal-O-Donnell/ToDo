@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
-    @*Search Box*@
+@*Search Box*@
+<div class="row" style="padding-bottom: 25px;">
     @using (Html.BeginForm())
     {
 
@@ -9,13 +10,13 @@
 
                 <div class="input-group col-md-2">
                     @if (ViewBag.SearchTerm != null)
-                    {
+                {
                         <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
                     }
                     else
                     {
                         <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                    }                    
+                    }
                     <span class="input-group-btn">
                         <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
                             <span class="glyphicon glyphicon-search"></span>
@@ -41,24 +42,24 @@
             </div>
         </form>
     }
+</div>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueTown.TownName)
+        </th>
+        <th>*@
+@*blank*@
+@*</th>
+    </tr>*@
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VenueName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VenueTown.TownName)
-            </th>
-            <th>
-                @*blank*@
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
+@*@foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -76,7 +77,28 @@
             </tr>
         }
 
-    </table>
+    </table>*@
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
+            <div class="L_blog_post">
+                <div class="post-img">
+                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+                </div>
+                <div class="content">
+                    <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
+                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                    @Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
 
 <script>
 

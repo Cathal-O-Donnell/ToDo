@@ -1,48 +1,71 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
 @*Search Box*@
-@using (Html.BeginForm())
-{
+<div class="row" style="padding-bottom: 25px;">
+    @using (Html.BeginForm())
+    {
 
-    <form class="form-horizontal" role="form">
-        <div class="form-group" style="padding-bottom: 10px;">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" style="padding-bottom: 10px;">
 
-            <div class="input-group col-md-2">
-                @if (ViewBag.SearchTerm != null)
+                <div class="input-group col-md-2">
+                    @if (ViewBag.SearchTerm != null)
                 {
-                    <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
-                }
-                else
-                {
-                    <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                }
-                
-                <span class="input-group-btn">
-                    <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
+                        <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
+                    }
+                    else
+                    {
+                        <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
+                    }
 
-            <div class="col-md-2">
-                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
-            </div>
+                    <span class="input-group-btn">
+                        <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
 
-            <div class="col-md-2">
-                @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "form-control", id = "lstEventCat" })
-            </div>
+                <div class="col-md-2">
+                    @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
+                </div>
 
-            <div class="col-md-1">
-                <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
-            </div>
+                <div class="col-md-2">
+                    @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "form-control", id = "lstEventCat" })
+                </div>
 
-            <div class="col-md-1">
-                <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+                <div class="col-md-1">
+                    <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
+                </div>
+
+                <div class="col-md-1">
+                    <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
+                </div>
             </div>
+        </form>
+    }
+</div>
+
+
+@*<div class="row">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-4" style="padding-bottom: 20px;">
+                    <div class="L_blog_post">
+                        <div class="post-img">
+                            <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+                        </div>
+                        <div class="content">
+                            <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
+                            <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-map-signs"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                            @Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-    </form>
-}
-
+    </div>*@
 <table class="table">
     <tr>
         <th>
@@ -90,6 +113,26 @@
     }
 
 </table>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-4">
+            <div class="L_blog_post">
+                <div class="post-img">
+                    <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">
+                </div>
+                <div class="content">
+                    <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
+                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-map-signs"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                    @Html.ActionLink("Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 <script>
 
