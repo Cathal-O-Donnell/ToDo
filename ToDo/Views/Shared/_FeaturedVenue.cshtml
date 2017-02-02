@@ -1,5 +1,17 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
+
+<style>
+    .CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -22,25 +34,25 @@
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
                     <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
-                    @Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                    <p class="CustomParagraph">@item.VenueDescription</p>
+                    @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
         </div>
 
 
         @*<div class="col-md-4 col-sm-4 col-xs-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1 class="panel-title">@Html.DisplayFor(modelItem => item.VenueName) - @Html.DisplayFor(modelItem => item.VenueTown.TownName)</h1>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">@Html.DisplayFor(modelItem => item.VenueName) - @Html.DisplayFor(modelItem => item.VenueTown.TownName)</h1>
+                    </div>
+                    <div class="panel-body" style="height: 350px;">
+                        <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
+                    </div>
+                    <div class="panel-footer">
+                        <center>@Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })</center>
+                    </div>
                 </div>
-                <div class="panel-body" style="height: 350px;">
-                    <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:300px; height: 300px;">
-                </div>
-                <div class="panel-footer">
-                    <center>@Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })</center>
-                </div>
-            </div>
-        </div>*@
+            </div>*@
     }
 </div>

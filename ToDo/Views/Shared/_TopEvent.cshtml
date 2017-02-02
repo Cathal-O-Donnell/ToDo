@@ -1,6 +1,15 @@
 ﻿@model ToDo.Models.Event
 
-
+<style>
+    .CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
 
 <div class="event-slider">
 
@@ -27,15 +36,15 @@
                 <div class="content">
                     <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
                     <h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>
-                    <p>
-                        Quickly pursue error-free technology via parallel systems. Conveniently formulate plug-and-play value after cross functional niche markets. Credibly restore  Dynamically incentivize backward-compatible strategic theme areas through process market positioning web services through...[...]
-                    </p>
+                   
+                    <p class="CustomParagraph">@Model.EventDescription</p>
+
                     <ul class="gray-bg">
                         <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
                         <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
                     </ul>
                     <div class="clearboth"></div>
-                    @Html.ActionLink("Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-pri" })
+                    @Html.ActionLink("More Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
         </div>

@@ -2599,6 +2599,14 @@ aside .widget-twitter li {
     margin-top: 10px;
 }
 
-/*Image Parallax - http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax_percent*/
+/*Custom Paragraph for venue and event previews*/
+/*.CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }*/
 
 

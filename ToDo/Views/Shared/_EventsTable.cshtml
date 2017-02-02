@@ -1,5 +1,16 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
+<style>
+    .CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
 @*Search Filters*@
 <div class="container" style="padding-bottom: 25px;">
     <form class="form-inline">
@@ -48,8 +59,8 @@
                 <div class="content">
                     <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
                     <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
-                    @*<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>*@
-                    @Html.ActionLink("Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                    <p class="CustomParagraph">@item.EventDescription</p>
+                    @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
         </div>
