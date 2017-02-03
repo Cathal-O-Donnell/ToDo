@@ -1,194 +1,257 @@
 ﻿@model ToDo.Models.Event
 
 
-@*<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">*@
-<body>
+@*<body onload="myFunction(@ViewBag.Lat, @ViewBag.Long)">
+    *@
+    <body>
 
-    @*Check if current user is the owner of this event*@
-    @if (ViewBag.IsOwner == true)
-    {
+        @*Check if current user is the owner of this event*@
+        @if (ViewBag.IsOwner == true)
+        {
         <div style="padding-top: 25px;">
             @Html.ActionLink("Edit", "Edit", new { id = Model.EventID }, new { @class = "btn btn-primary" })
 
             <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove</button>
         </div>
-    }
+        }
 
-    <div>
-
-            <div class="header-con">
-                <h2 class="title">@Model.EventTitle</h2>
-                @Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) -
-                @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
-            </div>
+        @*<div>
+        <div class="header-con">
+        <h2 class="title">@Model.EventTitle</h2>
+        @Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) -
+        @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
+        </div>
 
         <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="L_blog_post">
-                    <div class="post-img">
-                        @*Check if event has image*@
-                        @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
-                        {
-                            <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
-                        }
+        <div class="col-md-12 col-sm-12">
+        <div class="L_blog_post">
+        <div class="post-img">
 
-                        @*No event image was uploaded, display default image*@
-                        else
-                        {
+        @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+        {
+        <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+        }
+
+
+        else
+        {
+        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+        }
+        </div>
+        <div class="content">
+        <h3>@Model.EventTitle</h3>
+        <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Model.EventDate.ToShortDateString()</span>  <span><i class="icon fa fa-comments"></i>@Model.Venue.VenueTown.TownName)</span></div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>*@
+
+        <div class="event-slider">
+            <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+                <div class="row">
+                    <div class="eventschedule-post clearfix">
+
+                        <div class="event-img">
+                            @*Check if event has image*@
+                            @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+                            {
+                            <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            }
+
+                            @*No event image was uploaded, display default image*@
+                            else
+                            {
                             <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                        }
-                    </div>
-                    <div class="content">
-                        <h3>@Model.EventTitle</h3>
-                        <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Model.EventDate.ToShortDateString()</span>  <span><i class="icon fa fa-comments"></i>@Model.Venue.VenueTown.TownName)</span></div>
-                        @*<p style="white-space: pre-wrap;">@Html.DisplayFor(model => model.EventDescription)</p>*@
+                            }
+                            @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
+
+                            <div style="padding-top: 10px;">
+                                @*<h3 class="fa-clock-o"><span style="color:#FF0000;">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</span></h3>
+
+                                <h3>@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</h3>
+
+                                <h3>@Model.Venue.VenueTown.TownName</h3>
+
+                                <h3>Tickets: @Model.EventTicketStore</h3>
+
+                                <h3>@Model.EventTicketPrice</h3>*@
+                                <ul>
+                                    <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
+                                    <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
+                                    @if (Model.EventTicketStore != null)
+                                    {
+                                    <li class="fa fa-ticket" style="padding-top: 10px;">Tickets: @Model.EventTicketStore</li>
+
+                                    if (Model.EventTicketPrice != null)
+                                    {
+                                    <li class="fa fa-eur">Price: @Model.EventTicketPrice</li>
+                                    }
+                                    }
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="content">
+                            <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
+
+                            <h4 class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null)</h4>
+                            @*@Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)*@
+                            @*@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, new { @class = "primery-color" })*@
+
+                            <p class="CustomParagraph">@Model.EventDescription</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <hr />
+        <hr />
 
-    <div class="row">
+        <div class="row">
 
-        @*YouTube*@
-        <div class="col-sm-6" style="padding-right: 25px;">
+            @*YouTube*@
+            <div class="col-sm-5">
 
-            @if (ViewBag.hasYT == true)
-            {
+                @if (ViewBag.hasYT == true)
+                {
                 <div id="player">
 
                 </div>
-            }
-        </div>
+                }
+            </div>
 
-        @*Soundcloud*@
-        <div class="col-sm-6" style="padding-left: 25px;">
+            <div class="col-sm-2">
+            </div>
 
-            @if (ViewBag.hasSC == true)
-            {
+            @*Soundcloud*@
+            <div class="col-sm-5">
+
+                @if (ViewBag.hasSC == true)
+                {
                 <div id="scEmbed">
 
                 </div>
-            }
+                }
+            </div>
+
+        </div>
+        <div class="row">
+            <h2>Comments</h2>
+            <div id="disqus_thread"></div>
         </div>
 
-    </div>
-    <div class="row">
-        <h2>Comments</h2>
-        <div id="disqus_thread"></div>
-    </div>
+        @*Bootstap Modal Window*@
+        <div class="modal fade" id="EventRemoveModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 id="txtEventRemoveModal" class="modal-title">Delete </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to remove this event?</p>
 
-    @*Bootstap Modal Window*@
-    <div class="modal fade" id="EventRemoveModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 id="txtEventRemoveModal" class="modal-title">Delete </h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to remove this event?</p>
-
-                </div>
-                <div class="modal-footer">
-                    @*<button type="button" onclick="RemoveVenue();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>*@
-                    @Html.ActionLink("Remove", "DeleteEvent", new { id = Model.EventID }, new { @class = "btn btn-success", @style = "float: left" })
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" onclick="RemoveVenue();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>*@
+                        @Html.ActionLink("Remove", "DeleteEvent", new { id = Model.EventID }, new { @class = "btn btn-success", @style = "float: left" })
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</body>
+    </body>
 
-@*Google Maps and Directions*@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
+    @*Google Maps and Directions*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwQrjSkHEgvgg56PI5G_aEGFoAbk-Vg8"></script>
 
-@*Soundcloud*@
-<script src="https://connect.soundcloud.com/sdk.js"></script>
+    @*Soundcloud*@
+    <script src="https://connect.soundcloud.com/sdk.js"></script>
 
-<script>
+    <script>
 
-    function RemoveEventModal(Name, ID) {
+        function RemoveEventModal(Name, ID) {
 
-        txtEventRemoveModal.innerText = "Remove " + Name;
-        $("#EventRemoveModal").modal();
-    }
-
-    $( document ).ready(function() {
-        console.log('sc function hit');
-        var hasSC =  @Html.Raw(Json.Encode(@ViewBag.hasSC));
-        console.log(hasSC);
-        if (hasSC == true) {
-            var sc =  @Html.Raw(Json.Encode(@ViewBag.SoundCloud));
-
-            console.log(sc);
-            var container = document.getElementById('scEmbed');
-            SC.oEmbed(sc, container);
+            txtEventRemoveModal.innerText = "Remove " + Name;
+            $("#EventRemoveModal").modal();
         }
 
-    });
+        $( document ).ready(function() {
+            console.log('sc function hit');
+            var hasSC =  @Html.Raw(Json.Encode(@ViewBag.hasSC));
+            console.log(hasSC);
+            if (hasSC == true) {
+                var sc =  @Html.Raw(Json.Encode(@ViewBag.SoundCloud));
 
-
-    //YouTube iFrame API code
-    //This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
-
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    //This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    function onYouTubeIframeAPIReady() {
-
-        //Video ID
-        var youTubeLink = @Html.Raw(Json.Encode(@ViewBag.youTubeID))
-
-        player = new YT.Player('player', {
-            height: '390',
-            width: '640',
-            videoId: youTubeLink,
-            events: {
-                //'onReady': onPlayerReady, - AUTOPLAY
-                'onStateChange': onPlayerStateChange
+                console.log(sc);
+                var container = document.getElementById('scEmbed');
+                SC.oEmbed(sc, container);
             }
+
         });
-    }
 
-    //This  function causes the video the play automatically, NOT CURRENTLY USED
-    function onPlayerReady(event) {
-        event.target.playVideo();
-    }
 
-    //The API calls this function when the player's state changes.
-    //The function indicates that when playing a video (state=1),
-    //the player should play for six seconds and then stop.
-    var done = false;
-    function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
-            done = true;
+        //YouTube iFrame API code
+        //This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        //This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+
+            //Video ID
+            var youTubeLink = @Html.Raw(Json.Encode(@ViewBag.youTubeID))
+
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: youTubeLink,
+                events: {
+                    //'onReady': onPlayerReady, - AUTOPLAY
+                    'onStateChange': onPlayerStateChange
+                }
+            });
         }
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
 
-    //Comments section
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
+        //This  function causes the video the play automatically, NOT CURRENTLY USED
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
 
-        s.src = '//s00144297.disqus.com/embed.js';
-        //src="//s00144297.disqus.com/count.js
+        //The API calls this function when the player's state changes.
+        //The function indicates that when playing a video (state=1),
+        //the player should play for six seconds and then stop.
+        var done = false;
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+            }
+        }
+        function stopVideo() {
+            player.stopVideo();
+        }
 
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        //Comments section
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//s00144297.disqus.com/embed.js';
+            //src="//s00144297.disqus.com/count.js
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 
