@@ -628,7 +628,6 @@ video {
         text-transform: uppercase;
         font: 30px "Lato", sans-serif;
         color: #333333;
-
     }
 
     /*Old*/
@@ -662,7 +661,7 @@ video {
     margin: 20px auto;
 }
 
-/*.eventschedule li {
+.eventschedule li {
     margin-right: 5px;
     background: black;
     padding: 7px 12px;
@@ -671,7 +670,7 @@ video {
     color: #fff;
     border-radius: 5px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.6);
-}*/
+}
 
     .eventschedule li:last-child {
         margin-right: 0px;
@@ -2599,4 +2598,15 @@ aside .widget-twitter li {
 .new-account {
     display: block;
     margin-top: 10px;
+}
+
+
+/*Custom h3*/
+.CustomH3 {
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font: 30px "Lato", sans-serif;
+    color: #333333;
 }

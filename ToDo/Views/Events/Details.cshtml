@@ -13,40 +13,8 @@
 
             <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove</button>
         </div>
-        }
-
-        @*<div>
-        <div class="header-con">
-        <h2 class="title">@Model.EventTitle</h2>
-        @Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) -
-        @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
-        </div>
-
-        <div class="row">
-        <div class="col-md-12 col-sm-12">
-        <div class="L_blog_post">
-        <div class="post-img">
-
-        @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
-        {
-        <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
-        }
-
-
-        else
-        {
-        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-        }
-        </div>
-        <div class="content">
-        <h3>@Model.EventTitle</h3>
-        <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Model.EventDate.ToShortDateString()</span>  <span><i class="icon fa fa-comments"></i>@Model.Venue.VenueTown.TownName)</span></div>
-
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>*@
+        }      
+              
 
         <div class="event-slider">
             <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
@@ -65,18 +33,9 @@
                             {
                             <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
                             }
-                            @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
 
                             <div style="padding-top: 10px;">
-                                @*<h3 class="fa-clock-o"><span style="color:#FF0000;">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</span></h3>
 
-                                <h3>@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</h3>
-
-                                <h3>@Model.Venue.VenueTown.TownName</h3>
-
-                                <h3>Tickets: @Model.EventTicketStore</h3>
-
-                                <h3>@Model.EventTicketPrice</h3>*@
                                 <ul>
                                     <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
                                     <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
@@ -255,3 +214,35 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 
+@*<div>
+    <div class="header-con">
+    <h2 class="title">@Model.EventTitle</h2>
+    @Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) -
+    @Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)
+    </div>
+
+    <div class="row">
+    <div class="col-md-12 col-sm-12">
+    <div class="L_blog_post">
+    <div class="post-img">
+
+    @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+    {
+    <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+    }
+
+
+    else
+    {
+    <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+    }
+    </div>
+    <div class="content">
+    <h3>@Model.EventTitle</h3>
+    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Model.EventDate.ToShortDateString()</span>  <span><i class="icon fa fa-comments"></i>@Model.Venue.VenueTown.TownName)</span></div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>*@

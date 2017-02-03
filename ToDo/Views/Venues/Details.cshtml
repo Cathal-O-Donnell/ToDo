@@ -1,7 +1,19 @@
 ﻿@model ToDo.Models.Venue
 
-@*<body onload="GoogleMap(@ViewBag.Lat, @ViewBag.Long)">*@
-@*<body>*@
+<style>
+    .nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #E23737 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #E23737; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+</style>
+
 
 @*Check if current user is the owner of this event*@
 @if (ViewBag.IsOwner == true)
@@ -16,14 +28,23 @@
     </div>
 }
 
-<div style="display: inline; vertical-align: top;">
+
+
+
+@*<div style="display: inline; vertical-align: top; padding-top: 100px;">
     <h1>@Model.VenueName</h1>
 
     @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)
-</div>
+</div>*@
+
+<div class="eventschedule">
+    <div class="content">
+        <h2 class="CustomH3" style="text-align:center; padding-bottom: 10px;">@Model.VenueName<span> - @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)</span></h2>
+        <hr />
+    </div>
+</div> 
 
 <div>
-    <hr />
     <div class="row">
 
         @*Image*@
@@ -32,13 +53,13 @@
             @*Check if event has image*@
             @if (Model.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
             {
-                <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 250px; height:250px;" />
+                <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
             }
 
             @*No event image was uploaded, display default image*@
             else
             {
-                <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
+                <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
             }
         </div>
 
@@ -46,7 +67,7 @@
         <div class="col-sm-9">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">@Html.DisplayNameFor(model => model.VenueDescription)</a></li>
-                <li><a data-toggle="tab" href="#menu1">Map</a></li>
+                <li><a data-toggle="tab" href="#menu1">Location</a></li>
                 <li><a data-toggle="tab" href="#menu2">Contact Us</a></li>
             </ul>
 
@@ -63,8 +84,30 @@
                     {
 
                         <div class="row">
+                            <div class="col-sm-6" id="googleMap">
 
-                            <div id="googleMap" style="width:500px;height:500px; padding-top: 50px; padding-right: 25px;" class="col-sm-4">
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <h3>Need Directions?</h3>
+
+                                <input type="text" class="form-control" placeholder="Travelling From..." id="txtFrom">
+
+                                <p style="padding-top: 10px; padding-bottom: 10px;">
+                                    <button onclick="PlanRoute()" class="btn btn-success">Get Directions</button>
+                                </p>
+
+                                <h1 style="text-align:center;" id="txtDirections"></h1>
+
+                                <div id="dir">
+
+                                </div>
+                            </div>
+
+
+                            @*<div id="googleMap" style="width:500px;height:500px; padding-top: 50px; padding-right: 25px;" class="col-sm-4">
 
                             </div>
 
@@ -80,7 +123,7 @@
                                 <h1 style="text-align:center;" id="txtDirections"></h1>
 
                                 <div id="dir" class="col-sm-5"></div>
-                            </div>
+                            </div>*@
                         </div>
                     }
 

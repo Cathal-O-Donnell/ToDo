@@ -1,12 +1,8 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
 
 @*Partial View*@
-<div id="EventTable">
+<div id="EventTable" style="padding-top:47px;">
     @Html.Action("EventsTablePartialView")
 </div>
