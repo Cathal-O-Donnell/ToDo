@@ -517,6 +517,7 @@
     <Content Include="Views\Shared\_BandsTable.cshtml" />
     <Content Include="Views\Shared\_AdminBands.cshtml" />
     <Content Include="Views\Shared\_UserVenues.cshtml" />
+    <Content Include="Views\Shared\_VenueEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

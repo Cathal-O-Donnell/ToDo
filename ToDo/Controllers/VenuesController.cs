@@ -53,6 +53,7 @@ namespace ToDo.Controllers
             }
 
             Venue venue = db.Venues.Find(id);
+            ViewBag.VenueID = venue.VenueID;
 
             if (venue == null)
             {
@@ -450,6 +451,22 @@ namespace ToDo.Controllers
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }
+        }
+
+
+
+        //Venue Index Partial View
+        public ActionResult VenuesEventsPartialView(int? VenueID)
+        {
+            //Get Events
+            var events = (from e in db.Events
+                          where e.VenueID == VenueID && e.EventActive == true
+                          select e).ToList();
+
+            //Venue Types
+            ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
+            return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
     }
 }
