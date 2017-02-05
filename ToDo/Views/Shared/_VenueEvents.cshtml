@@ -31,16 +31,16 @@
             @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "CustomTextBox", id = "lstEventCat" })
         </div>
 
-        <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
+        <span class="btn btn-primary" onclick="AdvanceSearch(@ViewBag.VenueID);">Search</span>
 
-        <span class="btn btn-warning" onclick="Reset();">Reset</span>
+        <span class="btn btn-warning" onclick="Reset(@ViewBag.VenueID);">Reset</span>
     </form>
 </div>
 
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-3 col-sm-3" style="padding-bottom: 35px;">
+        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
             <div class="L_blog_post">
                 <div class="post-img">
                     @*Check if event has image*@
@@ -69,10 +69,8 @@
 <script>
 
     $(document).ready(function () {
-        var TownIndex =  @Html.Raw(Json.Encode(@ViewBag.TownIndex));
         var CategoryIndex =  @Html.Raw(Json.Encode(@ViewBag.CategoryIndex));
 
-        document.getElementById("lstTowns").selectedIndex = TownIndex;
         document.getElementById("lstEventCat").selectedIndex = CategoryIndex;
     });
 
@@ -83,49 +81,46 @@
         //Ajax code
         $.ajax({
             type: "GET",
-            url: '@Url.Action("EventsTablePartialView", "Events")',
+            url: '@Url.Action("VenuesEventsPartialView", "Venues")',
             data: { search: search },
             success: function (data) {
 
-                $('#EventTable').html(data);
-                $('#EventTable').fadeIn("fast")
+                $('#VenueEventsTable').html(data);
+                $('#VenueEventsTable').fadeIn("fast")
             }
         });
     }
 
-    function AdvanceSearch() {
-        var TownSelectedIndex = document.getElementById("lstTowns").selectedIndex;
+    function AdvanceSearch(id) {
         var ECypeSelectedIndex = document.getElementById("lstEventCat").selectedIndex;
 
-        var town = document.getElementById("lstTowns").value;
         var eventCat = document.getElementById("lstEventCat").value;
         var search = document.getElementById("txtSearch").value;
 
-        var advancedSearch = "true";
         //Ajax code
         $.ajax({
             type: "GET",
-            url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, CategoryIndex: ECypeSelectedIndex },
+            url: '@Url.Action("VenuesEventsPartialView", "Venues")',
+            data: { search: search, CategoryIndex: ECypeSelectedIndex, EventCategory: eventCat, VenueID: id },
             success: function (data) {
 
-                $('#EventTable').html(data);
-                $('#EventTable').fadeIn("fast")
+                $('#VenueEventsTable').html(data);
+                $('#VenueEventsTable').fadeIn("fast")
             }
         });
     }
 
-    function Reset() {
+    function Reset(id) {
         var advancedSearch = "false";
         //Ajax code
         $.ajax({
             type: "GET",
-            url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { AdvancedSearch: advancedSearch },
+            url: '@Url.Action("VenuesEventsPartialView", "Venues")',
+            data: { VenueID: id },
             success: function (data) {
 
-                $('#EventTable').html(data);
-                $('#EventTable').fadeIn("fast")
+                $('#VenueEventsTable').html(data);
+                $('#VenueEventsTable').fadeIn("fast")
             }
         });
     }

@@ -456,8 +456,11 @@ namespace ToDo.Controllers
 
 
         //Venue Index Partial View
-        public ActionResult VenuesEventsPartialView(int? VenueID)
+        public ActionResult VenuesEventsPartialView(int? VenueID, string search, string CategoryIndex, string EventCategory)
         {
+            ViewBag.VenueID = VenueID;
+            ViewBag.CategoryIndex = CategoryIndex;
+
             //Get Events
             var events = (from e in db.Events
                           where e.VenueID == VenueID && e.EventActive == true
@@ -465,6 +468,19 @@ namespace ToDo.Controllers
 
             //Venue Types
             ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                //Get all the events where the name contains the users search term
+                events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper())).ToList();
+                ViewBag.SearchTerm = search;
+            }
+
+            if (!String.IsNullOrEmpty(EventCategory))
+            {
+                int EventCategoryID = Convert.ToInt32(EventCategory);
+                events = events.Where(e => e.EventCat.EventCategoryID == EventCategoryID).ToList();
+            }
 
             return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
