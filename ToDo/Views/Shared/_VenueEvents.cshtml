@@ -56,11 +56,11 @@
                     }
                     @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
                 </div>
-                <div class="content">
+                <div class="content" style="height: 300px;">
                     <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
                     <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
                     <p class="CustomParagraph">@item.EventDescription</p>
-                    @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                    @Html.ActionLink("More Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
         </div>
