@@ -44,13 +44,15 @@
 
                         @if (item.VenueActive == true)
                         {
-                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-sm btn-warning">Make Inactive</button>
+                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-warning">Make Inactive</button>
                         }
 
                         else if (item.VenueActive == false)
                         {
-                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-sm btn-success">Make Active</button>
+                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-success">Make Active</button>
                         }
+
+                        @Html.ActionLink("Edit Venue", "Edit","Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>
