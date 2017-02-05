@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ToDo.Models;
+using System.Data.Entity;
 
 namespace ToDo.Controllers
 {
@@ -346,7 +347,51 @@ namespace ToDo.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        //Venue Index Partial View
+        public ActionResult UserVenuePartialView()
+        {
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            var venues = from v in db.Venues
+                         where v.OwnerId == UserId
+                         select v;
+
+            return PartialView("_UserVenues", venues.OrderBy(v => v.VenueName).ToList());
+        }
+
+        //Venue Change Status
+        public ActionResult VenueChangeStatus(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            //Change from active to inactive
+            if (venue.VenueActive == true)
+            {
+                venue.VenueActive = false;
+            }
+
+            //Change from actice to inactive
+            else
+            {
+                venue.VenueActive = true;
+            }
+
+            db.Entry(venue).State = EntityState.Modified;
+            db.SaveChanges();
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            var venues = from v in db.Venues
+                         where v.OwnerId == UserId
+                         select v;
+
+            return PartialView("_UserVenues", venues.OrderBy(v => v.VenueName).ToList());
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

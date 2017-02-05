@@ -39,35 +39,36 @@
 </div>
 
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
-            <div class="L_blog_post">
-                <div class="post-img">
 
-                    @*Check if venue has image*@
-                    @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
+                <div class="L_blog_post">
+                    <div class="post-img">
+
+                        @*Check if venue has image*@
+                        @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
                     {
-                        <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
-                    }
+                            <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                        }
 
-                    @*No venue image was uploaded, display default image*@
-                    else
-                    {
-                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                    }
+                        @*No venue image was uploaded, display default image*@
+                        else
+                        {
+                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                        }
 
-                    @*<img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
-                </div>
-                <div class="content">
-                    <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
-                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
-                    <p class="CustomParagraph">@item.VenueDescription</p>
-                    @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                        @*<img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
+                    </div>
+                    <div class="content">
+                        <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
+                        <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
+                        <p class="CustomParagraph">@item.VenueDescription</p>
+                        @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 </div>
 
 <script>

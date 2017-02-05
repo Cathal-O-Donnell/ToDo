@@ -3,7 +3,28 @@
 @using (Html.BeginForm("Create", "Venues", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
+    <form method="post" action="sendMail.php" id="contactform">
+       
+        <p>
+            @Html.EditorFor(model => model.VenueName, new { htmlAttributes = new { @class = "CustomTextBox", placeholder = @Html.DisplayNameFor(m => m.VenueName) } })
+            @Html.ValidationMessageFor(model => model.VenueName, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.TextAreaFor(model => model.VenueDescription)
+            @*@Html.EditorFor(model => model.VenueDescription, new { htmlAttributes = new { @class = "CustomTextBox", @cols = 80, @rows = 10 } })*@
+            @Html.ValidationMessageFor(model => model.VenueDescription, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.DropDownListFor(model => model.VenueTypeID, (SelectList)ViewBag.VenueTypes, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+        </p>
+        <p>
+            @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+        </p>
+
+        <button name="submit" type="submit" id="submitButton" title="Click here to submit your message!" class="btn btn-pri">SEND</button>
+    </form>
+
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -13,7 +34,7 @@
             <h2 style="color: #70b2f9;">New Venue</h2>
             @Html.LabelFor(model => model.VenueName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VenueName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VenueName, new { htmlAttributes = new { @class = "CustomTextBox", placeholder = @Html.DisplayNameFor(m => m.VenueName) } })
                 @Html.ValidationMessageFor(model => model.VenueName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -24,7 +45,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VenueDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 } })
+                @Html.EditorFor(model => model.VenueDescription, new { htmlAttributes = new { @class = "CustomTextBox", @cols = 80, @rows = 10 } })
                 @Html.ValidationMessageFor(model => model.VenueDescription, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.VenueTypeID, (SelectList)ViewBag.VenueTypes, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.VenueTypeID, (SelectList)ViewBag.VenueTypes, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
             </div>
         </div>
 
@@ -41,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueTownID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
             </div>
         </div>
 
@@ -49,7 +70,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VenueAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VenueAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VenueAddress, new { htmlAttributes = new { @class = "CustomTextBox" } })
                 @Html.ValidationMessageFor(model => model.VenueAddress, "", new { @class = "text-danger" })
             </div>
         </div>        
@@ -59,7 +80,7 @@
             <h2 style="color: #70b2f9;">Contact Details</h2>
             @Html.LabelFor(model => model.VenueEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VenueEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VenueEmail, new { htmlAttributes = new { @class = "CustomTextBox" } })
                 @Html.ValidationMessageFor(model => model.VenueEmail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,7 +89,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VenuePhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VenuePhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VenuePhoneNumber, new { htmlAttributes = new { @class = "CustomTextBox" } })
                 @Html.ValidationMessageFor(model => model.VenuePhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>

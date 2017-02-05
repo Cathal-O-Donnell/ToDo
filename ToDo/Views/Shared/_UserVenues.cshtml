@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ToDo.Models.Venue>
+
+<style>
+    .CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
+<h3 style="padding-right: 50px;">Your Venues</h3>
+
+@foreach (var item in Model)
+{
+    <div class="event-slider">
+
+        <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+            <div class="row">
+                <div class="eventschedule-post clearfix">
+                    <div class="event-img">
+                        @*Check if venue has image*@
+                        @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
+                        {
+                            <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                        }
+
+                        @*No venue image was uploaded, display default image*@
+                        else
+                        {
+                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                        }
+                    </div>
+                    <div class="content">
+                        <h3>@item.VenueName<span class="job">@item.VenueType.VenueTypeName    </span></h3>
+                        <h4 class="primery-color"><a href="#">@item.VenueTown.TownName</a> </h4>
+
+                        <p class="CustomParagraph">@item.VenueDescription</p>
+
+                        <div class="clearboth"></div>
+                        @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+
+                        @if (item.VenueActive == true)
+                        {
+                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-sm btn-warning">Make Inactive</button>
+                        }
+
+                        else if (item.VenueActive == false)
+                        {
+                            <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-sm btn-success">Make Active</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    //Change Venue Status Ajax
+    function VenueChangeStatus(VeID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenueChangeStatus", "Manage")',
+            data: { id: VeID },
+            success: function (data) {
+
+                $('#MyProfileVenues').html(data);
+                $('#MyProfileVenues').fadeIn("fast")
+            }
+        });
+    }
+</script>
+
+
+

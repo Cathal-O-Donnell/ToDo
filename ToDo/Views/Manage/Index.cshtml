@@ -1,23 +1,16 @@
 ﻿@model ToDo.Models.IndexViewModel
-@{
-    ViewBag.Title = "Manage";
-}
 
-<h2>@ViewBag.Title.</h2>
+<h2>My Profile</h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
-    <hr />
+        
+    @*User Venues Partial View*@
+    <div id="MyProfileVenues">
+        @Html.Action("UserVenuePartialView")
+    </div>
 
-    <h2>Venues</h2>
 
-    @foreach (var v in Model.UserVenues)
-    {
-        <h3>@v.VenueName</h3>
-    }
-
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="padding-top: 50px;">
         <dt>Password:</dt>
         <dd>
             [
