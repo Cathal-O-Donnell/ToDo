@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    
     @Scripts.Render("~/bundles/jquery")
 
     @*font awesome - http://www.w3schools.com/icons/fontawesome_icons_brand.asp*@
@@ -25,7 +26,7 @@
                     <ul>
                         @if (User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+                            <li class="CustomNavLI">@Html.ActionLink("Venues", "Index", "Venues")</li>
                             <li>@Html.ActionLink("Events", "Index", "Events")</li>
                             <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
                             <li>@Html.ActionLink("Admin", "Admin", "Home")</li>

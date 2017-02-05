@@ -49,7 +49,7 @@
                         @*Check if venue has image*@
                         @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
                     {
-                            <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px; text-align:center;" />
                         }
 
                         @*No venue image was uploaded, display default image*@
@@ -60,11 +60,15 @@
 
                         @*<img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
                     </div>
-                    <div class="content">
+                    <div class="content" style="height: 300px;">
                         <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
+                        <hr />
                         <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
                         <p class="CustomParagraph">@item.VenueDescription</p>
-                        @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                       
+                         <p style="text-align: center;">
+                            @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
+                        </p>
                     </div>
                 </div>
             </div>
