@@ -270,9 +270,10 @@ video {
 }
 
     .btn-pri:hover {
-        transition: all ease-in-out .2s;
+        background: #c91d1d;
+        /*transition: all ease-in-out .2s;
         background: transparent;
-        border: 1px solid #ddd;
+        border: 1px solid #ddd;*/
         color: #000;
     }
 

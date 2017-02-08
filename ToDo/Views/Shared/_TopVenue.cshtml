@@ -15,7 +15,7 @@
 
     <div class="eventschedule">
         <div class="content">
-            <h2 class="CustomH3" style="text-align:center; padding-bottom: 25px;">Top Events</h2>
+            <h2 class="CustomH3" style="text-align:center; padding-bottom: 25px;">Top Venues</h2>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
                         <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
                         <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
                     </ul>*@
-                    <div class="clearboth"></div>
+                    @*<div class="clearboth"></div>*@
                     @Html.ActionLink("More Details", "Details", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-pri" })
                 </div>
             </div>
