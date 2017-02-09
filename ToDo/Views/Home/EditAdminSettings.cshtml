@@ -45,6 +45,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event4_Option, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Event4Id, Model.Event4_Option, new { @class = "form-control", id = "lstFeaturedEvent4" })
+            </div>
+        </div>
+
         @*Venues*@
         <div class="form-group">
             @Html.LabelFor(model => model.TopVenueOption, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,6 +78,13 @@
             @Html.LabelFor(model => model.Venue3_Option, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(x => x.Venue3Id, Model.Venue3_Option, new { @class = "form-control", id = "lstFeaturedVenue3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue4_Option, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Venue4Id, Model.Venue4_Option, new { @class = "form-control", id = "lstFeaturedVenue4" })
             </div>
         </div>
        

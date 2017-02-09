@@ -428,6 +428,9 @@ namespace ToDo.Models
         [Display(Name = "Featured Event 3")]
         public int FeaturedEvent3 { get; set; }
 
+        [Display(Name = "Featured Event 4")]
+        public int FeaturedEvent4 { get; set; }
+
         //Venues
         [Display(Name = "Top Venue")]
         public int TopFeaturedVenue { get; set; }
@@ -440,6 +443,9 @@ namespace ToDo.Models
 
         [Display(Name = "Featured Venue 3")]
         public int FeaturedVenue3 { get; set; }
+
+        [Display(Name = "Featured Venue 4")]
+        public int FeaturedVenue4 { get; set; }
     }
 }
 

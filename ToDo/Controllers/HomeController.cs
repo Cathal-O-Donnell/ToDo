@@ -91,6 +91,7 @@ namespace ToDo.Controllers
             Venue featuredVenue1 = db.Venues.Find(admin.FeaturedVenue1);
             Venue featuredVenue2 = db.Venues.Find(admin.FeaturedVenue2);
             Venue featuredVenue3 = db.Venues.Find(admin.FeaturedVenue3);
+            Venue featuredVenue4 = db.Venues.Find(admin.FeaturedVenue4);
 
             List<Venue> featuredVenues = new List<Venue>();
 
@@ -127,6 +128,9 @@ namespace ToDo.Controllers
                 Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
                 ViewBag.Event3 = FeaturedEvent3.EventTitle;
 
+                Event FeaturedEvent4 = db.Events.Find(admin.FeaturedEvent4);
+                ViewBag.Event4 = FeaturedEvent4.EventTitle;
+
                 //Top Venue
                 Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);
                 ViewBag.TopVenue = TopFeaturedVenue.VenueName;
@@ -140,6 +144,9 @@ namespace ToDo.Controllers
 
                 Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
                 ViewBag.Venue3 = Venue3.VenueName;
+
+                Venue Venue4 = db.Venues.Find(admin.FeaturedVenue4);
+                ViewBag.Venue4 = Venue4.VenueName;
 
                 //Event Count
                 int EventCount = db.Events.Distinct().Count();
@@ -164,6 +171,9 @@ namespace ToDo.Controllers
         [HttpGet]
         public ActionResult EditAdminSettings()
         {
+
+            ViewBag.LinkText = "Admin";
+
             bool UserRole = User.IsInRole("Admin");
 
             if (UserRole == true)
@@ -212,6 +222,13 @@ namespace ToDo.Controllers
                         Value = x.EventID.ToString(),
                         Text = x.EventTitle
                     }),
+                    //Featured Event 4
+                    Event4Id = admin.FeaturedEvent4,
+                    Event4_Option = db.Events.Select(x => new SelectListItem
+                    {
+                        Value = x.EventID.ToString(),
+                        Text = x.EventTitle
+                    }),
                     //Top Venue
                     TopVenueId = admin.TopFeaturedVenue,
                     TopVenueOption = db.Venues.Select(x => new SelectListItem
@@ -236,6 +253,13 @@ namespace ToDo.Controllers
                     //Featured Venue 3
                     Venue3Id = admin.FeaturedVenue3,
                     Venue3_Option = db.Venues.Select(x => new SelectListItem
+                    {
+                        Value = x.VenueID.ToString(),
+                        Text = x.VenueName
+                    }),
+                    //Featured Venue 4
+                    Venue4Id = admin.FeaturedVenue3,
+                    Venue4_Option = db.Venues.Select(x => new SelectListItem
                     {
                         Value = x.VenueID.ToString(),
                         Text = x.VenueName
