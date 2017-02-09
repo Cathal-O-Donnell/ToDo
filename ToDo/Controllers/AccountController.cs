@@ -58,6 +58,8 @@ namespace ToDo.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            ViewBag.LinkText = "Login";
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -140,6 +142,9 @@ namespace ToDo.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+            ViewBag.LinkText = "Login";
+
             return View();
         }
 
