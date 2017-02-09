@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<ToDo.Models.Venue>
 
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
+@if (ViewBag.LoggedIn == true)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
+
 
 @*Partial View*@
 <div id="VenueTable">

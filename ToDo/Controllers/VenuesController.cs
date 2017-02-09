@@ -41,6 +41,15 @@ namespace ToDo.Controllers
                 TempData["VenueType"] = VenueType;
             }
 
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+            }
+
             return View();
         }
 
