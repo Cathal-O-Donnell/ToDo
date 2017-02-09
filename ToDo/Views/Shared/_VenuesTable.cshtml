@@ -58,7 +58,7 @@
                         <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
                     }
                 </div>
-                <div class="content" style="height: 300px;">
+                <div class="content" style="height: 250px;">
                     <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
                     <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
                     <p class="CustomParagraph">@item.VenueDescription</p>
@@ -71,40 +71,6 @@
             </div>
         </div>
     }
-
-
-    @*@foreach (var item in Model)
-    {
-        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
-            <div class="L_blog_post">
-                <div class="post-img">
-
-                   
-                    @if (item.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
-                    {
-                        <img src="~/File?id=@item.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px; text-align:center;" />
-                    }
-
-                   
-                    else
-                    {
-                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                    }
-
-                </div>
-                <div class="content" style="height: 300px;">
-                    <h3>@Html.DisplayFor(modelItem => item.VenueName)</h3>
-     
-                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.VenueTown.TownName)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)</span></div>
-                    <p class="CustomParagraph">@item.VenueDescription</p>
-
-                    <p style="text-align: center; position: absolute; bottom: 0;">
-                        @Html.ActionLink("More Details", "Details", "Venues", new { id = item.VenueID }, new { @class = "btn btn-pri" })
-                    </p>
-                </div>
-            </div>
-        </div>
-    }*@
 
 </div>
 
@@ -173,84 +139,3 @@
         });
     }
 </script>
-
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueType.VenueTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueTown.TownName)
-        </th>
-        <th>*@
-@*blank*@
-@*</th>
-    </tr>*@
-
-@*@foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueType.VenueTypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueTown.TownName)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.VenueID }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-
-    </table>*@
-
-
-@*Search Box*@
-@*<div style="padding-bottom: 15px;">
-        @using (Html.BeginForm())
-        {
-            <form class="form-horizontal" role="form">
-                    <div class="form-group" style="padding-bottom: 10px;">
-
-                        <div class="input-group col-md-2">
-                            @if (ViewBag.SearchTerm != null)
-                            {
-                                <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
-                            }
-                            else
-                            {
-                                <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                            }
-                            <span class="input-group-btn">
-                                <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
-                        </div>
-
-                        <div class="col-md-2">
-                            @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
-                        </div>
-
-                        <div class="col-md-2">
-                            @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "form-control", id = "lstVenueTypes" })
-                        </div>
-
-                        <div class="col-md-1">
-                            <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
-                        </div>
-
-                        <div class="col-md-1">
-                            <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
-                        </div>
-                    </div>
-                </form>
-        }
-    </div>*@

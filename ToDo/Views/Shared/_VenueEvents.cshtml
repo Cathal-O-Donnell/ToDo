@@ -38,37 +38,41 @@
 </div>
 
 <div class="row">
+
     @foreach (var item in Model)
     {
-        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
+
+        <div class="col-md-4 col-sm-4" style="padding-top: 50px;">
             <div class="L_blog_post">
                 <div class="post-img">
-                    @*Check if event has image*@
+                    @*Check if venue has image*@
                     @if (item.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
                     {
                         <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
                     }
 
-                    @*No event image was uploaded, display default image*@
+                    @*No venue image was uploaded, display default image*@
                     else
                     {
                         <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
                     }
-                    @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
                 </div>
-                <div class="content" style="height: 300px;">
+                <div class="content" style="height: 250px;">
                     <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
                     <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
                     <p class="CustomParagraph">@item.EventDescription</p>
-
-                    <p style="text-align: center; position: absolute; bottom: 0;">
-                        @Html.ActionLink("More Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
-                    </p>
+                    <div style="position: absolute; bottom: 0;">
+                        <p style="text-align: center;">
+                            @Html.ActionLink("More Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri " })
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     }
+
 </div>
+
 <script>
 
     $(document).ready(function () {
