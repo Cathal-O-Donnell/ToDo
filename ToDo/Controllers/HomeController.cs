@@ -104,6 +104,9 @@ namespace ToDo.Controllers
         //Admin
         public ActionResult Admin()
         {
+
+            ViewBag.LinkText = "Admin";
+
             bool UserRole = User.IsInRole("Admin");
 
             if (UserRole == true)

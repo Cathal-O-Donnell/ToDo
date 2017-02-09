@@ -38,7 +38,8 @@
                 </div>
                 <div class="content">
                     <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
-                    <h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>
+                    @*<h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>*@
+                    <h4  class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.VenueID }, null)</h4>
 
                     <p class="CustomParagraph">@Model.EventDescription</p>
 

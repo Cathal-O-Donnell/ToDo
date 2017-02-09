@@ -19,6 +19,9 @@ namespace ToDo.Controllers
         // GET: Bands
         public ActionResult Index()
         {
+
+            ViewBag.LinkText = "Bands";
+
             //See BandsTablePartialView
             return View();
         }
@@ -75,6 +78,9 @@ namespace ToDo.Controllers
         // GET: Bands/Details/5
         public ActionResult Details(int? id)
         {
+
+            ViewBag.LinkText = "Bands";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,6 +132,8 @@ namespace ToDo.Controllers
         // GET: Bands/Create
         public ActionResult Create()
         {
+
+            ViewBag.LinkText = "Bands";
 
             //Get the currentely logged in user
             string currentUserId = User.Identity.GetUserId();
@@ -202,6 +210,9 @@ namespace ToDo.Controllers
         // GET: Bands/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            ViewBag.LinkText = "Bands";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

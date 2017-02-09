@@ -24,6 +24,9 @@ namespace ToDo.Controllers
         // GET: Events
         public ActionResult Index()
         {
+
+            ViewBag.LinkText = "Events";
+
             //See EventsTablePartialView
             return View();
         }
@@ -31,6 +34,9 @@ namespace ToDo.Controllers
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
+
+            ViewBag.LinkText = "Events";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -147,6 +153,8 @@ namespace ToDo.Controllers
         public ActionResult Create(int? id)
         {
 
+            ViewBag.LinkText = "Events";
+
             //Get the currentely logged in user
             string currentUserId = User.Identity.GetUserId();
 
@@ -181,6 +189,9 @@ namespace ToDo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventEndTime,EventDescription,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventCatID")] Event @event, HttpPostedFileBase imageUpload)
         {
+
+            ViewBag.LinkText = "Events";
+
             if (ModelState.IsValid)
             {
                 //Get Owner Id
@@ -232,6 +243,9 @@ namespace ToDo.Controllers
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            ViewBag.LinkText = "Events";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

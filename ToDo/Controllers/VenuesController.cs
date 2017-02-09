@@ -24,6 +24,9 @@ namespace ToDo.Controllers
         // GET: Venues
         public ActionResult Index(string AdvancedSearch, string Town, string VenueType)
         {
+
+            ViewBag.LinkText = "Venues";
+
             //See VenuesTablePartialView
 
             if (AdvancedSearch != null)
@@ -56,6 +59,9 @@ namespace ToDo.Controllers
         // GET: Venues/Details/5
         public ActionResult Details(int? id)
         {
+
+            ViewBag.LinkText = "Venues";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -156,6 +162,9 @@ namespace ToDo.Controllers
         // GET: Venues/Create
         public ActionResult Create()
         {
+
+            ViewBag.LinkText = "Venues";
+
             //Get UserID
             string UserId = User.Identity.GetUserId();
 
@@ -241,6 +250,8 @@ namespace ToDo.Controllers
         // GET: Venues/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.LinkText = "Venues";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
