@@ -166,6 +166,67 @@ namespace ToDo.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BookBand([Bind(Include = "EventID, VenueID, EventTitle, EventDate, EventTime, EventEndTime, EventDescription, EventYouTube, EventSoundCloud, EventFacebook, EventTwitter, EventInstagram, EventWebsite, EventTicketPrice, EventTicketStore, EventCatID")] Event @event, HttpPostedFileBase imageUpload)
+        {
+            if (ModelState.IsValid)
+            {
+                //Get the currentely logged in user
+                string UserId = User.Identity.GetUserId();
+
+                //If no user is logged in, redirect them to the login page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                //Get Owner Id
+                @event.OwnerID = UserId;
+
+                //Get the new id for this event
+                var NextId = this.db.Events.Max(t => t.EventID);
+                var newId = NextId + 1;
+                @event.EventID = newId;
+
+                //Set this Events status as active
+                @event.EventActive = true;
+
+                //Event Category
+                @event.EventCat = db.EventCategories.Find(@event.EventCatID);
+
+                //Image File Upload
+                if (imageUpload != null && imageUpload.ContentLength > 0)
+                {
+                    var imgEvent = new File
+                    {
+                        FileName = System.IO.Path.GetFileName(imageUpload.FileName),
+                        FileType = FileType.EventImage,
+                        ContentType = imageUpload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(imageUpload.InputStream))
+                    {
+                        imgEvent.Content = reader.ReadBytes(imageUpload.ContentLength);
+                    }
+
+                    @event.Files = new List<File> { imgEvent };
+                }
+
+                db.Events.Add(@event);
+                db.SaveChanges();
+
+                //Redirect to details view for the new event
+                return RedirectToAction("Details", "Events", new
+                {
+                    id = @event.EventID
+                });
+            }
+
+            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
+            return View(@event);
+
+        }
+
         // GET: Bands/Create
         public ActionResult Create()
         {
