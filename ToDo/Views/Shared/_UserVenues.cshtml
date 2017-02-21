@@ -11,7 +11,7 @@
     }
 </style>
 
-<h3 style="padding-right: 50px;">Your Venues</h3>
+
 
 @foreach (var item in Model)
 {
@@ -52,13 +52,14 @@
                             <button type="button" onclick="VenueChangeStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-success">Show Venue</button>
                         }
 
-                        @Html.ActionLink("Edit Venue", "Edit","Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit Venue", "Edit", "Venues", new { id = item.VenueID }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
+
 
 <script>
     //Change Venue Status Ajax

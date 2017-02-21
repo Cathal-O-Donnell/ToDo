@@ -129,6 +129,43 @@ namespace ToDo.Controllers
             return View(band);
         }
 
+        public ActionResult BookBand(int? id)
+        {
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //User not logged in, redirect to Login Page
+            if (UserId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            //Get Venues that the user created
+            var venues = (from v in db.Venues
+                          where v.OwnerId == UserId
+                          select v).ToList();
+
+            if (venues.Count <= 0)
+            {
+                ViewBag.NoVenues = true;
+                ViewBag.Messgae = "You do not currently have any venues to book this band with, please register your venue first";
+            }
+
+            else
+            {
+                ViewBag.NoVenues = false;
+                
+                //User Venues
+                ViewBag.VenuesID = new SelectList(venues.OrderBy(x => x.VenueName), "VenueID", "VenueName");
+
+                //Event Categroies
+                ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+            }
+
+            return View();
+        }
+
         // GET: Bands/Create
         public ActionResult Create()
         {

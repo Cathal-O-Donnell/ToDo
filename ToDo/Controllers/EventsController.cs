@@ -176,7 +176,7 @@ namespace ToDo.Controllers
 
             Event newEvent = new Event() { Venue = venue, VenueID = Convert.ToInt32(id) };
 
-            //Venue Types
+            //Event Categories
             ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
 
             return View(newEvent);

@@ -11,46 +11,55 @@
     }
 </style>
 
-<div class="event-slider">
+@if (Model != null)
+{
+    <div class="event-slider">
 
-    <div class="eventschedule">
-        <div class="content">
-            <h2 class="CustomH3" style="text-align:center; padding-bottom: 25px;">Top Events</h2>
+        <div class="eventschedule">
+            <div class="content">
+                <h2 class="CustomH3" style="text-align:center; padding-bottom: 25px;">Top Events</h2>
+            </div>
         </div>
-    </div>
 
-    <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
-        <div class="row">
-            <div class="eventschedule-post clearfix">
-                <div class="event-img">
-                    @*Check if event has image*@
-                    @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
-                    {
-                        <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
-                    }
+        <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+            <div class="row">
+                <div class="eventschedule-post clearfix">
+                    <div class="event-img">
+                        @*Check if event has image*@
+                        @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+                        {
+                            <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                        }
 
-                    @*No event image was uploaded, display default image*@
-                    else
-                    {
-                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                    }
-                    @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
-                </div>
-                <div class="content">
-                    <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
-                    @*<h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>*@
-                    <h4  class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.VenueID }, null)</h4>
+                        @*No event image was uploaded, display default image*@
+                        else
+                        {
+                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                        }
+                        @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
+                    </div>
+                    <div class="content">
+                        <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
+                        @*<h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>*@
+                        <h4 class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.VenueID }, null)</h4>
 
-                    <p class="CustomParagraph">@Model.EventDescription</p>
+                        <p class="CustomParagraph">@Model.EventDescription</p>
 
-                    <ul class="gray-bg">
-                        <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
-                        <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
-                    </ul>
-                    <div class="clearboth"></div>
-                    @Html.ActionLink("More Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-pri" })
+                        <ul class="gray-bg">
+                            <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
+                            <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
+                        </ul>
+                        <div class="clearboth"></div>
+                        @Html.ActionLink("More Details", "Details", "Events", new { id = Model.EventID }, new { @class = "btn btn-pri" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+}
+
+else
+{
+    <h3>No Top event has been set</h3>
+}

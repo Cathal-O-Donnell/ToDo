@@ -12,6 +12,9 @@
     }
 </style>
 
+@if (Model != null)
+{
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -45,3 +48,9 @@
         </div>
     }
 </div>
+}
+
+else
+{
+     <h3>No featured Venues have been set</h3>
+}

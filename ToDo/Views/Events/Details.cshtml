@@ -9,9 +9,11 @@
         @if (ViewBag.IsOwner == true)
         {
         <div style="padding-top: 25px;">
-            @Html.ActionLink("Edit", "Edit", new { id = Model.EventID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Edit Event", "Edit", new { id = Model.EventID }, new { @class = "btn btn-primary" })
 
-            <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove</button>
+            @*<button id="btnRemoveEvent" class="btn btn-warning">Hide Event</button>*@
+
+            <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove Event</button>
         </div>
         }      
               

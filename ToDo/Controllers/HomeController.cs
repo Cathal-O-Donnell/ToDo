@@ -52,10 +52,12 @@ namespace ToDo.Controllers
             Event featuredEvent1 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent1);
             Event featuredEvent2 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent2);
             Event featuredEvent3 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent3);
+            Event featuredEvent4 = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.FeaturedEvent4);
 
             featuredEvents.Add(featuredEvent1);
             featuredEvents.Add(featuredEvent2);
             featuredEvents.Add(featuredEvent3);
+            //featuredEvents.Add(featuredEvent4);
 
             return PartialView("_FeaturedEvent", featuredEvents);
         }

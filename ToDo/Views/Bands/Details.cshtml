@@ -32,7 +32,7 @@
             }
 
             <p style="padding-top: 25px;">
-                <button onclick="BookBand(@Model.BandID)"; class="btn btn-info">Book @Model.BandName</button>
+                @Html.ActionLink("Book Band", "BookBand", new { id = Model.BandID }, new { @class = "btn btn-pri" })
             </p>
 
         </div>
