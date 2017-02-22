@@ -28,15 +28,6 @@
     </div>
 }
 
-
-
-
-@*<div style="display: inline; vertical-align: top; padding-top: 100px;">
-    <h1>@Model.VenueName</h1>
-
-    @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)
-</div>*@
-
 <div class="eventschedule">
     <div class="content">
         <h2 class="CustomH3" style="text-align:center; padding-bottom: 10px;">@Model.VenueName<span> - @Html.ActionLink(Model.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.VenueTown.TownID }, null)</span></h2>
