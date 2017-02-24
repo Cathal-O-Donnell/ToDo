@@ -4,7 +4,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <form method="post" action="sendMail.php" id="contactform">
+    @*<form method="post" action="sendMail.php" id="contactform">
        
         <p>
             @Html.EditorFor(model => model.VenueName, new { htmlAttributes = new { @class = "CustomTextBox", placeholder = @Html.DisplayNameFor(m => m.VenueName) } })
@@ -12,7 +12,7 @@
         </p>
         <p>
             @Html.TextAreaFor(model => model.VenueDescription)
-            @*@Html.EditorFor(model => model.VenueDescription, new { htmlAttributes = new { @class = "CustomTextBox", @cols = 80, @rows = 10 } })*@
+
             @Html.ValidationMessageFor(model => model.VenueDescription, "", new { @class = "text-danger" })
         </p>
         <p>
@@ -23,7 +23,7 @@
         </p>
 
         <button name="submit" type="submit" id="submitButton" title="Click here to submit your message!" class="btn btn-pri">SEND</button>
-    </form>
+    </form>*@
 
     <div class="form-horizontal">
 

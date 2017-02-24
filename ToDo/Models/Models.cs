@@ -312,7 +312,11 @@ namespace ToDo.Models
 
         //Venue Facebook
         [Display(Name = "Facebook")]
-        public string VenueFacebook { get; set; }        
+        public string VenueFacebook { get; set; }
+
+        //Venue Mailing List
+        [Display(Name = "Mailing List")]
+        public List<string> VenueEmailList { get; set; }
     }
 
     //Band Class

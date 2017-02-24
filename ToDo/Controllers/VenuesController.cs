@@ -13,6 +13,7 @@ using ToDo.Models;
 using Geocoding;
 using Geocoding.Google;
 using System.Data.Entity.Infrastructure;
+using System.Web.Security;
 
 namespace ToDo.Controllers
 {
@@ -503,6 +504,29 @@ namespace ToDo.Controllers
             }
 
             return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
+        }
+
+        // Remove Venue 
+        public ActionResult VenueMailingList(int id)
+        {
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            string email = Membership.GetUser().Email;
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+
+                Venue venue = db.Venues.Find(id);
+
+                venue.VenueEmailList.Add(email);
+
+                db.SaveChanges();
+            }
+
+
+            return View();
         }
     }
 }
