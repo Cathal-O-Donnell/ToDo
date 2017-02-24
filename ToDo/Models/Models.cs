@@ -313,10 +313,18 @@ namespace ToDo.Models
         //Venue Facebook
         [Display(Name = "Facebook")]
         public string VenueFacebook { get; set; }
+    }
 
-        //Venue Mailing List
+    public class VenueMailingList
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int VenueMailingListID { get; set; }
+
+        public int VenueID { get; set; }
+
         [Display(Name = "Mailing List")]
-        public List<string> VenueEmailList { get; set; }
+        public List<string> MailingList { get; set; }
     }
 
     //Band Class

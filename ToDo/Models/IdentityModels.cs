@@ -30,6 +30,7 @@ namespace ToDo.Models
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<Band> Bands { get; set; }
         public DbSet<MusicGenre> MusicGenres { get; set; }
+        public DbSet<VenueMailingList> VenueMailingList { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

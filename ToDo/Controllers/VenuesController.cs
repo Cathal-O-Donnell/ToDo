@@ -509,18 +509,25 @@ namespace ToDo.Controllers
         // Remove Venue 
         public ActionResult VenueMailingList(int id)
         {
-            //Get UserID
+            //Get UserID and Email
             string UserId = User.Identity.GetUserId();
+            string email = User.Identity.Name;
 
-            string email = Membership.GetUser().Email;
             //Check if the user is logged in
             if (UserId != null)
             {
                 ViewBag.LoggedIn = true;
 
+                //Add the users email to this venues email mailing list
                 Venue venue = db.Venues.Find(id);
 
-                venue.VenueEmailList.Add(email);
+                //If list is null, initlise it
+                //if (venue.VenueMailingList == null)
+                //{
+                //    venue.VenueMailingList = new List<string>();
+                //}
+
+                //venue.VenueMailingList.Add(email);
 
                 db.SaveChanges();
             }
