@@ -4,163 +4,176 @@
 @using (Html.BeginForm("Edit", "Bands", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
+        <div class="row">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.BandID)
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.BandID)
 
-        @*Band Name*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Band Name*@
+                <div class="form-group">
+                    <h2 class="CustomH3">Edit Band</h2>
+                    @Html.LabelFor(model => model.BandName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandName, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Band Description*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
-                @Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Band Description*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
+                        @Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Genre*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandGenreID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.MusicGenres, "--Select One--", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Genre*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandGenreID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.MusicGenres, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+                        @Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Contact Number*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandContactNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Contact Number*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandContactNumber, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandContactNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Band Email*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Band Email*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandEmail, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Facebook*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandFacebook, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandFacebook, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Facebook*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandFacebook, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandFacebook, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Manager Name*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandManagerName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandManagerName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*Manager*@
+                <div class="form-group">
+                    <h2 class="CustomH3">Manager</h2>
+                    @Html.LabelFor(model => model.BandManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandManagerName, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandManagerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        @*Manager Email*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandManagerEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandManagerEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Press Contact*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandPressContact, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandPressContact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Record Label*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandRecordLabel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandRecordLabel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Booking Agent Name*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandBookingAgentName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandBookingAgentName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*Booking Agent Email*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandBookingAgentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandBookingAgentEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*YouTube*@
-        <div class="form-group">
-            <h2 style="color: #70b2f9;">Content Links</h2>
-            @Html.LabelFor(model => model.BandYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandYouTube, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*SoundCloud*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.BandSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BandSoundCloud, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })
-            </div>
-        </div>      
-
-        @*Image*@
-        @if (Model.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
-        {
-            <div class="form-group">
-                <span class="control-label col-md-2"><strong>Current Image</strong></span>
-                <div class="col-md-10">
-                    <img src="~/File?id=@Model.BandFiles.First(f => f.BandFileType == ToDo.Models.FileType.EventImage).BandFileId" alt="avatar" style="width: 200px; height:200px;" />
+                @*Manager Email*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandManagerEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandManagerEmail, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        }
 
-        <div class="form-group">
-            @Html.Label("New Image", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="Avatar" name="upload" />
-            </div>
-        </div>
+            <div class="col-md-6">
 
-        @*OwnerID*@
-        @Html.HiddenFor(m => m.OwnerId, new { @Value = @ViewBag.OID })
+                @*Press Contact*@
+                <div class="form-group">
+                    <h2 class="CustomH3">Press Contact</h2>
+                    @Html.LabelFor(model => model.BandPressContact, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandPressContact, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
+                @*Record Label*@
+                <div class="form-group">
+                    <h2 class="CustomH3">Record Label</h2>
+                    @Html.LabelFor(model => model.BandRecordLabel, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandRecordLabel, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Booking Agent Name*@
+                <div class="form-group">
+                    <h2 class="CustomH3">Booking Agent</h2>
+                    @Html.LabelFor(model => model.BandBookingAgentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandBookingAgentName, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Booking Agent Email*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandBookingAgentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandBookingAgentEmail, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*YouTube*@
+                <div class="form-group">
+                    <h2 style="color: #70b2f9;">Links</h2>
+                    @Html.LabelFor(model => model.BandYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandYouTube, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*SoundCloud*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BandSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BandSoundCloud, new { htmlAttributes = new { @class = "CustomTextBox" } })
+                        @Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Image*@
+                @if (Model.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
+                {
+                    <div class="form-group">
+                        <h2 class="CustomH3">Image</h2>
+                        <span class="control-label col-md-2"><strong>Current Image</strong></span>
+                        <div class="col-md-10">
+                            <img src="~/File?id=@Model.BandFiles.First(f => f.BandFileType == ToDo.Models.FileType.EventImage).BandFileId" alt="avatar" style="width: 200px; height:200px;" />
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    @Html.Label("New Image", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" id="Avatar" name="upload" />
+                    </div>
+                </div>
+
+                @*OwnerID*@
+                @Html.HiddenFor(m => m.OwnerId, new { @Value = @ViewBag.OID })
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
