@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<ToDo.Models.Event>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
 <style>
     .CustomParagraph {
         margin: 20px;
@@ -14,6 +17,7 @@
 @*Search Filters*@
 <div class="container" style="padding-bottom: 25px;">
     <form class="form-inline">
+        @*Search Box*@
         <div class="form-group" style="padding-top:20px;">
             @if (ViewBag.SearchTerm != null)
             {
@@ -24,9 +28,15 @@
                 <input type="text" id="txtSearch" class="CustomTextBox" placeholder="Search..." />
             }
         </div>
+        @*Date Picker*@
+        <div class="form-group" style="padding-top:20px;">
+            <input type="text" id="datepicker" class="CustomTextBox" placeholder="Date">
+        </div>
+        @*Town Dropdown*@
         <div class="form-group" style="padding-top:20px;">
             @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "CustomTextBox", id = "lstTowns" })
         </div>
+        @*Event Categories*@
         <div class="form-group" style="padding-top:20px;">
             @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "CustomTextBox", id = "lstEventCat" })
         </div>
@@ -73,42 +83,12 @@
 
 </div>
 
-
-
-@*<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 col-sm-4" style="padding-bottom: 35px;">
-            <div class="L_blog_post">
-                <div class="post-img">
-                   
-                    @if (item.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
-                    {
-                        <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
-                    }
-
-                 
-                    else
-                    {
-                        <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                    }
-                    
-                </div>
-                <div class="content" style="height: 300px;">
-                    <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
-                    <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
-                    <p class="CustomParagraph">@item.EventDescription</p>
-
-                    <p style="text-align: center; position: absolute; bottom: 0;">
-                        @Html.ActionLink("More Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri" })
-                    </p>
-                </div>
-            </div>
-        </div>
-    }
-</div>*@
-
 <script>
+
+    $(function () {
+        //$("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        $("#datepicker").datepicker();
+    });
 
     $(document).ready(function () {
         var TownIndex =  @Html.Raw(Json.Encode(@ViewBag.TownIndex));
@@ -142,13 +122,16 @@
         var town = document.getElementById("lstTowns").value;
         var eventCat = document.getElementById("lstEventCat").value;
         var search = document.getElementById("txtSearch").value;
+        var date = document.getElementById("datepicker").value;
+
+        console.log(date);
 
         var advancedSearch = "true";
         //Ajax code
         $.ajax({
             type: "GET",
             url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, CategoryIndex: ECypeSelectedIndex },
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, CategoryIndex: ECypeSelectedIndex, Date: date },
             success: function (data) {
 
                 $('#EventTable').html(data);
@@ -173,99 +156,3 @@
     }
 
 </script>
-
-
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EventTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue.VenueName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventCat.EventCategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue.VenueTown.TownName)
-            </th>
-            <th>
-
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Venue.VenueName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventCat.EventCategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.EventID }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-
-    </table>*@
-
-
-
-@*Search Box*@
-@*<div class="row" style="padding-bottom: 25px;">
-        @using (Html.BeginForm())
-        {
-
-            <form class="form-horizontal" role="form">
-                <div class="form-group" style="padding-bottom: 10px;">
-
-                    <div class="input-group col-md-2">
-                        @if (ViewBag.SearchTerm != null)
-                    {
-                            <input type="text" id="txtSearch" class="search-query form-control" value="@ViewBag.SearchTerm" />
-                        }
-                        else
-                        {
-                            <input type="text" id="txtSearch" class="search-query form-control" placeholder="Search..." />
-                        }
-
-                        <span class="input-group-btn">
-                            <button id="btnCustomerInc" onclick="VenueSearch();" class="btn btn-info" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-
-                    <div class="col-md-2">
-                        @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "form-control", id = "lstTowns" })
-                    </div>
-
-                    <div class="col-md-2">
-                        @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "form-control", id = "lstEventCat" })
-                    </div>
-
-                    <div class="col-md-1">
-                        <span class="btn btn-sm btn-primary" onclick="AdvanceSearch();">Search</span>
-                    </div>
-
-                    <div class="col-md-1">
-                        <span class="btn btn-sm btn-warning" onclick="Reset();">Reset</span>
-                    </div>
-                </div>
-            </form>
-        }
-    </div>*@

@@ -13,6 +13,7 @@ using ToDo.Models;
 using Geocoding;
 using Geocoding.Google;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 
 namespace ToDo.Controllers
 {
@@ -408,8 +409,9 @@ namespace ToDo.Controllers
 
 
         //Event Index Partial View
-        public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch, string TownIndex, string CategoryIndex)
-        {
+        public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch, string TownIndex, string CategoryIndex, DateTime? Date)
+        {          
+                                  
             ViewBag.TownIndex = TownIndex;
             ViewBag.CategoryIndex = CategoryIndex;
 
@@ -422,11 +424,18 @@ namespace ToDo.Controllers
                          select e;
 
             if (AdvancedSearch == "true")
-            {
-
+            {               
+                //Get all Events from the database
                 events = from v in db.Events
                          where v.EventActive == true
                          select v;
+
+                if (Date != null)
+                {
+                    var stringDate = String.Format("{0:dd-MM-yyyy}", Date);
+                    DateTime formatedDate = DateTime.Parse(stringDate);
+                    events = events.Where(e => e.EventDate == formatedDate);
+                }
 
                 if (Town != "")
                 {
@@ -447,7 +456,7 @@ namespace ToDo.Controllers
                     ViewBag.SearchTerm = search;
                 }
 
-                return PartialView("_EventsTable", events.OrderBy(e => e.EventTitle).ToList());
+                return PartialView("_EventsTable", events.OrderBy(e => e.EventDate).ToList());
             }
 
             else
@@ -460,7 +469,7 @@ namespace ToDo.Controllers
                     ViewBag.SearchTerm = search;
                 }
 
-                return PartialView("_EventsTable", events.OrderBy(v => v.EventTitle).ToList());
+                return PartialView("_EventsTable", events.OrderBy(v => v.EventDate).ToList());
             }
         }
     }

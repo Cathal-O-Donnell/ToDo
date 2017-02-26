@@ -20,6 +20,15 @@ namespace ToDo.Controllers
         public ActionResult Index()
         {
 
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+            }
+
             ViewBag.LinkText = "Bands";
 
             //See BandsTablePartialView

@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<ToDo.Models.Band>
 
-<h2>Bands</h2>
-
-<hr />
-
+@if (ViewBag.LoggedIn == true)
+{
 <p>
-    @Html.ActionLink("Register Band", "Create", null, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Register Band", "Create", null, new { @class = "btn btn-primary" })
 </p>
+}
 
 @*Partial View*@
 <div id="BandTable">
