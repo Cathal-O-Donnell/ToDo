@@ -477,7 +477,7 @@ namespace ToDo.Controllers
 
 
         //Venue Index Partial View
-        public ActionResult VenuesEventsPartialView(int? VenueID, string search, string CategoryIndex, string EventCategory)
+        public ActionResult VenuesEventsPartialView(int? VenueID, string search, string CategoryIndex, string EventCategory, DateTime? Date)
         {
             ViewBag.VenueID = VenueID;
             ViewBag.CategoryIndex = CategoryIndex;
@@ -489,6 +489,13 @@ namespace ToDo.Controllers
 
             //Venue Types
             ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
+            if (Date != null)
+            {
+                var stringDate = String.Format("{0:dd-MM-yyyy}", Date);
+                DateTime formatedDate = DateTime.Parse(stringDate);
+                events = events.Where(e => e.EventDate == formatedDate).ToList();
+            }
 
             if (!String.IsNullOrEmpty(search))
             {
