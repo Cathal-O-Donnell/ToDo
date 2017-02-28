@@ -35,7 +35,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.BandGenreID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.MusicGenres, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+                        @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.MusicGenres, "Pick Genre", htmlAttributes: new { @class = "CustomTextBox" })
                         @Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })
                     </div>
                 </div>

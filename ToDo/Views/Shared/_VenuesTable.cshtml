@@ -12,33 +12,34 @@
     }
 </style>
 
-@*Search Filters*@
-<div class="container" style="padding-bottom: 25px;">
-    <form class="form-inline">
-        <div class="form-group" style="padding-top:20px;">
-            @if (ViewBag.SearchTerm != null)
-            {
-                <input type="text" id="txtSearch" class="CustomTextBox" value="@ViewBag.SearchTerm" />
-            }
-            else
-            {
-                <input type="text" id="txtSearch" class="CustomTextBox" placeholder="Search..." />
-            }
-        </div>
-        <div class="form-group" style="padding-top:20px;">
-            @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "CustomTextBox", id = "lstTowns" })
-        </div>
-        <div class="form-group" style="padding-top:20px;">
-            @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Please select", new { @class = "CustomTextBox", id = "lstVenueTypes" })
-        </div>
-
-        <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
-
-        <span class="btn btn-warning" onclick="Reset();">Reset</span>
-    </form>
-</div>
-
 <div style="padding-bottom:25px;">
+
+    @*Search Filters*@
+    <div class="container" style="padding-bottom: 10px;">
+        <form class="form-inline">
+            <div class="form-group" style="padding-top:20px;">
+                @if (ViewBag.SearchTerm != null)
+            {
+                    <input type="text" id="txtSearch" class="CustomTextBox" value="@ViewBag.SearchTerm" />
+                }
+                else
+                {
+                    <input type="text" id="txtSearch" class="CustomTextBox" placeholder="Search..." />
+                }
+            </div>
+            <div class="form-group" style="padding-top:20px;">
+                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Pick Town", new { @class = "CustomTextBox", id = "lstTowns" })
+            </div>
+            <div class="form-group" style="padding-top:20px;">
+                @Html.DropDownList("Venue_TypeID", (SelectList)ViewBag.VenueTypes, "Pick Type", new { @class = "CustomTextBox", id = "lstVenueTypes" })
+            </div>
+
+            <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
+
+            <span class="btn btn-warning" onclick="Reset();">Reset</span>
+        </form>
+    </div>
+
     <div class="row">
 
         @foreach (var item in Model)

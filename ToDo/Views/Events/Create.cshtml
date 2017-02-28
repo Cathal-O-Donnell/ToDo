@@ -35,7 +35,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCategories, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+                        @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCategories, "Pick Category", htmlAttributes: new { @class = "CustomTextBox" })
                     </div>
                 </div>
 

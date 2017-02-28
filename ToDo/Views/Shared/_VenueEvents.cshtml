@@ -34,7 +34,7 @@
         </div>
         @*Event Category*@
         <div class="form-group" style="padding-top:20px;">
-            @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "CustomTextBox", id = "lstEventCat" })
+            @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Pick Category", new { @class = "CustomTextBox", id = "lstEventCat" })
         </div>
 
         <span class="btn btn-primary" onclick="AdvanceSearch(@ViewBag.VenueID);">Search</span>

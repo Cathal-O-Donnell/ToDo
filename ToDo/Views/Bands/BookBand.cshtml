@@ -35,7 +35,7 @@ else
                     <div class="form-group">
                         @Html.LabelFor(model => model.Venue.VenueName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.VenueID, (SelectList)ViewBag.VenuesID, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.VenueID, (SelectList)ViewBag.VenuesID, "Pick Venue", htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -53,7 +53,7 @@ else
                     <div class="form-group">
                         @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCategories, "--Select One--", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCategories, "Pick Category", htmlAttributes: new { @class = "form-control" })
                         </div>
                     </div>
 

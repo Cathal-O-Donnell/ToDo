@@ -36,7 +36,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.VenueType, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.VenueTypeID, (SelectList)ViewBag.VenueTypes, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+                        @Html.DropDownListFor(model => model.VenueTypeID, (SelectList)ViewBag.VenueTypes, "Pick Type", htmlAttributes: new { @class = "CustomTextBox" })
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.VenueTownID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "--Select One--", htmlAttributes: new { @class = "CustomTextBox" })
+                        @Html.DropDownListFor(model => model.VenueTownID, (SelectList)ViewBag.TownId, "Pick Town", htmlAttributes: new { @class = "CustomTextBox" })
                     </div>
                 </div>
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ToDo.Models.Event>
+﻿    @model IEnumerable<ToDo.Models.Event>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -14,10 +14,10 @@
     }
 </style>
 
-<div style="padding-bottom:50px;">
+<div style="padding-bottom:25px;">
 
     @*Search Filters*@
-    <div class="container" style="padding-bottom: 25px;">
+    <div class="container" style="padding-bottom: 10px;">
         <form class="form-inline">
             @*Search Box*@
             <div class="form-group" style="padding-top:20px;">
@@ -32,15 +32,15 @@
             </div>
             @*Date Picker*@
             <div class="form-group" style="padding-top:20px;">
-                <input type="text" id="datepicker" class="CustomTextBox" placeholder="Date">
+                <input type="text" id="datepicker" class="CustomTextBox" placeholder="Pick Date">
             </div>
             @*Town Dropdown*@
             <div class="form-group" style="padding-top:20px;">
-                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Please select", new { @class = "CustomTextBox", id = "lstTowns" })
+                @Html.DropDownList("TownId", (SelectList)ViewBag.Towns, "Pick Town", new { @class = "CustomTextBox", id = "lstTowns" })
             </div>
             @*Event Categories*@
             <div class="form-group" style="padding-top:20px;">
-                @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Please select", new { @class = "CustomTextBox", id = "lstEventCat" })
+                @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Pick Category", new { @class = "CustomTextBox", id = "lstEventCat" })
             </div>
 
             <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>

@@ -264,7 +264,7 @@ namespace ToDo.Models
         //Name
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
-        [Display(Name = "Venue")]
+        [Display(Name = "Name")]
         public string VenueName { get; set; }
 
         //Address
@@ -297,17 +297,18 @@ namespace ToDo.Models
         public bool VenueActive { get; set; }
 
         //Venue Town Foreign
-        [Display(Name = "Venue Town")]
+        [Display(Name = "Town")]
         public int VenueTownID { get; set; }
 
         //venue Town
         public virtual Town VenueTown { get; set; }
 
         //Venue Catergory Foreign
-        [Display(Name = "Venue Town")]
+        [Display(Name = "Town")]
         public int VenueTypeID { get; set; }
 
         //venue Category
+        [Display(Name = "Type")]
         public virtual Venue_Type VenueType { get; set; }
 
         //Venue Facebook
