@@ -159,11 +159,11 @@ namespace ToDo.Models
         public string EventWebsite { get; set; }
 
         //Ticket Price
-        [Display(Name = "Ticket Price")]
+        [Display(Name = "Price")]
         public double? EventTicketPrice { get; set; }
 
         //Ticket Shop Link/ Location
-        [Display(Name = "Ticket Vendor")]
+        [Display(Name = "Vendor")]
         public string EventTicketStore { get; set; }
 
         //Image File 
