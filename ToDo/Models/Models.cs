@@ -465,8 +465,8 @@ namespace ToDo.Models
 
 //To Do
 
-//Facebook (sign in/ up, share events, like) - https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
-//sendgrid
+//Remove old events from the database
+
 
 //Get users current location - apply this location to the filters by default
 //Add more filters to the index pages (Town, Date, Venue)

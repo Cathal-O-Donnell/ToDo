@@ -423,7 +423,21 @@ namespace ToDo.Controllers
                          where e.EventActive == true && e.Venue.VenueActive == true
                          select e;
 
-            if (AdvancedSearch == "true")
+            //Remove old events from the database
+            foreach (var Event in events.ToList())
+            {
+                var EventDate = Event.EventDate;
+                TimeSpan ts = DateTime.Now - EventDate;
+
+                //Remove event if it is old
+                if (ts.TotalDays > 1)
+                {
+                    db.Events.Remove(Event);
+                    db.SaveChanges();
+                }
+            }
+
+                if (AdvancedSearch == "true")
             {               
                 //Get all Events from the database
                 events = from v in db.Events
