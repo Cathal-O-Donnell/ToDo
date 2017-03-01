@@ -470,6 +470,16 @@ namespace ToDo.Controllers
                     ViewBag.SearchTerm = search;
                 }
 
+                if (events.Count() <= 0)
+                {
+                    ViewBag.NoEvents = true;
+                }
+
+                else
+                {
+                    ViewBag.NoEvents = false;
+                }
+
                 return PartialView("_EventsTable", events.OrderBy(e => e.EventDate).ToList());
             }
 
@@ -481,6 +491,16 @@ namespace ToDo.Controllers
                     //Get all the events where the name contains the users search term
                     events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper()));
                     ViewBag.SearchTerm = search;
+                }
+
+                if (events.Count() <= 0)
+                {
+                    ViewBag.NoEvents = true;
+                }
+
+                else
+                {
+                    ViewBag.NoEvents = false;
                 }
 
                 return PartialView("_EventsTable", events.OrderBy(v => v.EventDate).ToList());

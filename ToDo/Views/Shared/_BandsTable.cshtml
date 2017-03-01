@@ -37,7 +37,16 @@
     </div>
 
     <div class="row">
-        @foreach (var item in Model)
+
+@if (ViewBag.NoBands == true)
+{
+    <h2 class="CustomH3" style="text-align: center;">0 results :(</h2>
+}
+
+else
+{
+
+        foreach (var item in Model)
         {
             <div class="col-md-4 col-sm-4" style="padding-top: 50px;">
                 <div class="L_blog_post">
@@ -69,6 +78,7 @@
                 </div>
             </div>
         }
+}
     </div>
 </div>  
 

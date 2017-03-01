@@ -67,6 +67,16 @@ namespace ToDo.Controllers
                     ViewBag.SearchTerm = search;
                 }
 
+                if (bands.Count() <= 0)
+                {
+                    ViewBag.NoBands = true;
+                }
+
+                else
+                {
+                    ViewBag.NoBands = false;
+                }
+
                 return PartialView("_BandsTable", bands.OrderBy(e => e.BandName).ToList());
             }
 
@@ -78,6 +88,16 @@ namespace ToDo.Controllers
                     //Get all the events where the name contains the users search term
                     bands = bands.Where(e => e.BandName.ToUpper().Contains(search.ToUpper()));
                     ViewBag.SearchTerm = search;
+                }
+
+                if (bands.Count() <= 0)
+                {
+                    ViewBag.NoBands = true;
+                }
+
+                else
+                {
+                    ViewBag.NoBands = false;
                 }
 
                 return PartialView("_BandsTable", bands.OrderBy(v => v.BandName).ToList());

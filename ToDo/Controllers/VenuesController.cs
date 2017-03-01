@@ -458,6 +458,16 @@ namespace ToDo.Controllers
                 TempData["AdvancedSearch"] = null;
                 TempData["Town"] = null;
 
+                if (venues.Count() <= 0)
+                {
+                    ViewBag.NoVenues = true;
+                }
+
+                else
+                {
+                    ViewBag.NoVenues = false;
+                }
+
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
             }
 
@@ -468,6 +478,16 @@ namespace ToDo.Controllers
                 {
                     venues = venues.Where(v => v.VenueName.ToUpper().Contains(search.ToUpper()));
                     ViewBag.SearchTerm = search;
+                }
+
+                if (venues.Count() <= 0)
+                {
+                    ViewBag.NoVenues = true;
+                }
+
+                else
+                {
+                    ViewBag.NoVenues = false;
                 }
 
                 return PartialView("_VenuesTable", venues.OrderBy(v => v.VenueName).ToList());
@@ -513,7 +533,7 @@ namespace ToDo.Controllers
             return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
 
-        // Remove Venue 
+        //Venue Mailing List
         public ActionResult VenueMailingList(int id)
         {
             //Get UserID and Email
