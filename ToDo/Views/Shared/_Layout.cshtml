@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    
+
     @Scripts.Render("~/bundles/jquery")
 
     @*font awesome - http://www.w3schools.com/icons/fontawesome_icons_brand.asp*@
@@ -26,18 +26,11 @@
                     <ul>
                         @if (User.IsInRole("Admin"))
                         {
-                           
+
                             <li class="@(ViewBag.Linktext == "Venues" ? "current" : "")">@Html.ActionLink("Venues", "Index", "Venues")</li>
                             <li class="@(ViewBag.Linktext == "Events" ? "current" : "")">@Html.ActionLink("Events", "Index", "Events")</li>
                             <li class="@(ViewBag.Linktext == "Bands" ? "current" : "")">@Html.ActionLink("Bands", "Index", "Bands")</li>
                             <li class="@(ViewBag.Linktext == "Admin" ? "current" : "")">@Html.ActionLink("Admin", "Admin", "Home")</li>
-
-
-                            
-                            @*<li class="CustomNavLI">@Html.ActionLink("Venues", "Index", "Venues")</li>*@
-                            @*< li > @Html.ActionLink("Events", "Index", "Events") </ li > *@
-                            @*< li > @Html.ActionLink("Bands", "Index", "Bands") </ li >
-                            < li > @Html.ActionLink("Admin", "Admin", "Home") </ li > *@
 
                             @Html.Partial("_LoginPartial")
                         }
@@ -59,15 +52,15 @@
     </div>
 
     <div class="container body-content">
-        @*@RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
+
         @RenderBody()
 
 
     </div>
+
+    @Scripts.Render("~/bundles/table")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
     <footer class="main-footer">
         <div class="container">
@@ -81,8 +74,6 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/table")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
 </body>
 </html>
