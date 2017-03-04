@@ -18,13 +18,15 @@
 @*Check if current user is the owner of this event*@
 @if (ViewBag.IsOwner == true)
 {
+    @*Only the venue owner can see this section*@
     <div style="padding-top: 25px;">
         @Html.ActionLink("Edit Venue", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
 
-        @*@Html.ActionLink("Remove Venue", "Delete", new { id = Model.VenueID }, new { @class = "btn btn-danger" })*@
         <button id="btnRemoveVenue" class="btn btn-warning">Hide Venue</button>
 
         @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
+
+        <h3>@Html.DisplayNameFor(model => model.VenueViewCounter) @Model.VenueViewCounter</h3>
     </div>
 }
 

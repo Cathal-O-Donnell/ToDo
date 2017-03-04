@@ -58,13 +58,22 @@ namespace ToDo.Controllers
             ViewBag.EPhone = venue.VenuePhoneNumber;
             ViewBag.EEmail = venue.VenueEmail;
 
-            //Get currents users id
+            //Get current users id
             string UserId = User.Identity.GetUserId();
 
             //Check if current user is the owner of this event
             if (@event.OwnerID == UserId)
             {
                 ViewBag.IsOwner = true;
+            }
+
+            else
+            {
+                ViewBag.IsOwner = false;
+
+                //If user is not owner of this event, add 1 to the view counter
+                @event.EventViewCounter = @event.EventViewCounter + 1;
+                db.SaveChanges();
             }
 
             //Check if the event is free

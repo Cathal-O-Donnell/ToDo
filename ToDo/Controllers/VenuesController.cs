@@ -69,7 +69,7 @@ namespace ToDo.Controllers
             }
 
             Venue venue = db.Venues.Find(id);
-            ViewBag.VenueID = venue.VenueID;
+            ViewBag.VenueID = venue.VenueID;            
 
             if (venue == null)
             {
@@ -83,6 +83,15 @@ namespace ToDo.Controllers
             if (venue.OwnerId == UserId)
             {
                 ViewBag.IsOwner = true;
+            }
+
+            else
+            {
+                ViewBag.IsOwner = false;
+
+                //If user is not owner of this venue, add 1 to the view counter
+                venue.VenueViewCounter = venue.VenueViewCounter + 1;
+                db.SaveChanges();
             }
 
             //Get Events

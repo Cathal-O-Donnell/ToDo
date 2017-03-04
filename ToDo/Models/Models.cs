@@ -8,10 +8,12 @@ using System.Web;
 
 namespace ToDo.Models
 {
+    #region Enums
     //Enums
     public enum Category { Charity, Community, Entertainment, Family, Music, Outdoor, Sporting, Theatre, Other }
     public enum ActivityCategory { Adventure, Culture, Drink, Family, Food, Historical, Shop }
     public enum FileType { EventImage = 1, Photo }
+    #endregion
 
     //Music Genre Class
     public class MusicGenre
@@ -179,6 +181,10 @@ namespace ToDo.Models
 
         //Event Category
         public virtual EventCategory EventCat { get; set; }
+
+        //Event View Counter
+        [Display(Name = "Total Views:")]
+        public int EventViewCounter { get; set; }
     }
 
     //Image File class
@@ -248,7 +254,7 @@ namespace ToDo.Models
         public virtual Band Band { get; set; }
     }
 
-    //Venue
+    //Venue class
     public class Venue
     {
         [Key]
@@ -314,6 +320,10 @@ namespace ToDo.Models
         //Venue Facebook
         [Display(Name = "Facebook")]
         public string VenueFacebook { get; set; }
+
+        //Venue View Counter
+        [Display(Name = "Total Views:")]
+        public int VenueViewCounter { get; set; }
     }
 
     //Venue Mailing List
@@ -352,7 +362,7 @@ namespace ToDo.Models
         public string BandDescription { get; set; }
 
         //Contact Number
-        [Display(Name = "Phone")]
+        [Display(Name = "Phone")]   
         [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
         public int? BandContactNumber { get; set; }
 
@@ -381,7 +391,7 @@ namespace ToDo.Models
         //Image File 
         public virtual ICollection<BandFile> BandFiles { get; set; }
 
-        //Youtube Link     
+        //Youtube Link      
         [Display(Name = "YouTube")]
         public string BandYouTube { get; set; }
 
