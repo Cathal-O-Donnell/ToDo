@@ -22,6 +22,8 @@
             @*<button id="btnRemoveEvent" class="btn btn-warning">Hide Event</button>*@
 
             <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove Event</button>
+
+            <h3>@Html.DisplayNameFor(model => model.EventViewCounter) @Model.EventViewCounter</h3>
         </div>
         }      
               

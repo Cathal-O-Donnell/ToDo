@@ -141,12 +141,8 @@ namespace ToDo.Controllers
                 ViewBag.noEvents = true;
             }
 
-            //GeoCodder: Long and Lat values
             IGeocoder geoCode;
-
             geoCode = new GoogleGeocoder();
-
-            //string twn = db.Towns.Find(venue.VenueTownID).Town;
 
             //Combine location into one string
             string address = string.Format("{0}, {1}, {2}, Ireland", venue.VenueAddress, venue.VenueTown.TownName, venue.VenueTown.County);
