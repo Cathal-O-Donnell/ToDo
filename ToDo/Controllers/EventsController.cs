@@ -72,7 +72,7 @@ namespace ToDo.Controllers
                 ViewBag.IsOwner = false;
 
                 //If user is not owner of this event, add 1 to the view counter
-                @event.EventViewCounter = @event.EventViewCounter ++;
+                @event.EventViewCounter = @event.EventViewCounter +1;
 
                 //Reset the daily view counter
                 if (DateTime.Now.Date != @event.EventViewCounterReset)
@@ -82,7 +82,7 @@ namespace ToDo.Controllers
                 }
 
                 //Incremente the daily view counter
-                @event.EventDailyViewCounter ++;
+                @event.EventDailyViewCounter = @event.EventDailyViewCounter + 1;
 
                 db.SaveChanges();
             }

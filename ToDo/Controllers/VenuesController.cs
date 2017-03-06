@@ -100,7 +100,7 @@ namespace ToDo.Controllers
                 }
 
                 //Incremente the daily view counter
-                venue.VenueDailyViewCounter++;
+                venue.VenueDailyViewCounter = venue.VenueDailyViewCounter + 1;
 
                 db.SaveChanges();
             }

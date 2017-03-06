@@ -77,8 +77,7 @@
                             <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
 
                             <h4 style="color: blue;" class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null)</h4>
-                            @*@Html.ActionLink(Model.Venue.VenueTown.TownName, "Index", "Venues", new { AdvancedSearch = "true", Town = Model.Venue.VenueTown.TownID }, null)*@
-                            @*@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, new { @class = "primery-color" })*@
+                            <h4>@Model.EventDate.Date.ToShortDateString()</h4>
 
                             <p class="CustomParagraph">@Model.EventDescription</p>
                         </div>
