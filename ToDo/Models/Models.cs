@@ -331,6 +331,13 @@ namespace ToDo.Models
         //Venue View Counter
         [Display(Name = "Total Views:")]
         public int VenueViewCounter { get; set; }
+
+        //Event variable for daily views counter
+        public DateTime VenueViewCounterReset { get; set; }
+
+        //EventDaily  View Counter
+        [Display(Name = "Todays Views:")]
+        public int VenueDailyViewCounter { get; set; }
     }
 
     //Venue Mailing List

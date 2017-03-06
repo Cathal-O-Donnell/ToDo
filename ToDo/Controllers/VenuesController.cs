@@ -91,6 +91,17 @@ namespace ToDo.Controllers
 
                 //If user is not owner of this venue, add 1 to the view counter
                 venue.VenueViewCounter = venue.VenueViewCounter + 1;
+
+                //Reset the daily view counter
+                if (DateTime.Now.Date != venue.VenueViewCounterReset)
+                {
+                    venue.VenueViewCounterReset = DateTime.Now.Date;
+                    venue.VenueDailyViewCounter = 0;
+                }
+
+                //Incremente the daily view counter
+                venue.VenueDailyViewCounter++;
+
                 db.SaveChanges();
             }
 

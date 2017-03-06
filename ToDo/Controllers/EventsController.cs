@@ -69,8 +69,7 @@ namespace ToDo.Controllers
 
             else
             {
-                //**CHANGE THIS TO FALSE, SET TO TRUE FOR TESTING**
-                ViewBag.IsOwner = true;
+                ViewBag.IsOwner = false;
 
                 //If user is not owner of this event, add 1 to the view counter
                 @event.EventViewCounter = @event.EventViewCounter ++;
