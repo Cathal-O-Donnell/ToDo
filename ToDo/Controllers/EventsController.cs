@@ -69,10 +69,22 @@ namespace ToDo.Controllers
 
             else
             {
-                ViewBag.IsOwner = false;
+                //**CHANGE THIS TO FALSE, SET TO TRUE FOR TESTING**
+                ViewBag.IsOwner = true;
 
                 //If user is not owner of this event, add 1 to the view counter
-                @event.EventViewCounter = @event.EventViewCounter + 1;
+                @event.EventViewCounter = @event.EventViewCounter ++;
+
+                //Reset the daily view counter
+                if (DateTime.Now.Date != @event.EventViewCounterReset)
+                {
+                    @event.EventViewCounterReset = DateTime.Now.Date;
+                    @event.EventDailyViewCounter = 0;
+                }
+
+                //Incremente the daily view counter
+                @event.EventDailyViewCounter ++;
+
                 db.SaveChanges();
             }
 
@@ -115,7 +127,7 @@ namespace ToDo.Controllers
             //Get Event Image
             @event = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == id);
 
-            //FaceBook
+            //Facebook
             if (@event.EventFacebook != null)
             {
                 ViewBag.hasFB = true;

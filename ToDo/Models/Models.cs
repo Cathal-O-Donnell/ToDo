@@ -185,6 +185,13 @@ namespace ToDo.Models
         //Event View Counter
         [Display(Name = "Total Views:")]
         public int EventViewCounter { get; set; }
+
+        //Event variable for daily views counter
+        public DateTime EventViewCounterReset { get; set; }
+
+        //EventDaily  View Counter
+        [Display(Name = "Todays Views:")]
+        public int EventDailyViewCounter { get; set; }
     }
 
     //Image File class
