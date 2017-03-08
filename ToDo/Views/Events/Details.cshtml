@@ -28,7 +28,7 @@
                     <h3>@Html.DisplayNameFor(model => model.EventViewCounter) @Model.EventViewCounter</h3>
                 </div>
                  <div class="col-md-3">
-                    <h3 style="color: green;">@Html.DisplayNameFor(model => model.EventDailyViewCounter) +@Model.EventDailyViewCounter</h3>
+                    <h3 style="color: #00cc00;">@Html.DisplayNameFor(model => model.EventDailyViewCounter) +@Model.EventDailyViewCounter</h3>
                 </div>
             </div>
         </div>
@@ -76,9 +76,7 @@
                         <div class="content">
                             <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
 
-                            <h4 style="color: blue;" class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null)</h4>
-                            <h4>@Model.EventDate.Date.ToShortDateString()</h4>
-
+                            <h4 class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.Venue.VenueID }, null) - @Model.EventDate.Date.ToShortDateString()</h4>
                             <p class="CustomParagraph">@Model.EventDescription</p>
                         </div>
                     </div>

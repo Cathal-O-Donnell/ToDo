@@ -46,6 +46,11 @@ namespace ToDo.Controllers
             //Get selected event from DB
             Event @event = db.Events.Find(id);
 
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
             //Get Venue Id
             int venueID = @event.VenueID;
             //Find venue in db
@@ -65,6 +70,13 @@ namespace ToDo.Controllers
             if (@event.OwnerID == UserId)
             {
                 ViewBag.IsOwner = true;
+
+                //Reset the daily view counter
+                if (DateTime.Now.Date != @event.EventViewCounterReset)
+                {
+                    @event.EventViewCounterReset = DateTime.Now.Date;
+                    @event.EventDailyViewCounter = 0;
+                }
             }
 
             else
@@ -96,31 +108,6 @@ namespace ToDo.Controllers
             else
             {
                 ViewBag.FreeEvent = false;
-            }
-
-            //GeoCodder: Long and Lat values
-            IGeocoder geoCode;
-
-            geoCode = new GoogleGeocoder();
-
-            string twn = db.Towns.Find(venue.VenueTownID).TownName;
-
-            //Combine location into one string
-            string address = string.Format("{0}, {1}, {2}", venue.VenueName, venue.VenueAddress, twn);
-
-            var coordinates = geoCode.Geocode(address).ToList();
-
-            //Check if coordinates are valid
-            if (coordinates.Count > 0)
-            {
-                var longlat = coordinates.First();
-
-                //Pass variables to View
-                ViewBag.Long = Convert.ToDouble(longlat.Coordinates.Longitude);
-                ViewBag.Lat = Convert.ToDouble(longlat.Coordinates.Latitude);
-                ViewBag.Address = address;
-
-                ViewBag.hasMap = true;
             }
 
             //Get Event Image
@@ -162,11 +149,7 @@ namespace ToDo.Controllers
             {
                 ViewBag.hasSC = false;
             }
-
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
+                        
             return View(@event);
         }
 

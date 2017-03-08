@@ -83,6 +83,13 @@ namespace ToDo.Controllers
             if (venue.OwnerId == UserId)
             {
                 ViewBag.IsOwner = true;
+
+                //Reset the daily view counter
+                if (DateTime.Now.Date != venue.VenueViewCounterReset)
+                {
+                    venue.VenueViewCounterReset = DateTime.Now.Date;
+                    venue.VenueDailyViewCounter = 0;
+                }
             }
 
             else

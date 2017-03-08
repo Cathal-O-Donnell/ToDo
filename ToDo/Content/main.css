@@ -378,14 +378,14 @@ video {
             font-family: 'Montserrat', sans-serif;
         }
 
-        CustomNavLI {
-            text-transform: uppercase;
-            font-size: 15px;
-            color: #fff;
-            font-weight: 400;
-            padding: 2px 10px;
-            font-family: 'Montserrat', sans-serif;
-        }
+CustomNavLI {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+    padding: 2px 10px;
+    font-family: 'Montserrat', sans-serif;
+}
 
 /*Mobile nav bar icon*/
 .main-open {
@@ -2619,4 +2619,17 @@ aside .widget-twitter li {
     text-transform: uppercase;
     font: 30px "Lato", sans-serif;
     color: #333333;
+}
+
+/*Venue Link*/
+.VenueLink {
+    color: blue !important;
+    line-height: 1.4;
+    font-size: 15px;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: auto;
+    box-sizing: border-box;
+    font-weight: normal;
+    font-family: inherit;
 }
