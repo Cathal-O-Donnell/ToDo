@@ -84,7 +84,7 @@ namespace ToDo.Controllers
 
             //Get Venues that the user created
             var venues = (from v in db.Venues
-                          where v.OwnerId == UserId
+                          where v.OwnerId == UserId && v.VenueDeleteFlag != true // exclude venues that the user has chosen to delete
                           select v).ToList();
 
             model.UserVenues = venues;

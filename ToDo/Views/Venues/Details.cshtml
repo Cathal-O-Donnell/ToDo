@@ -67,8 +67,6 @@
         <button id="btnRemoveVenue" class="btn btn-warning">Hide Venue</button>
 
         @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
-
-        @*@Html.ActionLink("Delete Venue", "DeleteVenue", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-danger" })*@
         
         <button id="btnDeleteVenue" class="btn btn-danger">Delete Venue</button>
 
@@ -217,10 +215,12 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to hide this venue?</p>
+                <br />
+                <p>Hiding a venue prevents users from viewing it, this can be undone in the my profile page</p>
 
             </div>
             <div class="modal-footer">
-                @Html.ActionLink("Remove", "RemoveVenue", new { id = Model.VenueID }, new { @class = "btn btn-success", @style = "float: left" })
+                @Html.ActionLink("Confirm", "RemoveVenue", new { id = Model.VenueID }, new { @class = "btn btn-success", @style = "float: left" })
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -241,7 +241,7 @@
             </div>
             <div class="modal-footer">
 
-                @Html.ActionLink("Delete Venue", "DeleteVenue", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-success", @style = "float: left" })
+                @Html.ActionLink("Confirm", "DeleteVenue", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-success", @style = "float: left" })
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
