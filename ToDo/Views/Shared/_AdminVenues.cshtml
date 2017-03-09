@@ -13,6 +13,12 @@
                 @Html.DisplayNameFor(model => model.VenueTown.TownName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.VenueDeleteFlag)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+            <th>
                 @*blank*@
             </th>
             <th>
@@ -30,6 +36,20 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VenueTown.TownName)
+                </td>
+                <td>
+                    @if (item.VenueDeleteFlag == true)
+                    {
+                        <p style="color: forestgreen;">Yes</p>
+                    }
+
+                    else if (item.VenueDeleteFlag == false)
+                    {
+                        <p style="color: red;">No</p>
+                    }
+                </td>
+                <td>
+                    <button type="button" onclick="VenueChangeFlagStatus(@item.VenueID);" data-VenueID="@item.VenueID" class="btn btn-sm btn-info">Reset Flag</button>
                 </td>
                 <td>                    
                     <button id="btnVenueDelete" onclick="DeleteVenueModal('@item.VenueName', '@item.VenueID');" class="btn btn-sm btn-danger">Delete</button>
@@ -109,6 +129,22 @@
                 $('.modal-backdrop').remove();
 
                 txtSuccessVenue.innerText = "Venue has been deleted";
+            }
+        });
+    }
+
+    function VenueChangeFlagStatus(vid) {
+
+        console.log('VenueChangeFlagStatus function hit');
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenueChangeFlagStatus", "Home")',
+            data: { id: vid },
+            success: function (data) {
+
+                $('#AdminVenues').html(data);
+                $('#AdminVenues').fadeIn("fast")
             }
         });
     }

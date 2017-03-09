@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ToDo.Models.MusicGenre>
+
+<h1 style="color: blue; text-align: center;">Music Genres</h1>
+<hr />
+
+<table id="dataTableMusicGenres" class="table table-bordered table-responsive table-striped" cellspacing="0" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MusicGenreID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MusicGenreName)
+            </th>
+            <th>
+                @*blank*@
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MusicGenreID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MusicGenreName)
+                </td>
+                <td>
+                    <button  onclick="DeleteGenreModal('@item.MusicGenreName', '@item.MusicGenreID');" class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <label for="txtGenre">Genre:</label>
+    <input id="txtGenre" />
+
+    <span class="btn btn-sm btn-success" onclick="AddGenre();">Add Genre</span>
+
+    <h2 id="txtEC" style="color: green; text-align: center;"></h2>
+</div>
+
+@*Bootstap Modal Window*@
+<div class="modal fade" id="GenreModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="txtGenreModal" class="modal-title">Delete </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this Genre?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="RemoveGenre();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var GenreModalID = null;
+
+     //DataTable
+    $(document).ready(function () {
+        $('#dataTableEventCategories').DataTable();
+    });
+
+
+    function DeleteGenreModal(Name, ID) {
+
+        GenreModalID = ID;
+
+        txtGenreModal.innerText = "Delete " + Name;
+        $("#GenreModal").modal();
+    }
+
+    function RemoveGenre() {
+
+        ECID = GenreModalID;
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveEventCategory", "Home")',
+            data: { id: ECID },
+            success: function (data) {
+
+                $('#AdminEventCategories').html(data);
+                $('#AdminEventCategories').fadeIn("fast")
+
+                $('#EventCatModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+                document.getElementById("txtEC").style.color = "#ff0000";
+                txtEC.innerText = "Event Category has been deleted";
+            }
+        });
+    }
+
+    function AddGenre()
+    {
+        var cat = document.getElementById('txtCategory').value
+        console.log(cat);
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AddVEventCategory", "Home")',
+            data: { Category: cat },
+            success: function (data) {
+
+
+                $("#AdminEventCategories").html("");
+                $("#AdminEventCategories").html(data);
+                document.getElementById("txtEC").style.color = "green";
+                txtEC.innerText = cat + " has been added";
+
+            },
+            error: function (data) {
+
+                txtEC.innerText = "An error has occurred";
+                txtEC.style = "color: red;"
+            }
+        });
+    }
+</script>
+
+
+

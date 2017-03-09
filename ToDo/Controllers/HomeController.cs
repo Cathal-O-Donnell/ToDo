@@ -406,6 +406,31 @@ namespace ToDo.Controllers
             return PartialView("_AdminEvents", events.OrderBy(e => e.EventTitle).ToList());
         }
 
+        //Venue Change Delete Flag Status
+        public ActionResult VenueChangeFlagStatus(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            //Change flag from true to false
+            if (venue.VenueDeleteFlag == true)
+            {
+                venue.VenueDeleteFlag = false;
+            }
+
+            else
+            {
+                venue.VenueDeleteFlag = true;
+            }
+
+            db.Entry(venue).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var venues = from v in db.Venues
+                         select v;
+
+            return PartialView("_AdminVenues", venues.OrderBy(v => v.VenueName).ToList());
+        }
+
         //Venue Change Status
         public ActionResult VenueChangeStatus(int id)
         {

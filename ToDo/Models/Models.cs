@@ -338,6 +338,10 @@ namespace ToDo.Models
         //EventDaily  View Counter
         [Display(Name = "Todays Views:")]
         public int VenueDailyViewCounter { get; set; }
+
+        //Boolean to flag venue for deletition
+        [Display(Name = "Delete Flag")]
+        public bool VenueDeleteFlag { get; set; }
     }
 
     //Venue Mailing List

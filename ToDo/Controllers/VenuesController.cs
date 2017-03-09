@@ -76,8 +76,20 @@ namespace ToDo.Controllers
                 return HttpNotFound();
             }
 
+            //If venue is flagged for deletion, do not allow the user to access it
+            if (venue.VenueDeleteFlag == true)
+            {
+                return HttpNotFound();
+            }
+
             //Get UserID
             string UserId = User.Identity.GetUserId();
+
+            //If venue is inactive only allow the owner to access it
+            if (venue.VenueActive == false && venue.OwnerId != UserId)
+            {
+                return HttpNotFound();
+            }
 
             //Check if current user is the owner of this event
             if (venue.OwnerId == UserId)
@@ -238,6 +250,9 @@ namespace ToDo.Controllers
                 //Set the venue status as active
                 venue.VenueActive = true;
 
+                //Set the deletition flag to false
+                venue.VenueDeleteFlag = false;
+
                 Town twn = db.Towns.Find(venue.VenueID);
 
 
@@ -378,6 +393,18 @@ namespace ToDo.Controllers
             return RedirectToAction("Index");
         }
 
+        //Delete venue method, flag venue for deletition
+        public ActionResult DeleteVenue(int? id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            venue.VenueDeleteFlag = true;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         // GET: Venues/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -449,7 +476,8 @@ namespace ToDo.Controllers
             ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
 
             var venues = from v in db.Venues
-                         where v.VenueActive == true
+                         //Select the venues which are active and not flagged for deletition
+                         where v.VenueActive == true && v.VenueDeleteFlag == false
                          select v;
 
             if (AdvancedSearch == "true")

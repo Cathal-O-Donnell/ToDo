@@ -569,6 +569,7 @@
     <Content Include="Views\Shared\_UserVenues.cshtml" />
     <Content Include="Views\Shared\_VenueEvents.cshtml" />
     <Content Include="Views\Bands\BookBand.cshtml" />
+    <Content Include="Views\Shared\_AdminBandGenre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
