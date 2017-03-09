@@ -19,9 +19,7 @@
         <div style="padding-top: 25px;">
             @Html.ActionLink("Edit Event", "Edit", new { id = Model.EventID }, new { @class = "btn btn-primary" })
 
-            @*<button id="btnRemoveEvent" class="btn btn-warning">Hide Event</button>*@
-
-            <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Remove Event</button>
+            <button onclick="RemoveEventModal('@Model.EventTitle', '@Model.EventID');" class="btn btn-danger">Delete Event</button>
 
             <div class="row">
                 <div class="col-md-2">
@@ -119,13 +117,13 @@
             <div id="disqus_thread"></div>
         </div>
 
-        @*Bootstap Modal Window*@
-        <div class="modal fade" id="EventRemoveModal" role="dialog">
+        @*Bootstap Hide Event Modal Window*@
+        <div class="modal fade" id="EventHideModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 id="txtEventRemoveModal" class="modal-title">Delete </h4>
+                        <h4 id="txtEventHideModal" class="modal-title">Delete </h4>
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to remove this event?</p>
@@ -133,7 +131,7 @@
                     </div>
                     <div class="modal-footer">
                         @*<button type="button" onclick="RemoveVenue();" class="btn btn-success" data-dismiss="modal" style="float: left">Confirm</button>*@
-                        @Html.ActionLink("Remove", "DeleteEvent", new { id = Model.EventID }, new { @class = "btn btn-success", @style = "float: left" })
+                        @Html.ActionLink("Confirm", "DeleteEvent", new { id = Model.EventID }, new { @class = "btn btn-success", @style = "float: left" })
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -149,11 +147,10 @@
     <script src="https://connect.soundcloud.com/sdk.js"></script>
 
     <script>
-
         function RemoveEventModal(Name, ID) {
 
-            txtEventRemoveModal.innerText = "Remove " + Name;
-            $("#EventRemoveModal").modal();
+            txtEventHideModal.innerText = "Remove " + Name;
+            $("#EventHideModal").modal();
         }
 
         $( document ).ready(function() {
