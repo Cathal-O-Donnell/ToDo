@@ -616,11 +616,19 @@ namespace ToDo.Controllers
 
             return PartialView("_AdminVenueType", venueTypes.OrderBy(vtype => vtype.VenueTypeName).ToList());
         }
+        
+        public PartialViewResult AdminBandGenresTablePartialView()
+        {
+            var bandGenres = from bg in db.MusicGenres
+                             select bg;
+
+            return PartialView("_AdminBandGenre", bandGenres.OrderBy(bg => bg.MusicGenreName).ToList());
+        }
 
         public PartialViewResult AdminEventCategoriesTablePartialView()
         {
             var eventCategories = from ecat in db.EventCategories
-                             select ecat;
+                                  select ecat;
 
             return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
         }
@@ -728,6 +736,57 @@ namespace ToDo.Controllers
                         select b;
 
             return PartialView("_AdminBands", bands.OrderBy(b => b.BandName).ToList());
+        }
+
+        [HttpGet]
+        public ActionResult AddBandGenre(string Genre)
+        {
+            bool UserRole = User.IsInRole("Admin");
+
+            if (UserRole == true)
+            {
+                //Get UserID
+                string UserId = User.Identity.GetUserId();
+
+                //User not logged in, redirect to Login Page
+                if (UserId == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                MusicGenre mg = new MusicGenre();
+
+                mg.MusicGenreName = Genre;
+
+                db.MusicGenres.Add(mg);
+                db.SaveChanges();
+
+                var bandGenres = from bg in db.MusicGenres
+                                 select bg;
+
+                return PartialView("_AdminBandGenre", bandGenres.OrderBy(bg => bg.MusicGenreName).ToList());
+            }
+
+            else
+            {
+                var bandGenres = from bg in db.MusicGenres
+                                 select bg;
+
+                return PartialView("_AdminBandGenre", bandGenres.OrderBy(bg => bg.MusicGenreName).ToList());
+            }
+        }
+
+        //Remove Music Genre
+        public ActionResult RemoveGenre(int id)
+        {
+            MusicGenre mg = db.MusicGenres.Find(id);
+            db.MusicGenres.Remove(mg);
+            db.SaveChanges();
+
+            var bandGenres = from bg in db.MusicGenres
+                             select bg;
+
+            return PartialView("_AdminBandGenre", bandGenres.OrderBy(bg => bg.MusicGenreName).ToList());
         }
     }
 }

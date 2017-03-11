@@ -42,7 +42,7 @@
 
     <span class="btn btn-sm btn-success" onclick="AddGenre();">Add Genre</span>
 
-    <h2 id="txtEC" style="color: green; text-align: center;"></h2>
+    <h2 id="txtBG" style="color: green; text-align: center;"></h2>
 </div>
 
 @*Bootstap Modal Window*@
@@ -71,7 +71,7 @@
 
      //DataTable
     $(document).ready(function () {
-        $('#dataTableEventCategories').DataTable();
+        $('#dataTableMusicGenres').DataTable();
     });
 
 
@@ -85,49 +85,49 @@
 
     function RemoveGenre() {
 
-        ECID = GenreModalID;
+        gID = GenreModalID;
 
         $.ajax({
             type: "GET",
-            url: '@Url.Action("RemoveEventCategory", "Home")',
-            data: { id: ECID },
+            url: '@Url.Action("RemoveGenre", "Home")',
+            data: { id: gID },
             success: function (data) {
 
-                $('#AdminEventCategories').html(data);
-                $('#AdminEventCategories').fadeIn("fast")
+                $('#AdminBandGenres').html(data);
+                $('#AdminBandGenres').fadeIn("fast")
 
                 $('#EventCatModal').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
 
-                document.getElementById("txtEC").style.color = "#ff0000";
-                txtEC.innerText = "Event Category has been deleted";
+                document.getElementById("txtBG").style.color = "#ff0000";
+                txtBG.innerText = "Genre has been deleted";
             }
         });
     }
 
     function AddGenre()
     {
-        var cat = document.getElementById('txtCategory').value
-        console.log(cat);
+        var bg = document.getElementById('txtGenre').value
+        console.log(bg);
 
         $.ajax({
             type: "GET",
-            url: '@Url.Action("AddVEventCategory", "Home")',
-            data: { Category: cat },
+            url: '@Url.Action("AddBandGenre", "Home")',
+            data: { Genre: bg },
             success: function (data) {
 
 
-                $("#AdminEventCategories").html("");
-                $("#AdminEventCategories").html(data);
-                document.getElementById("txtEC").style.color = "green";
-                txtEC.innerText = cat + " has been added";
+                $("#AdminBandGenres").html("");
+                $("#AdminBandGenres").html(data);
+                document.getElementById("txtBG").style.color = "green";
+                txtBG.innerText = bg + " has been added";
 
             },
             error: function (data) {
 
-                txtEC.innerText = "An error has occurred";
-                txtEC.style = "color: red;"
+                txtBG.innerText = "An error has occurred";
+                txtBG.style = "color: red;"
             }
         });
     }

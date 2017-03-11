@@ -160,7 +160,12 @@
 </div>
 
 <div class="row" style="height: 750px;">
+    @*Bands*@
     <div id="AdminBands" class="col-sm-6">
         @Html.Action("AdminBandsPartialView");
+    </div>
+    @*Band Genres*@
+    <div id="AdminBandGenres" class="col-sm-6">
+        @Html.Action("AdminBandGenresTablePartialView")
     </div>
 </div>
