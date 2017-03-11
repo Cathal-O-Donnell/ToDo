@@ -581,6 +581,17 @@ namespace ToDo.Controllers
                 events = events.Where(e => e.EventCat.EventCategoryID == EventCategoryID).ToList();
             }
 
+            if (events.Count() <= 0)
+            {
+                ViewBag.NoEvents = true;
+            }
+
+            else
+            {
+                ViewBag.NoEvents = false;
+            }
+
+
             return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
 
