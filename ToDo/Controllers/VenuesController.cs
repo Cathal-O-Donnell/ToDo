@@ -253,6 +253,9 @@ namespace ToDo.Controllers
                 //Set the deletition flag to false
                 venue.VenueDeleteFlag = false;
 
+                //Set the view counter reset date
+                venue.VenueViewCounterReset = DateTime.Now.Date;
+
                 Town twn = db.Towns.Find(venue.VenueID);
 
 

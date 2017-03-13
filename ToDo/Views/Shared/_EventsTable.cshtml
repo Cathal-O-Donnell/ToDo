@@ -32,7 +32,7 @@
             </div>
             @*Date Picker*@
             <div class="form-group" style="padding-top:20px;">
-                <input type="text" id="datepicker" class="CustomTextBox" placeholder="Pick Date">
+                <input type="text" id="datepicker" class="CustomTextBox" placeholder="Date">
             </div>
             @*Town Dropdown*@
             <div class="form-group" style="padding-top:20px;">
@@ -136,11 +136,12 @@
         var date = document.getElementById("datepicker").value;
 
         var advancedSearch = "true";
-        //Ajax code
+        
         $.ajax({
             type: "GET",
             url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, CategoryIndex: ECypeSelectedIndex, Date: date },
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, 
+                CategoryIndex: ECypeSelectedIndex, Date: date },
             success: function (data) {
 
                 $('#EventTable').html(data);

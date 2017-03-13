@@ -12,11 +12,12 @@
 <div>
     @*New Venue*@
     <p>
-        @Html.ActionLink("New Venue", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("New Venue", "Create", "Venues", null, new { @class = "btn btn-primary" })
     </p>
     @*New Band*@
     <p>
-        @Html.ActionLink("New Band", "Create", null, new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("New Band", "Create", "Bands", new { @class = "btn btn-primary" })*@
+        @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-primary" })
     </p>
 
     @*User Venues Partial View*@
