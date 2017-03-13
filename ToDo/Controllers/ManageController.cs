@@ -84,7 +84,7 @@ namespace ToDo.Controllers
 
             //Get Venues that the user created
             var venues = (from v in db.Venues
-                          where v.OwnerId == UserId && v.VenueDeleteFlag == false // exclude venues that the user has chosen to delete
+                          where v.OwnerId == UserId && v.VenueDeleteFlag != true // exclude venues that the user has chosen to delete
                           select v).ToList();
 
             model.UserVenues = venues;
@@ -358,7 +358,7 @@ namespace ToDo.Controllers
             string UserId = User.Identity.GetUserId();
 
             var venues = from v in db.Venues
-                         where v.OwnerId == UserId
+                         where v.OwnerId == UserId && v.VenueDeleteFlag == false // display only the venues that this user created and have not been flagged for deletion
                          select v;
 
             return PartialView("_UserVenues", venues.OrderBy(v => v.VenueName).ToList());

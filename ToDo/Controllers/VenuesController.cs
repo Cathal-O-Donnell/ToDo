@@ -376,7 +376,7 @@ namespace ToDo.Controllers
         }
 
         // Remove Venue 
-        public ActionResult RemoveVenue(int? id)
+        public ActionResult HideVenue(int? id)
         {
             if (id == null)
             {
@@ -392,8 +392,6 @@ namespace ToDo.Controllers
 
             //Set this Venue as inactive
             venue.VenueActive = false;
-
-            //db.Venues.Remove(venue);
             db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -485,6 +483,17 @@ namespace ToDo.Controllers
                          //Select the venues which are active and not flagged for deletition
                          where v.VenueActive == true && v.VenueDeleteFlag == false
                          select v;
+
+            foreach (var v in venues)
+            {
+                string vn = v.VenueName;
+                bool df = v.VenueDeleteFlag;
+
+                if (df == true)
+                {
+                    int x = 0;
+                }
+            }
 
             if (AdvancedSearch == "true")
             {
