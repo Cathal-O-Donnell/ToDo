@@ -390,7 +390,10 @@ namespace ToDo.Controllers
                 return HttpNotFound();
             }
 
-            db.Venues.Remove(venue);
+            //Set this Venue as inactive
+            venue.VenueActive = false;
+
+            //db.Venues.Remove(venue);
             db.SaveChanges();
 
             return RedirectToAction("Index");
