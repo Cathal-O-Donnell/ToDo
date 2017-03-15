@@ -486,11 +486,7 @@ namespace ToDo.Controllers
 
             if (AdvancedSearch == "true")
             {
-
-                //venues = from v in db.Venues
-                //         where v.VenueActive == true
-                //         select v;
-
+                
                 if (Town != "")
                 {
                     int townID = Convert.ToInt32(Town);

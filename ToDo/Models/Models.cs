@@ -177,6 +177,7 @@ namespace ToDo.Models
 
         //Event Category Foreign ID
         [Display(Name = "Category")]
+        [Required(ErrorMessage = "You must select a category")]
         public int EventCatID { get; set; }
 
         //Event Category
@@ -277,19 +278,19 @@ namespace ToDo.Models
         //Name
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
-        [Display(Name = "Name")]
+        [Display(Name = "Name *")]
         public string VenueName { get; set; }
 
         //Address
         [Required(ErrorMessage = "You must enter a street")]
         [DataType(DataType.Text)]
-        [Display(Name = "Street")]
+        [Display(Name = "Street *")]
         public string VenueAddress { get; set; }
 
         //Description
         [Required(ErrorMessage = "Give your venue a brief description")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "About Us")]
+        [Display(Name = "Details *")]
         public string VenueDescription { get; set; }
 
         //Contact Email
@@ -310,18 +311,20 @@ namespace ToDo.Models
         public bool VenueActive { get; set; }
 
         //Venue Town Foreign
-        [Display(Name = "Town")]
+        [Display(Name = "Town *")]
+        [Required(ErrorMessage = "You must select a town")]
         public int VenueTownID { get; set; }
 
         //venue Town
         public virtual Town VenueTown { get; set; }
 
         //Venue Catergory Foreign
-        [Display(Name = "Town")]
+        [Display(Name = "Town *")]
+        [Required(ErrorMessage = "You must select a venue type")]
         public int VenueTypeID { get; set; }
 
         //venue Category
-        [Display(Name = "Type")]
+        [Display(Name = "Type *")]
         public virtual Venue_Type VenueType { get; set; }
 
         //Venue Facebook

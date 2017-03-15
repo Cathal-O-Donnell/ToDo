@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventTitle, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
-                        @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                     @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventTime, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -73,7 +73,10 @@
                         @Html.EditorFor(model => model.EventEndTime, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @Html.ValidationMessageFor(model => model.EventEndTime, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>               
+            </div>
+
+            <div class="col-md-6">
 
                 @*YouTube*@
                 <div class="form-group">
@@ -93,12 +96,8 @@
                         @Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-            </div>
-
-            <div class="col-md-6">
-                @*Facebook*@
-                <div class="form-group">
+                
+                @*<div class="form-group">
                     <h2 class="CustomH3">Social Media</h2>
                     @Html.LabelFor(model => model.EventFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -107,7 +106,7 @@
                     </div>
                 </div>
 
-                @*Twitter*@
+                
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventTwitter, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -116,7 +115,7 @@
                     </div>
                 </div>
 
-                @*Instagram*@
+                
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventInstagram, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -125,14 +124,14 @@
                     </div>
                 </div>
 
-                @*Website*@
+                
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventWebsite, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @Html.ValidationMessageFor(model => model.EventWebsite, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>*@
 
                 @*Ticket Price*@
                 <div class="form-group">
@@ -140,7 +139,7 @@
                     @Html.LabelFor(model => model.EventTicketPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventTicketPrice, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventTicketPrice, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventTicketPrice, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -149,7 +148,7 @@
                     @Html.LabelFor(model => model.EventTicketStore, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.EventTicketStore, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventTicketStore, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventTicketStore, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -164,10 +163,25 @@
 
                 @Html.HiddenFor(e => e.VenueID)
 
+                @*Create Button*@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Create" class="btn btn-success" />
                     </div>
+                </div>
+
+                @*Validation*@
+                <div class="form-group">
+                    <p>@Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventCatID, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventEndTime, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventYouTube, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventTicketPrice, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.EventTicketStore, "", new { @class = "text-danger" })</p>
                 </div>
             </div>
         </div>
