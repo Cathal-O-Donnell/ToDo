@@ -482,25 +482,14 @@ namespace ToDo.Controllers
             var venues = from v in db.Venues
                          //Select the venues which are active and not flagged for deletition
                          where v.VenueActive == true && v.VenueDeleteFlag == false
-                         select v;
-
-            foreach (var v in venues)
-            {
-                string vn = v.VenueName;
-                bool df = v.VenueDeleteFlag;
-
-                if (df == true)
-                {
-                    int x = 0;
-                }
-            }
+                         select v;            
 
             if (AdvancedSearch == "true")
             {
 
-                venues = from v in db.Venues
-                         where v.VenueActive == true
-                         select v;
+                //venues = from v in db.Venues
+                //         where v.VenueActive == true
+                //         select v;
 
                 if (Town != "")
                 {

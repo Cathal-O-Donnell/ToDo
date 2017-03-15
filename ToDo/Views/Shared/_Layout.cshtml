@@ -22,7 +22,7 @@
                 <a href="@Url.Action("Index", "Home")">
                     <img src="~/logo.png" id="logo" alt="logo" />
                 </a>
-                <nav class="main-nav">
+                <nav class="main-nav" role="navigation">
                     <ul>
                         @if (User.IsInRole("Admin"))
                         {
