@@ -145,6 +145,23 @@
             }
         </div>
 
+        <div style="padding-top: 25px;">
+
+            @if (ViewBag.hasEvents == false)
+            {
+                <h2 style="text-align:center;">There is no events for this band, please check back later</h2>
+            }
+
+            else
+            {
+
+                @*Partial View*@
+                <div id="BandEventsTable">
+                    @Html.Action("BandEventsPartialView", new { BandID = Model.BandID })
+                </div>
+            }
+        </div>
+
     </div>
 
     <div class="row">

@@ -44,20 +44,20 @@ namespace ToDo.Controllers
 
             //Get all Bands from the database
             var bands = from b in db.Bands
-                         where b.BandActive == true
-                         select b;
+                        where b.BandActive == true
+                        select b;
 
             if (AdvancedSearch == "true")
             {
 
                 bands = from b in db.Bands
-                         where b.BandActive == true
-                         select b;
+                        where b.BandActive == true
+                        select b;
 
                 if (BandGenre != "")
                 {
                     int genreID = Convert.ToInt32(BandGenre);
-                    bands = bands.Where(b =>b.BandGenre.MusicGenreID == genreID);
+                    bands = bands.Where(b => b.BandGenre.MusicGenreID == genreID);
                 }
 
                 if (!String.IsNullOrEmpty(search))
@@ -155,6 +155,38 @@ namespace ToDo.Controllers
                 ViewBag.hasSC = false;
             }
 
+            //Get Events for this band
+            var events = (from e in db.Events
+                          where e.BandID == id && e.EventActive == true
+                          select e).OrderBy(x => x.EventDate).ToList();
+
+            band.BandEvents = events;
+
+            //Get list of events for this band
+            if (band.BandEvents.Count() > 0)
+            {
+                ViewBag.hasEvents = true;
+            }
+            else
+            {
+                ViewBag.hasEvents = false;
+            }
+
+            //Sort Events
+            foreach (var Event in band.BandEvents.ToList())
+            {
+                var EventDate = Event.EventDate;
+
+                TimeSpan ts = DateTime.Now - EventDate;
+
+                //Remove event if it is old
+                if (ts.TotalDays > 1)
+                {
+                    db.Events.Remove(Event);
+                    db.SaveChanges();
+                }
+            }
+
             return View(band);
         }
 
@@ -184,7 +216,10 @@ namespace ToDo.Controllers
             else
             {
                 ViewBag.NoVenues = false;
-                
+
+                //Store the Bands ID
+                TempData["BandID"] = id;
+
                 //User Venues
                 ViewBag.VenuesID = new SelectList(venues.OrderBy(x => x.VenueName), "VenueID", "VenueName");
 
@@ -224,6 +259,11 @@ namespace ToDo.Controllers
                 //Event Category
                 @event.EventCat = db.EventCategories.Find(@event.EventCatID);
 
+                //View Counter
+                @event.EventViewCounterReset = DateTime.Now.Date;
+                @event.EventDailyViewCounter = 0;
+                @event.EventViewCounter = 0;
+
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
                 {
@@ -241,8 +281,15 @@ namespace ToDo.Controllers
                     @event.Files = new List<File> { imgEvent };
                 }
 
+                //Band ID
+                int BandID = Convert.ToInt32(TempData["BandID"]);
+                @event.BandID = BandID;               
+
+
                 db.Events.Add(@event);
                 db.SaveChanges();
+
+
 
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", "Events", new
@@ -304,7 +351,7 @@ namespace ToDo.Controllers
             int x = band.BandID;
 
             if (ModelState.IsValid)
-            {               
+            {
 
                 //Set the band status as active
                 band.BandActive = true;
@@ -497,6 +544,54 @@ namespace ToDo.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        //Band Events Partial View
+        public ActionResult BandEventsPartialView(int? BandID, string search, string CategoryIndex, string EventCategory, DateTime? Date)
+        {
+            ViewBag.BandID = BandID;
+            ViewBag.CategoryIndex = CategoryIndex;
+
+            //Get Events
+            var events = (from e in db.Events
+                          where e.BandID == BandID && e.EventActive == true
+                          select e).ToList();
+
+            //Event Categories
+            ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
+
+            if (Date != null)
+            {
+                var stringDate = String.Format("{0:dd-MM-yyyy}", Date);
+                DateTime formatedDate = DateTime.Parse(stringDate);
+                events = events.Where(e => e.EventDate == formatedDate).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                //Get all the events where the name contains the users search term
+                events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper())).ToList();
+                ViewBag.SearchTerm = search;
+            }
+
+            if (!String.IsNullOrEmpty(EventCategory))
+            {
+                int EventCategoryID = Convert.ToInt32(EventCategory);
+                events = events.Where(e => e.EventCat.EventCategoryID == EventCategoryID).ToList();
+            }
+
+            if (events.Count() <= 0)
+            {
+                ViewBag.NoEvents = true;
+            }
+
+            else
+            {
+                ViewBag.NoEvents = false;
+            }
+
+
+            return PartialView("_BandEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
     }
 }

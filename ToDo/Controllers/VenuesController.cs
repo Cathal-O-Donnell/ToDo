@@ -144,25 +144,6 @@ namespace ToDo.Controllers
                     db.Events.Remove(Event);
                     db.SaveChanges();
                 }
-
-                //Check if this event is schedluded for today
-                if (EventDate == DateTime.Today)
-                {
-                    ViewBag.EventToday = 1;
-                    ViewBag.TodaysEventTitle = Event.EventTitle;
-                    ViewBag.EventStart = Event.EventTime.ToString("hh:mm tt");
-
-                    //Check if Event has not started
-                    if (DateTime.Now.TimeOfDay < Event.EventTime.TimeOfDay)
-                    {
-                        ViewBag.HasEventStarted = false;
-                    }
-                    //Check if Event has started
-                    if (DateTime.Now.TimeOfDay > Event.EventTime.TimeOfDay)
-                    {
-                        ViewBag.HasEventStarted = true;
-                    }
-                }
             }
 
             //Check if there is any events for this Venue
@@ -255,6 +236,9 @@ namespace ToDo.Controllers
 
                 //Set the view counter reset date
                 venue.VenueViewCounterReset = DateTime.Now.Date;
+
+                //initialize mailing list
+                venue.MailingList = new List<string>();
 
                 Town twn = db.Towns.Find(venue.VenueID);
 
@@ -430,7 +414,6 @@ namespace ToDo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Venue venue = db.Venues.Find(id);
-            //db.Venues.Remove(venue);
 
             //Set this Venue as inactive
             venue.VenueActive = false;
@@ -607,21 +590,21 @@ namespace ToDo.Controllers
             {
                 ViewBag.LoggedIn = true;
 
-                //Add the users email to this venues email mailing list
-                Venue venue = db.Venues.Find(id);
+                using (var db = new ApplicationDbContext())
+                {
+                    Venue venue = db.Venues.Find(id);
 
-                //If list is null, initlise it
-                //if (venue.VenueMailingList == null)
-                //{
-                //    venue.VenueMailingList = new List<string>();
-                //}
+                    //If list is null, initlise it
+                    if (venue.MailingList == null)
+                    {
+                        venue.MailingList = new List<string>();
+                    }
 
-                //venue.VenueMailingList.Add(email);
+                    venue.MailingList.Add(email);
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
             }
-
-
             return View();
         }
     }

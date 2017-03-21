@@ -101,38 +101,38 @@ namespace ToDo.Models
         //Title
         [Required(ErrorMessage = "You must enter a title")]
         [DataType(DataType.Text)]
-        [Display(Name = "Title")]
+        [Display(Name = "Title*")]
         public string EventTitle { get; set; }
 
         //Date
         [Required(ErrorMessage = "You must enter a date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date")]
+        [Display(Name = "Date*")]
         public DateTime EventDate { get; set; }
 
         //Time
         [Required(ErrorMessage = "You must enter a start time")]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
-        [Display(Name = "Time")]
+        [Display(Name = "Time*")]
         public DateTime EventTime { get; set; }
 
         //End Time
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
-        [Display(Name = "End Time")]
+        [Display(Name = "End Time*")]
         public DateTime EventEndTime { get; set; }
 
         //Description
         [Required(ErrorMessage = "Give your event a brief description")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Description")]
+        [Display(Name = "Description*")]
         public string EventDescription { get; set; }
 
         //Event Category
         [Required(ErrorMessage = "You must select a category from the list")]
-        [Display(Name = "Category")]
+        [Display(Name = "Category*")]
         public Category EventCategory { get; set; }
 
         //Youtube Link     
@@ -193,6 +193,9 @@ namespace ToDo.Models
         //EventDaily  View Counter
         [Display(Name = "Todays Views:")]
         public int EventDailyViewCounter { get; set; }
+
+        //Foreign Key for Band
+        public int? BandID { get; set; }
     }
 
     //Image File class
@@ -278,19 +281,19 @@ namespace ToDo.Models
         //Name
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
-        [Display(Name = "Name *")]
+        [Display(Name = "Name*")]
         public string VenueName { get; set; }
 
         //Address
         [Required(ErrorMessage = "You must enter a street")]
         [DataType(DataType.Text)]
-        [Display(Name = "Street *")]
+        [Display(Name = "Street*")]
         public string VenueAddress { get; set; }
 
         //Description
         [Required(ErrorMessage = "Give your venue a brief description")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Details *")]
+        [Display(Name = "Details*")]
         public string VenueDescription { get; set; }
 
         //Contact Email
@@ -311,7 +314,7 @@ namespace ToDo.Models
         public bool VenueActive { get; set; }
 
         //Venue Town Foreign
-        [Display(Name = "Town *")]
+        [Display(Name = "Town*")]
         [Required(ErrorMessage = "You must select a town")]
         public int VenueTownID { get; set; }
 
@@ -319,12 +322,12 @@ namespace ToDo.Models
         public virtual Town VenueTown { get; set; }
 
         //Venue Catergory Foreign
-        [Display(Name = "Town *")]
+        [Display(Name = "Type*")]
         [Required(ErrorMessage = "You must select a venue type")]
         public int VenueTypeID { get; set; }
 
         //venue Category
-        [Display(Name = "Type *")]
+        [Display(Name = "Type*")]
         public virtual Venue_Type VenueType { get; set; }
 
         //Venue Facebook
@@ -345,6 +348,11 @@ namespace ToDo.Models
         //Boolean to flag venue for deletition
         [Display(Name = "Delete Flag")]
         public bool VenueDeleteFlag { get; set; }
+
+        //Venue Mailing List
+        [Display(Name = "Mailing List")]
+        public List<string> MailingList { get; set; }
+
     }
 
     //Venue Mailing List
@@ -374,7 +382,7 @@ namespace ToDo.Models
         [Required(ErrorMessage = "You must enter a name")]
         [DataType(DataType.Text)]
         [Display(Name = "Name")]
-        public string BandName { get; set; }        
+        public string BandName { get; set; }
 
         //Description
         [Required(ErrorMessage = "Give your venue a brief description")]
@@ -383,7 +391,7 @@ namespace ToDo.Models
         public string BandDescription { get; set; }
 
         //Contact Number
-        [Display(Name = "Phone")]   
+        [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "This is not a valid phone number")]
         public int? BandContactNumber { get; set; }
 
@@ -395,7 +403,7 @@ namespace ToDo.Models
         //Facebook
         [Display(Name = "Facebook")]
         public string BandFacebook { get; set; }
-        
+
         //Band Active
         [Display(Name = "Band Active")]
         public bool BandActive { get; set; }
@@ -450,7 +458,13 @@ namespace ToDo.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "This is not a valid email address")]
         public string BandBookingAgentEmail { get; set; }
 
+        //List of events for this band
+        public List<Event> BandEvents { get; set; }
 
+        public Band()
+        {
+            BandEvents = new List<Event>();
+        }
     }
 
     //Admin settings class

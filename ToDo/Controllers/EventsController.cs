@@ -213,6 +213,11 @@ namespace ToDo.Controllers
                 //Event Category
                 @event.EventCat = db.EventCategories.Find(@event.EventCatID);
 
+                //View Counter
+                @event.EventViewCounterReset = DateTime.Now.Date;
+                @event.EventDailyViewCounter = 0;
+                @event.EventViewCounter = 0;
+
                 //Image File Upload
                 if (imageUpload != null && imageUpload.ContentLength > 0)
                 {

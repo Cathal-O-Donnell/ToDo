@@ -1,0 +1,156 @@
+﻿@model IEnumerable<ToDo.Models.Event>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<style>
+    .CustomParagraph {
+        margin: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
+@*Search Filters*@
+<div class="container" style="padding-bottom: 25px;">
+    <form class="form-inline">
+        <div class="form-group" style="padding-top:20px;">
+            @*Search Box*@
+            @if (ViewBag.SearchTerm != null)
+            {
+                <input type="text" id="txtSearch" class="CustomTextBox" value="@ViewBag.SearchTerm" />
+            }
+            else
+            {
+                <input type="text" id="txtSearch" class="CustomTextBox" placeholder="Search..." />
+            }
+        </div>
+        @*Date Picker*@
+        <div class="form-group" style="padding-top:20px;">
+            <input type="text" id="datepicker" class="CustomTextBox" placeholder="Date">
+        </div>
+        @*Event Category*@
+        <div class="form-group" style="padding-top:20px;">
+            @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Pick Category", new { @class = "CustomTextBox", id = "lstEventCat" })
+        </div>
+
+        <span class="btn btn-primary" onclick="AdvanceSearch(@ViewBag.BandID);">Search</span>
+
+        <span class="btn btn-warning" onclick="Reset(@ViewBag.BandID);">Reset</span>
+    </form>
+</div>
+
+<div class="row">
+
+    @if (ViewBag.NoEvents == true)
+    {
+        <h2 class="CustomH3" style="text-align: center;">0 results :(</h2>
+    }
+
+    else
+    {
+
+        foreach (var item in Model)
+        {
+
+            <div class="col-md-4 col-sm-4" style="padding-top: 50px;">
+                <div class="L_blog_post">
+                    <div class="post-img">
+                        @*Check if event has image*@
+                        @if (item.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
+                    {
+                            <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                        }
+
+                        @*No event image was uploaded, display default image*@
+                        else
+                        {
+                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                        }
+                    </div>
+                    <div class="content" style="height: 250px;">
+                        <h3>@Html.DisplayFor(modelItem => item.EventTitle)</h3>
+                        <div class=catgrory> <span> <i class="icon fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.EventDate)</span>  <span><i class="icon fa fa-building-o"></i>@Html.DisplayFor(modelItem => item.Venue.VenueTown.TownName)</span></div>
+                        <p class="CustomParagraph">@item.EventDescription</p>
+                        <div style="position: absolute; bottom: 0;">
+                            <p style="text-align: center;">
+                                @Html.ActionLink("More Details", "Details", "Events", new { id = item.EventID }, new { @class = "btn btn-pri " })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<script>
+
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+
+    $(document).ready(function () {
+        var CategoryIndex =  @Html.Raw(Json.Encode(@ViewBag.CategoryIndex));
+
+        document.getElementById("lstEventCat").selectedIndex = CategoryIndex;
+    });
+
+    function VenueSearch() {
+        //Get the search term the user entered
+        var search = document.getElementById("txtSearch").value;
+
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandEventsPartialView", "BandID")',
+            data: { search: search },
+            success: function (data) {
+
+                $('#BandEventsTable').html(data);
+                $('#BandEventsTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function AdvanceSearch(id) {
+        var ECypeSelectedIndex = document.getElementById("lstEventCat").selectedIndex;
+
+        var eventCat = document.getElementById("lstEventCat").value;
+        var search = document.getElementById("txtSearch").value;
+        var date = document.getElementById("datepicker").value;
+
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandEventsPartialView", "Bands")',
+            data: { search: search, CategoryIndex: ECypeSelectedIndex, EventCategory: eventCat, BandID: id, Date: date },
+            success: function (data) {
+
+                $('#BandEventsTable').html(data);
+                $('#BandEventsTable').fadeIn("fast")
+            }
+        });
+    }
+
+    function Reset(id) {
+        var advancedSearch = "false";
+        //Ajax code
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandEventsPartialView", "Bands")',
+            data: { BandID: id },
+            success: function (data) {
+
+                $('#BandEventsTable').html(data);
+                $('#BandEventsTable').fadeIn("fast")
+            }
+        });
+    }
+
+</script>
+
+

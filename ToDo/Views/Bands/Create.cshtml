@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.BandName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandName, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandName, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.BandDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
-                        @Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                     @Html.LabelFor(model => model.BandGenreID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.BandGenreID, (SelectList)ViewBag.Genres, "Pick Genre", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     @Html.LabelFor(model => model.BandContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandContactNumber, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandContactNumber, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                     @Html.LabelFor(model => model.BandEmail, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandEmail, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandEmail, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandEmail, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@
                     @Html.LabelFor(model => model.BandFacebook, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandFacebook, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandFacebook, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandFacebook, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                     @Html.LabelFor(model => model.BandManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandManagerName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandManagerName, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandManagerName, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                     @Html.LabelFor(model => model.BandManagerEmail, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandManagerEmail, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })*@
                     </div>
                 </div>              
             </div>
@@ -105,7 +105,7 @@
                     @Html.LabelFor(model => model.BandPressContact, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandPressContact, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                     @Html.LabelFor(model => model.BandRecordLabel, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandRecordLabel, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
                     @Html.LabelFor(model => model.BandBookingAgentName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandBookingAgentName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@
                     @Html.LabelFor(model => model.BandBookingAgentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandBookingAgentEmail, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
                 @*YouTube*@
@@ -143,7 +143,7 @@
                     @Html.LabelFor(model => model.BandYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandYouTube, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -152,7 +152,7 @@
                     @Html.LabelFor(model => model.BandSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BandSoundCloud, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -165,12 +165,34 @@
                     </div>
                 </div>
 
+                @*Create Button*@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Create" class="btn btn-success" />
                     </div>
                 </div>
+
+                @*Validation*@
+                <div class="form-group">
+                    <p>@Html.ValidationMessageFor(model => model.BandName, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandDescription, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandGenreID, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandContactNumber, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandEmail, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandFacebook, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandManagerEmail, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandPressContact, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandRecordLabel, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandBookingAgentName, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandBookingAgentEmail, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandYouTube, "", new { @class = "text-danger" })</p>
+                    <p>@Html.ValidationMessageFor(model => model.BandSoundCloud, "", new { @class = "text-danger" })</p>
+                </div>
             </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

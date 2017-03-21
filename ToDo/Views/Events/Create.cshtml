@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <h2 class="CustomH3">New Event</h2>
                     @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventTitle, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @*@Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })*@
                     </div>
@@ -33,7 +33,7 @@
                 @*Description*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10 }, style = "height: 500px;" })
                         @*@Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })*@
                     </div>
@@ -42,7 +42,7 @@
                 @*Category*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.DropDownListFor(model => model.EventCatID, (SelectList)ViewBag.EventCategories, "Pick Category", htmlAttributes: new { @class = "CustomTextBox" })
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <h2 class="CustomH3">When</h2>
                     @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @*@Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })*@
                     </div>
@@ -60,7 +60,7 @@
                 @*Time*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventTime, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @*@Html.ValidationMessageFor(model => model.EventTime, "", new { @class = "text-danger" })*@
                     </div>
@@ -69,9 +69,9 @@
                 @*End Time*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventEndTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventEndTime, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventEndTime, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventEndTime, "", new { @class = "text-danger" })*@
                     </div>
                 </div>               
             </div>
@@ -82,18 +82,18 @@
                 <div class="form-group">
                     <h2 class="CustomH3">Links</h2>
                     @Html.LabelFor(model => model.EventYouTube, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventYouTube, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventYouTube, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventYouTube, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
                 @*SoundCloud*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventSoundCloud, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventSoundCloud, new { htmlAttributes = new { @class = "CustomTextBox" } })
-                        @Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.EventSoundCloud, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
                 
@@ -137,7 +137,7 @@
                 <div class="form-group">
                     <h2 class="CustomH3">Ticket Information</h2>
                     @Html.LabelFor(model => model.EventTicketPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventTicketPrice, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @*@Html.ValidationMessageFor(model => model.EventTicketPrice, "", new { @class = "text-danger" })*@
                     </div>
@@ -146,7 +146,7 @@
                 @*Ticket Vendor*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EventTicketStore, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.EventTicketStore, new { htmlAttributes = new { @class = "CustomTextBox" } })
                         @*@Html.ValidationMessageFor(model => model.EventTicketStore, "", new { @class = "text-danger" })*@
                     </div>
@@ -156,7 +156,7 @@
                 <div class="form-group">
                     <h2 class="CustomH3">Image</h2>
                     @Html.Label("Image", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <input type="file" id="imgEvent" name="imageUpload" />
                     </div>
                 </div>
