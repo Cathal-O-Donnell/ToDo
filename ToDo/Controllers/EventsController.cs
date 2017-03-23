@@ -198,6 +198,12 @@ namespace ToDo.Controllers
 
             if (ModelState.IsValid)
             {
+                Venue venue = db.Venues.Find(@event.VenueID);
+                string venueName = venue.VenueName;
+                string eventDes = @event.EventDescription;
+                string eventDate = Convert.ToString(@event.EventDate.Date.ToShortDateString());
+                string eventTime = Convert.ToString(@event.EventTime.TimeOfDay);
+
                 //Get Owner Id
                 string UserId = User.Identity.GetUserId();
                 @event.OwnerID = UserId;
@@ -237,6 +243,11 @@ namespace ToDo.Controllers
 
                 db.Events.Add(@event);
                 db.SaveChanges();
+
+                string emailSubject = @event.EventTitle;
+                string emailBody = string.Format("New event posted for {0}.<br><br> {1} <br> {2} {3}", venueName, eventDes, eventDate, eventTime );
+
+                EmailNotification(@event.VenueID, emailSubject, emailBody);
                 
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", new
@@ -392,10 +403,20 @@ namespace ToDo.Controllers
         {
             Event @event = db.Events.Find(id);
             int venueID = @event.VenueID;
-            //db.Events.Remove(@event);
+            
 
             //Set this event as inactive
             @event.EventActive = false;
+
+            Venue venue = db.Venues.Find(@event.VenueID);
+            string venueName = venue.VenueName;
+            string eventDes = @event.EventDescription;
+            string eventDate = Convert.ToString(@event.EventDate.Date.ToShortDateString());
+            string eventTime = Convert.ToString(@event.EventTime.TimeOfDay);
+
+            string emailSubject = string.Format(@event.EventTitle + "cancelled");
+            string emailBody = string.Format("This event has been cancelled");
+
 
             db.SaveChanges();
 
@@ -512,6 +533,28 @@ namespace ToDo.Controllers
                 }
 
                 return PartialView("_EventsTable", events.OrderBy(v => v.EventDate).ToList());
+            }
+        }
+
+        public void EmailNotification(int id, string Subject, string Body)
+        {
+            //Get Subscribers List
+            List<string> subscribers = (from e in db.VenueMailingList
+                                        where e.VenueID == id
+                                        select e.UserEmail).ToList();
+
+            foreach (var email in subscribers)
+            {
+                GMailer.GmailUsername = "ToDoEventsGuide@gmail.com";
+                GMailer.GmailPassword = "todosoftware";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = email;
+                mailer.Subject = Subject;
+                mailer.Body = Body;
+                mailer.IsHtml = true;
+                mailer.Send();
+                //Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application
             }
         }
     }

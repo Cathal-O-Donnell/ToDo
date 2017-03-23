@@ -16,6 +16,7 @@ using System.Data.Entity.Infrastructure;
 using System.Web.Security;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net.Mail;
 
 namespace ToDo.Controllers
 {
@@ -71,7 +72,7 @@ namespace ToDo.Controllers
             }
 
             Venue venue = db.Venues.Find(id);
-            ViewBag.VenueID = venue.VenueID;            
+            ViewBag.VenueID = venue.VenueID;
 
             if (venue == null)
             {
@@ -173,6 +174,37 @@ namespace ToDo.Controllers
                 ViewBag.Address = address;
 
                 ViewBag.hasMap = true;
+            }
+
+            //Check if the current user is a subscriber of this venue
+            if (UserId != null)
+            {
+                // Get Subscribers List for this venue
+                List<string> subscribersId = (from e in db.VenueMailingList
+                                            where e.VenueID == id
+                                            select e.User_ID).ToList();
+
+                if (subscribersId.Count <= 0)
+                {
+                    ViewBag.IsSubscriber = false;
+                }
+
+                foreach (var item in subscribersId)
+                {
+                    if (item.Contains(UserId))
+                    {
+                        ViewBag.IsSubscriber = true;
+                    }
+
+                    else
+                    {
+                        ViewBag.IsSubscriber = false;
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.IsSubscriber = false;
             }
 
             return View(venue);
@@ -481,13 +513,13 @@ namespace ToDo.Controllers
             ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
 
             var venues = from v in db.Venues
-                         //Select the venues which are active and not flagged for deletition
+                             //Select the venues which are active and not flagged for deletition
                          where v.VenueActive == true && v.VenueDeleteFlag == false
-                         select v;            
+                         select v;
 
             if (AdvancedSearch == "true")
             {
-                
+
                 if (Town != "")
                 {
                     int townID = Convert.ToInt32(Town);
@@ -616,13 +648,30 @@ namespace ToDo.Controllers
 
                 db.VenueMailingList.Add(vml);
                 db.SaveChanges();
-
-                //Get Events
-                List<string> subscribers = (from e in db.VenueMailingList
-                              where e.VenueID == id
-                              select e.UserEmail).ToList();
             }
             return View();
+        }
+
+        public void EmailNotification(int id, string Subject, string Body)
+        {
+            //Get Subscribers List
+            List<string> subscribers = (from e in db.VenueMailingList
+                                        where e.VenueID == id
+                                        select e.UserEmail).ToList();
+
+            foreach (var email in subscribers)
+            {
+                GMailer.GmailUsername = "ToDoEventsGuide@gmail.com";
+                GMailer.GmailPassword = "todosoftware";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = email;
+                mailer.Subject = Subject;
+                mailer.Body = Body;
+                mailer.IsHtml = true;
+                mailer.Send();
+                //Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application
+            }
         }
     }
 }

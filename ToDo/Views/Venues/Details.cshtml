@@ -106,7 +106,16 @@
                 <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
             }
 
-            <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-primary">Subscribe</button>
+            @if (ViewBag.IsSubscriber == false)
+            {
+                <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-success">Subscribe</button>
+            }
+
+            else if (ViewBag.IsSubscriber == true)
+            {
+                <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-primary">Unsubscribe</button>
+            }
+
 
         </div>
 
