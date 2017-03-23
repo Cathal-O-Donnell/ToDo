@@ -282,14 +282,18 @@ namespace ToDo.Controllers
                 }
 
                 //Band ID
-                int BandID = Convert.ToInt32(TempData["BandID"]);
-                @event.BandID = BandID;               
-
-
+                if (TempData["BandID"] != null)
+                {
+                    int BandID = Convert.ToInt32(TempData["BandID"]);
+                    @event.BandID = BandID;
+                }
+                else
+                {
+                    @event.BandID = null;
+                }                              
+                
                 db.Events.Add(@event);
                 db.SaveChanges();
-
-
 
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", "Events", new

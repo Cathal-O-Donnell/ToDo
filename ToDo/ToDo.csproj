@@ -57,6 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,6 +169,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationUserVenue.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationUserVenue.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUserVenue.cs">
+      <DependentUpon>ApplicationUserVenue.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUserVenue.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationUserVenue.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUserVenue1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationUserVenue.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -201,6 +221,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplicationUserVenue.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApplicationUserVenue.edmx</DependentUpon>
+      <LastGenOutput>ApplicationUserVenue.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ApplicationUserVenue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApplicationUserVenue.edmx</DependentUpon>
+      <LastGenOutput>ApplicationUserVenue1.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap - default.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -480,6 +510,13 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <EntityDeploy Include="ApplicationUserVenue.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ApplicationUserVenue.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ApplicationUserVenue.edmx.diagram">
+      <DependentUpon>ApplicationUserVenue.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\S00144297WebApp - Web Deploy.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -591,6 +628,9 @@
     <EmbeddedResource Include="Migrations\201610221201151_Files.resx">
       <DependentUpon>201610221201151_Files.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

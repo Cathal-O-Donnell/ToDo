@@ -350,22 +350,28 @@ namespace ToDo.Models
         public bool VenueDeleteFlag { get; set; }
 
         //Venue Mailing List
-        [Display(Name = "Mailing List")]
-        public List<string> MailingList { get; set; }
+        //public Venue()
+        //{
+        //    VenueSubscribers = new HashSet<ApplicationUser>();
+        //}
+        //public virtual ICollection<ApplicationUser> VenueSubscribers { get; set; }
 
+        //Venue Mailing List Foreign Key
+
+        //public int VenueMailingListId { get; set; }
     }
 
-    //Venue Mailing List
     public class VenueMailingList
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VenueMailingListID { get; set; }
+        public int VenueMailingListId { get; set; }
 
         public int VenueID { get; set; }
 
-        [Display(Name = "Mailing List")]
-        public List<string> MailingList { get; set; }
+        public string User_ID { get; set; }
+
+        public string UserEmail { get; set; }
     }
 
     //Band Class

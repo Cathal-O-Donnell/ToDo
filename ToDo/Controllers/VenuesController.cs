@@ -14,6 +14,8 @@ using Geocoding;
 using Geocoding.Google;
 using System.Data.Entity.Infrastructure;
 using System.Web.Security;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ToDo.Controllers
 {
@@ -238,7 +240,7 @@ namespace ToDo.Controllers
                 venue.VenueViewCounterReset = DateTime.Now.Date;
 
                 //initialize mailing list
-                venue.MailingList = new List<string>();
+                //venue.MailingList = new List<string>();
 
                 Town twn = db.Towns.Find(venue.VenueID);
 
@@ -260,7 +262,23 @@ namespace ToDo.Controllers
                     venue.VenueFiles = new List<VenueFile> { imgVenue };
                 }
 
+                //Create a new mailing List for this venue
+                string email = User.Identity.Name;
+
+                VenueMailingList vml = new VenueMailingList();
+                vml.VenueID = venue.VenueID;
+                vml.User_ID = UserId;
+                vml.UserEmail = email;
+
+                ////ID
+                //var NextId = this.db.VenueMailingList.Max(t => t.VenueMailingListId);
+                //var newId = NextId + 1;
+                //venue.VenueMailingListId = newId;
+
+                //venue.VenueMailingListId = newId;
+
                 db.Venues.Add(venue);
+                db.VenueMailingList.Add(vml);
                 db.SaveChanges();
 
                 //Redirect to details view for the new event
@@ -590,20 +608,19 @@ namespace ToDo.Controllers
             {
                 ViewBag.LoggedIn = true;
 
-                using (var db = new ApplicationDbContext())
-                {
-                    Venue venue = db.Venues.Find(id);
+                VenueMailingList vml = new VenueMailingList();
 
-                    //If list is null, initlise it
-                    if (venue.MailingList == null)
-                    {
-                        venue.MailingList = new List<string>();
-                    }
+                vml.VenueID = id;
+                vml.User_ID = UserId;
+                vml.UserEmail = email;
 
-                    venue.MailingList.Add(email);
+                db.VenueMailingList.Add(vml);
+                db.SaveChanges();
 
-                    db.SaveChanges();
-                }
+                //Get Events
+                List<string> subscribers = (from e in db.VenueMailingList
+                              where e.VenueID == id
+                              select e.UserEmail).ToList();
             }
             return View();
         }
