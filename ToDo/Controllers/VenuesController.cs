@@ -176,37 +176,6 @@ namespace ToDo.Controllers
                 ViewBag.hasMap = true;
             }
 
-            //Check if the current user is a subscriber of this venue
-            if (UserId != null)
-            {
-                // Get Subscribers List for this venue
-                List<string> subscribersId = (from e in db.VenueMailingList
-                                            where e.VenueID == id
-                                            select e.User_ID).ToList();
-
-                if (subscribersId.Count <= 0)
-                {
-                    ViewBag.IsSubscriber = false;
-                }
-
-                foreach (var item in subscribersId)
-                {
-                    if (item.Contains(UserId))
-                    {
-                        ViewBag.IsSubscriber = true;
-                    }
-
-                    else
-                    {
-                        ViewBag.IsSubscriber = false;
-                    }
-                }
-            }
-            else
-            {
-                ViewBag.IsSubscriber = false;
-            }
-
             return View(venue);
         }
 
@@ -628,9 +597,11 @@ namespace ToDo.Controllers
             return PartialView("_VenueEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
 
-        //Venue Mailing List
-        public ActionResult VenueMailingList(int id)
+        //Venue Subscribe
+        public ActionResult VenueSubscribe(int id)
         {
+            Venue venue = db.Venues.Find(id);
+
             //Get UserID and Email
             string UserId = User.Identity.GetUserId();
             string email = User.Identity.Name;
@@ -649,7 +620,43 @@ namespace ToDo.Controllers
                 db.VenueMailingList.Add(vml);
                 db.SaveChanges();
             }
-            return View();
+
+            ViewBag.IsSubscriber = false;
+
+            return RedirectToAction("VenueSubscribePartialView", "Venue");
+        }
+
+        //Venue Unubscribe
+        public ActionResult VenueUnsubscribe(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            //Get UserID and Email
+            string UserId = User.Identity.GetUserId();
+            string email = User.Identity.Name;
+
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+
+
+
+                var x = (from e in db.VenueMailingList
+                         where e.VenueID == id && e.User_ID == UserId
+                         select e.VenueMailingListId).First();
+
+                int vmlId = Convert.ToInt32(x);
+
+                VenueMailingList vml = db.VenueMailingList.Find(vmlId);
+
+                db.VenueMailingList.Remove(vml);
+                db.SaveChanges();                
+            }
+
+            ViewBag.IsSubscriber = false;
+
+            return PartialView("_VenueSubscribe", venue);
         }
 
         public void EmailNotification(int id, string Subject, string Body)
@@ -672,6 +679,48 @@ namespace ToDo.Controllers
                 mailer.Send();
                 //Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application
             }
+        }
+
+        //Venue Subscribe Partial View
+        public ActionResult VenueSubscribePartialView(int id)
+        {
+            Venue venue = db.Venues.Find(id);
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Check if the current user is a subscriber of this venue
+            if (UserId != null)
+            {
+                // Get Subscribers List for this venue
+                List<string> subscribersId = (from e in db.VenueMailingList
+                                              where e.VenueID == id
+                                              select e.User_ID).ToList();
+
+                if (subscribersId.Count <= 0)
+                {
+                    ViewBag.IsSubscriber = false;
+                }
+
+                foreach (var item in subscribersId)
+                {
+                    if (item.Contains(UserId))
+                    {
+                        ViewBag.IsSubscriber = true;
+                    }
+
+                    else
+                    {
+                        ViewBag.IsSubscriber = false;
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.IsSubscriber = false;
+            }
+
+            return PartialView("_VenueSubscribe", venue);
         }
     }
 }

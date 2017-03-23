@@ -106,16 +106,24 @@
                 <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
             }
 
-            @if (ViewBag.IsSubscriber == false)
-            {
-                <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-success">Subscribe</button>
-            }
+            <div id="VenueSubscribe">
+                @*Venues*@
+                <div id="AdminVenues" class="col-sm-10">
+                    @Html.Action("VenueSubscribePartialView", Model.VenueID)
+                </div>
+            </div>
 
-            else if (ViewBag.IsSubscriber == true)
+            @*<div id="VenueSubscribe">
+                @if (ViewBag.IsSubscriber == false)
             {
-                <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-primary">Unsubscribe</button>
-            }
+                    <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-success">Subscribe</button>
+                }
 
+                else if (ViewBag.IsSubscriber == true)
+                {
+                    <button onclick="VenueUnsubscribe(@Model.VenueID);" class="btn btn-primary">Unsubscribe</button>
+                }
+            </div>*@
 
         </div>
 
@@ -422,21 +430,36 @@
 
     });
 
-    //Venue Subscribe Ajax
+    @*//Venue Subscribe Ajax
     function VenueSubscribe(vID) {
         console.log('Venue Subscribe function hit');
 
         $.ajax({
             type: "GET",
-            url: '@Url.Action("VenueMailingList", "Venues")',
+            url: '@Url.Action("VenueSubscribe", "Venues")',
             data: { id: vID },
             success: function (data) {
 
-                $('#AdminBands').html(data);
-                $('#AdminBands').fadeIn("fast")
+                $('#VenueSubscribe').html(data);
+                $('#VenueSubscribe').fadeIn("fast")
             }
         });
     }
+
+    function VenueUnsubscribe(vID) {
+        console.log('Venue Subscribe function hit');
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("VenueUnsubscribe", "Venues")',
+            data: { id: vID },
+            success: function (data) {
+
+                $('#VenueSubscribe').html(data);
+                $('#VenueSubscribe').fadeIn("fast")
+            }
+        });
+    }*@
 
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
