@@ -271,13 +271,6 @@ namespace ToDo.Controllers
                 vml.User_ID = UserId;
                 vml.UserEmail = email;
 
-                ////ID
-                //var NextId = this.db.VenueMailingList.Max(t => t.VenueMailingListId);
-                //var newId = NextId + 1;
-                //venue.VenueMailingListId = newId;
-
-                //venue.VenueMailingListId = newId;
-
                 db.Venues.Add(venue);
                 db.VenueMailingList.Add(vml);
                 db.SaveChanges();
@@ -619,11 +612,16 @@ namespace ToDo.Controllers
 
                 db.VenueMailingList.Add(vml);
                 db.SaveChanges();
+
+                ViewBag.IsSubscriber = true;
+                return PartialView("_VenueSubscribe", venue);
             }
 
-            ViewBag.IsSubscriber = false;
-
-            return RedirectToAction("VenueSubscribePartialView", "Venue");
+            else
+            {
+                ViewBag.IsSubscriber = false;
+                return PartialView("_VenueSubscribe", venue);
+            }        
         }
 
         //Venue Unubscribe

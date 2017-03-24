@@ -363,16 +363,26 @@ namespace ToDo.Controllers
             }
 
             Event @event = db.Events.Find(id);
-
-            int venueID = @event.VenueID;
+            int venueID = @event.VenueID;            
 
             if (@event == null)
             {
                 return HttpNotFound();
             }
 
+            Venue venue = db.Venues.Find(@event.VenueID);
+            string venueName = venue.VenueName;
+            string eventTitle = @event.EventTitle;
+
             db.Events.Remove(@event);
             db.SaveChanges();
+
+            
+
+            //Email Notification
+            string emailSubject = string.Format(@event.EventTitle + " Cancelled");
+            string emailBody = string.Format("{0} has cencelled the event: {1}", venueName, eventTitle);
+            EmailNotification(@event.VenueID, emailSubject, emailBody);
 
             //Redirect to details view for the current venue
             return RedirectToAction("Details", "Venues", new
