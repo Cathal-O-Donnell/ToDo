@@ -597,5 +597,113 @@ namespace ToDo.Controllers
 
             return PartialView("_BandEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
+
+        //Venue Subscribe Partial View
+        public ActionResult BandSubscribePartialView(int id)
+        {
+            Band band = db.Bands.Find(id);
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            //Check if the current user is a subscriber of this venue
+            if (UserId != null)
+            {
+                // Get Subscribers List for this venue
+                List<string> subscribersId = (from e in db.BandsMailingList
+                                              where e.BandID == id
+                                              select e.User_ID).ToList();
+
+                if (subscribersId.Count <= 0)
+                {
+                    ViewBag.IsSubscriber = false;
+                }
+
+                foreach (var item in subscribersId)
+                {
+                    if (item.Contains(UserId))
+                    {
+                        ViewBag.IsSubscriber = true;
+                    }
+
+                    else
+                    {
+                        ViewBag.IsSubscriber = false;
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.IsSubscriber = false;
+            }
+
+            return PartialView("_BandsSubscribe", band);
+        }
+
+        //Band Subscribe
+        public ActionResult BandSubscribe(int id)
+        {
+            Band band = db.Bands.Find(id);
+
+            //Get UserID and Email
+            string UserId = User.Identity.GetUserId();
+            string email = User.Identity.Name;
+
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+
+                BandMailingList bml = new BandMailingList();
+
+                bml.BandID = id;
+                bml.User_ID = UserId;
+                bml.UserEmail = email;
+
+                db.BandsMailingList.Add(bml);
+                db.SaveChanges();
+
+                ViewBag.IsSubscriber = true;
+                return PartialView("_BandsSubscribe", band);
+            }
+
+            else
+            {
+                ViewBag.IsSubscriber = false;
+                return PartialView("_BandsSubscribe", band);
+            }
+        }
+
+        //Venue Unubscribe
+        public ActionResult BandUnsubscribe(int id)
+        {
+            Band band = db.Bands.Find(id);
+
+            //Get UserID and Email
+            string UserId = User.Identity.GetUserId();
+
+            //Check if the user is logged in
+            if (UserId != null)
+            {
+                ViewBag.LoggedIn = true;
+
+
+
+                int x = (from e in db.BandsMailingList
+                         where e.BandID == id && e.User_ID == UserId
+                         select e.BandMailingListId).First();
+
+                int bmlId = Convert.ToInt32(x);
+
+                BandMailingList bml = db.BandsMailingList.Find(x);
+
+                db.BandsMailingList.Remove(bml);
+                db.SaveChanges();
+            }
+
+            ViewBag.IsSubscriber = false;
+
+            return PartialView("_BandsSubscribe", band);
+        }
     }
 }

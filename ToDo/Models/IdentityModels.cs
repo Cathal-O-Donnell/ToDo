@@ -40,7 +40,7 @@ namespace ToDo.Models
         public DbSet<Band> Bands { get; set; }
         public DbSet<MusicGenre> MusicGenres { get; set; }
         public DbSet<VenueMailingList> VenueMailingList { get; set; }
-
+        public DbSet<BandMailingList> BandsMailingList { get; set; }
 
 
         public ApplicationDbContext()

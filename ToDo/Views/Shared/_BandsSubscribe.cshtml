@@ -1,0 +1,45 @@
+﻿@model ToDo.Models.Band
+
+<div>
+    @if (ViewBag.IsSubscriber == false)
+    {
+        <button onclick="BandSubscribe(@Model.BandID);" class="btn btn-block btn-primary">Subscribe <span class="glyphicon glyphicon-heart"></span></button>
+    }
+
+    else if (ViewBag.IsSubscriber == true)
+    {
+        <button onclick="BandUnsubscribe(@Model.BandID);" class="btn btn-block btn-danger">Unsubscribe <span class="glyphicon glyphicon-heart"></span></button>
+    }
+</div>
+
+<script>
+    //Band Subscribe Ajax
+    function BandSubscribe(bID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandSubscribe", "Bands")',
+            data: { id: bID },
+            success: function (data) {
+
+                $('#BandSubscribe').html(data);
+                $('#BandSubscribe').fadeIn("fast")
+            }
+        });
+    }
+
+    function BandUnsubscribe(bID) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("BandUnsubscribe", "Bands")',
+            data: { id: bID },
+            success: function (data) {
+
+                $('#BandSubscribe').html(data);
+                $('#BandSubscribe').fadeIn("fast")
+            }
+        });
+    }
+</script>
+

@@ -40,6 +40,13 @@
                 <img src="~/default-image.jpg" alt="imgDefault" style="width: 250px; height:250px;" />
             }
 
+            <div id="BandSubscribe">
+                @*Venues*@
+                <div>
+                    @Html.Action("BandSubscribePartialView", Model.BandID)
+                </div>
+            </div>
+
             <p style="padding-top: 25px;">
                 @Html.ActionLink("Book Band", "BookBand", new { id = Model.BandID }, new { @class = "btn btn-pri" })
             </p>

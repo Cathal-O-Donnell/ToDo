@@ -366,6 +366,20 @@ namespace ToDo.Models
         public string UserEmail { get; set; }
     }
 
+    //Band Mailing List class
+    public class BandMailingList
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BandMailingListId { get; set; }
+
+        public int BandID { get; set; }
+
+        public string User_ID { get; set; }
+
+        public string UserEmail { get; set; }
+    }
+
     //Band Class
     public class Band
     {
