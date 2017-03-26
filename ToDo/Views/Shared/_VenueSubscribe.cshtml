@@ -1,14 +1,14 @@
 ﻿@model ToDo.Models.Venue
 
-<div >
+<div>
     @if (ViewBag.IsSubscriber == false)
-            {
-        <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-md btn-success">Subscribe</button>
+    {
+        <button onclick="VenueSubscribe(@Model.VenueID);" class="btn btn-block btn-primary">Subscribe <span class="glyphicon glyphicon-heart"></span></button>
     }
 
     else if (ViewBag.IsSubscriber == true)
     {
-        <button onclick="VenueUnsubscribe(@Model.VenueID);" class="btn btn-md btn-primary">Unsubscribe</button>
+        <button onclick="VenueUnsubscribe(@Model.VenueID);" class="btn btn-block btn-danger">Unsubscribe <span class="glyphicon glyphicon-heart"></span></button>
     }
 </div>
 

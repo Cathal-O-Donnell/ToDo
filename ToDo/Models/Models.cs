@@ -352,6 +352,7 @@ namespace ToDo.Models
         public bool VenueDeleteFlag { get; set; }
     }
 
+    //Venue Mailing List class
     public class VenueMailingList
     {
         [Key]
@@ -504,6 +505,7 @@ namespace ToDo.Models
         public int FeaturedVenue4 { get; set; }
     }
 
+    //Gmail SMTP class
     public class GMailer
     {
         public static string GmailUsername { get; set; }
