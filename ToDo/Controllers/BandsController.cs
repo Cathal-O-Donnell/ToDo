@@ -131,6 +131,28 @@ namespace ToDo.Controllers
                 ViewBag.IsOwner = true;
             }
 
+            if (UserId != null)
+            {
+                //Check if the current user is a venue owner
+                List<int> venueOwner = (from e in db.Venues
+                                        where e.OwnerId == UserId
+                                        select e.VenueID).ToList();
+
+                if (venueOwner.Count > 0)
+                {
+                    ViewBag.VenueOwner = true;
+                }
+                else
+                {
+                    ViewBag.VenueOwner = false;
+                }
+            }
+            else
+            {
+                ViewBag.VenueOwner = false;
+            }
+            
+
             //YouTube
             if (band.BandYouTube != null)
             {
