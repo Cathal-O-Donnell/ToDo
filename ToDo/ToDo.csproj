@@ -500,6 +500,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="ToDo_logo.png" />
+    <Content Include="ToDo_logo1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

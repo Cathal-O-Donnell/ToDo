@@ -64,12 +64,13 @@
     <div style="padding-top: 25px;">
         @Html.ActionLink("Edit Venue", "Edit", new { id = Model.VenueID }, new { @class = "btn btn-primary" })
 
-        <button id="btnRemoveVenue" class="btn btn-warning">Hide Venue</button>
-
-        @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
+        <button id="btnRemoveVenue" class="btn btn-warning">Hide Venue</button>        
         
         <button id="btnDeleteVenue" class="btn btn-danger">Delete Venue</button>
 
+        @Html.ActionLink("Add Event", "Create", "Events", new { id = Model.VenueID }, new { @class = "btn btn-success" })
+
+        @*View Counters*@
         <div class="row">
             <div class="col-md-2">
                 <h3>@Html.DisplayNameFor(model => model.VenueViewCounter) @Model.VenueViewCounter</h3>
