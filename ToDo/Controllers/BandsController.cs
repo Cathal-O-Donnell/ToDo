@@ -151,7 +151,7 @@ namespace ToDo.Controllers
             {
                 ViewBag.VenueOwner = false;
             }
-            
+
 
             //YouTube
             if (band.BandYouTube != null)
@@ -270,6 +270,12 @@ namespace ToDo.Controllers
                 //Get Owner Id
                 @event.OwnerID = UserId;
 
+                Venue venue = db.Venues.Find(@event.VenueID);
+                string venueName = venue.VenueName;
+                string eventDes = @event.EventDescription;
+                string eventDate = Convert.ToString(@event.EventDate.Date.ToShortDateString());
+                string eventTime = Convert.ToString(@event.EventTime.TimeOfDay);
+
                 //Get the new id for this event
                 var NextId = this.db.Events.Max(t => t.EventID);
                 var newId = NextId + 1;
@@ -312,10 +318,16 @@ namespace ToDo.Controllers
                 else
                 {
                     @event.BandID = null;
-                }                              
-                
+                }
+
                 db.Events.Add(@event);
                 db.SaveChanges();
+
+                string emailSubject = @event.EventTitle;
+                string emailLink = string.Format("<a href = \"https://localhost:44300/Events/Details/{0}\"> here </a>", @event.EventID);
+                string emailBody = string.Format("New event posted for <b>{0}</b> on {2} {3}.<br><br> {1} <br><br> {4} <a>", venueName, eventDes, eventDate, eventTime, emailLink);
+
+                EmailNotification(@event.VenueID, emailSubject, emailBody);
 
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", "Events", new
@@ -726,6 +738,29 @@ namespace ToDo.Controllers
             ViewBag.IsSubscriber = false;
 
             return PartialView("_BandsSubscribe", band);
+        }
+
+        public void EmailNotification(int id, string Subject, string Body)
+        {
+            //Get Subscribers List
+            List<string> subscribers = (from e in db.VenueMailingList
+                                        where e.VenueID == id
+                                        select e.UserEmail).ToList();
+
+            //Send an email to every subscriber to this venue
+            foreach (var email in subscribers)
+            {
+                GMailer.GmailUsername = "ToDoEventsGuide@gmail.com";
+                GMailer.GmailPassword = "todosoftware";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = email;
+                mailer.Subject = Subject;
+                mailer.Body = Body;
+                mailer.IsHtml = true;
+                mailer.Send();
+
+            }
         }
     }
 }

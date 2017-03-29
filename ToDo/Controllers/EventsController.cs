@@ -554,6 +554,7 @@ namespace ToDo.Controllers
                                         where e.VenueID == id
                                         select e.UserEmail).ToList();
 
+            //Send an email to every subscriber to this venue
             foreach (var email in subscribers)
             {
                 GMailer.GmailUsername = "ToDoEventsGuide@gmail.com";
@@ -565,8 +566,10 @@ namespace ToDo.Controllers
                 mailer.Body = Body;
                 mailer.IsHtml = true;
                 mailer.Send();
-                //Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application
+                
             }
         }
     }
 }
+
+//Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application

@@ -620,7 +620,7 @@ namespace ToDo.Controllers
             else
             {
                 ViewBag.IsSubscriber = false;
-                return PartialView("_VenueSubscribe", venue);
+                return RedirectToAction("Login", "Account");
             }        
         }
 
