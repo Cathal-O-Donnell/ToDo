@@ -364,6 +364,20 @@ namespace ToDo.Controllers
             return PartialView("_UserVenues", venues.OrderBy(v => v.VenueName).ToList());
         }
 
+        //Band Partial View
+        public ActionResult UserBandsPartialView()
+        {
+
+            //Get UserID
+            string UserId = User.Identity.GetUserId();
+
+            var bands = from b in db.Bands
+                         where b.OwnerId == UserId
+                         select b;
+
+            return PartialView("_UserBands", bands.OrderBy(b => b.BandName).ToList());
+        }
+
         //Venue Change Status
         public ActionResult VenueChangeStatus(int id)
         {
