@@ -375,6 +375,15 @@ namespace ToDo.Controllers
                          where b.OwnerId == UserId
                          select b;
 
+            if (bands.Count() > 0)
+            {
+                ViewBag.hasBands = true;
+            }
+            else
+            {
+                ViewBag.hasBands = false;
+            }
+
             return PartialView("_UserBands", bands.OrderBy(b => b.BandName).ToList());
         }
 

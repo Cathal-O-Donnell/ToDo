@@ -11,57 +11,67 @@
     }
 </style>
 
-
-<div class="eventschedule">
-    <div class="content">
-        <h2 class="CustomH3" style="text-align:center; padding-bottom: 2px;">My Bands</h2>
-    </div>
-</div>
-
-@foreach (var item in Model)
+@if (ViewBag.hasBands == true)
 {
-    <div class="event-slider">
 
-        <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
-            <div class="row">
-                <div class="eventschedule-post clearfix">
-                    <div class="event-img">
-                        @*Check if venue has image*@
-                        @if (item.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
-                        {
-                            <img src="~/File?id=@item.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
-                        }
+    <div class="eventschedule">
+        <div class="content">
+            <h2 class="CustomH3" style="text-align:center; padding-bottom: 2px;">My Bands</h2>
+        </div>
+    </div>
 
-                        @*No venue image was uploaded, display default image*@
-                        else
-                        {
-                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
-                        }
-                    </div>
-                    <div class="content">
-                        <h3>@item.BandName<span class="job">@item.BandGenre.MusicGenreName</span></h3>
+    foreach (var item in Model)
+    {
+        <div class="event-slider">
 
-                        <p class="CustomParagraph">@item.BandDescription</p>
+            <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
+                <div class="row">
+                    <div class="eventschedule-post clearfix">
+                        <div class="event-img">
+                            @*Check if venue has image*@
+                            @if (item.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
+                            {
+                                <img src="~/File?id=@item.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            }
 
-                        <div class="clearboth"></div>
-                        @Html.ActionLink("More Details", "Details", "Bands", new { id = item.BandID }, new { @class = "btn btn-pri" })
+                            @*No venue image was uploaded, display default image*@
+                            else
+                            {
+                                <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                            }
+                        </div>
+                        <div class="content">
+                            <h3>@item.BandName<span class="job">@item.BandGenre.MusicGenreName</span></h3>
 
-                        @if (item.BandActive == true)
-                        {
-                            <button type="button" onclick="VenueChangeStatus(@item.BandID);" data-VenueID="@item.BandID" class="btn btn-warning">Hide Band</button>
-                        }
+                            <p class="CustomParagraph">@item.BandDescription</p>
 
-                        else if (item.BandActive == false)
-                        {
-                            <button type="button" onclick="VenueChangeStatus(@item.BandID);" data-VenueID="@item.BandID" class="btn btn-success">Show Band</button>
-                        }
+                            <div class="clearboth"></div>
+                            @Html.ActionLink("More Details", "Details", "Bands", new { id = item.BandID }, new { @class = "btn btn-pri" })
 
-                        @Html.ActionLink("Edit Band", "Edit", "Venues", new { id = item.BandID }, new { @class = "btn btn-primary" })
+                            @if (item.BandActive == true)
+                            {
+                                <button type="button" onclick="VenueChangeStatus(@item.BandID);" data-VenueID="@item.BandID" class="btn btn-warning">Hide Band</button>
+                            }
+
+                            else if (item.BandActive == false)
+                            {
+                                <button type="button" onclick="VenueChangeStatus(@item.BandID);" data-VenueID="@item.BandID" class="btn btn-success">Show Band</button>
+                            }
+
+                            @Html.ActionLink("Edit Band", "Edit", "Venues", new { id = item.BandID }, new { @class = "btn btn-primary" })
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+}
+
+else
+{
+    <p style="text-align: center;">
+        @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-primary" })
+    </p>
 }
 
 

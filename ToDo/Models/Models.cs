@@ -536,7 +536,7 @@ namespace ToDo.Models
         static GMailer()
         {
             GmailHost = "smtp.gmail.com";
-            GmailPort = 25; // Gmail can use ports 25, 465 & 587; but must be 25 for medium trust environment.
+            GmailPort = 587; // Gmail can use ports 25, 465 & 587; but must be 25 for medium trust environment.
             GmailSSL = true;
         }
 
