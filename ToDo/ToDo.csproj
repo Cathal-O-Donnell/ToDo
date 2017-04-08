@@ -494,6 +494,8 @@
     <None Include="Properties\PublishProfiles\S00144297WebApp - Web Deploy.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\ToDoEventsGuide - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ToDoEventsGuide - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
