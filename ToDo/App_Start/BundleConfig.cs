@@ -10,11 +10,19 @@ namespace ToDo
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui-1.12.1.min.js"
+                        "~/Scripts/jquery-ui-1.12.1.min.js"                                                
                         ));
 
+            bundles.Add(new ScriptBundle("~/bundles/themejs").Include(
+                "~/Scripts/waypoints.min.js",
+                "~/Scripts/jquery.countdown.js",
+                "~/Scripts/jquery.nav.js",
+                "~/Scripts/main.js"                               
+                ));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+
+
+                  bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -43,7 +51,8 @@ namespace ToDo
                         "~/Content/DataTables/css/jquery.dataTables.css",
                          "~/Content/DataTables/images",
                          "~/Content/DataTables/css/buttons.dataTables.min.css",
-                         "~/Content/DataTables/css/fixedColumns.dataTables.min.css"                           
+                         "~/Content/DataTables/css/fixedColumns.dataTables.min.css",
+                         "~/Content/colors-css/"                     
                          ));
         }
     }

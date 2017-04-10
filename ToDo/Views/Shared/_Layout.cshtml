@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/themejs")
 
     @*font awesome - http://www.w3schools.com/icons/fontawesome_icons_brand.asp*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -16,42 +17,40 @@
 
 </head>
 <body>
+
     <div style="padding-bottom: 50px;">
-        <header id="main-header">
-            <div class="container">
-                <a href="@Url.Action("Index", "Home")">
-                    @*<img src="~/ToDo_logo.png" />*@
-                    @*<img src="~/ToDo_logo1.png" />*@
-                    <img src="~/ToDo_logo1.png" id="logo" alt="logo" style="width:140px; height:50px;" />
-                </a>
-                <nav class="main-nav" role="navigation">
-                    <ul>
-                        @if (User.IsInRole("Admin"))
-                        {
+            <header id="main-header">
+                <div class="container">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/ToDo_logo1.png" id="logo" alt="logo" style="width:140px; height:50px;" />
+                    </a>
+                    <span class="main-open fa fa-bars"> </span>
+                    <nav class="main-nav" role="navigation">
+                        <ul>
+                            @if (User.IsInRole("Admin"))
+                            {
 
-                            <li class="@(ViewBag.Linktext == "Venues" ? "current" : "")">@Html.ActionLink("Venues", "Index", "Venues")</li>
-                            <li class="@(ViewBag.Linktext == "Events" ? "current" : "")">@Html.ActionLink("Events", "Index", "Events")</li>
-                            <li class="@(ViewBag.Linktext == "Bands" ? "current" : "")">@Html.ActionLink("Bands", "Index", "Bands")</li>
-                            <li class="@(ViewBag.Linktext == "Admin" ? "current" : "")">@Html.ActionLink("Admin", "Admin", "Home")</li>
+                                <li class="@(ViewBag.Linktext == "Venues" ? "current" : "")">@Html.ActionLink("Venues", "Index", "Venues")</li>
+                                <li class="@(ViewBag.Linktext == "Events" ? "current" : "")">@Html.ActionLink("Events", "Index", "Events")</li>
+                                <li class="@(ViewBag.Linktext == "Bands" ? "current" : "")">@Html.ActionLink("Bands", "Index", "Bands")</li>
+                                <li class="@(ViewBag.Linktext == "Admin" ? "current" : "")">@Html.ActionLink("Admin", "Admin", "Home")</li>
 
-                            @Html.Partial("_LoginPartial")
-                        }
+                                @Html.Partial("_LoginPartial")
+                            }
 
-                        else
-                        {
-                            <li class="@(ViewBag.Linktext == "Venues" ? "current" : "")">@Html.ActionLink("Venues", "Index", "Venues")</li>
-                            <li class="@(ViewBag.Linktext == "Events" ? "current" : "")">@Html.ActionLink("Events", "Index", "Events")</li>
-                            <li class="@(ViewBag.Linktext == "Bands" ? "current" : "")">@Html.ActionLink("Bands", "Index", "Bands")</li>
+                            else
+                            {
+                                <li class="@(ViewBag.Linktext == "Venues" ? "current" : "")">@Html.ActionLink("Venues", "Index", "Venues")</li>
+                                <li class="@(ViewBag.Linktext == "Events" ? "current" : "")">@Html.ActionLink("Events", "Index", "Events")</li>
+                                <li class="@(ViewBag.Linktext == "Bands" ? "current" : "")">@Html.ActionLink("Bands", "Index", "Bands")</li>
 
-                            <li>@Html.Partial("_LoginPartial")</li>
-                        }
-                    </ul>
-
-                </nav>
-            </div>
-        </header>
-
-    </div>
+                                <li>@Html.Partial("_LoginPartial")</li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        </div>
 
     <div class="container body-content">
 
