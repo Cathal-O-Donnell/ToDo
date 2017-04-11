@@ -28,7 +28,7 @@
                         @*Check if venue has image*@
                         @if (Model.VenueFiles.Any(f => f.VenueFileType == ToDo.Models.FileType.EventImage))
                         {
-                            <img src="~/File?id=@Model.VenueFiles.First().VenueFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            <img src="~/File?id=@Model.VenueFiles.First().VenueFileId, fileType=3" alt="imgEvent" style="width: 360px; height:240px;" />
                         }
 
                         @*No venue image was uploaded, display default image*@
@@ -43,11 +43,6 @@
 
                         <p class="CustomParagraph">@Model.VenueDescription</p>
 
-                        @*<ul class="gray-bg">
-                                <li class="fa fa-clock-o ">@Model.EventTime.ToShortTimeString() TO @Model.EventEndTime.ToShortTimeString()</li>
-                                <li class="fa fa-map-signs">@Model.Venue.VenueTown.TownName</li>
-                            </ul>*@
-                        @*<div class="clearboth"></div>*@
                         @Html.ActionLink("More Details", "Details", "Venues", new { id = Model.VenueID }, new { @class = "btn btn-pri" })
                     </div>
                 </div>

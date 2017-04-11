@@ -12,8 +12,9 @@ namespace ToDo.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /File/
-        public ActionResult Index(int id, int? x)
+        public ActionResult Index(int id)
         {
+
             //Event File
             var fileToRetrieve = db.Files.Find(id);
 
