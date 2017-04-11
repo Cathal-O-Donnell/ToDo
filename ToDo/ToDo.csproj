@@ -186,6 +186,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BandsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\BandFileController.cs" />
+    <Compile Include="Controllers\VenueFileController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

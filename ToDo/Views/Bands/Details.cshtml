@@ -31,7 +31,7 @@
             @*Check if event has image*@
             @if (Model.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
             {
-                <img src="~/File?id=@Model.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                <img src="~/BandFile?id=@Model.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
             }
 
             @*No event image was uploaded, display default image*@
