@@ -361,6 +361,15 @@ namespace ToDo.Controllers
                          where v.OwnerId == UserId && v.VenueDeleteFlag == false // display only the venues that this user created and have not been flagged for deletion
                          select v;
 
+            if (venues.Count() > 0)
+            {
+                ViewBag.HasVenue = true;
+            }
+            else
+            {
+                ViewBag.HasVenue = false;
+            }
+
             return PartialView("_UserVenues", venues.OrderBy(v => v.VenueName).ToList());
         }
 

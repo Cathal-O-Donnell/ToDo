@@ -19,7 +19,7 @@
         <form class="form-inline">
             <div class="form-group" style="padding-top:20px;">
                 @if (ViewBag.SearchTerm != null)
-            {
+                {
                     <input type="text" id="txtSearch" class="CustomTextBox" value="@ViewBag.SearchTerm" />
                 }
                 else
@@ -37,6 +37,8 @@
             <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
 
             <span class="btn btn-warning" onclick="Reset();">Reset</span>
+
+            @Html.ActionLink("New Venue", "Create", "Venues", null, new { @class = "btn btn-success" })
         </form>
     </div>
 

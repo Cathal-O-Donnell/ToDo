@@ -33,6 +33,8 @@
             <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
 
             <span class="btn btn-warning" onclick="Reset();">Reset</span>
+
+            @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-success" })
         </form>
     </div>
 

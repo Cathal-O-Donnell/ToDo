@@ -69,9 +69,14 @@
 
 else
 {
-    <p style="text-align: center;">
-        @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-primary" })
-    </p>
+    <div class="row col-md-8 col-md-offset-2" style="padding-top: 25px;">
+
+        <h2 class="CustomH3" style="text-align: center;">You do not have any bands currently</h2>
+
+        <p style="text-align: center;">
+            @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-block btn-primary" })
+        </p>
+    </div>
 }
 
 

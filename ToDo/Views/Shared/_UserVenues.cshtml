@@ -12,14 +12,18 @@
 </style>
 
 
-<div class="eventschedule">
-    <div class="content">
-        <h2 class="CustomH3" style="text-align:center; padding-bottom: 2px;">My Venues</h2>
-    </div>
-</div>
 
-@foreach (var item in Model)
+
+@if (ViewBag.HasVenue == true)
 {
+    <div class="eventschedule">
+        <div class="content">
+            <h2 class="CustomH3" style="text-align:center; padding-bottom: 2px;">My Venues</h2>
+        </div>
+    </div>
+
+    foreach (var item in Model)
+    {
     <div class="event-slider">       
 
         <div class="eventschedule" data-dot="1<span class='date'>06/2016</span>">
@@ -62,6 +66,18 @@
                 </div>
             </div>
         </div>
+    </div>
+    }
+}
+
+else if (ViewBag.HasVenue == false)
+{
+    <div class="row col-md-8 col-md-offset-2" style="padding-top: 25px;">
+        <h2 class="CustomH3" style="text-align: center;">You do not have any venues currently</h2>
+
+        <p style="text-align: center;">
+            @Html.ActionLink("New Venue", "Create", "Venues", null, new { @class = "btn btn-block btn-primary" })
+        </p>
     </div>
 }
 
