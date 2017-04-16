@@ -18,7 +18,8 @@
 <div class="row">
     @foreach (var item in Model)
     {
-
+        if (item != null)
+        {
         <div class="col-md-4 col-sm-4">
             <div class="L_blog_post">
                 <div class="post-img">
@@ -46,6 +47,7 @@
                 </div>
             </div>
         </div>
+        }
     }
 </div>
 }

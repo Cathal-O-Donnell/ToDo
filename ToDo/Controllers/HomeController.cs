@@ -68,9 +68,18 @@ namespace ToDo.Controllers
             AdminSettings admin = db.AdminSettings.Find(1);
 
             //Get Top Event from database
-            Event topEvent = db.Events.Find(admin.TopFeaturedEvent);
+            //Event topEvent = db.Events.Find(admin.TopFeaturedEvent);
+            Event topEvent = db.Events.Include(s => s.Files).SingleOrDefault(s => s.EventID == admin.TopFeaturedEvent);
 
-            return PartialView("_TopEvent", topEvent);
+            if (topEvent == null)
+            {
+                return PartialView("_TopEvent", null);
+            }
+
+            else
+            {
+                return PartialView("_TopEvent", topEvent);
+            }            
         }
 
         //Top Venue Partial View
@@ -118,37 +127,109 @@ namespace ToDo.Controllers
 
                 //Top Event
                 Event TopFeaturedEvent = db.Events.Find(admin.TopFeaturedEvent);
-                ViewBag.TopEvent = TopFeaturedEvent.EventTitle;
+                if (TopFeaturedEvent != null)
+                {
+                    ViewBag.TopEvent = TopFeaturedEvent.EventTitle;
+                }
+                else
+                {
+                    ViewBag.TopEvent = "Top Event not set";
+                }
 
                 //Featured Events
                 Event FeaturedEvent1 = db.Events.Find(admin.FeaturedEvent1);
-                ViewBag.Event1 = FeaturedEvent1.EventTitle;
+                if (FeaturedEvent1 != null)
+                {
+                    ViewBag.Event1 = FeaturedEvent1.EventTitle;
+                }
+                else
+                {
+                    ViewBag.Event1 = "Featured Event 1 not set";
+                }
+                
 
                 Event FeaturedEvent2 = db.Events.Find(admin.FeaturedEvent2);
-                ViewBag.Event2 = FeaturedEvent2.EventTitle;
+                if (FeaturedEvent2 != null)
+                {
+                    ViewBag.Event2 = FeaturedEvent2.EventTitle;
+                }
+                else
+                {
+                    ViewBag.Event2 = "Featured Event 2 not set";
+                }
 
                 Event FeaturedEvent3 = db.Events.Find(admin.FeaturedEvent3);
-                ViewBag.Event3 = FeaturedEvent3.EventTitle;
+                if (FeaturedEvent3 != null)
+                {
+                    ViewBag.Event3 = FeaturedEvent2.EventTitle;
+                }
+                else
+                {
+                    ViewBag.Event3 = "Featured Event 3 not set";
+                }
 
                 Event FeaturedEvent4 = db.Events.Find(admin.FeaturedEvent4);
-                ViewBag.Event4 = FeaturedEvent4.EventTitle;
+                if (FeaturedEvent4 != null)
+                {
+                    ViewBag.Event4 = FeaturedEvent4.EventTitle;
+                }
+                else
+                {
+                    ViewBag.Event4 = "Featured Event 4 not set";
+                }
 
                 //Top Venue
                 Venue TopFeaturedVenue = db.Venues.Find(admin.TopFeaturedVenue);
-                ViewBag.TopVenue = TopFeaturedVenue.VenueName;
+                if (TopFeaturedVenue != null)
+                {
+                    ViewBag.TopVenue = TopFeaturedVenue.VenueName;
+                }
+                else
+                {
+                    ViewBag.TopVenue = "Top Venue not set";
+                }
 
                 //Featured Venues
                 Venue Venue1 = db.Venues.Find(admin.FeaturedVenue1);
-                ViewBag.Venue1 = Venue1.VenueName;
+                if (Venue1 != null)
+                {
+                    ViewBag.Venue1 = Venue1.VenueName;
+                }
+                else
+                {
+                    ViewBag.Venue1 = "Featured Venue 1 not set";
+                }
 
                 Venue Venue2 = db.Venues.Find(admin.FeaturedVenue2);
-                ViewBag.Venue2 = Venue2.VenueName;
+                if (Venue2 != null)
+                {
+                    ViewBag.Venue2 = Venue2.VenueName;
+                }
+                else
+                {
+                    ViewBag.Venue2 = "Featured Venue 2 not set";
+                }
 
                 Venue Venue3 = db.Venues.Find(admin.FeaturedVenue3);
-                ViewBag.Venue3 = Venue3.VenueName;
+                if (Venue3 != null)
+                {
+                    ViewBag.Venue3 = Venue3.VenueName;
+                }
+                else
+                {
+                    ViewBag.Venue3 = "Featured Venue 3 not set";
+                }
 
                 Venue Venue4 = db.Venues.Find(admin.FeaturedVenue4);
-                ViewBag.Venue4 = Venue4.VenueName;
+                if (Venue4 != null)
+                {
+                    ViewBag.Venue4 = Venue4.VenueName;
+                }
+                else
+                {
+                    ViewBag.Venue4 = "Featured Venue 4 not set";
+                }
+
 
                 //Event Count
                 int EventCount = db.Events.Distinct().Count();
