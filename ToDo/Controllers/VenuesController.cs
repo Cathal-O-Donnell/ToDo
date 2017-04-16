@@ -8,8 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ToDo.Models;
-
-//Google Maps API
 using Geocoding;
 using Geocoding.Google;
 using System.Data.Entity.Infrastructure;
@@ -28,7 +26,6 @@ namespace ToDo.Controllers
         // GET: Venues
         public ActionResult Index(string AdvancedSearch, string Town, string VenueType)
         {
-
             ViewBag.LinkText = "Venues";
 
             //See VenuesTablePartialView
@@ -63,7 +60,6 @@ namespace ToDo.Controllers
         // GET: Venues/Details/5
         public ActionResult Details(int? id)
         {
-
             ViewBag.LinkText = "Venues";
 
             if (id == null)
@@ -182,7 +178,6 @@ namespace ToDo.Controllers
         // GET: Venues/Create
         public ActionResult Create()
         {
-
             ViewBag.LinkText = "Venues";
 
             //Get UserID
@@ -193,8 +188,7 @@ namespace ToDo.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
-
+            
             else
             {
                 //Towns
@@ -239,9 +233,6 @@ namespace ToDo.Controllers
 
                 //Set the view counter reset date
                 venue.VenueViewCounterReset = DateTime.Now.Date;
-
-                //initialize mailing list
-                //venue.MailingList = new List<string>();
 
                 Town twn = db.Towns.Find(venue.VenueID);
 
@@ -469,13 +460,12 @@ namespace ToDo.Controllers
             {
                 AdvancedSearch = Convert.ToString(TempData["AdvancedSearch"]);
             }
-
-
+            
             ViewBag.Towns = new SelectList(db.Towns.OrderBy(x => x.TownName), "TownId", "TownName");
             ViewBag.VenueTypes = new SelectList(db.VenueCategories.OrderBy(x => x.VenueTypeName), "Venue_TypeID", "VenueTypeName");
 
             var venues = from v in db.Venues
-                             //Select the venues which are active and not flagged for deletition
+                         //Select the venues which are active and not flagged for deletition
                          where v.VenueActive == true && v.VenueDeleteFlag == false
                          select v;
 
@@ -556,6 +546,7 @@ namespace ToDo.Controllers
             //Venue Types
             ViewBag.EventCategories = new SelectList(db.EventCategories.OrderBy(x => x.EventCategoryName), "EventCategoryID", "EventCategoryName");
 
+            //Date Filter
             if (Date != null)
             {
                 var stringDate = String.Format("{0:dd-MM-yyyy}", Date);
@@ -563,13 +554,14 @@ namespace ToDo.Controllers
                 events = events.Where(e => e.EventDate == formatedDate).ToList();
             }
 
+            //Search Box Filter
             if (!String.IsNullOrEmpty(search))
             {
-                //Get all the events where the name contains the users search term
                 events = events.Where(e => e.EventTitle.ToUpper().Contains(search.ToUpper())).ToList();
                 ViewBag.SearchTerm = search;
             }
 
+            //Event Category Filter
             if (!String.IsNullOrEmpty(EventCategory))
             {
                 int EventCategoryID = Convert.ToInt32(EventCategory);
@@ -637,8 +629,6 @@ namespace ToDo.Controllers
             if (UserId != null)
             {
                 ViewBag.LoggedIn = true;
-
-
 
                 var x = (from e in db.VenueMailingList
                          where e.VenueID == id && e.User_ID == UserId

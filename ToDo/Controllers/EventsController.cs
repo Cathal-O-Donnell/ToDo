@@ -8,10 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ToDo.Models;
-
-//Google Maps API
-using Geocoding;
-using Geocoding.Google;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 
@@ -25,7 +21,6 @@ namespace ToDo.Controllers
         // GET: Events
         public ActionResult Index()
         {
-
             ViewBag.LinkText = "Events";
 
             //See EventsTablePartialView
@@ -35,7 +30,6 @@ namespace ToDo.Controllers
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
-
             ViewBag.LinkText = "Events";
 
             if (id == null)
@@ -84,7 +78,7 @@ namespace ToDo.Controllers
                 ViewBag.IsOwner = false;
 
                 //If user is not owner of this event, add 1 to the view counter
-                @event.EventViewCounter = @event.EventViewCounter +1;
+                @event.EventViewCounter = @event.EventViewCounter + 1;
 
                 //Reset the daily view counter
                 if (DateTime.Now.Date != @event.EventViewCounterReset)
@@ -124,7 +118,7 @@ namespace ToDo.Controllers
             {
                 ViewBag.hasFB = false;
             }
-            
+
 
             //YouTube
             if (@event.EventYouTube != null)
@@ -149,14 +143,13 @@ namespace ToDo.Controllers
             {
                 ViewBag.hasSC = false;
             }
-                        
+
             return View(@event);
         }
 
         // GET: Events/Create
         public ActionResult Create(int? id)
         {
-
             ViewBag.LinkText = "Events";
 
             //Get the currentely logged in user
@@ -193,7 +186,6 @@ namespace ToDo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EventID,VenueID,EventTitle,EventDate,EventTime,EventEndTime,EventDescription,EventYouTube,EventSoundCloud,EventFacebook,EventTwitter,EventInstagram,EventWebsite,EventTicketPrice,EventTicketStore,EventCatID")] Event @event, HttpPostedFileBase imageUpload)
         {
-
             ViewBag.LinkText = "Events";
 
             if (ModelState.IsValid)
@@ -246,16 +238,16 @@ namespace ToDo.Controllers
 
                 string emailSubject = @event.EventTitle;
                 string emailLink = string.Format("<a href = \"https://localhost:44300/Events/Details/{0}\"> here </a>", @event.EventID);
-                string emailBody = string.Format("New event posted for <b>{0}</b> on {2} {3}.<br><br> {1} <br><br> {4} <a>", venueName, eventDes, eventDate, eventTime, emailLink );
+                string emailBody = string.Format("New event posted for <b>{0}</b> on {2} {3}.<br><br> {1} <br><br> {4} <a>", venueName, eventDes, eventDate, eventTime, emailLink);
 
                 EmailNotification(@event.VenueID, emailSubject, emailBody);
-                
+
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", new
                 {
                     id = @event.EventID
                 });
-        }
+            }
 
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
@@ -264,7 +256,6 @@ namespace ToDo.Controllers
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
-
             ViewBag.LinkText = "Events";
 
             if (id == null)
@@ -291,7 +282,6 @@ namespace ToDo.Controllers
             }
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
 
-
             return View(@event);
         }
 
@@ -305,7 +295,7 @@ namespace ToDo.Controllers
             }
             var EventToUpdate = db.Events.Find(id);
             if (TryUpdateModel(EventToUpdate, "",
-                new string[] { "EventID","OwnerID","VenueID","EventTitle","EventDate","EventTime", "EventEndTime", "EventDescription", "EventCatID", "EventYouTube","EventSoundCloud","EventFacebook","EventTwitter","EventInstagram","EventWebsite","EventTicketPrice","EventTicketStore" }))
+                new string[] { "EventID", "OwnerID", "VenueID", "EventTitle", "EventDate", "EventTime", "EventEndTime", "EventDescription", "EventCatID", "EventYouTube", "EventSoundCloud", "EventFacebook", "EventTwitter", "EventInstagram", "EventWebsite", "EventTicketPrice", "EventTicketStore" }))
             {
                 try
                 {
@@ -343,8 +333,6 @@ namespace ToDo.Controllers
 
                     db.SaveChanges();
 
-                    
-
                     return RedirectToAction("Index");
                 }
                 catch (RetryLimitExceededException)
@@ -364,7 +352,7 @@ namespace ToDo.Controllers
             }
 
             Event @event = db.Events.Find(id);
-            int venueID = @event.VenueID;            
+            int venueID = @event.VenueID;
 
             if (@event == null)
             {
@@ -377,8 +365,6 @@ namespace ToDo.Controllers
 
             db.Events.Remove(@event);
             db.SaveChanges();
-
-            
 
             //Email Notification
             string emailSubject = string.Format(@event.EventTitle + " Cancelled");
@@ -414,7 +400,6 @@ namespace ToDo.Controllers
         {
             Event @event = db.Events.Find(id);
             int venueID = @event.VenueID;
-            
 
             //Set this event as inactive
             @event.EventActive = false;
@@ -427,7 +412,6 @@ namespace ToDo.Controllers
 
             string emailSubject = string.Format(@event.EventTitle + "cancelled");
             string emailBody = string.Format("This event has been cancelled");
-
 
             db.SaveChanges();
 
@@ -450,8 +434,7 @@ namespace ToDo.Controllers
 
         //Event Index Partial View
         public ActionResult EventsTablePartialView(string search, string Town, string EventCategory, string AdvancedSearch, string TownIndex, string CategoryIndex, DateTime? Date)
-        {          
-                                  
+        {
             ViewBag.TownIndex = TownIndex;
             ViewBag.CategoryIndex = CategoryIndex;
 
@@ -477,8 +460,8 @@ namespace ToDo.Controllers
                 }
             }
 
-                if (AdvancedSearch == "true")
-            {               
+            if (AdvancedSearch == "true")
+            {
                 //Get all Events from the database
                 events = from v in db.Events
                          where v.EventActive == true
@@ -566,10 +549,7 @@ namespace ToDo.Controllers
                 mailer.Body = Body;
                 mailer.IsHtml = true;
                 mailer.Send();
-                
             }
         }
     }
 }
-
-//Tutorial used: http://stackoverflow.com/questions/20882891/how-can-i-send-email-using-gmail-smtp-in-asp-net-mvc-application

@@ -419,8 +419,6 @@ namespace ToDo.Controllers
                          select events;
 
             return PartialView("_AdminEvents", ev.OrderBy(x => x.EventTitle).ToList());
-            //return RedirectToAction("Admin");
-            //return View(venue)
         }
 
         // Remove Venue 
@@ -445,8 +443,6 @@ namespace ToDo.Controllers
                          select v;
 
             return PartialView("_AdminVenues", venues.OrderBy(v => v.VenueName).ToList());
-            //return RedirectToAction("Admin");
-            //return View(venue)
         }
 
         // POST: Venues/Delete/5
@@ -616,7 +612,6 @@ namespace ToDo.Controllers
                             select twns;
 
                 return PartialView("_AdminTowns", towns.OrderBy(v => v.TownName).ToList());
-                //return RedirectToAction("Admin", "Home");
             }
 
             else
@@ -634,8 +629,6 @@ namespace ToDo.Controllers
                         select twns;
 
             return PartialView("_AdminTowns", towns.OrderBy(v => v.TownName).ToList());
-
-            //return RedirectToAction("Admin", "Home");
         }
 
         public PartialViewResult AdminVenueTypesTablePartialView()
@@ -673,7 +666,6 @@ namespace ToDo.Controllers
                                  select vtype;
 
                 return PartialView("_AdminVenueType", venueTypes.OrderBy(vtype => vtype.VenueTypeName).ToList());
-                //return RedirectToAction("Admin", "Home");
             }
 
             else
@@ -742,7 +734,6 @@ namespace ToDo.Controllers
                                       select ecat;
 
                 return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
-                //return RedirectToAction("Admin", "Home");
             }
 
             else
@@ -765,7 +756,6 @@ namespace ToDo.Controllers
                                   select ecat;
 
             return PartialView("_AdminEventCategories", eventCategories.OrderBy(ecat => ecat.EventCategoryName).ToList());
-            //return RedirectToAction("Admin", "Home");
         }
 
 

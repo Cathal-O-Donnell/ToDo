@@ -19,7 +19,6 @@ namespace ToDo.Controllers
         // GET: Bands
         public ActionResult Index()
         {
-
             //Get UserID
             string UserId = User.Identity.GetUserId();
 
@@ -107,7 +106,6 @@ namespace ToDo.Controllers
         // GET: Bands/Details/5
         public ActionResult Details(int? id)
         {
-
             ViewBag.LinkText = "Bands";
 
             if (id == null)
@@ -214,7 +212,6 @@ namespace ToDo.Controllers
 
         public ActionResult BookBand(int? id)
         {
-
             //Get UserID
             string UserId = User.Identity.GetUserId();
 
@@ -338,13 +335,11 @@ namespace ToDo.Controllers
 
             ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "OwnerId", @event.VenueID);
             return View(@event);
-
         }
 
         // GET: Bands/Create
         public ActionResult Create()
         {
-
             ViewBag.LinkText = "Bands";
 
             //Get the currentely logged in user
@@ -369,7 +364,6 @@ namespace ToDo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud,BandManagerName,BandManagerEmail,BandPressContact,BandRecordLabel,BandBookingAgentName,BandBookingAgentEmail")] Band band, HttpPostedFileBase imageUpload)
         {
-
             //Get the currentely logged in user
             string UserId = User.Identity.GetUserId();
 
@@ -390,7 +384,6 @@ namespace ToDo.Controllers
 
             if (ModelState.IsValid)
             {
-
                 //Set the band status as active
                 band.BandActive = true;
 
@@ -422,7 +415,6 @@ namespace ToDo.Controllers
         // GET: Bands/Edit/5
         public ActionResult Edit(int? id)
         {
-
             ViewBag.LinkText = "Bands";
 
             if (id == null)
@@ -436,7 +428,6 @@ namespace ToDo.Controllers
             {
                 return HttpNotFound();
             }
-
 
             //Image
             band = db.Bands.Include(s => s.BandFiles).SingleOrDefault(s => s.BandID == id);
@@ -498,8 +489,6 @@ namespace ToDo.Controllers
 
                     db.SaveChanges();
 
-
-
                     return RedirectToAction("Index");
                 }
                 catch (RetryLimitExceededException)
@@ -509,22 +498,6 @@ namespace ToDo.Controllers
             }
             return View(BandToUpdate);
         }
-
-        // POST: Bands/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "BandID,BandName,BandDescription,BandContactNumber,BandEmail,BandFacebook,BandGenreID,BandYouTube,BandSoundCloud,BandManagerName,BandManagerEmail,BandPressContact,BandRecordLabel,BandBookingAgentName,BandBookingAgentEmail")] Band band)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(band).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(band);
-        //}
 
         // GET: Bands/Delete/5
         public ActionResult Delete(int? id)
@@ -628,7 +601,6 @@ namespace ToDo.Controllers
                 ViewBag.NoEvents = false;
             }
 
-
             return PartialView("_BandEvents", events.OrderBy(v => v.EventTitle).ToList());
         }
 
@@ -721,8 +693,6 @@ namespace ToDo.Controllers
             {
                 ViewBag.LoggedIn = true;
 
-
-
                 int x = (from e in db.BandsMailingList
                          where e.BandID == id && e.User_ID == UserId
                          select e.BandMailingListId).First();
@@ -759,7 +729,6 @@ namespace ToDo.Controllers
                 mailer.Body = Body;
                 mailer.IsHtml = true;
                 mailer.Send();
-
             }
         }
     }

@@ -560,25 +560,3 @@ namespace ToDo.Models
         }
     }
 }
-
-//To Do
-
-//Remove old events from the database
-
-
-//Get users current location - apply this location to the filters by default
-//Add more filters to the index pages (Town, Date, Venue)
-//Admin should be able to add and remove admins
-//Delete confirmation popup in stead of view - add this to admin page aswell - https://jsfiddle.net/gitaek/2d4Mv/ - http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_modal_sm&stacked=h
-//Fourm section for user discussion
-//Admin activity log
-//Venues activity log - who create the venues, who created/ edited/ removed events
-//Allow users to add multiple admins to the sam venue - add new roles to the roles table(Venue admin)
-//Venues admin section - edit/ remove/ make admin of venue/ unlist event/ unlist venue**
-
-
-
-//Style
-//Image thumbnails - http://bootsnipp.com/snippets/featured/thumbnails-like-bootsnipp
-//Styling (color wheel, human computer interaction)
-//Themeforest
