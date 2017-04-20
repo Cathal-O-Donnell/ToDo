@@ -67,13 +67,17 @@
                             @*Check if venue has image*@
                             @if (item.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
                             {
-                                <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                                <a href='@Url.Action("Details", "Events", new { id = item.EventID })'>
+                                    <img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                                </a>
                             }
 
                             @*No venue image was uploaded, display default image*@
                             else
                             {
-                                <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                                <a href='@Url.Action("Details", "Events", new { id = item.EventID })'>
+                                    <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                                </a>
                             }
                         </div>
                         <div class="content" style="height: 250px;">
@@ -136,11 +140,11 @@
         var date = document.getElementById("datepicker").value;
 
         var advancedSearch = "true";
-        
+
         $.ajax({
             type: "GET",
             url: '@Url.Action("EventsTablePartialView", "Events")',
-            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex, 
+            data: { Town: town, EventCategory: eventCat, AdvancedSearch: advancedSearch, search: search, TownIndex: TownSelectedIndex,
                 CategoryIndex: ECypeSelectedIndex, Date: date },
             success: function (data) {
 

@@ -28,19 +28,23 @@
                         @*Check if event has image*@
                         @if (Model.Files.Any(f => f.FileType == ToDo.Models.FileType.EventImage))
                         {
-                            <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            <a href='@Url.Action("Details", "Events", new { id = Model.EventID })'>
+                                <img src="~/File?id=@Model.Files.First().FileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            </a>
                         }
 
                         @*No event image was uploaded, display default image*@
                         else
                         {
-                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                            <a href='@Url.Action("Details", "Events", new { id = Model.EventID })'>
+                                <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                            </a>                            
                         }
-                        @*<img src="~/File?id=@item.Files.First().FileId" alt="imgEvent" class="img-responsive" style="width:360px; height: 240px;">*@
+
                     </div>
                     <div class="content">
                         <h3>@Model.EventTitle<span class="job">     @Model.EventCat.EventCategoryName    </span></h3>
-                        @*<h4 class="primery-color"><a href="#">@Model.Venue.VenueName</a> </h4>*@
+
                         <h4 class="primery-color">@Html.ActionLink(Model.Venue.VenueName, "Details", "Venues", new { id = Model.VenueID }, null)</h4>
 
                         <p class="CustomParagraph">@Model.EventDescription</p>

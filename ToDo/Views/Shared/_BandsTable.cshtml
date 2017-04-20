@@ -18,7 +18,7 @@
         <form class="form-inline">
             <div class="form-group" style="padding-top:20px;">
                 @if (ViewBag.SearchTerm != null)
-            {
+                {
                     <input type="text" id="txtSearch" class="CustomTextBox" value="@ViewBag.SearchTerm" />
                 }
                 else
@@ -56,13 +56,17 @@ else
                         @*Check if event has image*@
                         @if (item.BandFiles.Any(f => f.BandFileType == ToDo.Models.FileType.EventImage))
                         {
-                            <img src="~/BandFile?id=@item.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            <a href='@Url.Action("Details", "Bands", new { id = item.BandID })'>
+                                <img src="~/BandFile?id=@item.BandFiles.First().BandFileId" alt="imgEvent" style="width: 360px; height:240px;" />
+                            </a>                            
                         }
 
                         @*No event image was uploaded, display default image*@
                         else
                         {
-                            <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                            <a href='@Url.Action("Details", "Bands", new { id = item.BandID })'>
+                                <img src="~/default-image.jpg" alt="imgDefault" style="width: 360px; height:240px;" />
+                            </a>                            
                         }
 
                     </div>
