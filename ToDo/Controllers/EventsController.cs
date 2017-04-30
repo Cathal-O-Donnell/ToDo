@@ -240,7 +240,7 @@ namespace ToDo.Controllers
                 string emailLink = string.Format("<a href = \"https://localhost:44300/Events/Details/{0}\"> here </a>", @event.EventID);
                 string emailBody = string.Format("New event posted for <b>{0}</b> on {2} {3}.<br><br> {1} <br><br> {4} <a>", venueName, eventDes, eventDate, eventTime, emailLink);
 
-                EmailNotification(@event.VenueID, emailSubject, emailBody);
+                //EmailNotification(@event.VenueID, emailSubject, emailBody);
 
                 //Redirect to details view for the new event
                 return RedirectToAction("Details", new
@@ -369,7 +369,8 @@ namespace ToDo.Controllers
             //Email Notification
             string emailSubject = string.Format(@event.EventTitle + " Cancelled");
             string emailBody = string.Format("{0} has cencelled the event: {1}", venueName, eventTitle);
-            EmailNotification(@event.VenueID, emailSubject, emailBody);
+
+            //EmailNotification(@event.VenueID, emailSubject, emailBody);
 
             //Redirect to details view for the current venue
             return RedirectToAction("Details", "Venues", new

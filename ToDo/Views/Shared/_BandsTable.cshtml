@@ -30,9 +30,11 @@
                 @Html.DropDownList("GenreId", (SelectList)ViewBag.Genres, "Pick Genre", new { @class = "CustomTextBox", id = "lstGenres" })
             </div>
 
-            <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
+            @*<span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>*@
+            <span onclick="AdvanceSearch();" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</span>
 
-            <span class="btn btn-warning" onclick="Reset();">Reset</span>
+            @*<span class="btn btn-warning" onclick="Reset();">Reset</span>*@
+            <span onclick="Reset();" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Reset</span>
 
             @Html.ActionLink("New Band", "Create", "Bands", null, new { @class = "btn btn-success" })
         </form>

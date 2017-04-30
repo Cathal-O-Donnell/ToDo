@@ -43,9 +43,11 @@
                 @Html.DropDownList("EventCategoryID", (SelectList)ViewBag.EventCategories, "Pick Category", new { @class = "CustomTextBox", id = "lstEventCat" })
             </div>
 
-            <span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>
+            @*<span class="btn btn-primary" onclick="AdvanceSearch();">Search</span>*@
+            <span onclick="AdvanceSearch();" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</span>
 
-            <span class="btn btn-warning" onclick="Reset();">Reset</span>
+            @*<span class="btn btn-warning" onclick="Reset();">Reset</span>*@
+            <span onclick="Reset();" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Reset</span>
         </form>
     </div>
 

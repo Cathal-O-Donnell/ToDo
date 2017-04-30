@@ -72,6 +72,12 @@
         </div>
     </div>
     }
+
+    <div class="row col-md-8 col-md-offset-2" style="padding-top: 25px;">
+        <p style="text-align: center;">
+            @Html.ActionLink("New Venue", "Create", "Venues", null, new { @class = "btn btn-block btn-primary" })
+        </p>
+    </div>
 }
 
 else if (ViewBag.HasVenue == false)
